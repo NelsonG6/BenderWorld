@@ -19,20 +19,32 @@ namespace ReinforcementLearning
         {
             InitializeComponent();
 
-            random = new Random();
-            MainBoard = new Board(random);
+            random = new Random(); //This random is used throughout the entire program
 
-            //This makes it so when I add pictureboxes to the mainboard,
-            //It doesn't need specific coordinates. It just adds 10 to a row and then addes a new row.
-            MainBoard.SetEdgeSize(10);
+            MainBoard = new Board(random); //Create our grid
 
-            this.WindowState = FormWindowState.Maximized;
-            
+            MainBoard.SetEdgeSize(10); //Simplifies adding pictureboxes to the 10x10 grid
+
+            this.WindowState = FormWindowState.Maximized; //Start with the window maximized
+
+            //Pass textboxes to the board, so it can manage them.
+            MainBoard.number_of_episodes = textboxNumberofepisodes;
+            MainBoard.number_of_steps = textboxNumberofsteps;
+            MainBoard.n_textbox = textboxN;
+            MainBoard.y_textbox = textboxY;
+            MainBoard.current_position_left = textboxLeft;
+            MainBoard.current_position_right = textboxRight;
+            MainBoard.current_position_up = textboxUp;
+            MainBoard.current_position_down = textboxDown;
+            MainBoard.current_position_square = textboxCurrentsquare;
+            MainBoard.current_position_encoding = textboxEncodedas;
+
+            //Used for creating pictureboxes and their point values
             int edge_length = 75;
             int x_offset = 50;
             int y_offset = 75;
-
-            PictureBox building;
+           
+            PictureBox building; //Temporary
             
             //Create pictureboxes and pass them to our board
             for (int i = 0; i < 10; i++)
@@ -41,57 +53,98 @@ namespace ReinforcementLearning
                 {
                     //Fill in the column with rows
                     building = new PictureBox();
-                    building.Name = i.ToString() + "-" + j.ToString();
-                    building.Location = new Point(x_offset + (i * edge_length),
-                        y_offset + (j * edge_length));
+                    building.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
+                    building.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length)); 
                     building.Size = new Size(edge_length, edge_length);
                     building.SizeMode = PictureBoxSizeMode.StretchImage;
-                    building.BackgroundImage = Properties.Resources.grid_background;
+                    building.BackgroundImage = Properties.Resources.grid_background; //Same background for every image
                     building.BackgroundImageLayout = ImageLayout.Stretch;
                     this.Controls.Add(building);
-                    MainBoard.AddPicturebox(building, i, 9-j);
+                    MainBoard.AddPicturebox(building, i, 9-j); //9-j for pictureboxes being displayed in the correct order
                 }
             }
 
-            updateBoard();
+            MainBoard.shuffle_bender();
+            MainBoard.clear(); //Will give us the default empty board
+            MainBoard.load_initial_settings();
         }
 
-        public void updateBoard()
-        {
-            MainBoard.update();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            MainBoard.shuffle();
-            updateBoard();
-
-            textboxLeft.Clear();
-            textboxDown.Clear();
-            textboxRight.Clear();
-            textboxUp.Clear();
-            textboxCurrentsquare.Clear();
-            textboxEncodedas.Clear();
+        private void start_algorithm(object sender, EventArgs e)
+        {            
+            buttonStartAlgorithm.Enabled = false;
+            groupboxAlgorithmprogress.Enabled = true;
+            listboxBenderhistory.Enabled = true;
+            groupboxCurrentposition.Enabled = true;
+            groupboxConfiguration.Enabled = false;
+            buttonRestart.Enabled = true;
+            MainBoard.startAlgorithm();    
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            updateCurrentPositionGroupbox();
+
+        }                
+
+        private void reset_settings(object sender, EventArgs e)
+        {
+            buttonStartAlgorithm.Enabled = true;
+            groupboxAlgorithmprogress.Enabled = false;
+            listboxBenderhistory.Enabled = false;
+            groupboxCurrentposition.Enabled = false;
+            buttonRestart.Enabled = false;
+            groupboxConfiguration.Enabled = true;
+            MainBoard.clear();
         }
 
-        private void updateCurrentPositionGroupbox()
+        private void next_episode(object sender, EventArgs e)
         {
-            textboxLeft.Text = MainBoard.detect_percept(-1, 0);
-            textboxDown.Text = MainBoard.detect_percept(0, -1);
-            textboxRight.Text = MainBoard.detect_percept(1, 0);
-            textboxUp.Text = MainBoard.detect_percept(0, 1);
-            textboxCurrentsquare.Text = MainBoard.detect_percept(0, 0);
-            textboxEncodedas.Text = MainBoard.get_encoding_of_percepts();
+
         }
+
+        private void set_episode_from_dropdown(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_episode_from_textbox(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_steps_from_dropdown(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_steps_from_textbox(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_n_from_dropdown(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_n_from_textbox(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_y_from_dropdown(object sender, EventArgs e)
+        {
+
+        }
+
+        private void set_y_from_textbox(object sender, EventArgs e)
+        {
+
+        }
+
+        private void advance_one_step(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

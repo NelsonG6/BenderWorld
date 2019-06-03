@@ -12,88 +12,28 @@ namespace ReinforcementLearning
 {
     public partial class Form1 : Form
     {
-        Board MainBoard;
-        Random random;
+        AlgorithmManager current_algorithm;
 
         public Form1()
         {
             InitializeComponent();
-
-            random = new Random(); //This random is used throughout the entire program
-
-            MainBoard = new Board(random); //Create our grid
-
-            MainBoard.SetEdgeSize(10); //Simplifies adding pictureboxes to the 10x10 grid
-
             this.WindowState = FormWindowState.Maximized; //Start with the window maximized
 
-            //Pass textboxes to the board, so it can manage them.
-            MainBoard.number_of_episodes = textboxNumberofepisodes;
-            MainBoard.number_of_steps = textboxNumberofsteps;
-            MainBoard.n_textbox = textboxN;
-            MainBoard.y_textbox = textboxY;
-            MainBoard.current_position_left = textboxLeft;
-            MainBoard.current_position_right = textboxRight;
-            MainBoard.current_position_up = textboxUp;
-            MainBoard.current_position_down = textboxDown;
-            MainBoard.current_position_square = textboxCurrentsquare;
-            MainBoard.current_position_encoding = textboxEncodedas;
-
-            //Used for creating pictureboxes and their point values
-            int edge_length = 75;
-            int x_offset = 50;
-            int y_offset = 75;
-           
-            PictureBox building; //Temporary
-            
-            //Create pictureboxes and pass them to our board
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    //Fill in the column with rows
-                    building = new PictureBox();
-                    building.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
-                    building.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length)); 
-                    building.Size = new Size(edge_length, edge_length);
-                    building.SizeMode = PictureBoxSizeMode.StretchImage;
-                    building.BackgroundImage = Properties.Resources.grid_background; //Same background for every image
-                    building.BackgroundImageLayout = ImageLayout.Stretch;
-                    this.Controls.Add(building);
-                    MainBoard.AddPicturebox(building, i, 9-j); //9-j for pictureboxes being displayed in the correct order
-                }
-            }
-
-            MainBoard.shuffle_bender();
-            MainBoard.clear(); //Will give us the default empty board
-            MainBoard.load_initial_settings();
+            //Initialize dropdown boxes
+            comboboxAdvancesteps.SelectedIndex = 0;
+            comboboxAdvanceepisodes.SelectedIndex = 0;
         }
 
         private void start_algorithm(object sender, EventArgs e)
-        {            
-            buttonStartAlgorithm.Enabled = false;
-            groupboxAlgorithmprogress.Enabled = true;
-            listboxBenderhistory.Enabled = true;
-            groupboxCurrentposition.Enabled = true;
-            groupboxConfiguration.Enabled = false;
-            buttonRestart.Enabled = true;
-            MainBoard.startAlgorithm();    
+        {
+            change_enabled_setting();
+            current_algorithm.take_step();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void reset_algorithm(object sender, EventArgs e)
         {
-
-        }                
-
-        private void reset_settings(object sender, EventArgs e)
-        {
-            buttonStartAlgorithm.Enabled = true;
-            groupboxAlgorithmprogress.Enabled = false;
-            listboxBenderhistory.Enabled = false;
-            groupboxCurrentposition.Enabled = false;
-            buttonRestart.Enabled = false;
-            groupboxConfiguration.Enabled = true;
-            MainBoard.clear();
+            change_enabled_setting();
+            current_algorithm.restartAlgorithm();
         }
 
         private void next_episode(object sender, EventArgs e)
@@ -146,5 +86,53 @@ namespace ReinforcementLearning
 
         }
 
+        private void change_enabled_setting()
+        {
+            buttonStartAlgorithm.Enabled = !buttonStartAlgorithm.Enabled;
+            groupboxAlgorithmprogress.Enabled = !groupboxAlgorithmprogress.Enabled;
+            groupboxCurrentposition.Enabled = !groupboxCurrentposition.Enabled;
+            buttonRestart.Enabled = !buttonRestart.Enabled;
+            groupboxConfiguration.Enabled = !groupboxConfiguration.Enabled;
+            groupboxQmatrix.Enabled = !groupboxQmatrix.Enabled;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //When the form loads, we'll create some pictureboxes, that will function as the robot world grid.
+
+            //We waited to initialize this until now, instead of in Form1(), because we need the textboxes to be loaded into Application Controls.
+            current_algorithm = new AlgorithmManager();
+
+            //Used for creating pictureboxes and their point values
+            int edge_length = 75;
+            int x_offset = 50;
+            int y_offset = 55;
+
+            PictureBox building; //Temporary
+
+            //Create pictureboxes and pass them to our board
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    //Fill in the column with rows
+                    building = new PictureBox();
+                    building.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
+                    building.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length));
+                    building.Size = new Size(edge_length, edge_length);
+                    building.SizeMode = PictureBoxSizeMode.StretchImage;
+                    building.BackgroundImage = Properties.Resources.grid_background; //Same background for every image
+                    building.BackgroundImageLayout = ImageLayout.Stretch;
+                    this.Controls.Add(building);
+                    current_algorithm.main_board.board_data[i][9 - j].pictureData = building;
+                }
+            }
+
+
+            //Shuffle bender now, after pictureboxes have been included.
+            //This helps due to every other time we shuffle, we want to re-display the pictures immediately.
+            current_algorithm.main_board.shuffle_bender();
+            textboxStatus.Text = "Program launched.";
+        }
     }
 }

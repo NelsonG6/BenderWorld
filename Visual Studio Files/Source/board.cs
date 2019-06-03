@@ -4,38 +4,26 @@ using System.Windows.Forms;
 
 namespace ReinforcementLearning
 {
+    //Manages a few different classes
     class Board
     {
-        private List<List<BoardSquare>> board_data; //These contain pictureboxes, passed from form1
-
-        public TextBox number_of_episodes;
-        public TextBox number_of_steps;
-        public TextBox n_textbox;
-        public TextBox y_textbox;
-        public TextBox current_position_left;
-        public TextBox current_position_down;
-        public TextBox current_position_right;
-        public TextBox current_position_up;
-        public TextBox current_position_square;
-        public TextBox current_position_encoding;
-
-        private int board_size;
+        public List<List<BoardSquare>> board_data; //These contain pictureboxes, passed from form1
+        public int board_size;
 
         //keeps track of where bender is
-        private int bender_x;
-        private int bender_y;
-        Random random;
+        public int bender_x;
+        public int bender_y;
 
-        public int episode_limit;
-        public int step_limit;
-        public float n;
-        public float y;
+        public int beer_can_count;
+
+        Random random;
 
         public Board(Random set_random)
         {
             random = set_random;
-            board_size = 0;
+            board_size = 10;
             board_data = new List<List<BoardSquare>>();
+            beer_can_count = 0;
 
             //Initialize 10x10 grid
             for (int i = 0; i < 10; i++)
@@ -46,11 +34,6 @@ namespace ReinforcementLearning
                     board_data[i].Add(new BoardSquare(random));
                 }
             }
-
-            episode_limit = 5000;
-            step_limit = 200;
-            n = .2F;
-            y = .9F;
 
             //Add walls
             //left wall
@@ -65,40 +48,28 @@ namespace ReinforcementLearning
             //Bender location will be set in shuffle
             bender_x = 0;
             bender_y = 0;
+
+
         }
 
-        public void shuffle()
+        public void shuffle_cans_and_bender()
         {
+            beer_can_count = 0;
             //Activate the 50/50 chance for each tile to have beer in it.
-            foreach (var i in board_data) { foreach (var j in i) { j.randomize_beer_presence(); } }
+            foreach (var i in board_data)
+            {
+                foreach (var j in i)
+                {
+                    j.randomize_beer_presence();
+                    ++beer_can_count;
+                }
+            }
 
             shuffle_bender(); //Place bender randomly somewhere
-
-            //Update every picturebox, now that the status of beer and bender has possibly changed.
-            foreach (var i in board_data) { foreach (var j in i) { j.setPicture(); } }
         }
 
-        public void SetEdgeSize(int to_set)
-        {
-            board_size = to_set;
-        }
-
-        public void AddPicturebox(PictureBox to_add, int x_index, int y_index)
-        {
-            board_data[x_index][y_index].pictureData = to_add;
-        }
-
-        public void update_textboxes()
-        {
-            current_position_left.Text = detect_percept(-1, 0);
-            current_position_down.Text = detect_percept(0, -1);
-            current_position_right.Text = detect_percept(1, 0);
-            current_position_up.Text = detect_percept(0, 1);
-            current_position_square.Text = detect_percept(0, 0);
-            current_position_encoding.Text = get_encoding_of_percepts();
-            current_position_down.Refresh();
-        }
-
+        //Used when the robot takes an action
+        //We get a string from this, which will be translated into a reward at the q-matrix.
         public string detect_percept(int x_move, int y_move)
         {
             if(board_data[bender_x][bender_y].check_wall(x_move, y_move))
@@ -115,6 +86,7 @@ namespace ReinforcementLearning
             //Shouldn't reach this
         }
 
+        //This is how we store each state that bender can percieve.
         public string get_encoding_of_percepts()
         {
             string precept_string = detect_percept(-1, 0);
@@ -125,27 +97,8 @@ namespace ReinforcementLearning
             return precept_string;
         }
 
-        public void startAlgorithm()
-        {
-            shuffle();
-            update_textboxes();
-        }
-
-        public void clear()
-        {
-            //Clear all the pictures
-            foreach (var i in board_data) { foreach (var j in i) { j.pictureData.Image = null; } }
-            board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Keep bender displayed for novelty
-
-            //Clear the current position textboxes
-            current_position_down.Clear();
-            current_position_left.Clear();
-            current_position_right.Clear();
-            current_position_up.Clear();
-            current_position_square.Clear();
-            current_position_encoding.Clear();
-        }
-
+        //This is called each time we generate a new episode for our algorithm.
+        //This is also called at the start of the program launch, disconnected from shuffling the whole board, just once.
         public void shuffle_bender()
         {
             //If Bender is already somewhere on the board, make sure we remove him from that location.
@@ -155,15 +108,34 @@ namespace ReinforcementLearning
             bender_x = random.Next(0, 10); //0-9 inclusive
             bender_y = random.Next(0, 10); 
             board_data[bender_x][bender_y].bender_present = true; //Set bender
-            board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Set picture
+
+            //Bender's image may not be set yet.
+            if(board_data[bender_x][bender_y].pictureData != null)
+                board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Set picture
+
+            update_pictureboxes();
         }
 
-        public void load_initial_settings()
+        //This is called when the algorithm has been reset
+        public void clear()
         {
-            number_of_episodes.Text = episode_limit.ToString();
-            number_of_steps.Text = step_limit.ToString();
-            n_textbox.Text = n.ToString();
-            y_textbox.Text = y.ToString();
+            //Clear all the pictures
+            foreach (var i in board_data)
+            {
+                foreach (var j in i)
+                {
+                    j.beer_can_present = false;
+                }
+            }
+            board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Keep bender displayed for novelty
+            update_pictureboxes();
+        }
+
+        //This is called after the board state has been changed
+        public void update_pictureboxes()
+        {
+            //Update every picturebox, now that the status of beer and bender has possibly changed.
+            foreach (var i in board_data) { foreach (var j in i) { j.setPicture(); } }
         }
     }
 }

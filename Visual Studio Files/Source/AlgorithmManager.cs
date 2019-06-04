@@ -6,49 +6,63 @@ using System.Threading.Tasks;
 
 namespace ReinforcementLearning
 {
-    class AlgorithmManager
+    static class AlgorithmManager
     {
-        private Random random;
-        public Qmatrix live_qmatrix;
-        public TextboxHandler textboxes;
-        public Board main_board;
+        static public AlgorithmState current_state; //This will store the current configuration of cans and bender, and q matrix.
 
-        public List<List<AlgorithmState>> state_history;
 
-        public AlgorithmManager()
+        static public List<List<AlgorithmState>> state_history;
+
+        static AlgorithmManager()
         {
-            random = new Random();
-            main_board = new Board(random); //Create our grid
-            live_qmatrix = new Qmatrix(random);
-            textboxes = new TextboxHandler();
-            textboxes.clear_after_board_reset(main_board); //Will give us the default empty board
-            textboxes.load_initial_settings(this);
+            current_state = new AlgorithmState(); //This marks the progress point of the entire algorithm.
+            //If a history entry is being viewed, then this is not what is being displayed currently.
+            //In that case, the currently displayed state will be held by the FormsHandler.
+
+            //Commenting this because pictureboxes get created after this constructor has run
+            //textboxes.clear_after_board_reset(main_board); //Will give us the default empty board
             state_history = new List<List<AlgorithmState>>();
         }
 
-        public void restartAlgorithm()
+        public static void create_empty_board()
         {
-            state_history.Clear();
-            textboxes.clear_after_board_reset(main_board);
-            main_board.clear();    
+            state_history.Clear(); //Erase all state history
+            current_state.reset(); //Reset everything in our state except the initial values.
+            FormsHandler.update_state(current_state); //use formshandler to display this state
         }
 
-        public void take_step()
+        public static void take_step()
         {
             //figure out which action to take
+            if (current_state.episode_count == 0 && current_state.step_count == 0) //First step, so just display step 0.
+            {
+                current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board
+                FormsHandler.update_state(current_state);
+            }
+                
+            else
+            {
+                //Get step from qmatrix. Being randomly generated for now.
+                string step_to_take = current_state.live_qmatrix.generate_step(current_state);
 
-            //Lets randomly generate it for now
-            string step_to_take = live_qmatrix.generate_step();
-            main_board.shuffle_cans_and_bender();
+                
+                if (current_state.step_count >= current_state.step_limit)
+                {   //We've taken the max amount of steps.
+                    if (current_state.episode_count >= current_state.episode_limit)
+                    {
+                        //algorithm is done running trials
 
-            textboxes.handle_step(this);
+                    }
+                }
+            }
 
+
+            FormsHandler.update_state(current_state);
         }
 
-        //This handles when we are resetting our episode data.
-        public void start_episode()
+        static public void place_bender_randomly()
         {
-
+            current_state.board_data.shuffle_bender();
         }
     }
 }

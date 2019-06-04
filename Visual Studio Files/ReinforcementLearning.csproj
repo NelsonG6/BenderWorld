@@ -49,7 +49,7 @@
     <Compile Include="Source\AlgorithmManager.cs" />
     <Compile Include="Source\AlgorithmState.cs" />
     <Compile Include="Source\board.cs" />
-    <Compile Include="Source\boardSquare.cs" />
+    <Compile Include="Source\BoardSquare.cs" />
     <Compile Include="Source\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,8 +58,10 @@
     </Compile>
     <Compile Include="Properties\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\MyRandom.cs" />
+    <Compile Include="Source\PictureSquare.cs" />
     <Compile Include="Source\Qmatrix.cs" />
-    <Compile Include="Source\TextboxHandler.cs" />
+    <Compile Include="Source\FormsHandler.cs" />
     <EmbeddedResource Include="Source\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +135,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Images\0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Images\background explored.png" />
+    <Content Include="Properties\Images\background last move.png" />
+    <None Include="Properties\Images\background unexplored ver3.png" />
+    <None Include="Properties\Images\background unexplored ver2.png" />
+    <Content Include="Properties\Images\background unexplored.png" />
+    <None Include="Resources\background unexplored ver2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

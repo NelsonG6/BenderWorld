@@ -130,6 +130,16 @@ namespace ReinforcementLearning
             this.textboxAdvanceepisodesinput = new System.Windows.Forms.TextBox();
             this.groupboxAlgorithmprogress = new System.Windows.Forms.GroupBox();
             this.groupboxSessionprogress = new System.Windows.Forms.GroupBox();
+            this.groupboxCans = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.textboxCanscollected = new System.Windows.Forms.TextBox();
+            this.textboxCansremaining = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.groupboxRewarddata = new System.Windows.Forms.GroupBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.textboxRewardtotal = new System.Windows.Forms.TextBox();
+            this.textboxRewardepisode = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -178,16 +188,19 @@ namespace ReinforcementLearning
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.textboxCansremaining = new System.Windows.Forms.TextBox();
-            this.textboxCanscollected = new System.Windows.Forms.TextBox();
-            this.groupboxCans = new System.Windows.Forms.GroupBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.groupboxRewarddata = new System.Windows.Forms.GroupBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.textboxRewardepisode = new System.Windows.Forms.TextBox();
-            this.textboxRewardtotal = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.comboBox12 = new System.Windows.Forms.ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.groupboxCurrentposition.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupboxInitialsettings.SuspendLayout();
@@ -203,6 +216,8 @@ namespace ReinforcementLearning
             this.groupboxAdvanceepisodes.SuspendLayout();
             this.groupboxAlgorithmprogress.SuspendLayout();
             this.groupboxSessionprogress.SuspendLayout();
+            this.groupboxCans.SuspendLayout();
+            this.groupboxRewarddata.SuspendLayout();
             this.groupboxQmatrix.SuspendLayout();
             this.groupboxHistory.SuspendLayout();
             this.groupboxStatusmessage.SuspendLayout();
@@ -227,8 +242,8 @@ namespace ReinforcementLearning
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            this.groupboxCans.SuspendLayout();
-            this.groupboxRewarddata.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRestart
@@ -258,7 +273,7 @@ namespace ReinforcementLearning
             this.groupboxCurrentposition.Controls.Add(this.label1);
             this.groupboxCurrentposition.Controls.Add(this.textboxLeft);
             this.groupboxCurrentposition.Enabled = false;
-            this.groupboxCurrentposition.Location = new System.Drawing.Point(21, 176);
+            this.groupboxCurrentposition.Location = new System.Drawing.Point(21, 143);
             this.groupboxCurrentposition.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxCurrentposition.Name = "groupboxCurrentposition";
             this.groupboxCurrentposition.Padding = new System.Windows.Forms.Padding(4);
@@ -1196,17 +1211,119 @@ namespace ReinforcementLearning
             this.groupboxSessionprogress.Controls.Add(this.textboxStepsprogress);
             this.groupboxSessionprogress.Controls.Add(this.groupboxCurrentposition);
             this.groupboxSessionprogress.Controls.Add(this.label20);
-            this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 292);
+            this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 342);
             this.groupboxSessionprogress.Name = "groupboxSessionprogress";
-            this.groupboxSessionprogress.Size = new System.Drawing.Size(546, 317);
+            this.groupboxSessionprogress.Size = new System.Drawing.Size(546, 280);
             this.groupboxSessionprogress.TabIndex = 18;
             this.groupboxSessionprogress.TabStop = false;
             this.groupboxSessionprogress.Text = "Session progress";
             // 
+            // groupboxCans
+            // 
+            this.groupboxCans.Controls.Add(this.label37);
+            this.groupboxCans.Controls.Add(this.textboxCanscollected);
+            this.groupboxCans.Controls.Add(this.textboxCansremaining);
+            this.groupboxCans.Controls.Add(this.label36);
+            this.groupboxCans.Location = new System.Drawing.Point(22, 66);
+            this.groupboxCans.Name = "groupboxCans";
+            this.groupboxCans.Size = new System.Drawing.Size(190, 76);
+            this.groupboxCans.TabIndex = 59;
+            this.groupboxCans.TabStop = false;
+            this.groupboxCans.Text = "Can data this episode";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(99, 21);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(66, 17);
+            this.label37.TabIndex = 29;
+            this.label37.Text = "Collected";
+            // 
+            // textboxCanscollected
+            // 
+            this.textboxCanscollected.Location = new System.Drawing.Point(99, 39);
+            this.textboxCanscollected.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxCanscollected.Name = "textboxCanscollected";
+            this.textboxCanscollected.ReadOnly = true;
+            this.textboxCanscollected.Size = new System.Drawing.Size(79, 22);
+            this.textboxCanscollected.TabIndex = 28;
+            // 
+            // textboxCansremaining
+            // 
+            this.textboxCansremaining.Location = new System.Drawing.Point(11, 39);
+            this.textboxCansremaining.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxCansremaining.Name = "textboxCansremaining";
+            this.textboxCansremaining.ReadOnly = true;
+            this.textboxCansremaining.Size = new System.Drawing.Size(79, 22);
+            this.textboxCansremaining.TabIndex = 23;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(14, 21);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(75, 17);
+            this.label36.TabIndex = 22;
+            this.label36.Text = "Remaining";
+            // 
+            // groupboxRewarddata
+            // 
+            this.groupboxRewarddata.Controls.Add(this.label38);
+            this.groupboxRewarddata.Controls.Add(this.textboxRewardtotal);
+            this.groupboxRewarddata.Controls.Add(this.textboxRewardepisode);
+            this.groupboxRewarddata.Controls.Add(this.label39);
+            this.groupboxRewarddata.Location = new System.Drawing.Point(282, 66);
+            this.groupboxRewarddata.Name = "groupboxRewarddata";
+            this.groupboxRewarddata.Size = new System.Drawing.Size(250, 76);
+            this.groupboxRewarddata.TabIndex = 60;
+            this.groupboxRewarddata.TabStop = false;
+            this.groupboxRewarddata.Text = "Reward data";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(100, 22);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(40, 17);
+            this.label38.TabIndex = 29;
+            this.label38.Text = "Total";
+            // 
+            // textboxRewardtotal
+            // 
+            this.textboxRewardtotal.Location = new System.Drawing.Point(100, 40);
+            this.textboxRewardtotal.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxRewardtotal.Name = "textboxRewardtotal";
+            this.textboxRewardtotal.ReadOnly = true;
+            this.textboxRewardtotal.Size = new System.Drawing.Size(79, 22);
+            this.textboxRewardtotal.TabIndex = 28;
+            // 
+            // textboxRewardepisode
+            // 
+            this.textboxRewardepisode.Location = new System.Drawing.Point(14, 40);
+            this.textboxRewardepisode.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxRewardepisode.Name = "textboxRewardepisode";
+            this.textboxRewardepisode.ReadOnly = true;
+            this.textboxRewardepisode.Size = new System.Drawing.Size(76, 22);
+            this.textboxRewardepisode.TabIndex = 23;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(10, 23);
+            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(89, 17);
+            this.label39.TabIndex = 22;
+            this.label39.Text = "This episode";
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(467, 26);
+            this.label23.Location = new System.Drawing.Point(389, 19);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(15, 17);
@@ -1215,17 +1332,17 @@ namespace ReinforcementLearning
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(379, 47);
+            this.textBox2.Location = new System.Drawing.Point(297, 40);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(80, 22);
+            this.textBox2.Size = new System.Drawing.Size(75, 22);
             this.textBox2.TabIndex = 21;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(289, 28);
+            this.label19.Location = new System.Drawing.Point(212, 20);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(17, 17);
@@ -1235,7 +1352,7 @@ namespace ReinforcementLearning
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(377, 27);
+            this.label22.Location = new System.Drawing.Point(301, 20);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(16, 17);
@@ -1244,54 +1361,54 @@ namespace ReinforcementLearning
             // 
             // textboxYprogress
             // 
-            this.textboxYprogress.Location = new System.Drawing.Point(466, 47);
+            this.textboxYprogress.Location = new System.Drawing.Point(382, 40);
             this.textboxYprogress.Margin = new System.Windows.Forms.Padding(4);
             this.textboxYprogress.Name = "textboxYprogress";
             this.textboxYprogress.ReadOnly = true;
-            this.textboxYprogress.Size = new System.Drawing.Size(73, 22);
+            this.textboxYprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxYprogress.TabIndex = 13;
             // 
             // textboxNprogress
             // 
-            this.textboxNprogress.Location = new System.Drawing.Point(293, 47);
+            this.textboxNprogress.Location = new System.Drawing.Point(209, 40);
             this.textboxNprogress.Margin = new System.Windows.Forms.Padding(4);
             this.textboxNprogress.Name = "textboxNprogress";
             this.textboxNprogress.ReadOnly = true;
-            this.textboxNprogress.Size = new System.Drawing.Size(81, 22);
+            this.textboxNprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxNprogress.TabIndex = 17;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(132, 27);
+            this.label18.Location = new System.Drawing.Point(132, 20);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(111, 17);
+            this.label18.Size = new System.Drawing.Size(71, 17);
             this.label18.TabIndex = 12;
-            this.label18.Text = "Episode number";
+            this.label18.Text = "Episode #";
             // 
             // textboxEpisodesprogress
             // 
-            this.textboxEpisodesprogress.Location = new System.Drawing.Point(133, 51);
+            this.textboxEpisodesprogress.Location = new System.Drawing.Point(121, 40);
             this.textboxEpisodesprogress.Margin = new System.Windows.Forms.Padding(4);
             this.textboxEpisodesprogress.Name = "textboxEpisodesprogress";
             this.textboxEpisodesprogress.ReadOnly = true;
-            this.textboxEpisodesprogress.Size = new System.Drawing.Size(70, 22);
+            this.textboxEpisodesprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxEpisodesprogress.TabIndex = 13;
             // 
             // textboxStepsprogress
             // 
-            this.textboxStepsprogress.Location = new System.Drawing.Point(50, 51);
+            this.textboxStepsprogress.Location = new System.Drawing.Point(33, 40);
             this.textboxStepsprogress.Margin = new System.Windows.Forms.Padding(4);
             this.textboxStepsprogress.Name = "textboxStepsprogress";
             this.textboxStepsprogress.ReadOnly = true;
-            this.textboxStepsprogress.Size = new System.Drawing.Size(72, 22);
+            this.textboxStepsprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxStepsprogress.TabIndex = 15;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(47, 27);
+            this.label20.Location = new System.Drawing.Point(47, 20);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(49, 17);
@@ -1303,15 +1420,15 @@ namespace ReinforcementLearning
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "No board states have been added yet."});
-            this.comboBox1.Location = new System.Drawing.Point(22, 37);
+            this.comboBox1.Location = new System.Drawing.Point(27, 21);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(513, 24);
+            this.comboBox1.Size = new System.Drawing.Size(497, 24);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.Text = "Select a board state...";
             // 
             // textboxQmatrixcurrent
             // 
-            this.textboxQmatrixcurrent.Location = new System.Drawing.Point(375, 96);
+            this.textboxQmatrixcurrent.Location = new System.Drawing.Point(375, 38);
             this.textboxQmatrixcurrent.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixcurrent.Name = "textboxQmatrixcurrent";
             this.textboxQmatrixcurrent.ReadOnly = true;
@@ -1321,7 +1438,7 @@ namespace ReinforcementLearning
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(370, 79);
+            this.label17.Location = new System.Drawing.Point(370, 21);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(103, 17);
@@ -1330,17 +1447,17 @@ namespace ReinforcementLearning
             // 
             // textboxQmatrixup
             // 
-            this.textboxQmatrixup.Location = new System.Drawing.Point(287, 96);
+            this.textboxQmatrixup.Location = new System.Drawing.Point(291, 38);
             this.textboxQmatrixup.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixup.Name = "textboxQmatrixup";
             this.textboxQmatrixup.ReadOnly = true;
-            this.textboxQmatrixup.Size = new System.Drawing.Size(79, 22);
+            this.textboxQmatrixup.Size = new System.Drawing.Size(75, 22);
             this.textboxQmatrixup.TabIndex = 19;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(287, 77);
+            this.label24.Location = new System.Drawing.Point(287, 19);
             this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(26, 17);
@@ -1349,26 +1466,26 @@ namespace ReinforcementLearning
             // 
             // textboxQmatrixdown
             // 
-            this.textboxQmatrixdown.Location = new System.Drawing.Point(199, 96);
+            this.textboxQmatrixdown.Location = new System.Drawing.Point(203, 38);
             this.textboxQmatrixdown.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixdown.Name = "textboxQmatrixdown";
             this.textboxQmatrixdown.ReadOnly = true;
-            this.textboxQmatrixdown.Size = new System.Drawing.Size(80, 22);
+            this.textboxQmatrixdown.Size = new System.Drawing.Size(79, 22);
             this.textboxQmatrixdown.TabIndex = 15;
             // 
             // textboxQmatrixright
             // 
-            this.textboxQmatrixright.Location = new System.Drawing.Point(111, 96);
+            this.textboxQmatrixright.Location = new System.Drawing.Point(115, 38);
             this.textboxQmatrixright.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixright.Name = "textboxQmatrixright";
             this.textboxQmatrixright.ReadOnly = true;
-            this.textboxQmatrixright.Size = new System.Drawing.Size(80, 22);
+            this.textboxQmatrixright.Size = new System.Drawing.Size(79, 22);
             this.textboxQmatrixright.TabIndex = 17;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(108, 75);
+            this.label25.Location = new System.Drawing.Point(108, 19);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(41, 17);
@@ -1378,7 +1495,7 @@ namespace ReinforcementLearning
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(197, 77);
+            this.label26.Location = new System.Drawing.Point(197, 19);
             this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(43, 17);
@@ -1388,7 +1505,7 @@ namespace ReinforcementLearning
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(21, 76);
+            this.label27.Location = new System.Drawing.Point(21, 18);
             this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(32, 17);
@@ -1397,32 +1514,23 @@ namespace ReinforcementLearning
             // 
             // textboxQmatrixleft
             // 
-            this.textboxQmatrixleft.Location = new System.Drawing.Point(23, 96);
+            this.textboxQmatrixleft.Location = new System.Drawing.Point(27, 38);
             this.textboxQmatrixleft.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixleft.Name = "textboxQmatrixleft";
             this.textboxQmatrixleft.ReadOnly = true;
-            this.textboxQmatrixleft.Size = new System.Drawing.Size(80, 22);
+            this.textboxQmatrixleft.Size = new System.Drawing.Size(79, 22);
             this.textboxQmatrixleft.TabIndex = 13;
             // 
             // groupboxQmatrix
             // 
-            this.groupboxQmatrix.Controls.Add(this.comboBox1);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixright);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixcurrent);
-            this.groupboxQmatrix.Controls.Add(this.label25);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixdown);
-            this.groupboxQmatrix.Controls.Add(this.label17);
-            this.groupboxQmatrix.Controls.Add(this.label26);
-            this.groupboxQmatrix.Controls.Add(this.label24);
-            this.groupboxQmatrix.Controls.Add(this.label27);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixleft);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixup);
+            this.groupboxQmatrix.Controls.Add(this.groupBox4);
+            this.groupboxQmatrix.Controls.Add(this.groupBox1);
             this.groupboxQmatrix.Enabled = false;
-            this.groupboxQmatrix.Location = new System.Drawing.Point(1408, 147);
+            this.groupboxQmatrix.Location = new System.Drawing.Point(1408, 140);
             this.groupboxQmatrix.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxQmatrix.Name = "groupboxQmatrix";
             this.groupboxQmatrix.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxQmatrix.Size = new System.Drawing.Size(545, 138);
+            this.groupboxQmatrix.Size = new System.Drawing.Size(545, 204);
             this.groupboxQmatrix.TabIndex = 12;
             this.groupboxQmatrix.TabStop = false;
             this.groupboxQmatrix.Text = "Q-Matrix";
@@ -1430,7 +1538,7 @@ namespace ReinforcementLearning
             // comboBox6
             // 
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(21, 45);
+            this.comboBox6.Location = new System.Drawing.Point(21, 23);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(241, 24);
             this.comboBox6.TabIndex = 22;
@@ -1440,9 +1548,9 @@ namespace ReinforcementLearning
             // 
             this.groupboxHistory.Controls.Add(this.comboBox7);
             this.groupboxHistory.Controls.Add(this.comboBox6);
-            this.groupboxHistory.Location = new System.Drawing.Point(1408, 913);
+            this.groupboxHistory.Location = new System.Drawing.Point(1408, 943);
             this.groupboxHistory.Name = "groupboxHistory";
-            this.groupboxHistory.Size = new System.Drawing.Size(546, 91);
+            this.groupboxHistory.Size = new System.Drawing.Size(546, 59);
             this.groupboxHistory.TabIndex = 22;
             this.groupboxHistory.TabStop = false;
             this.groupboxHistory.Text = "History";
@@ -1450,7 +1558,7 @@ namespace ReinforcementLearning
             // comboBox7
             // 
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(268, 45);
+            this.comboBox7.Location = new System.Drawing.Point(268, 23);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(263, 24);
             this.comboBox7.TabIndex = 23;
@@ -1459,9 +1567,9 @@ namespace ReinforcementLearning
             // groupboxStatusmessage
             // 
             this.groupboxStatusmessage.Controls.Add(this.textboxStatus);
-            this.groupboxStatusmessage.Location = new System.Drawing.Point(1407, 615);
+            this.groupboxStatusmessage.Location = new System.Drawing.Point(1407, 628);
             this.groupboxStatusmessage.Name = "groupboxStatusmessage";
-            this.groupboxStatusmessage.Size = new System.Drawing.Size(546, 292);
+            this.groupboxStatusmessage.Size = new System.Drawing.Size(546, 314);
             this.groupboxStatusmessage.TabIndex = 23;
             this.groupboxStatusmessage.TabStop = false;
             this.groupboxStatusmessage.Text = "Status message";
@@ -1471,7 +1579,7 @@ namespace ReinforcementLearning
             this.textboxStatus.Location = new System.Drawing.Point(21, 21);
             this.textboxStatus.Name = "textboxStatus";
             this.textboxStatus.ReadOnly = true;
-            this.textboxStatus.Size = new System.Drawing.Size(511, 265);
+            this.textboxStatus.Size = new System.Drawing.Size(511, 287);
             this.textboxStatus.TabIndex = 0;
             this.textboxStatus.Text = "";
             // 
@@ -1686,107 +1794,144 @@ namespace ReinforcementLearning
             this.pictureBox6.TabIndex = 58;
             this.pictureBox6.TabStop = false;
             // 
-            // label36
+            // groupBox1
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(25, 28);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(75, 17);
-            this.label36.TabIndex = 22;
-            this.label36.Text = "Remaining";
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Controls.Add(this.textboxQmatrixup);
+            this.groupBox1.Controls.Add(this.textboxQmatrixright);
+            this.groupBox1.Controls.Add(this.textboxQmatrixleft);
+            this.groupBox1.Controls.Add(this.textboxQmatrixcurrent);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.textboxQmatrixdown);
+            this.groupBox1.Location = new System.Drawing.Point(7, 125);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(530, 71);
+            this.groupBox1.TabIndex = 59;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "View";
             // 
-            // textboxCansremaining
+            // groupBox4
             // 
-            this.textboxCansremaining.Location = new System.Drawing.Point(28, 50);
-            this.textboxCansremaining.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxCansremaining.Name = "textboxCansremaining";
-            this.textboxCansremaining.ReadOnly = true;
-            this.textboxCansremaining.Size = new System.Drawing.Size(72, 22);
-            this.textboxCansremaining.TabIndex = 23;
+            this.groupBox4.Controls.Add(this.button9);
+            this.groupBox4.Controls.Add(this.label35);
+            this.groupBox4.Controls.Add(this.label40);
+            this.groupBox4.Controls.Add(this.comboBox12);
+            this.groupBox4.Controls.Add(this.label41);
+            this.groupBox4.Controls.Add(this.comboBox10);
+            this.groupBox4.Controls.Add(this.label42);
+            this.groupBox4.Controls.Add(this.comboBox11);
+            this.groupBox4.Controls.Add(this.label43);
+            this.groupBox4.Controls.Add(this.comboBox9);
+            this.groupBox4.Controls.Add(this.comboBox8);
+            this.groupBox4.Controls.Add(this.comboBox1);
+            this.groupBox4.Location = new System.Drawing.Point(7, 18);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(530, 110);
+            this.groupBox4.TabIndex = 59;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Select";
             // 
-            // textboxCanscollected
+            // comboBox8
             // 
-            this.textboxCanscollected.Location = new System.Drawing.Point(110, 50);
-            this.textboxCanscollected.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxCanscollected.Name = "textboxCanscollected";
-            this.textboxCanscollected.ReadOnly = true;
-            this.textboxCanscollected.Size = new System.Drawing.Size(71, 22);
-            this.textboxCanscollected.TabIndex = 28;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(27, 70);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(79, 24);
+            this.comboBox8.TabIndex = 1;
             // 
-            // groupboxCans
+            // comboBox9
             // 
-            this.groupboxCans.Controls.Add(this.label37);
-            this.groupboxCans.Controls.Add(this.textboxCanscollected);
-            this.groupboxCans.Controls.Add(this.textboxCansremaining);
-            this.groupboxCans.Controls.Add(this.label36);
-            this.groupboxCans.Location = new System.Drawing.Point(22, 78);
-            this.groupboxCans.Name = "groupboxCans";
-            this.groupboxCans.Size = new System.Drawing.Size(217, 97);
-            this.groupboxCans.TabIndex = 59;
-            this.groupboxCans.TabStop = false;
-            this.groupboxCans.Text = "Can data this episode";
+            this.comboBox9.FormattingEnabled = true;
+            this.comboBox9.Location = new System.Drawing.Point(115, 70);
+            this.comboBox9.Name = "comboBox9";
+            this.comboBox9.Size = new System.Drawing.Size(79, 24);
+            this.comboBox9.TabIndex = 2;
             // 
-            // label37
+            // comboBox10
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(108, 28);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(66, 17);
-            this.label37.TabIndex = 29;
-            this.label37.Text = "Collected";
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Location = new System.Drawing.Point(291, 69);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(79, 24);
+            this.comboBox10.TabIndex = 4;
             // 
-            // groupboxRewarddata
+            // comboBox11
             // 
-            this.groupboxRewarddata.Controls.Add(this.label38);
-            this.groupboxRewarddata.Controls.Add(this.textboxRewardtotal);
-            this.groupboxRewarddata.Controls.Add(this.textboxRewardepisode);
-            this.groupboxRewarddata.Controls.Add(this.label39);
-            this.groupboxRewarddata.Location = new System.Drawing.Point(282, 78);
-            this.groupboxRewarddata.Name = "groupboxRewarddata";
-            this.groupboxRewarddata.Size = new System.Drawing.Size(250, 97);
-            this.groupboxRewarddata.TabIndex = 60;
-            this.groupboxRewarddata.TabStop = false;
-            this.groupboxRewarddata.Text = "Reward data";
+            this.comboBox11.FormattingEnabled = true;
+            this.comboBox11.Location = new System.Drawing.Point(203, 69);
+            this.comboBox11.Name = "comboBox11";
+            this.comboBox11.Size = new System.Drawing.Size(79, 24);
+            this.comboBox11.TabIndex = 3;
             // 
-            // label39
+            // comboBox12
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(23, 29);
-            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(89, 17);
-            this.label39.TabIndex = 22;
-            this.label39.Text = "This episode";
+            this.comboBox12.FormattingEnabled = true;
+            this.comboBox12.Location = new System.Drawing.Point(376, 69);
+            this.comboBox12.Name = "comboBox12";
+            this.comboBox12.Size = new System.Drawing.Size(79, 24);
+            this.comboBox12.TabIndex = 5;
             // 
-            // textboxRewardepisode
+            // label35
             // 
-            this.textboxRewardepisode.Location = new System.Drawing.Point(26, 50);
-            this.textboxRewardepisode.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxRewardepisode.Name = "textboxRewardepisode";
-            this.textboxRewardepisode.ReadOnly = true;
-            this.textboxRewardepisode.Size = new System.Drawing.Size(80, 22);
-            this.textboxRewardepisode.TabIndex = 23;
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(24, 53);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(32, 17);
+            this.label35.TabIndex = 22;
+            this.label35.Text = "Left";
             // 
-            // textboxRewardtotal
+            // label40
             // 
-            this.textboxRewardtotal.Location = new System.Drawing.Point(115, 50);
-            this.textboxRewardtotal.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxRewardtotal.Name = "textboxRewardtotal";
-            this.textboxRewardtotal.ReadOnly = true;
-            this.textboxRewardtotal.Size = new System.Drawing.Size(79, 22);
-            this.textboxRewardtotal.TabIndex = 28;
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(290, 51);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(26, 17);
+            this.label40.TabIndex = 25;
+            this.label40.Text = "Up";
             // 
-            // label38
+            // label41
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(160, 29);
-            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(40, 17);
-            this.label38.TabIndex = 29;
-            this.label38.Text = "Total";
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(200, 50);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(43, 17);
+            this.label41.TabIndex = 23;
+            this.label41.Text = "Down";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(111, 51);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(41, 17);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "Right";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(372, 51);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(103, 17);
+            this.label43.TabIndex = 26;
+            this.label43.Text = "Current square";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(464, 70);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(60, 24);
+            this.button9.TabIndex = 59;
+            this.button9.Text = "View";
+            this.button9.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1854,8 +1999,11 @@ namespace ReinforcementLearning
             this.groupboxAlgorithmprogress.ResumeLayout(false);
             this.groupboxSessionprogress.ResumeLayout(false);
             this.groupboxSessionprogress.PerformLayout();
+            this.groupboxCans.ResumeLayout(false);
+            this.groupboxCans.PerformLayout();
+            this.groupboxRewarddata.ResumeLayout(false);
+            this.groupboxRewarddata.PerformLayout();
             this.groupboxQmatrix.ResumeLayout(false);
-            this.groupboxQmatrix.PerformLayout();
             this.groupboxHistory.ResumeLayout(false);
             this.groupboxStatusmessage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -1879,10 +2027,10 @@ namespace ReinforcementLearning
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            this.groupboxCans.ResumeLayout(false);
-            this.groupboxCans.PerformLayout();
-            this.groupboxRewarddata.ResumeLayout(false);
-            this.groupboxRewarddata.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2041,6 +2189,19 @@ namespace ReinforcementLearning
         private TextBox textboxRewardtotal;
         private TextBox textboxRewardepisode;
         private Label label39;
+        private GroupBox groupBox1;
+        private GroupBox groupBox4;
+        private Button button9;
+        private Label label35;
+        private Label label40;
+        private ComboBox comboBox12;
+        private Label label41;
+        private ComboBox comboBox10;
+        private Label label42;
+        private ComboBox comboBox11;
+        private Label label43;
+        private ComboBox comboBox9;
+        private ComboBox comboBox8;
     }
 }
 

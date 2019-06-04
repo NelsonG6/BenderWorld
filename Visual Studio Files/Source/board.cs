@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 
 namespace ReinforcementLearning
 {
@@ -16,11 +14,8 @@ namespace ReinforcementLearning
 
         public int beer_can_count;
 
-        Random random;
-
-        public Board(Random set_random)
+        public Board()
         {
-            random = set_random;
             board_size = 10;
             board_data = new List<List<BoardSquare>>();
             beer_can_count = 0;
@@ -31,7 +26,7 @@ namespace ReinforcementLearning
                 board_data.Add(new List<BoardSquare>());
                 for (int j = 0; j < 10; j++)
                 {
-                    board_data[i].Add(new BoardSquare(random));
+                    board_data[i].Add(new BoardSquare());
                 }
             }
 
@@ -49,7 +44,26 @@ namespace ReinforcementLearning
             bender_x = 0;
             bender_y = 0;
 
+        }
 
+        //Copy constructor
+        public Board(Board set_from)
+        {
+            board_size = set_from.board_size;
+
+            beer_can_count = set_from.beer_can_count;
+
+            board_data = new List<List<BoardSquare>>();
+            
+            //Initialize 10x10 grid
+            for (int i = 0; i < 10; i++)
+            {
+                board_data.Add(new List<BoardSquare>());
+                for (int j = 0; j < 10; j++)
+                {
+                    board_data[i].Add(new BoardSquare(set_from.board_data[i][j]));
+                }
+            }
         }
 
         public void shuffle_cans_and_bender()
@@ -66,6 +80,23 @@ namespace ReinforcementLearning
             }
 
             shuffle_bender(); //Place bender randomly somewhere
+        }
+
+
+        //This is called each time we generate a new episode for our algorithm.
+        //This is also called at the start of the program launch, disconnected from shuffling the whole board, just once.
+        public void shuffle_bender()
+        {
+            //If Bender is already somewhere on the board, make sure we remove him from that location.
+            if (board_data[bender_x][bender_y].bender_present) board_data[bender_x][bender_y].bender_present = false;
+
+            //Get bender's new location.
+            bender_x = MyRandom.Next(0, 10); //0-9 inclusive
+            bender_y = MyRandom.Next(0, 10);
+            board_data[bender_x][bender_y].bender_present = true; //Set bender
+
+            //Commenting this because I want to display pictureboxes from the textboxhandler, from a call from algorithmmanager
+            //update_pictureboxes();
         }
 
         //Used when the robot takes an action
@@ -97,24 +128,6 @@ namespace ReinforcementLearning
             return precept_string;
         }
 
-        //This is called each time we generate a new episode for our algorithm.
-        //This is also called at the start of the program launch, disconnected from shuffling the whole board, just once.
-        public void shuffle_bender()
-        {
-            //If Bender is already somewhere on the board, make sure we remove him from that location.
-            if (board_data[bender_x][bender_y].bender_present) board_data[bender_x][bender_y].bender_present = false;
-
-            //Get bender's new location.
-            bender_x = random.Next(0, 10); //0-9 inclusive
-            bender_y = random.Next(0, 10); 
-            board_data[bender_x][bender_y].bender_present = true; //Set bender
-
-            //Bender's image may not be set yet.
-            if(board_data[bender_x][bender_y].pictureData != null)
-                board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Set picture
-
-            update_pictureboxes();
-        }
 
         //This is called when the algorithm has been reset
         public void clear()
@@ -127,15 +140,18 @@ namespace ReinforcementLearning
                     j.beer_can_present = false;
                 }
             }
-            board_data[bender_x][bender_y].pictureData.Image = Properties.Resources.bender; //Keep bender displayed for novelty
-            update_pictureboxes();
+            
         }
 
-        //This is called after the board state has been changed
-        public void update_pictureboxes()
+        public void clone_position(Board clone_from)
         {
-            //Update every picturebox, now that the status of beer and bender has possibly changed.
-            foreach (var i in board_data) { foreach (var j in i) { j.setPicture(); } }
+            for(int i = 0; i < board_size; i++)
+            {
+                for(int j = 0; j < board_size; j++)
+                {
+                    board_data[i][j].copy_status(clone_from.board_data[i][j]);
+                }
+            }
         }
-    }
+    }    
 }

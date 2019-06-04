@@ -23,14 +23,13 @@ namespace ReinforcementLearning
         //Used for building the q matrix.
         Dictionary<String, float> dictionary_to_insert;
 
-        Random random;
-
-        public AlgorithmState current_state;
+        //public AlgorithmState current_state;
+        //Don't think a q matrix needs a state, it just needs to decide what action to take
 
         //Punishments will be an associated string that returns an integer value.
         public Dictionary<string, int> reinforcement_factors;
 
-        public Qmatrix(Random set_random)
+        public Qmatrix()
         {
             moves = new List<string>();
             moves.Add("Left");
@@ -39,16 +38,17 @@ namespace ReinforcementLearning
             moves.Add("Down");
             moves.Add("Grab");
 
-            current_state = new AlgorithmState("default");
-            random = set_random;
+            //This is our q-matrix
             matrix_data = new Dictionary<List<String>, Dictionary<String, float>>();
 
+            //Build our dictionary that has our 5 moves in it
             dictionary_to_insert = new Dictionary<string, float>();
             foreach(var i in moves)
             {
                 dictionary_to_insert.Add(i, 0F);
             }
 
+            //Build our reinforcement factors dictionary
             reinforcement_factors = new Dictionary<string, int>();
             reinforcement_factors.Add("Wall", -5);
             reinforcement_factors.Add("Beer", 10);
@@ -67,10 +67,10 @@ namespace ReinforcementLearning
 
         }
 
-        public string generate_step()
+        public string generate_step(AlgorithmState current_state)
         {
             //Temporary while working out the UI. This will not be a simple random equation.
-            return moves[random.Next(0, 5)];
+            return moves[MyRandom.Next(0, 5)];
         }
 
     }

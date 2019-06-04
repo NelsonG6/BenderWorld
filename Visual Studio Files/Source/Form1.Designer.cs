@@ -57,21 +57,21 @@ namespace ReinforcementLearning
             this.textboxEpisodesinput = new System.Windows.Forms.TextBox();
             this.comboboxEpisode = new System.Windows.Forms.ComboBox();
             this.groupboxInitialsettings = new System.Windows.Forms.GroupBox();
-            this.textboxBeerreward = new System.Windows.Forms.TextBox();
+            this.textboxInitialBeerreward = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.textboxEmptysquare = new System.Windows.Forms.TextBox();
-            this.textboxWallpunishment = new System.Windows.Forms.TextBox();
+            this.textboxInitialEmptysquare = new System.Windows.Forms.TextBox();
+            this.textboxInitialWallpunishment = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.textboxNinitial = new System.Windows.Forms.TextBox();
+            this.textboxInitialNinitial = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.textboxY = new System.Windows.Forms.TextBox();
-            this.textboxEpsilon = new System.Windows.Forms.TextBox();
+            this.textboxInitialY = new System.Windows.Forms.TextBox();
+            this.textboxInitialEpsilon = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textboxNumberofepisodes = new System.Windows.Forms.TextBox();
-            this.textboxNumberofsteps = new System.Windows.Forms.TextBox();
+            this.textboxInitialNumberofepisodes = new System.Windows.Forms.TextBox();
+            this.textboxInitialNumberofsteps = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonStepstextbox = new System.Windows.Forms.Button();
@@ -96,26 +96,26 @@ namespace ReinforcementLearning
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.textboxBeerconfig = new System.Windows.Forms.TextBox();
+            this.comboboxBeer = new System.Windows.Forms.ComboBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.textboxEmptySquareconfig = new System.Windows.Forms.TextBox();
+            this.comboboxEmptysquare = new System.Windows.Forms.ComboBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.textboxWallpunish = new System.Windows.Forms.TextBox();
+            this.comboboxWallpunishment = new System.Windows.Forms.ComboBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.textboxE = new System.Windows.Forms.TextBox();
+            this.comboboxE = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.buttonAdvancestepstextbox = new System.Windows.Forms.Button();
             this.comboboxAdvancesteps = new System.Windows.Forms.ComboBox();
@@ -162,45 +162,46 @@ namespace ReinforcementLearning
             this.label27 = new System.Windows.Forms.Label();
             this.textboxQmatrixleft = new System.Windows.Forms.TextBox();
             this.groupboxQmatrix = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.comboboxCurrentsquare = new System.Windows.Forms.ComboBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.comboboxUp = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.comboboxDown = new System.Windows.Forms.ComboBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.comboboxRight = new System.Windows.Forms.ComboBox();
+            this.comboboxLeft = new System.Windows.Forms.ComboBox();
+            this.groupboxQmatrixview = new System.Windows.Forms.GroupBox();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.groupboxHistory = new System.Windows.Forms.GroupBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.groupboxStatusmessage = new System.Windows.Forms.GroupBox();
             this.textboxStatus = new System.Windows.Forms.RichTextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox24 = new System.Windows.Forms.PictureBox();
+            this.pictureBox26 = new System.Windows.Forms.PictureBox();
+            this.pictureBox27 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox24 = new System.Windows.Forms.PictureBox();
-            this.pictureBox26 = new System.Windows.Forms.PictureBox();
-            this.pictureBox27 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupboxCurrentposition.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupboxInitialsettings.SuspendLayout();
@@ -219,31 +220,31 @@ namespace ReinforcementLearning
             this.groupboxCans.SuspendLayout();
             this.groupboxRewarddata.SuspendLayout();
             this.groupboxQmatrix.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupboxQmatrixview.SuspendLayout();
             this.groupboxHistory.SuspendLayout();
             this.groupboxStatusmessage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRestart
@@ -272,7 +273,6 @@ namespace ReinforcementLearning
             this.groupboxCurrentposition.Controls.Add(this.label2);
             this.groupboxCurrentposition.Controls.Add(this.label1);
             this.groupboxCurrentposition.Controls.Add(this.textboxLeft);
-            this.groupboxCurrentposition.Enabled = false;
             this.groupboxCurrentposition.Location = new System.Drawing.Point(21, 143);
             this.groupboxCurrentposition.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxCurrentposition.Name = "groupboxCurrentposition";
@@ -401,7 +401,7 @@ namespace ReinforcementLearning
             this.buttonStartAlgorithm.Location = new System.Drawing.Point(15, 719);
             this.buttonStartAlgorithm.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStartAlgorithm.Name = "buttonStartAlgorithm";
-            this.buttonStartAlgorithm.Size = new System.Drawing.Size(259, 28);
+            this.buttonStartAlgorithm.Size = new System.Drawing.Size(125, 28);
             this.buttonStartAlgorithm.TabIndex = 7;
             this.buttonStartAlgorithm.Text = "Start algorithm";
             this.buttonStartAlgorithm.UseVisualStyleBackColor = true;
@@ -423,7 +423,7 @@ namespace ReinforcementLearning
             // 
             // buttonEpisodestextbox
             // 
-            this.buttonEpisodestextbox.Location = new System.Drawing.Point(157, 48);
+            this.buttonEpisodestextbox.Location = new System.Drawing.Point(157, 49);
             this.buttonEpisodestextbox.Name = "buttonEpisodestextbox";
             this.buttonEpisodestextbox.Size = new System.Drawing.Size(75, 23);
             this.buttonEpisodestextbox.TabIndex = 4;
@@ -467,21 +467,21 @@ namespace ReinforcementLearning
             // 
             // groupboxInitialsettings
             // 
-            this.groupboxInitialsettings.Controls.Add(this.textboxBeerreward);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialBeerreward);
             this.groupboxInitialsettings.Controls.Add(this.label30);
             this.groupboxInitialsettings.Controls.Add(this.label29);
-            this.groupboxInitialsettings.Controls.Add(this.textboxEmptysquare);
-            this.groupboxInitialsettings.Controls.Add(this.textboxWallpunishment);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialEmptysquare);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialWallpunishment);
             this.groupboxInitialsettings.Controls.Add(this.label28);
-            this.groupboxInitialsettings.Controls.Add(this.textboxNinitial);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialNinitial);
             this.groupboxInitialsettings.Controls.Add(this.label21);
-            this.groupboxInitialsettings.Controls.Add(this.textboxY);
-            this.groupboxInitialsettings.Controls.Add(this.textboxEpsilon);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialY);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialEpsilon);
             this.groupboxInitialsettings.Controls.Add(this.label11);
             this.groupboxInitialsettings.Controls.Add(this.label10);
             this.groupboxInitialsettings.Controls.Add(this.label8);
-            this.groupboxInitialsettings.Controls.Add(this.textboxNumberofepisodes);
-            this.groupboxInitialsettings.Controls.Add(this.textboxNumberofsteps);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofepisodes);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofsteps);
             this.groupboxInitialsettings.Controls.Add(this.label9);
             this.groupboxInitialsettings.Location = new System.Drawing.Point(1407, 13);
             this.groupboxInitialsettings.Name = "groupboxInitialsettings";
@@ -490,14 +490,14 @@ namespace ReinforcementLearning
             this.groupboxInitialsettings.TabStop = false;
             this.groupboxInitialsettings.Text = "Initial Settings";
             // 
-            // textboxBeerreward
+            // textboxInitialBeerreward
             // 
-            this.textboxBeerreward.Location = new System.Drawing.Point(421, 96);
-            this.textboxBeerreward.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxBeerreward.Name = "textboxBeerreward";
-            this.textboxBeerreward.ReadOnly = true;
-            this.textboxBeerreward.Size = new System.Drawing.Size(113, 22);
-            this.textboxBeerreward.TabIndex = 25;
+            this.textboxInitialBeerreward.Location = new System.Drawing.Point(421, 96);
+            this.textboxInitialBeerreward.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialBeerreward.Name = "textboxInitialBeerreward";
+            this.textboxInitialBeerreward.ReadOnly = true;
+            this.textboxInitialBeerreward.Size = new System.Drawing.Size(113, 22);
+            this.textboxInitialBeerreward.TabIndex = 25;
             // 
             // label30
             // 
@@ -519,23 +519,23 @@ namespace ReinforcementLearning
             this.label29.TabIndex = 22;
             this.label29.Text = "Empty square punishment";
             // 
-            // textboxEmptysquare
+            // textboxInitialEmptysquare
             // 
-            this.textboxEmptysquare.Location = new System.Drawing.Point(362, 42);
-            this.textboxEmptysquare.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxEmptysquare.Name = "textboxEmptysquare";
-            this.textboxEmptysquare.ReadOnly = true;
-            this.textboxEmptysquare.Size = new System.Drawing.Size(172, 22);
-            this.textboxEmptysquare.TabIndex = 23;
+            this.textboxInitialEmptysquare.Location = new System.Drawing.Point(362, 42);
+            this.textboxInitialEmptysquare.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialEmptysquare.Name = "textboxInitialEmptysquare";
+            this.textboxInitialEmptysquare.ReadOnly = true;
+            this.textboxInitialEmptysquare.Size = new System.Drawing.Size(172, 22);
+            this.textboxInitialEmptysquare.TabIndex = 23;
             // 
-            // textboxWallpunishment
+            // textboxInitialWallpunishment
             // 
-            this.textboxWallpunishment.Location = new System.Drawing.Point(287, 96);
-            this.textboxWallpunishment.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxWallpunishment.Name = "textboxWallpunishment";
-            this.textboxWallpunishment.ReadOnly = true;
-            this.textboxWallpunishment.Size = new System.Drawing.Size(113, 22);
-            this.textboxWallpunishment.TabIndex = 21;
+            this.textboxInitialWallpunishment.Location = new System.Drawing.Point(287, 96);
+            this.textboxInitialWallpunishment.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialWallpunishment.Name = "textboxInitialWallpunishment";
+            this.textboxInitialWallpunishment.ReadOnly = true;
+            this.textboxInitialWallpunishment.Size = new System.Drawing.Size(113, 22);
+            this.textboxInitialWallpunishment.TabIndex = 21;
             // 
             // label28
             // 
@@ -547,14 +547,14 @@ namespace ReinforcementLearning
             this.label28.TabIndex = 20;
             this.label28.Text = "Wall punishment";
             // 
-            // textboxNinitial
+            // textboxInitialNinitial
             // 
-            this.textboxNinitial.Location = new System.Drawing.Point(109, 96);
-            this.textboxNinitial.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxNinitial.Name = "textboxNinitial";
-            this.textboxNinitial.ReadOnly = true;
-            this.textboxNinitial.Size = new System.Drawing.Size(80, 22);
-            this.textboxNinitial.TabIndex = 19;
+            this.textboxInitialNinitial.Location = new System.Drawing.Point(109, 96);
+            this.textboxInitialNinitial.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialNinitial.Name = "textboxInitialNinitial";
+            this.textboxInitialNinitial.ReadOnly = true;
+            this.textboxInitialNinitial.Size = new System.Drawing.Size(80, 22);
+            this.textboxInitialNinitial.TabIndex = 19;
             // 
             // label21
             // 
@@ -566,23 +566,23 @@ namespace ReinforcementLearning
             this.label21.TabIndex = 18;
             this.label21.Text = "Ɛ";
             // 
-            // textboxY
+            // textboxInitialY
             // 
-            this.textboxY.Location = new System.Drawing.Point(199, 96);
-            this.textboxY.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxY.Name = "textboxY";
-            this.textboxY.ReadOnly = true;
-            this.textboxY.Size = new System.Drawing.Size(80, 22);
-            this.textboxY.TabIndex = 13;
+            this.textboxInitialY.Location = new System.Drawing.Point(199, 96);
+            this.textboxInitialY.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialY.Name = "textboxInitialY";
+            this.textboxInitialY.ReadOnly = true;
+            this.textboxInitialY.Size = new System.Drawing.Size(80, 22);
+            this.textboxInitialY.TabIndex = 13;
             // 
-            // textboxEpsilon
+            // textboxInitialEpsilon
             // 
-            this.textboxEpsilon.Location = new System.Drawing.Point(23, 96);
-            this.textboxEpsilon.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxEpsilon.Name = "textboxEpsilon";
-            this.textboxEpsilon.ReadOnly = true;
-            this.textboxEpsilon.Size = new System.Drawing.Size(80, 22);
-            this.textboxEpsilon.TabIndex = 17;
+            this.textboxInitialEpsilon.Location = new System.Drawing.Point(23, 96);
+            this.textboxInitialEpsilon.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialEpsilon.Name = "textboxInitialEpsilon";
+            this.textboxInitialEpsilon.ReadOnly = true;
+            this.textboxInitialEpsilon.Size = new System.Drawing.Size(80, 22);
+            this.textboxInitialEpsilon.TabIndex = 17;
             // 
             // label11
             // 
@@ -614,23 +614,23 @@ namespace ReinforcementLearning
             this.label8.TabIndex = 16;
             this.label8.Text = "η";
             // 
-            // textboxNumberofepisodes
+            // textboxInitialNumberofepisodes
             // 
-            this.textboxNumberofepisodes.Location = new System.Drawing.Point(24, 43);
-            this.textboxNumberofepisodes.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxNumberofepisodes.Name = "textboxNumberofepisodes";
-            this.textboxNumberofepisodes.ReadOnly = true;
-            this.textboxNumberofepisodes.Size = new System.Drawing.Size(165, 22);
-            this.textboxNumberofepisodes.TabIndex = 13;
+            this.textboxInitialNumberofepisodes.Location = new System.Drawing.Point(24, 43);
+            this.textboxInitialNumberofepisodes.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialNumberofepisodes.Name = "textboxInitialNumberofepisodes";
+            this.textboxInitialNumberofepisodes.ReadOnly = true;
+            this.textboxInitialNumberofepisodes.Size = new System.Drawing.Size(165, 22);
+            this.textboxInitialNumberofepisodes.TabIndex = 13;
             // 
-            // textboxNumberofsteps
+            // textboxInitialNumberofsteps
             // 
-            this.textboxNumberofsteps.Location = new System.Drawing.Point(197, 43);
-            this.textboxNumberofsteps.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxNumberofsteps.Name = "textboxNumberofsteps";
-            this.textboxNumberofsteps.ReadOnly = true;
-            this.textboxNumberofsteps.Size = new System.Drawing.Size(157, 22);
-            this.textboxNumberofsteps.TabIndex = 15;
+            this.textboxInitialNumberofsteps.Location = new System.Drawing.Point(197, 43);
+            this.textboxInitialNumberofsteps.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxInitialNumberofsteps.Name = "textboxInitialNumberofsteps";
+            this.textboxInitialNumberofsteps.ReadOnly = true;
+            this.textboxInitialNumberofsteps.Size = new System.Drawing.Size(157, 22);
+            this.textboxInitialNumberofsteps.TabIndex = 15;
             // 
             // label9
             // 
@@ -658,7 +658,7 @@ namespace ReinforcementLearning
             // 
             // buttonStepstextbox
             // 
-            this.buttonStepstextbox.Location = new System.Drawing.Point(157, 48);
+            this.buttonStepstextbox.Location = new System.Drawing.Point(157, 49);
             this.buttonStepstextbox.Name = "buttonStepstextbox";
             this.buttonStepstextbox.Size = new System.Drawing.Size(75, 23);
             this.buttonStepstextbox.TabIndex = 4;
@@ -716,7 +716,7 @@ namespace ReinforcementLearning
             // 
             // buttonNtextbox
             // 
-            this.buttonNtextbox.Location = new System.Drawing.Point(157, 48);
+            this.buttonNtextbox.Location = new System.Drawing.Point(157, 50);
             this.buttonNtextbox.Name = "buttonNtextbox";
             this.buttonNtextbox.Size = new System.Drawing.Size(75, 23);
             this.buttonNtextbox.TabIndex = 4;
@@ -818,6 +818,7 @@ namespace ReinforcementLearning
             // 
             // groupboxConfiguration
             // 
+            this.groupboxConfiguration.Controls.Add(this.button10);
             this.groupboxConfiguration.Controls.Add(this.groupBox11);
             this.groupboxConfiguration.Controls.Add(this.groupBox10);
             this.groupboxConfiguration.Controls.Add(this.groupBox9);
@@ -839,8 +840,8 @@ namespace ReinforcementLearning
             this.groupBox11.Controls.Add(this.button7);
             this.groupBox11.Controls.Add(this.button8);
             this.groupBox11.Controls.Add(this.label34);
-            this.groupBox11.Controls.Add(this.textBox14);
-            this.groupBox11.Controls.Add(this.comboBox5);
+            this.groupBox11.Controls.Add(this.textboxBeerconfig);
+            this.groupBox11.Controls.Add(this.comboboxBeer);
             this.groupBox11.Location = new System.Drawing.Point(17, 632);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(259, 80);
@@ -856,6 +857,7 @@ namespace ReinforcementLearning
             this.button7.TabIndex = 4;
             this.button7.Text = "Set";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -865,6 +867,7 @@ namespace ReinforcementLearning
             this.button8.TabIndex = 3;
             this.button8.Text = "Set";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label34
             // 
@@ -875,28 +878,28 @@ namespace ReinforcementLearning
             this.label34.TabIndex = 2;
             this.label34.Text = "or";
             // 
-            // textBox14
+            // textboxBeerconfig
             // 
-            this.textBox14.Location = new System.Drawing.Point(29, 50);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(121, 22);
-            this.textBox14.TabIndex = 1;
+            this.textboxBeerconfig.Location = new System.Drawing.Point(29, 50);
+            this.textboxBeerconfig.Name = "textboxBeerconfig";
+            this.textboxBeerconfig.Size = new System.Drawing.Size(121, 22);
+            this.textboxBeerconfig.TabIndex = 1;
             // 
-            // comboBox5
+            // comboboxBeer
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(29, 18);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 24);
-            this.comboBox5.TabIndex = 0;
+            this.comboboxBeer.FormattingEnabled = true;
+            this.comboboxBeer.Location = new System.Drawing.Point(29, 18);
+            this.comboboxBeer.Name = "comboboxBeer";
+            this.comboboxBeer.Size = new System.Drawing.Size(121, 24);
+            this.comboboxBeer.TabIndex = 0;
             // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.button5);
             this.groupBox10.Controls.Add(this.button6);
             this.groupBox10.Controls.Add(this.label33);
-            this.groupBox10.Controls.Add(this.textBox13);
-            this.groupBox10.Controls.Add(this.comboBox4);
+            this.groupBox10.Controls.Add(this.textboxEmptySquareconfig);
+            this.groupBox10.Controls.Add(this.comboboxEmptysquare);
             this.groupBox10.Location = new System.Drawing.Point(17, 537);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(259, 80);
@@ -912,6 +915,7 @@ namespace ReinforcementLearning
             this.button5.TabIndex = 4;
             this.button5.Text = "Set";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -931,28 +935,28 @@ namespace ReinforcementLearning
             this.label33.TabIndex = 2;
             this.label33.Text = "or";
             // 
-            // textBox13
+            // textboxEmptySquareconfig
             // 
-            this.textBox13.Location = new System.Drawing.Point(29, 50);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(121, 22);
-            this.textBox13.TabIndex = 1;
+            this.textboxEmptySquareconfig.Location = new System.Drawing.Point(29, 50);
+            this.textboxEmptySquareconfig.Name = "textboxEmptySquareconfig";
+            this.textboxEmptySquareconfig.Size = new System.Drawing.Size(121, 22);
+            this.textboxEmptySquareconfig.TabIndex = 1;
             // 
-            // comboBox4
+            // comboboxEmptysquare
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(29, 18);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 24);
-            this.comboBox4.TabIndex = 0;
+            this.comboboxEmptysquare.FormattingEnabled = true;
+            this.comboboxEmptysquare.Location = new System.Drawing.Point(29, 18);
+            this.comboboxEmptysquare.Name = "comboboxEmptysquare";
+            this.comboboxEmptysquare.Size = new System.Drawing.Size(121, 24);
+            this.comboboxEmptysquare.TabIndex = 0;
             // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.button3);
             this.groupBox9.Controls.Add(this.button4);
             this.groupBox9.Controls.Add(this.label32);
-            this.groupBox9.Controls.Add(this.textBox12);
-            this.groupBox9.Controls.Add(this.comboBox3);
+            this.groupBox9.Controls.Add(this.textboxWallpunish);
+            this.groupBox9.Controls.Add(this.comboboxWallpunishment);
             this.groupBox9.Location = new System.Drawing.Point(15, 451);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(259, 80);
@@ -968,6 +972,7 @@ namespace ReinforcementLearning
             this.button3.TabIndex = 4;
             this.button3.Text = "Set";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -977,6 +982,7 @@ namespace ReinforcementLearning
             this.button4.TabIndex = 3;
             this.button4.Text = "Set";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label32
             // 
@@ -987,28 +993,28 @@ namespace ReinforcementLearning
             this.label32.TabIndex = 2;
             this.label32.Text = "or";
             // 
-            // textBox12
+            // textboxWallpunish
             // 
-            this.textBox12.Location = new System.Drawing.Point(29, 50);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(121, 22);
-            this.textBox12.TabIndex = 1;
+            this.textboxWallpunish.Location = new System.Drawing.Point(29, 50);
+            this.textboxWallpunish.Name = "textboxWallpunish";
+            this.textboxWallpunish.Size = new System.Drawing.Size(121, 22);
+            this.textboxWallpunish.TabIndex = 1;
             // 
-            // comboBox3
+            // comboboxWallpunishment
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(29, 18);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 24);
-            this.comboBox3.TabIndex = 0;
+            this.comboboxWallpunishment.FormattingEnabled = true;
+            this.comboboxWallpunishment.Location = new System.Drawing.Point(29, 18);
+            this.comboboxWallpunishment.Name = "comboboxWallpunishment";
+            this.comboboxWallpunishment.Size = new System.Drawing.Size(121, 24);
+            this.comboboxWallpunishment.TabIndex = 0;
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.button1);
             this.groupBox7.Controls.Add(this.button2);
             this.groupBox7.Controls.Add(this.label31);
-            this.groupBox7.Controls.Add(this.textBox11);
-            this.groupBox7.Controls.Add(this.comboBox2);
+            this.groupBox7.Controls.Add(this.textboxE);
+            this.groupBox7.Controls.Add(this.comboboxE);
             this.groupBox7.Location = new System.Drawing.Point(15, 365);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(259, 80);
@@ -1024,6 +1030,7 @@ namespace ReinforcementLearning
             this.button1.TabIndex = 4;
             this.button1.Text = "Set";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -1033,6 +1040,7 @@ namespace ReinforcementLearning
             this.button2.TabIndex = 3;
             this.button2.Text = "Set";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label31
             // 
@@ -1043,20 +1051,20 @@ namespace ReinforcementLearning
             this.label31.TabIndex = 2;
             this.label31.Text = "or";
             // 
-            // textBox11
+            // textboxE
             // 
-            this.textBox11.Location = new System.Drawing.Point(29, 50);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(121, 22);
-            this.textBox11.TabIndex = 1;
+            this.textboxE.Location = new System.Drawing.Point(29, 50);
+            this.textboxE.Name = "textboxE";
+            this.textboxE.Size = new System.Drawing.Size(121, 22);
+            this.textboxE.TabIndex = 1;
             // 
-            // comboBox2
+            // comboboxE
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(29, 18);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
-            this.comboBox2.TabIndex = 0;
+            this.comboboxE.FormattingEnabled = true;
+            this.comboboxE.Location = new System.Drawing.Point(29, 18);
+            this.comboboxE.Name = "comboboxE";
+            this.comboboxE.Size = new System.Drawing.Size(121, 24);
+            this.comboboxE.TabIndex = 0;
             // 
             // groupBox8
             // 
@@ -1080,6 +1088,7 @@ namespace ReinforcementLearning
             this.buttonAdvancestepstextbox.TabIndex = 9;
             this.buttonAdvancestepstextbox.Text = "Step";
             this.buttonAdvancestepstextbox.UseVisualStyleBackColor = true;
+            this.buttonAdvancestepstextbox.Click += new System.EventHandler(this.buttonAdvancestepstextbox_Click);
             // 
             // comboboxAdvancesteps
             // 
@@ -1104,6 +1113,7 @@ namespace ReinforcementLearning
             this.buttonAdvancestepsdropdown.TabIndex = 8;
             this.buttonAdvancestepsdropdown.Text = "Step";
             this.buttonAdvancestepsdropdown.UseVisualStyleBackColor = true;
+            this.buttonAdvancestepsdropdown.Click += new System.EventHandler(this.buttonAdvancestepsdropdown_Click);
             // 
             // textboxAdvancestepsinput
             // 
@@ -1211,6 +1221,7 @@ namespace ReinforcementLearning
             this.groupboxSessionprogress.Controls.Add(this.textboxStepsprogress);
             this.groupboxSessionprogress.Controls.Add(this.groupboxCurrentposition);
             this.groupboxSessionprogress.Controls.Add(this.label20);
+            this.groupboxSessionprogress.Enabled = false;
             this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 342);
             this.groupboxSessionprogress.Name = "groupboxSessionprogress";
             this.groupboxSessionprogress.Size = new System.Drawing.Size(546, 280);
@@ -1524,7 +1535,7 @@ namespace ReinforcementLearning
             // groupboxQmatrix
             // 
             this.groupboxQmatrix.Controls.Add(this.groupBox4);
-            this.groupboxQmatrix.Controls.Add(this.groupBox1);
+            this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixview);
             this.groupboxQmatrix.Enabled = false;
             this.groupboxQmatrix.Location = new System.Drawing.Point(1408, 140);
             this.groupboxQmatrix.Margin = new System.Windows.Forms.Padding(4);
@@ -1534,6 +1545,165 @@ namespace ReinforcementLearning
             this.groupboxQmatrix.TabIndex = 12;
             this.groupboxQmatrix.TabStop = false;
             this.groupboxQmatrix.Text = "Q-Matrix";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button9);
+            this.groupBox4.Controls.Add(this.label35);
+            this.groupBox4.Controls.Add(this.label40);
+            this.groupBox4.Controls.Add(this.comboboxCurrentsquare);
+            this.groupBox4.Controls.Add(this.label41);
+            this.groupBox4.Controls.Add(this.comboboxUp);
+            this.groupBox4.Controls.Add(this.label42);
+            this.groupBox4.Controls.Add(this.comboboxDown);
+            this.groupBox4.Controls.Add(this.label43);
+            this.groupBox4.Controls.Add(this.comboboxRight);
+            this.groupBox4.Controls.Add(this.comboboxLeft);
+            this.groupBox4.Controls.Add(this.comboBox1);
+            this.groupBox4.Location = new System.Drawing.Point(7, 18);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(530, 110);
+            this.groupBox4.TabIndex = 59;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Select";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(464, 70);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(60, 24);
+            this.button9.TabIndex = 59;
+            this.button9.Text = "View";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(24, 53);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(32, 17);
+            this.label35.TabIndex = 22;
+            this.label35.Text = "Left";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(290, 51);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(26, 17);
+            this.label40.TabIndex = 25;
+            this.label40.Text = "Up";
+            // 
+            // comboboxCurrentsquare
+            // 
+            this.comboboxCurrentsquare.FormattingEnabled = true;
+            this.comboboxCurrentsquare.Items.AddRange(new object[] {
+            "Empty",
+            "Can",
+            "Wall"});
+            this.comboboxCurrentsquare.Location = new System.Drawing.Point(376, 69);
+            this.comboboxCurrentsquare.Name = "comboboxCurrentsquare";
+            this.comboboxCurrentsquare.Size = new System.Drawing.Size(79, 24);
+            this.comboboxCurrentsquare.TabIndex = 5;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(200, 50);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(43, 17);
+            this.label41.TabIndex = 23;
+            this.label41.Text = "Down";
+            // 
+            // comboboxUp
+            // 
+            this.comboboxUp.FormattingEnabled = true;
+            this.comboboxUp.Items.AddRange(new object[] {
+            "Empty",
+            "Can",
+            "Wall"});
+            this.comboboxUp.Location = new System.Drawing.Point(291, 69);
+            this.comboboxUp.Name = "comboboxUp";
+            this.comboboxUp.Size = new System.Drawing.Size(79, 24);
+            this.comboboxUp.TabIndex = 4;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(111, 51);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(41, 17);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "Right";
+            // 
+            // comboboxDown
+            // 
+            this.comboboxDown.FormattingEnabled = true;
+            this.comboboxDown.Items.AddRange(new object[] {
+            "Empty",
+            "Can",
+            "Wall"});
+            this.comboboxDown.Location = new System.Drawing.Point(203, 69);
+            this.comboboxDown.Name = "comboboxDown";
+            this.comboboxDown.Size = new System.Drawing.Size(79, 24);
+            this.comboboxDown.TabIndex = 3;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(372, 51);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(103, 17);
+            this.label43.TabIndex = 26;
+            this.label43.Text = "Current square";
+            // 
+            // comboboxRight
+            // 
+            this.comboboxRight.FormattingEnabled = true;
+            this.comboboxRight.Items.AddRange(new object[] {
+            "Empty",
+            "Can",
+            "Wall"});
+            this.comboboxRight.Location = new System.Drawing.Point(115, 70);
+            this.comboboxRight.Name = "comboboxRight";
+            this.comboboxRight.Size = new System.Drawing.Size(79, 24);
+            this.comboboxRight.TabIndex = 2;
+            // 
+            // comboboxLeft
+            // 
+            this.comboboxLeft.FormattingEnabled = true;
+            this.comboboxLeft.Items.AddRange(new object[] {
+            "Empty",
+            "Can",
+            "Wall"});
+            this.comboboxLeft.Location = new System.Drawing.Point(27, 70);
+            this.comboboxLeft.Name = "comboboxLeft";
+            this.comboboxLeft.Size = new System.Drawing.Size(79, 24);
+            this.comboboxLeft.TabIndex = 1;
+            // 
+            // groupboxQmatrixview
+            // 
+            this.groupboxQmatrixview.Controls.Add(this.label27);
+            this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixup);
+            this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixright);
+            this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixleft);
+            this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixcurrent);
+            this.groupboxQmatrixview.Controls.Add(this.label24);
+            this.groupboxQmatrixview.Controls.Add(this.label26);
+            this.groupboxQmatrixview.Controls.Add(this.label25);
+            this.groupboxQmatrixview.Controls.Add(this.label17);
+            this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixdown);
+            this.groupboxQmatrixview.Location = new System.Drawing.Point(7, 125);
+            this.groupboxQmatrixview.Name = "groupboxQmatrixview";
+            this.groupboxQmatrixview.Size = new System.Drawing.Size(530, 71);
+            this.groupboxQmatrixview.TabIndex = 59;
+            this.groupboxQmatrixview.TabStop = false;
+            this.groupboxQmatrixview.Text = "View";
             // 
             // comboBox6
             // 
@@ -1557,6 +1727,7 @@ namespace ReinforcementLearning
             // 
             // comboBox7
             // 
+            this.comboBox7.Enabled = false;
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(268, 23);
             this.comboBox7.Name = "comboBox7";
@@ -1583,9 +1754,189 @@ namespace ReinforcementLearning
             this.textboxStatus.TabIndex = 0;
             this.textboxStatus.Text = "";
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(38, 102);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 58;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
+            this.pictureBox12.Location = new System.Drawing.Point(38, 287);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox12.TabIndex = 57;
+            this.pictureBox12.TabStop = false;
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
+            this.pictureBox13.Location = new System.Drawing.Point(38, 192);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox13.TabIndex = 56;
+            this.pictureBox13.TabStop = false;
+            // 
+            // pictureBox24
+            // 
+            this.pictureBox24.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox24.Image")));
+            this.pictureBox24.Location = new System.Drawing.Point(38, 382);
+            this.pictureBox24.Name = "pictureBox24";
+            this.pictureBox24.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox24.TabIndex = 55;
+            this.pictureBox24.TabStop = false;
+            // 
+            // pictureBox26
+            // 
+            this.pictureBox26.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox26.Image")));
+            this.pictureBox26.Location = new System.Drawing.Point(38, 562);
+            this.pictureBox26.Name = "pictureBox26";
+            this.pictureBox26.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox26.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox26.TabIndex = 53;
+            this.pictureBox26.TabStop = false;
+            // 
+            // pictureBox27
+            // 
+            this.pictureBox27.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox27.Image")));
+            this.pictureBox27.Location = new System.Drawing.Point(38, 467);
+            this.pictureBox27.Name = "pictureBox27";
+            this.pictureBox27.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox27.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox27.TabIndex = 52;
+            this.pictureBox27.TabStop = false;
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
+            this.pictureBox10.Location = new System.Drawing.Point(38, 742);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox10.TabIndex = 47;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
+            this.pictureBox11.Location = new System.Drawing.Point(38, 652);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 46;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox16.Image")));
+            this.pictureBox16.Location = new System.Drawing.Point(903, 998);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox16.TabIndex = 43;
+            this.pictureBox16.TabStop = false;
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox17.Image")));
+            this.pictureBox17.Location = new System.Drawing.Point(1003, 998);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox17.TabIndex = 42;
+            this.pictureBox17.TabStop = false;
+            // 
+            // pictureBox18
+            // 
+            this.pictureBox18.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox18.Image")));
+            this.pictureBox18.Location = new System.Drawing.Point(703, 998);
+            this.pictureBox18.Name = "pictureBox18";
+            this.pictureBox18.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox18.TabIndex = 41;
+            this.pictureBox18.TabStop = false;
+            // 
+            // pictureBox19
+            // 
+            this.pictureBox19.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox19.Image")));
+            this.pictureBox19.Location = new System.Drawing.Point(803, 998);
+            this.pictureBox19.Name = "pictureBox19";
+            this.pictureBox19.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox19.TabIndex = 40;
+            this.pictureBox19.TabStop = false;
+            // 
+            // pictureBox20
+            // 
+            this.pictureBox20.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox20.Image")));
+            this.pictureBox20.Location = new System.Drawing.Point(503, 998);
+            this.pictureBox20.Name = "pictureBox20";
+            this.pictureBox20.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox20.TabIndex = 39;
+            this.pictureBox20.TabStop = false;
+            // 
+            // pictureBox21
+            // 
+            this.pictureBox21.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox21.Image")));
+            this.pictureBox21.Location = new System.Drawing.Point(603, 998);
+            this.pictureBox21.Name = "pictureBox21";
+            this.pictureBox21.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox21.TabIndex = 38;
+            this.pictureBox21.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(303, 998);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 31;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(403, 998);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 30;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(103, 998);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 27;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(38, 932);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(25, 30);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 26;
+            this.pictureBox4.TabStop = false;
+            // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::ReinforcementLearning.Properties.Resources._1;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(203, 998);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(25, 30);
@@ -1595,7 +1946,7 @@ namespace ReinforcementLearning
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::ReinforcementLearning.Properties.Resources._1;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(38, 842);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(25, 30);
@@ -1614,324 +1965,16 @@ namespace ReinforcementLearning
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox4
+            // button10
             // 
-            this.pictureBox4.Image = global::ReinforcementLearning.Properties.Resources._0;
-            this.pictureBox4.Location = new System.Drawing.Point(38, 932);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 26;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::ReinforcementLearning.Properties.Resources._0;
-            this.pictureBox5.Location = new System.Drawing.Point(103, 998);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 27;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Image = global::ReinforcementLearning.Properties.Resources._2;
-            this.pictureBox8.Location = new System.Drawing.Point(303, 998);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 31;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = global::ReinforcementLearning.Properties.Resources._3;
-            this.pictureBox9.Location = new System.Drawing.Point(403, 998);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 30;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox16
-            // 
-            this.pictureBox16.Image = global::ReinforcementLearning.Properties.Resources._8;
-            this.pictureBox16.Location = new System.Drawing.Point(903, 998);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox16.TabIndex = 43;
-            this.pictureBox16.TabStop = false;
-            // 
-            // pictureBox17
-            // 
-            this.pictureBox17.Image = global::ReinforcementLearning.Properties.Resources._9;
-            this.pictureBox17.Location = new System.Drawing.Point(1003, 998);
-            this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox17.TabIndex = 42;
-            this.pictureBox17.TabStop = false;
-            // 
-            // pictureBox18
-            // 
-            this.pictureBox18.Image = global::ReinforcementLearning.Properties.Resources._6;
-            this.pictureBox18.Location = new System.Drawing.Point(703, 998);
-            this.pictureBox18.Name = "pictureBox18";
-            this.pictureBox18.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox18.TabIndex = 41;
-            this.pictureBox18.TabStop = false;
-            // 
-            // pictureBox19
-            // 
-            this.pictureBox19.Image = global::ReinforcementLearning.Properties.Resources._7;
-            this.pictureBox19.Location = new System.Drawing.Point(803, 998);
-            this.pictureBox19.Name = "pictureBox19";
-            this.pictureBox19.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox19.TabIndex = 40;
-            this.pictureBox19.TabStop = false;
-            // 
-            // pictureBox20
-            // 
-            this.pictureBox20.Image = global::ReinforcementLearning.Properties.Resources._4;
-            this.pictureBox20.Location = new System.Drawing.Point(503, 998);
-            this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox20.TabIndex = 39;
-            this.pictureBox20.TabStop = false;
-            // 
-            // pictureBox21
-            // 
-            this.pictureBox21.Image = global::ReinforcementLearning.Properties.Resources._5;
-            this.pictureBox21.Location = new System.Drawing.Point(603, 998);
-            this.pictureBox21.Name = "pictureBox21";
-            this.pictureBox21.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox21.TabIndex = 38;
-            this.pictureBox21.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Image = global::ReinforcementLearning.Properties.Resources._2;
-            this.pictureBox10.Location = new System.Drawing.Point(38, 742);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox10.TabIndex = 47;
-            this.pictureBox10.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Image = global::ReinforcementLearning.Properties.Resources._3;
-            this.pictureBox11.Location = new System.Drawing.Point(38, 652);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox11.TabIndex = 46;
-            this.pictureBox11.TabStop = false;
-            // 
-            // pictureBox24
-            // 
-            this.pictureBox24.Image = global::ReinforcementLearning.Properties.Resources._6;
-            this.pictureBox24.Location = new System.Drawing.Point(38, 382);
-            this.pictureBox24.Name = "pictureBox24";
-            this.pictureBox24.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox24.TabIndex = 55;
-            this.pictureBox24.TabStop = false;
-            // 
-            // pictureBox26
-            // 
-            this.pictureBox26.Image = global::ReinforcementLearning.Properties.Resources._4;
-            this.pictureBox26.Location = new System.Drawing.Point(38, 562);
-            this.pictureBox26.Name = "pictureBox26";
-            this.pictureBox26.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox26.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox26.TabIndex = 53;
-            this.pictureBox26.TabStop = false;
-            // 
-            // pictureBox27
-            // 
-            this.pictureBox27.Image = global::ReinforcementLearning.Properties.Resources._5;
-            this.pictureBox27.Location = new System.Drawing.Point(38, 467);
-            this.pictureBox27.Name = "pictureBox27";
-            this.pictureBox27.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox27.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox27.TabIndex = 52;
-            this.pictureBox27.TabStop = false;
-            // 
-            // pictureBox12
-            // 
-            this.pictureBox12.Image = global::ReinforcementLearning.Properties.Resources._7;
-            this.pictureBox12.Location = new System.Drawing.Point(38, 287);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox12.TabIndex = 57;
-            this.pictureBox12.TabStop = false;
-            // 
-            // pictureBox13
-            // 
-            this.pictureBox13.Image = global::ReinforcementLearning.Properties.Resources._8;
-            this.pictureBox13.Location = new System.Drawing.Point(38, 192);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox13.TabIndex = 56;
-            this.pictureBox13.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::ReinforcementLearning.Properties.Resources._9;
-            this.pictureBox6.Location = new System.Drawing.Point(38, 102);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(25, 30);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 58;
-            this.pictureBox6.TabStop = false;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.textboxQmatrixup);
-            this.groupBox1.Controls.Add(this.textboxQmatrixright);
-            this.groupBox1.Controls.Add(this.textboxQmatrixleft);
-            this.groupBox1.Controls.Add(this.textboxQmatrixcurrent);
-            this.groupBox1.Controls.Add(this.label24);
-            this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.textboxQmatrixdown);
-            this.groupBox1.Location = new System.Drawing.Point(7, 125);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(530, 71);
-            this.groupBox1.TabIndex = 59;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "View";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button9);
-            this.groupBox4.Controls.Add(this.label35);
-            this.groupBox4.Controls.Add(this.label40);
-            this.groupBox4.Controls.Add(this.comboBox12);
-            this.groupBox4.Controls.Add(this.label41);
-            this.groupBox4.Controls.Add(this.comboBox10);
-            this.groupBox4.Controls.Add(this.label42);
-            this.groupBox4.Controls.Add(this.comboBox11);
-            this.groupBox4.Controls.Add(this.label43);
-            this.groupBox4.Controls.Add(this.comboBox9);
-            this.groupBox4.Controls.Add(this.comboBox8);
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Location = new System.Drawing.Point(7, 18);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(530, 110);
-            this.groupBox4.TabIndex = 59;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Select";
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(27, 70);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(79, 24);
-            this.comboBox8.TabIndex = 1;
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(115, 70);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(79, 24);
-            this.comboBox9.TabIndex = 2;
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(291, 69);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(79, 24);
-            this.comboBox10.TabIndex = 4;
-            // 
-            // comboBox11
-            // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(203, 69);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(79, 24);
-            this.comboBox11.TabIndex = 3;
-            // 
-            // comboBox12
-            // 
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Location = new System.Drawing.Point(376, 69);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(79, 24);
-            this.comboBox12.TabIndex = 5;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(24, 53);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(32, 17);
-            this.label35.TabIndex = 22;
-            this.label35.Text = "Left";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(290, 51);
-            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(26, 17);
-            this.label40.TabIndex = 25;
-            this.label40.Text = "Up";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(200, 50);
-            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(43, 17);
-            this.label41.TabIndex = 23;
-            this.label41.Text = "Down";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(111, 51);
-            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(41, 17);
-            this.label42.TabIndex = 24;
-            this.label42.Text = "Right";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(372, 51);
-            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(103, 17);
-            this.label43.TabIndex = 26;
-            this.label43.Text = "Current square";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(464, 70);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(60, 24);
-            this.button9.TabIndex = 59;
-            this.button9.Text = "View";
-            this.button9.UseVisualStyleBackColor = true;
+            this.button10.Location = new System.Drawing.Point(153, 719);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(125, 28);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "Reset config";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
@@ -2004,33 +2047,33 @@ namespace ReinforcementLearning
             this.groupboxRewarddata.ResumeLayout(false);
             this.groupboxRewarddata.PerformLayout();
             this.groupboxQmatrix.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupboxQmatrixview.ResumeLayout(false);
+            this.groupboxQmatrixview.PerformLayout();
             this.groupboxHistory.ResumeLayout(false);
             this.groupboxStatusmessage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2059,13 +2102,13 @@ namespace ReinforcementLearning
         private TextBox textboxEpisodesinput;
         private ComboBox comboboxEpisode;
         private GroupBox groupboxInitialsettings;
-        private TextBox textboxY;
-        private TextBox textboxEpsilon;
+        private TextBox textboxInitialY;
+        private TextBox textboxInitialEpsilon;
         private Label label11;
         private Label label10;
         private Label label8;
-        private TextBox textboxNumberofepisodes;
-        private TextBox textboxNumberofsteps;
+        private TextBox textboxInitialNumberofepisodes;
+        private TextBox textboxInitialNumberofsteps;
         private Label label9;
         private GroupBox groupBox3;
         private Button buttonStepstextbox;
@@ -2106,7 +2149,7 @@ namespace ReinforcementLearning
         private TextBox textboxEpisodesprogress;
         private TextBox textboxStepsprogress;
         private Label label20;
-        private TextBox textboxNinitial;
+        private TextBox textboxInitialNinitial;
         private Label label21;
         private Label label23;
         private TextBox textBox2;
@@ -2124,36 +2167,36 @@ namespace ReinforcementLearning
         private Label label27;
         private TextBox textboxQmatrixleft;
         private GroupBox groupboxQmatrix;
-        private TextBox textboxBeerreward;
+        private TextBox textboxInitialBeerreward;
         private Label label30;
         private Label label29;
-        private TextBox textboxEmptysquare;
-        private TextBox textboxWallpunishment;
+        private TextBox textboxInitialEmptysquare;
+        private TextBox textboxInitialWallpunishment;
         private Label label28;
         private GroupBox groupBox11;
         private Button button7;
         private Button button8;
         private Label label34;
-        private TextBox textBox14;
-        private ComboBox comboBox5;
+        private TextBox textboxBeerconfig;
+        private ComboBox comboboxBeer;
         private GroupBox groupBox10;
         private Button button5;
         private Button button6;
         private Label label33;
-        private TextBox textBox13;
-        private ComboBox comboBox4;
+        private TextBox textboxEmptySquareconfig;
+        private ComboBox comboboxEmptysquare;
         private GroupBox groupBox9;
         private Button button3;
         private Button button4;
         private Label label32;
-        private TextBox textBox12;
-        private ComboBox comboBox3;
+        private TextBox textboxWallpunish;
+        private ComboBox comboboxWallpunishment;
         private GroupBox groupBox7;
         private Button button1;
         private Button button2;
         private Label label31;
-        private TextBox textBox11;
-        private ComboBox comboBox2;
+        private TextBox textboxE;
+        private ComboBox comboboxE;
         private ComboBox comboBox6;
         private GroupBox groupboxHistory;
         private ComboBox comboBox7;
@@ -2189,19 +2232,20 @@ namespace ReinforcementLearning
         private TextBox textboxRewardtotal;
         private TextBox textboxRewardepisode;
         private Label label39;
-        private GroupBox groupBox1;
+        private GroupBox groupboxQmatrixview;
         private GroupBox groupBox4;
         private Button button9;
         private Label label35;
         private Label label40;
-        private ComboBox comboBox12;
+        private ComboBox comboboxCurrentsquare;
         private Label label41;
-        private ComboBox comboBox10;
+        private ComboBox comboboxUp;
         private Label label42;
-        private ComboBox comboBox11;
+        private ComboBox comboboxDown;
         private Label label43;
-        private ComboBox comboBox9;
-        private ComboBox comboBox8;
+        private ComboBox comboboxRight;
+        private ComboBox comboboxLeft;
+        private Button button10;
     }
 }
 

@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Source\AlgorithmManager.cs" />
     <Compile Include="Source\AlgorithmState.cs" />
     <Compile Include="Source\board.cs" />
@@ -67,14 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,60 +89,28 @@
     <None Include="Properties\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Images\title2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\grid.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\Images\bender.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Images\beer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Images\grid background.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\Images\bender and beer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\7.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\6.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Images\0.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Images\background explored.png" />
     <Content Include="Properties\Images\background last move.png" />
-    <None Include="Properties\Images\background unexplored ver3.png" />
-    <None Include="Properties\Images\background unexplored ver2.png" />
     <Content Include="Properties\Images\background unexplored.png" />
-    <None Include="Resources\background unexplored ver2.png" />
+    <Content Include="Properties\Images\numbers\0.png" />
+    <Content Include="Properties\Images\numbers\1.png" />
+    <Content Include="Properties\Images\numbers\2.png" />
+    <Content Include="Properties\Images\numbers\3.png" />
+    <Content Include="Properties\Images\numbers\4.png" />
+    <Content Include="Properties\Images\numbers\5.png" />
+    <Content Include="Properties\Images\numbers\6.png" />
+    <Content Include="Properties\Images\numbers\7.png" />
+    <Content Include="Properties\Images\numbers\8.png" />
+    <Content Include="Properties\Images\numbers\9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

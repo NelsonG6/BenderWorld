@@ -9,6 +9,7 @@ namespace ReinforcementLearning
         //The class for storing the data relevant for each square
         public bool beer_can_present;
         public bool bender_present; //Actually dont even think this is being used right now, not sure
+        public string square_state; //Using a string to store one of three values: last move, unexplored, explored
 
         public List<int[]> walls;
 
@@ -17,6 +18,7 @@ namespace ReinforcementLearning
             walls = new List<int[]>();
             bender_present = false;
             beer_can_present = false;
+            square_state = "Unexplored"; //Deafult
         }
 
         public BoardSquare(BoardSquare set_from)
@@ -26,6 +28,7 @@ namespace ReinforcementLearning
 
             bender_present = set_from.bender_present;
             beer_can_present = set_from.beer_can_present;
+            square_state = set_from.square_state;
         }
 
 
@@ -47,7 +50,7 @@ namespace ReinforcementLearning
         {
             beer_can_present = copy_from.beer_can_present;
             bender_present = copy_from.bender_present;
+            square_state = copy_from.square_state;
         }
-
     }
 }

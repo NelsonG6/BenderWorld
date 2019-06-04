@@ -9,16 +9,12 @@ namespace ReinforcementLearning
 
         public Board board_data; //Stores the state of the cans and walls (bender is stored with other coordinates)
 
-        public int episode_limit; //When to stop
-        public int step_limit;
 
         public float n_current; //eta
         public float y_current; //discount
         public float e_current; //epsilon
 
-        public float n_initial; //eta
-        public float y_initial; //discount
-        public float e_initial; //epsilon
+
 
         public int cans_remaining; //Session - Can data
         public int cans_collected;
@@ -38,11 +34,8 @@ namespace ReinforcementLearning
         public string down_value;
         public string up_value;
         public string current_square_value;
-        
-        public string status_message; //The message that was displayed when this state was produced.
 
-        //Punishments will be an associated string that returns an integer value.
-        public Dictionary<string, int> reinforcement_factors;
+        public string status_message; //The message that was displayed when this state was produced.
 
         public Qmatrix live_qmatrix; //Moves will be generated from here.
 
@@ -56,67 +49,41 @@ namespace ReinforcementLearning
             board_data = new Board();
 
             //Any flag means set default
-            episode_limit = 5000;
-            step_limit = 200;
-            n_initial = .2F;
-            y_initial = .9F;
-            e_initial = .1F;
-
-            reinforcement_factors = new Dictionary<string, int>();
-            reinforcement_factors.Add("Wall", -5);
-            reinforcement_factors.Add("Beer", 10);
-            reinforcement_factors.Add("Empty", -1);
+            live_qmatrix = new Qmatrix();
 
             reset(); //handle initializing the "current session" fields
         }
 
         //Copied from another algorithm state
         public AlgorithmState(AlgorithmState set_from)
-        {
-            //Any flag means set default
-            episode_limit = set_from.episode_limit;
-            step_limit = set_from.step_limit;
-            n_initial = set_from.n_initial;
-            //discount
-            y_initial = set_from.y_initial;
-            //epsilon
-            e_initial = set_from.e_initial;
-
-            //Session variables
-            episode_limit = set_from.episode_limit;
-            step_limit = set_from.step_limit;
-            //eta
-            
-
+        {           
             n_current = set_from.n_current;
             y_current = set_from.y_current;
             e_current = set_from.e_current;
 
-            //Session - Can data
-            cans_remaining = set_from.cans_remaining;
+            cans_remaining = set_from.cans_remaining; //Can data
             cans_collected = set_from.cans_collected;
 
-            //Session - Reward data
-            episode_rewards = set_from.episode_rewards;
+            episode_rewards = set_from.episode_rewards; //Reward data
             total_rewards = set_from.total_rewards;
 
-            //Session - Current position
-            position_encoding = set_from.position_encoding;
+            position_encoding = set_from.position_encoding; //Session - Current position
             left_value = set_from.left_value;
             right_value = set_from.right_value;
             down_value = set_from.down_value;
             up_value = set_from.up_value;
-            current_square_value = set_from.current_square_value;
+            current_square_value = set_from.current_square_value;            
 
-            //Status message
-            status_message = set_from.status_message;
+            status_message = set_from.status_message; //Status message
 
-            board_data = new Board(set_from.board_data);
+            live_qmatrix = new Qmatrix(set_from.live_qmatrix); //Copy the q matrix
+
+            board_data = new Board(set_from.board_data); //Copy the board
         }
 
         //Used to erase session-based progress.
         public void reset()
-        {
+        {   //We'll keep the placement of bender
             episode_count = 0; //Current progress
             step_count = 0;
 

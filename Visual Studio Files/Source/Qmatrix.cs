@@ -7,24 +7,21 @@ using System.Threading.Tasks;
 namespace ReinforcementLearning
 {
     class Qmatrix
-    {   
-        //Q-Matrix is a string with 5 corresponding action-value pairs. Example: { "beer, beer, beer, beer, empty", "left: 5", "right: 5"
-        Dictionary<List<String>, Dictionary<String, float>> matrix_data;
-
+    {
         //Our robot can make 5 percepts. Each percept has 3 possible results.
         //3 ^ 5 = 243, so there are 243 possible states to correlate our q matrix to.
         //We need to assemble each combination.
         //Our three states are represented by strings:
         //"Wall", "Can", "Empty"
 
-        //This stores what moves are possible.
-        List<string> moves;
+        //Q-Matrix is a string with 5 corresponding action-value pairs. Example: { "beer, beer, beer, beer, empty", "left: 5", "right: 5"
+        Dictionary<List<string>, Dictionary<string, float>> matrix_data;
 
         //Used for building the q matrix.
         Dictionary<String, float> dictionary_to_insert;
 
-        //public AlgorithmState current_state;
-        //Don't think a q matrix needs a state, it just needs to decide what action to take
+        //This stores what moves are possible.
+        List<string> moves;
 
         //Punishments will be an associated string that returns an integer value.
         public Dictionary<string, int> reinforcement_factors;
@@ -39,7 +36,7 @@ namespace ReinforcementLearning
             moves.Add("Grab");
 
             //This is our q-matrix
-            matrix_data = new Dictionary<List<String>, Dictionary<String, float>>();
+            matrix_data = new Dictionary<List<string>, Dictionary<string, float>>();
 
             //Build our dictionary that has our 5 moves in it
             dictionary_to_insert = new Dictionary<string, float>();
@@ -48,11 +45,36 @@ namespace ReinforcementLearning
                 dictionary_to_insert.Add(i, 0F);
             }
 
-            //Build our reinforcement factors dictionary
-            reinforcement_factors = new Dictionary<string, int>();
-            reinforcement_factors.Add("Wall", -5);
-            reinforcement_factors.Add("Beer", 10);
-            reinforcement_factors.Add("Empty", -1);
+        }
+
+        public Qmatrix(Qmatrix copy_from)
+        {
+            moves = new List<string>();
+            moves.Add("Left");
+            moves.Add("Right");
+            moves.Add("Up");
+            moves.Add("Down");
+            moves.Add("Grab");
+
+            Dictionary<string, float> dictionary_to_insert;
+
+            //Copy the q-matrix.
+            matrix_data = new Dictionary<List<string>, Dictionary<string, float>>();
+            foreach(var i in copy_from.matrix_data.Keys)
+            {   //For each list of strings in copy_from.matrix data
+                //Get a copy of the dictionary at this list of strings
+                //Should be a deep copy
+                dictionary_to_insert = copy_from.matrix_data[i].ToDictionary(entry => entry.Key, entry => entry.Value);
+
+                matrix_data.Add(i, dictionary_to_insert);
+            }
+
+            //Build our dictionary that has our 5 moves in it
+            dictionary_to_insert = new Dictionary<string, float>();
+            foreach (var i in moves)
+            {
+                dictionary_to_insert.Add(i, 0F);
+            }
 
         }
 
@@ -62,7 +84,8 @@ namespace ReinforcementLearning
             if(!matrix_data.ContainsKey(percieved_state))
                 matrix_data.Add(percieved_state, dictionary_to_insert.ToDictionary(  entry => entry.Key,
                                                                                      entry => (float)entry.Value));
-
+            //The above line makes a copy of the dictionary that stores 5 action-float pairs.    
+            
             matrix_data[percieved_state][action] += add_to_state;
 
         }

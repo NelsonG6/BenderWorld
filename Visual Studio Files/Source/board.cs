@@ -44,6 +44,7 @@ namespace ReinforcementLearning
             bender_x = 0;
             bender_y = 0;
 
+            shuffle_cans_and_bender(); //A fresh board not copied will need randomly generated data, except at program launch. We'll clear it in that case.
         }
 
         //Copy constructor
@@ -152,6 +153,11 @@ namespace ReinforcementLearning
                     board_data[i][j].copy_status(clone_from.board_data[i][j]);
                 }
             }
+        }
+
+        public bool is_bender_on_can()
+        {
+            return board_data[bender_x][bender_y].beer_can_present;
         }
     }    
 }

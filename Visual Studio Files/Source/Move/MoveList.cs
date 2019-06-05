@@ -10,7 +10,7 @@ namespace ReinforcementLearning
         readonly static Move down_move;
         readonly static Move grab_move;
 
-        readonly static List<Move> list_of_moves;
+        public readonly static List<Move> list;
 
         static MoveList()
         {
@@ -20,39 +20,39 @@ namespace ReinforcementLearning
             left_move.grid_adjustment[0] = -1;
             left_move.grid_adjustment[1] = 0;
             left_move.grab = false;
-            left_move.name_of_move = "Left";
+            left_move.name_of_move = "L";
 
             right_move = new Move();
             right_move.grid_adjustment[0] = 1;
             right_move.grid_adjustment[1] = 0;
             right_move.grab = false;
-            right_move.name_of_move = "Right";
+            right_move.name_of_move = "R";
 
             up_move = new Move();
             up_move.grid_adjustment[0] = 0;
             up_move.grid_adjustment[1] = 1;
             up_move.grab = false;
-            up_move.name_of_move = "up";
+            up_move.name_of_move = "Up";
 
             down_move = new Move();
             down_move.grid_adjustment[0] = 0;
             down_move.grid_adjustment[1] = -1;
             down_move.grab = false;
-            down_move.name_of_move = "down";
+            down_move.name_of_move = "D";
 
             grab_move = new Move();
             grab_move.grid_adjustment[0] = 0;
             grab_move.grid_adjustment[1] = 0;
             grab_move.grab = true;
-            grab_move.name_of_move = "Grab";
+            grab_move.name_of_move = "Gr";
 
-            list_of_moves = new List<Move>();
+            list = new List<Move>();
 
-            list_of_moves.Add(left_move);
-            list_of_moves.Add(right_move);
-            list_of_moves.Add(up_move);
-            list_of_moves.Add(down_move);
-            list_of_moves.Add(grab_move);
+            list.Add(left_move);
+            list.Add(right_move);
+            list.Add(up_move);
+            list.Add(down_move);
+            list.Add(grab_move);
         }
 
         public static Move left()
@@ -82,7 +82,7 @@ namespace ReinforcementLearning
 
         public static List<Move> get_moves()
         {
-            return list_of_moves;
+            return list;
         }
     }
 

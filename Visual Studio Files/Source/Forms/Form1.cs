@@ -55,7 +55,6 @@ namespace ReinforcementLearning
                 }
             }
 
-            AlgorithmManager.create_empty_board(); //This will gives us a board set to empty square.
             //Called from the restart button, but works here on initial launch.
             //This triggers the constructor for algorithm manager, as well
 
@@ -316,6 +315,10 @@ namespace ReinforcementLearning
             }
         }
 
-
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (comboboxEpisode.Text == "Invalid.")
+                comboboxEpisode.Text = "";
+        }
     }
 }

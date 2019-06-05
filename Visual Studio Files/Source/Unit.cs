@@ -24,6 +24,14 @@ namespace ReinforcementLearning
             bender_y = 0;
         }
 
+        public Unit(Unit set_from)
+        {
+            bender_x = set_from.bender_x;
+            bender_y = set_from.bender_y;
+            unit_name = set_from.unit_name;
+            perception_data = new PerceptionState(set_from.perception_data);
+        }
+
         public PerceptionState get_perception_state()
         {
             return perception_data;

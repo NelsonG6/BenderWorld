@@ -5,11 +5,9 @@ using System.Collections.Generic;
 
 namespace ReinforcementLearning
 {
-    class PictureSquare : BoardSquare
+    class PictureSquare : SquareBase
     {
         public PictureBox pictureData;
-
-        public static Dictionary<string, System.Drawing.Bitmap> backgrounds;
 
         public PictureSquare() : base()
         {
@@ -33,16 +31,10 @@ namespace ReinforcementLearning
         }
 
 
-        public void copy_attributes(BoardSquare copy_from)
+        public void copy_attributes(SquareBase copy_from)
         {
             beer_can_present = copy_from.beer_can_present;
             bender_present = copy_from.beer_can_present;
-            walls = new Dictionary<Move, bool>();
-
-            foreach (var i in copy_from.walls.Keys)
-            {
-                walls.Add(i, copy_from.walls[i]);
-            }
         }
 
         public static void set_backgrounds()

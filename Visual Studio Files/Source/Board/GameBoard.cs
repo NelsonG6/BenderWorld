@@ -3,67 +3,51 @@
 namespace ReinforcementLearning
 {
     //Manages a few different classes
-    class Board
+    class GameBoard : BoardBase 
     {
-        public List<List<BoardSquare>> board_data; //These contain pictureboxes, passed from form1
-        public int board_size;
-
         public int beer_can_count;
-
         public Unit bender;
 
-        public Board()
+        public GameBoard() : base()
         {
-            board_size = 10;
-            board_data = new List<List<BoardSquare>>();
-            beer_can_count = 0;
-
             //Initialize 10x10 grid
             for (int i = 0; i < 10; i++)
             {
-                board_data.Add(new List<BoardSquare>());
                 for (int j = 0; j < 10; j++)
                 {
                     board_data[i].Add(new BoardSquare());
                 }
             }
 
-            //Add walls
-            //left wall
-            for (int i = 0; i < 10; i++) { board_data[0][i].walls[MoveList.left()] = true; }
-            //right wall
-            for (int i = 0; i < 10; i++) { board_data[9][i].walls[MoveList.right()] = true; }
-            //bottom wall
-            for (int i = 0; i < 10; i++) { board_data[i][0].walls[MoveList.down()] = true; }
-            //above wall
-            for (int i = 0; i < 10; i++) { board_data[i][9].walls[MoveList.up()] = true; }
+            add_walls();
 
             //Bender location will be set in shuffle
-
-
             bender = new Unit();
-
+            board_size = 10;
             shuffle_cans_and_bender(); //A fresh board not copied will need randomly generated data, except at program launch. We'll clear it in that case.
         }
 
         //Copy constructor
-        public Board(Board set_from)
+        public GameBoard(GameBoard set_from) : base()
         {
             board_size = set_from.board_size;
 
             beer_can_count = set_from.beer_can_count;
 
-            board_data = new List<List<BoardSquare>>();
-            
+            board_data = new List<List<SquareBase>>();
+
             //Initialize 10x10 grid
             for (int i = 0; i < 10; i++)
             {
-                board_data.Add(new List<BoardSquare>());
                 for (int j = 0; j < 10; j++)
                 {
-                    board_data[i].Add(new BoardSquare(set_from.board_data[i][j]));
+                    board_data[i].Add(new BoardSquare((BoardSquare)set_from.board_data[i][j]));
                 }
             }
+
+            add_walls();
+
+            bender = new Unit(set_from.bender);
         }
 
         public void shuffle_cans_and_bender()
@@ -74,10 +58,12 @@ namespace ReinforcementLearning
             {
                 foreach (var j in i)
                 {
-                    j.randomize_beer_presence();
+                    ((BoardSquare)j).randomize_beer_presence();
                     ++beer_can_count;
                 }
             }
+
+
 
             shuffle_bender(); //Place bender randomly somewhere
         }
@@ -103,9 +89,9 @@ namespace ReinforcementLearning
         //Generates percepts, and not MoveResults.
         public Percept percieve(Move move_to_check)
         {
-            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+            SquareBase bender_location = board_data[bender.bender_x][bender.bender_y];
 
-            if (move_to_check != MoveList.grab() && bender_location.check_if_walls_prevent_move(move_to_check))
+            if (move_to_check != MoveList.grab() && ((BoardSquare)bender_location).check_if_walls_prevent_move(move_to_check))
             {
                 return PerceptList.wall(); //Wall percieved 
             }
@@ -114,7 +100,7 @@ namespace ReinforcementLearning
                 int percieve_x = bender.bender_x + move_to_check.grid_adjustment[0];
                 int percieve_y = bender.bender_y + move_to_check.grid_adjustment[1];
 
-                BoardSquare percieve_location = board_data[percieve_x][percieve_y];
+                SquareBase percieve_location = board_data[percieve_x][percieve_y];
                 if (percieve_location.beer_can_present)
                     return PerceptList.can();
                 else
@@ -145,16 +131,15 @@ namespace ReinforcementLearning
                     j.beer_can_present = false;
                 }
             }
-            
         }
 
-        public void clone_position(Board clone_from)
+        public void clone_position(GameBoard clone_from)
         {
             for(int i = 0; i < board_size; i++)
             {
                 for(int j = 0; j < board_size; j++)
                 {
-                    board_data[i][j].copy_status(clone_from.board_data[i][j]);
+                    get_board_data(i, j).copy_status(clone_from.get_board_data(i, j));
                 }
             }
         }
@@ -167,19 +152,22 @@ namespace ReinforcementLearning
         //This function will give bender perception data from the board
         public void bender_percieves()
         {
-
+            foreach(var i in MoveList.list)
+            {
+                bender.get_perception_state().perceptions[i] = percieve(i);
+            }
+            //Translated: for each move, percieve with this move, and update the perception for this move.
         }
 
         public MoveResult apply_move(Move move_to_apply)
         {
             //Get the move result based on the current condition
-            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
-            if(bender_location.check_if_walls_prevent_move(move_to_apply))
+            if(bender_location().check_if_walls_prevent_move(move_to_apply))
                 return MoveResultList.move_hit_wall(); //Walls prevent move
 
             if(move_to_apply == MoveList.grab())
             {
-                if (bender_location.beer_can_present)
+                if (bender_location().beer_can_present)
                 {
                     collect_can();
                     return MoveResultList.can_collected();
@@ -196,18 +184,16 @@ namespace ReinforcementLearning
 
         public void move_bender(Move to_move)
         {
-            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
-            bender_location.bender_present = false;
+            bender_location().bender_present = false;
 
             bender.bender_x += to_move.grid_adjustment[0];
             bender.bender_y += to_move.grid_adjustment[1];
-            bender_location = board_data[bender.bender_x][bender.bender_y];
-            bender_location.bender_present = true;
+            bender_location().bender_present = true;
         }
 
         public void collect_can()
         {
-            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+            SquareBase bender_location = board_data[bender.bender_x][bender.bender_y];
             
             bender_location.beer_can_present = false;
         }
@@ -224,6 +210,48 @@ namespace ReinforcementLearning
                 }
             }
             return total;
+        }
+
+        public void remove_unit(Unit to_remove)
+        {
+            board_data[bender.bender_x][bender.bender_y].bender_present = false;
+            bender = null; //I think this removes bender
+            
+        }
+
+        public void add_unit(Unit to_add)
+        {
+            bender = to_add;
+            board_data[bender.bender_x][bender.bender_y].bender_present = true;
+            //bender added
+        }
+
+        public void add_walls()
+        {
+            //Add walls
+            //left wall
+            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[1][i]).walls = WallsList.left_wall(); }
+            //right wall
+            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[8][i]).walls = WallsList.right_wall(); }
+            //bottom wall
+            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[i][1]).walls = WallsList.bottom_wall(); }
+            //above wall
+            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[i][8]).walls = WallsList.top_wall(); }
+
+            ((BoardSquare)board_data[0][0]).walls = WallsList.bottom_left_wall();
+            ((BoardSquare)board_data[9][9]).walls = WallsList.top_right_wall();
+            ((BoardSquare)board_data[0][9]).walls = WallsList.top_left_wall();
+            ((BoardSquare)board_data[9][0]).walls = WallsList.bottom_right_wall();
+        }
+
+        public BoardSquare bender_location()
+        {
+            return (BoardSquare)board_data[bender.bender_x][bender.bender_y];
+        }
+
+        public BoardSquare get_board_data(int x, int y)
+        {
+            return (BoardSquare)board_data[x][y];
         }
     }    
 }

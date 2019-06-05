@@ -34,5 +34,15 @@ namespace ReinforcementLearning
                 perceptions.Add(i.Key, i.Value);
             }
         }
+
+        public string get_string()
+        {
+            string building = "";
+            foreach (var i in perceptions)
+            {
+                building += ("[" + i.Key.name_of_move) + ": " + i.Value.get_string_data() + "]";
+            }
+            return building;
+        }
     }
 }

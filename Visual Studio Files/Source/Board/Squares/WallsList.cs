@@ -1,4 +1,4 @@
-﻿namespace ReinforcementLearning.Source
+﻿namespace ReinforcementLearning
 {
     static class WallsList
     {
@@ -15,13 +15,14 @@
         {
 
             top_wall_data = new Wall(MoveList.up());
-            bottom_left_wall_data = new Wall(MoveList.down());
+            bottom_wall_data = new Wall(MoveList.down());
             left_wall_data = new Wall(MoveList.left());
             right_wall_data = new Wall(MoveList.right());
             top_left_wall_data = new Wall(MoveList.left(), MoveList.up());
             top_right_wall_data = new Wall(MoveList.right(), MoveList.up());
             bottom_left_wall_data = new Wall(MoveList.left(), MoveList.down());
             bottom_right_wall_data = new Wall(MoveList.right(), MoveList.down());
+
         }
 
         public static Wall top_wall()
@@ -42,19 +43,19 @@
         }
         public static Wall top_left_wall()
         {
-            return top_wall_data;
+            return top_left_wall_data;
         }
         public static Wall top_right_wall()
         {
-            return top_wall_data;
+            return top_right_wall_data;
         }
         public static Wall bottom_left_wall()
         {
-            return top_wall_data;
+            return bottom_left_wall_data;
         }
         public static Wall bottom_right_wall()
         {
-            return top_wall_data;
+            return bottom_right_wall_data;
         }
     }
 }

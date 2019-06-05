@@ -11,7 +11,7 @@ namespace ReinforcementLearning
         //"Wall", "Can", "Empty"
 
         //Q-Matrix is a string with 5 corresponding action-value pairs. Example: { "beer, beer, beer, beer, empty", "left: 5", "right: 5"
-        Dictionary<PerceptionState, MoveSet> matrix_data;
+        public Dictionary<PerceptionState, MoveSet> matrix_data;
 
         //The q-matrix does not store any details about what state the board is in, so it must have a state passed to it.
 
@@ -52,6 +52,16 @@ namespace ReinforcementLearning
 
             //Temporary while working out the UI. This will not be a simple random equation.
             return MoveList.get_moves()[MyRandom.Next(0, 5)];
+        }
+
+        public List <string> get_list_of_qmatrix_states()
+        {
+            List<string> building = new List<string>();
+            foreach (var i in matrix_data.Keys)
+            {
+                building.Add(i.get_string());
+            }
+            return building;
         }
 
     }

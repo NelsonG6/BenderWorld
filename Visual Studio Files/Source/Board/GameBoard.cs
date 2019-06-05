@@ -230,13 +230,13 @@ namespace ReinforcementLearning
         {
             //Add walls
             //left wall
-            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[1][i]).walls = WallsList.left_wall(); }
+            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[0][i]).walls = WallsList.left_wall(); }
             //right wall
-            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[8][i]).walls = WallsList.right_wall(); }
+            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[9][i]).walls = WallsList.right_wall(); }
             //bottom wall
-            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[i][1]).walls = WallsList.bottom_wall(); }
+            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[i][0]).walls = WallsList.bottom_wall(); }
             //above wall
-            for (int i = 1; i < 9; i++) { ((BoardSquare)board_data[i][8]).walls = WallsList.top_wall(); }
+            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[i][9]).walls = WallsList.top_wall(); }
 
             ((BoardSquare)board_data[0][0]).walls = WallsList.bottom_left_wall();
             ((BoardSquare)board_data[9][9]).walls = WallsList.top_right_wall();
@@ -249,7 +249,7 @@ namespace ReinforcementLearning
             return (BoardSquare)board_data[bender.bender_x][bender.bender_y];
         }
 
-        public BoardSquare get_board_data(int x, int y)
+        public new BoardSquare get_board_data(int x, int y)
         {
             return (BoardSquare)board_data[x][y];
         }

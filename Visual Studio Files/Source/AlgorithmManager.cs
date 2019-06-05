@@ -25,9 +25,9 @@ namespace ReinforcementLearning
         static public int step_limit;
 
         //Punishments will be an associated string that returns an integer value.
-        static public Dictionary<string, int> reinforcement_factors;
+        static public Dictionary<MoveResult, float> reinforcement_factors;
 
-        static public bool algorithm_started;
+        static public bool algorithm_started;        
 
         static AlgorithmManager()
         {
@@ -35,8 +35,29 @@ namespace ReinforcementLearning
             state_to_view = current_state;
             state_history = new List<List<AlgorithmState>>(); //initialize history
             qmatrix = new Qmatrix();
+            reinforcement_factors = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
 
             set_default_configuration();
+        }
+
+        public static void set_default_configuration()
+        {
+            n_initial = .2F;
+            y_initial = .9F;
+            e_initial = .1F;
+
+            episode_limit = 5000;
+            step_limit = 200;
+
+            reinforcement_factors.Clear();
+
+            //Build our reinforcement factors dictionary
+            
+            reinforcement_factors.Add(MoveResultList.move_hit_wall(), -5);
+            reinforcement_factors.Add(MoveResultList.can_collected(), 10);
+            reinforcement_factors.Add(MoveResultList.can_missing(), -1);
+            reinforcement_factors.Add(MoveResultList.move_successful(), 0);
+
         }
 
         public static void create_empty_board()
@@ -53,35 +74,38 @@ namespace ReinforcementLearning
         public static void take_step(int steps_to_take) //Go to the most current state, and step forward once. 
         {   //This function also will not step if
             //figure out which action to take
-            while(steps_to_take-- > 0)
+
+            float update_value = 0;
+            PerceptionState state_for_qmatrix;
+
+            while (steps_to_take-- > 0)
             {
                 if (!algorithm_started) //First step, so just display step 0.
                 {
                     current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board
+                    current_state.update_fields(); //update everything after the change
+
+
                     state_history.Add(new List<AlgorithmState>()); //episode index 0
                     state_history[0].Add(current_state);
                     
-                    algorithm_started = true;                    
+                    algorithm_started = true;
+
+                    //Bender percieves
+                    current_state.board_data.bender_percieves();
                 }
                 else
                 {
-                    //Get step from qmatrix. Being randomly generated for now.
-                    string step_to_take = qmatrix.generate_step(state_to_view);
-
-                    //We got our move. Determine if we have a grab attempt, or a move attempt.
-                    if(step_to_take == "Grab")
-                    {
-                        //see if there is a can to grab or not.
-                        if(current_state.board_data.is_bender_on_can())
-                        {
-                            //There was a can here.
-                            //update total rewards
-                            //update reward value for this iteration
-
-                        }
-
-                    }
+                    current_state = new AlgorithmState(current_state); //Copy the old state. We're going to change this one into the new state.
                     
+                    //Get step from qmatrix. Being randomly generated for now.
+                    state_for_qmatrix = current_state.board_data.bender.get_perception_state(); //This is used to update the matrix after our move
+                    Move step_to_take = qmatrix.generate_step(); //Tentative; we'll attempt this later. just a random move for now.
+                    MoveResult move_result = current_state.board_data.apply_move(step_to_take); //The move should be performed now, if possible.
+                    update_value = reinforcement_factors[move_result];
+                    current_state.episode_rewards += (int)update_value;
+
+                    current_state.live_qmatrix.update_state(state_for_qmatrix, step_to_take, update_value);
 
                     if (state_to_view.step_count >= step_limit)
                     {   //We've taken the max amount of steps. 
@@ -99,31 +123,5 @@ namespace ReinforcementLearning
                 FormsHandler.display_manager_state();
             }
         }
-
-        public static void set_default_configuration()
-        {
-            n_initial = .2F;
-            y_initial = .9F;
-            e_initial = .1F;
-
-            episode_limit = 5000;
-            step_limit = 200;
-            
-            //Build our reinforcement factors dictionary
-            if (reinforcement_factors == null)
-            {
-                reinforcement_factors = new Dictionary<string, int>();
-                reinforcement_factors.Add("Wall collision", -5);
-                reinforcement_factors.Add("Beer pickup", 10);
-                reinforcement_factors.Add("Empty pickup", -1);
-            }
-            else
-            {
-                reinforcement_factors["Wall collision"] = -5;
-                reinforcement_factors["Beer pickup"] = 10;
-                reinforcement_factors["Empty pickup"] = -1;
-            }
-        }
-
     }
 }

@@ -50,11 +50,7 @@ namespace ReinforcementLearning
             this.label1 = new System.Windows.Forms.Label();
             this.textboxLeft = new System.Windows.Forms.TextBox();
             this.buttonStartAlgorithm = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonEpisodestextbox = new System.Windows.Forms.Button();
             this.buttonEpisodesdropdown = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textboxEpisodesinput = new System.Windows.Forms.TextBox();
             this.comboboxEpisode = new System.Windows.Forms.ComboBox();
             this.groupboxInitialsettings = new System.Windows.Forms.GroupBox();
             this.textboxInitialBeerreward = new System.Windows.Forms.TextBox();
@@ -73,61 +69,25 @@ namespace ReinforcementLearning
             this.textboxInitialNumberofepisodes = new System.Windows.Forms.TextBox();
             this.textboxInitialNumberofsteps = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonStepstextbox = new System.Windows.Forms.Button();
             this.buttonStepsdropdown = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textboxStepsinput = new System.Windows.Forms.TextBox();
             this.comboboxSteps = new System.Windows.Forms.ComboBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.buttonNtextbox = new System.Windows.Forms.Button();
             this.buttonNdropdown = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textboxNinput = new System.Windows.Forms.TextBox();
             this.comboboxN = new System.Windows.Forms.ComboBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.buttonYtextbox = new System.Windows.Forms.Button();
             this.buttonYdropdown = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textboxYinput = new System.Windows.Forms.TextBox();
             this.comboboxY = new System.Windows.Forms.ComboBox();
             this.groupboxConfiguration = new System.Windows.Forms.GroupBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textboxBeerconfig = new System.Windows.Forms.TextBox();
             this.comboboxBeer = new System.Windows.Forms.ComboBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.label33 = new System.Windows.Forms.Label();
-            this.textboxEmptySquareconfig = new System.Windows.Forms.TextBox();
             this.comboboxEmptysquare = new System.Windows.Forms.ComboBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.textboxWallpunish = new System.Windows.Forms.TextBox();
             this.comboboxWallpunishment = new System.Windows.Forms.ComboBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.textboxE = new System.Windows.Forms.TextBox();
             this.comboboxE = new System.Windows.Forms.ComboBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.buttonAdvancestepstextbox = new System.Windows.Forms.Button();
             this.comboboxAdvancesteps = new System.Windows.Forms.ComboBox();
             this.buttonAdvancestepsdropdown = new System.Windows.Forms.Button();
-            this.textboxAdvancestepsinput = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.groupboxAdvanceepisodes = new System.Windows.Forms.GroupBox();
-            this.buttonAdvanceepisodestextbox = new System.Windows.Forms.Button();
             this.comboboxAdvanceepisodes = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.buttonAdvanceepisodesdropdown = new System.Windows.Forms.Button();
-            this.textboxAdvanceepisodesinput = new System.Windows.Forms.TextBox();
             this.groupboxAlgorithmprogress = new System.Windows.Forms.GroupBox();
             this.groupboxSessionprogress = new System.Windows.Forms.GroupBox();
             this.groupboxCans = new System.Windows.Forms.GroupBox();
@@ -141,11 +101,11 @@ namespace ReinforcementLearning
             this.textboxRewardepisode = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textboxNprogress = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.textboxYprogress = new System.Windows.Forms.TextBox();
-            this.textboxNprogress = new System.Windows.Forms.TextBox();
+            this.textboxEprogress = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textboxEpisodesprogress = new System.Windows.Forms.TextBox();
             this.textboxStepsprogress = new System.Windows.Forms.TextBox();
@@ -202,19 +162,26 @@ namespace ReinforcementLearning
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.groupboxRewards = new System.Windows.Forms.GroupBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.textboxRewardssuccessmove = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboboxMovedwithoutwall = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupboxCurrentposition.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupboxInitialsettings.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupboxConfiguration.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupboxAdvanceepisodes.SuspendLayout();
             this.groupboxAlgorithmprogress.SuspendLayout();
             this.groupboxSessionprogress.SuspendLayout();
             this.groupboxCans.SuspendLayout();
@@ -245,15 +212,17 @@ namespace ReinforcementLearning
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupboxRewards.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRestart
             // 
             this.buttonRestart.Enabled = false;
-            this.buttonRestart.Location = new System.Drawing.Point(1114, 979);
+            this.buttonRestart.Location = new System.Drawing.Point(33, 115);
             this.buttonRestart.Margin = new System.Windows.Forms.Padding(4);
             this.buttonRestart.Name = "buttonRestart";
-            this.buttonRestart.Size = new System.Drawing.Size(289, 25);
+            this.buttonRestart.Size = new System.Drawing.Size(241, 25);
             this.buttonRestart.TabIndex = 5;
             this.buttonRestart.Text = "Restart";
             this.buttonRestart.UseVisualStyleBackColor = true;
@@ -398,139 +367,95 @@ namespace ReinforcementLearning
             // 
             // buttonStartAlgorithm
             // 
-            this.buttonStartAlgorithm.Location = new System.Drawing.Point(15, 719);
+            this.buttonStartAlgorithm.Location = new System.Drawing.Point(34, 515);
             this.buttonStartAlgorithm.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStartAlgorithm.Name = "buttonStartAlgorithm";
-            this.buttonStartAlgorithm.Size = new System.Drawing.Size(125, 28);
+            this.buttonStartAlgorithm.Size = new System.Drawing.Size(242, 28);
             this.buttonStartAlgorithm.TabIndex = 7;
             this.buttonStartAlgorithm.Text = "Start algorithm";
             this.buttonStartAlgorithm.UseVisualStyleBackColor = true;
             this.buttonStartAlgorithm.Click += new System.EventHandler(this.start_algorithm);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonEpisodestextbox);
-            this.groupBox2.Controls.Add(this.buttonEpisodesdropdown);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textboxEpisodesinput);
-            this.groupBox2.Controls.Add(this.comboboxEpisode);
-            this.groupBox2.Location = new System.Drawing.Point(15, 21);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(259, 80);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "How many episodes will there be?";
-            // 
-            // buttonEpisodestextbox
-            // 
-            this.buttonEpisodestextbox.Location = new System.Drawing.Point(157, 49);
-            this.buttonEpisodestextbox.Name = "buttonEpisodestextbox";
-            this.buttonEpisodestextbox.Size = new System.Drawing.Size(75, 23);
-            this.buttonEpisodestextbox.TabIndex = 4;
-            this.buttonEpisodestextbox.Text = "Set";
-            this.buttonEpisodestextbox.UseVisualStyleBackColor = true;
-            this.buttonEpisodestextbox.Click += new System.EventHandler(this.set_episode_from_textbox);
-            // 
             // buttonEpisodesdropdown
             // 
-            this.buttonEpisodesdropdown.Location = new System.Drawing.Point(157, 18);
+            this.buttonEpisodesdropdown.Location = new System.Drawing.Point(195, 41);
             this.buttonEpisodesdropdown.Name = "buttonEpisodesdropdown";
             this.buttonEpisodesdropdown.Size = new System.Drawing.Size(75, 23);
-            this.buttonEpisodesdropdown.TabIndex = 3;
+            this.buttonEpisodesdropdown.TabIndex = 2;
             this.buttonEpisodesdropdown.Text = "Set";
             this.buttonEpisodesdropdown.UseVisualStyleBackColor = true;
             this.buttonEpisodesdropdown.Click += new System.EventHandler(this.set_episode_from_dropdown);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 52);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(21, 17);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "or";
-            // 
-            // textboxEpisodesinput
-            // 
-            this.textboxEpisodesinput.Location = new System.Drawing.Point(29, 50);
-            this.textboxEpisodesinput.Name = "textboxEpisodesinput";
-            this.textboxEpisodesinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxEpisodesinput.TabIndex = 1;
-            // 
             // comboboxEpisode
             // 
             this.comboboxEpisode.FormattingEnabled = true;
-            this.comboboxEpisode.Location = new System.Drawing.Point(29, 18);
+            this.comboboxEpisode.Location = new System.Drawing.Point(34, 41);
             this.comboboxEpisode.Name = "comboboxEpisode";
-            this.comboboxEpisode.Size = new System.Drawing.Size(121, 24);
-            this.comboboxEpisode.TabIndex = 0;
+            this.comboboxEpisode.Size = new System.Drawing.Size(122, 24);
+            this.comboboxEpisode.TabIndex = 1;
+            this.comboboxEpisode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxEpisode_KeyPress);
             // 
             // groupboxInitialsettings
             // 
-            this.groupboxInitialsettings.Controls.Add(this.textboxInitialBeerreward);
-            this.groupboxInitialsettings.Controls.Add(this.label30);
-            this.groupboxInitialsettings.Controls.Add(this.label29);
-            this.groupboxInitialsettings.Controls.Add(this.textboxInitialEmptysquare);
-            this.groupboxInitialsettings.Controls.Add(this.textboxInitialWallpunishment);
-            this.groupboxInitialsettings.Controls.Add(this.label28);
+            this.groupboxInitialsettings.Controls.Add(this.label9);
+            this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofsteps);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialNinitial);
             this.groupboxInitialsettings.Controls.Add(this.label21);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialY);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialEpsilon);
+            this.groupboxInitialsettings.Controls.Add(this.groupboxRewards);
             this.groupboxInitialsettings.Controls.Add(this.label11);
             this.groupboxInitialsettings.Controls.Add(this.label10);
             this.groupboxInitialsettings.Controls.Add(this.label8);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofepisodes);
-            this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofsteps);
-            this.groupboxInitialsettings.Controls.Add(this.label9);
             this.groupboxInitialsettings.Location = new System.Drawing.Point(1407, 13);
             this.groupboxInitialsettings.Name = "groupboxInitialsettings";
-            this.groupboxInitialsettings.Size = new System.Drawing.Size(546, 127);
+            this.groupboxInitialsettings.Size = new System.Drawing.Size(546, 145);
             this.groupboxInitialsettings.TabIndex = 10;
             this.groupboxInitialsettings.TabStop = false;
             this.groupboxInitialsettings.Text = "Initial Settings";
             // 
             // textboxInitialBeerreward
             // 
-            this.textboxInitialBeerreward.Location = new System.Drawing.Point(421, 96);
+            this.textboxInitialBeerreward.Location = new System.Drawing.Point(15, 84);
             this.textboxInitialBeerreward.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialBeerreward.Name = "textboxInitialBeerreward";
             this.textboxInitialBeerreward.ReadOnly = true;
-            this.textboxInitialBeerreward.Size = new System.Drawing.Size(113, 22);
+            this.textboxInitialBeerreward.Size = new System.Drawing.Size(108, 22);
             this.textboxInitialBeerreward.TabIndex = 25;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(453, 75);
+            this.label30.Location = new System.Drawing.Point(11, 67);
             this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(85, 17);
+            this.label30.Size = new System.Drawing.Size(38, 17);
             this.label30.TabIndex = 24;
-            this.label30.Text = "Beer reward";
+            this.label30.Text = "Beer";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(362, 23);
+            this.label29.Location = new System.Drawing.Point(129, 68);
             this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(172, 17);
+            this.label29.Size = new System.Drawing.Size(80, 17);
             this.label29.TabIndex = 22;
-            this.label29.Text = "Empty square punishment";
+            this.label29.Text = "Empty grab";
             // 
             // textboxInitialEmptysquare
             // 
-            this.textboxInitialEmptysquare.Location = new System.Drawing.Point(362, 42);
+            this.textboxInitialEmptysquare.Location = new System.Drawing.Point(132, 84);
             this.textboxInitialEmptysquare.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialEmptysquare.Name = "textboxInitialEmptysquare";
             this.textboxInitialEmptysquare.ReadOnly = true;
-            this.textboxInitialEmptysquare.Size = new System.Drawing.Size(172, 22);
+            this.textboxInitialEmptysquare.Size = new System.Drawing.Size(113, 22);
             this.textboxInitialEmptysquare.TabIndex = 23;
             // 
             // textboxInitialWallpunishment
             // 
-            this.textboxInitialWallpunishment.Location = new System.Drawing.Point(287, 96);
+            this.textboxInitialWallpunishment.Location = new System.Drawing.Point(132, 43);
             this.textboxInitialWallpunishment.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialWallpunishment.Name = "textboxInitialWallpunishment";
             this.textboxInitialWallpunishment.ReadOnly = true;
@@ -540,16 +465,16 @@ namespace ReinforcementLearning
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(288, 77);
+            this.label28.Location = new System.Drawing.Point(133, 24);
             this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(112, 17);
+            this.label28.Size = new System.Drawing.Size(71, 17);
             this.label28.TabIndex = 20;
-            this.label28.Text = "Wall punishment";
+            this.label28.Text = "Hits a wall";
             // 
             // textboxInitialNinitial
             // 
-            this.textboxInitialNinitial.Location = new System.Drawing.Point(109, 96);
+            this.textboxInitialNinitial.Location = new System.Drawing.Point(109, 104);
             this.textboxInitialNinitial.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialNinitial.Name = "textboxInitialNinitial";
             this.textboxInitialNinitial.ReadOnly = true;
@@ -559,7 +484,7 @@ namespace ReinforcementLearning
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(21, 76);
+            this.label21.Location = new System.Drawing.Point(21, 87);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(17, 17);
@@ -568,7 +493,7 @@ namespace ReinforcementLearning
             // 
             // textboxInitialY
             // 
-            this.textboxInitialY.Location = new System.Drawing.Point(199, 96);
+            this.textboxInitialY.Location = new System.Drawing.Point(199, 104);
             this.textboxInitialY.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialY.Name = "textboxInitialY";
             this.textboxInitialY.ReadOnly = true;
@@ -577,7 +502,7 @@ namespace ReinforcementLearning
             // 
             // textboxInitialEpsilon
             // 
-            this.textboxInitialEpsilon.Location = new System.Drawing.Point(23, 96);
+            this.textboxInitialEpsilon.Location = new System.Drawing.Point(23, 104);
             this.textboxInitialEpsilon.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialEpsilon.Name = "textboxInitialEpsilon";
             this.textboxInitialEpsilon.ReadOnly = true;
@@ -587,7 +512,7 @@ namespace ReinforcementLearning
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(197, 77);
+            this.label11.Location = new System.Drawing.Point(197, 85);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(15, 17);
@@ -597,17 +522,17 @@ namespace ReinforcementLearning
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 23);
+            this.label10.Location = new System.Drawing.Point(22, 43);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(135, 17);
+            this.label10.Size = new System.Drawing.Size(66, 17);
             this.label10.TabIndex = 12;
-            this.label10.Text = "Number of episodes";
+            this.label10.Text = "Episodes";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(109, 76);
+            this.label8.Location = new System.Drawing.Point(109, 84);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(16, 17);
@@ -616,479 +541,191 @@ namespace ReinforcementLearning
             // 
             // textboxInitialNumberofepisodes
             // 
-            this.textboxInitialNumberofepisodes.Location = new System.Drawing.Point(24, 43);
+            this.textboxInitialNumberofepisodes.Location = new System.Drawing.Point(24, 63);
             this.textboxInitialNumberofepisodes.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialNumberofepisodes.Name = "textboxInitialNumberofepisodes";
             this.textboxInitialNumberofepisodes.ReadOnly = true;
-            this.textboxInitialNumberofepisodes.Size = new System.Drawing.Size(165, 22);
+            this.textboxInitialNumberofepisodes.Size = new System.Drawing.Size(79, 22);
             this.textboxInitialNumberofepisodes.TabIndex = 13;
             // 
             // textboxInitialNumberofsteps
             // 
-            this.textboxInitialNumberofsteps.Location = new System.Drawing.Point(197, 43);
+            this.textboxInitialNumberofsteps.Location = new System.Drawing.Point(108, 63);
             this.textboxInitialNumberofsteps.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialNumberofsteps.Name = "textboxInitialNumberofsteps";
             this.textboxInitialNumberofsteps.ReadOnly = true;
-            this.textboxInitialNumberofsteps.Size = new System.Drawing.Size(157, 22);
+            this.textboxInitialNumberofsteps.Size = new System.Drawing.Size(171, 22);
             this.textboxInitialNumberofsteps.TabIndex = 15;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(198, 23);
+            this.label9.Location = new System.Drawing.Point(109, 43);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(123, 17);
             this.label9.TabIndex = 14;
             this.label9.Text = "Steps per episode";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.buttonStepstextbox);
-            this.groupBox3.Controls.Add(this.buttonStepsdropdown);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.textboxStepsinput);
-            this.groupBox3.Controls.Add(this.comboboxSteps);
-            this.groupBox3.Location = new System.Drawing.Point(15, 107);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(259, 80);
-            this.groupBox3.TabIndex = 9;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "How many steps per episode?";
-            // 
-            // buttonStepstextbox
-            // 
-            this.buttonStepstextbox.Location = new System.Drawing.Point(157, 49);
-            this.buttonStepstextbox.Name = "buttonStepstextbox";
-            this.buttonStepstextbox.Size = new System.Drawing.Size(75, 23);
-            this.buttonStepstextbox.TabIndex = 4;
-            this.buttonStepstextbox.Text = "Set";
-            this.buttonStepstextbox.UseVisualStyleBackColor = true;
-            this.buttonStepstextbox.Click += new System.EventHandler(this.set_steps_from_textbox);
-            // 
             // buttonStepsdropdown
             // 
-            this.buttonStepsdropdown.Location = new System.Drawing.Point(157, 18);
+            this.buttonStepsdropdown.Location = new System.Drawing.Point(195, 93);
             this.buttonStepsdropdown.Name = "buttonStepsdropdown";
             this.buttonStepsdropdown.Size = new System.Drawing.Size(75, 23);
-            this.buttonStepsdropdown.TabIndex = 3;
+            this.buttonStepsdropdown.TabIndex = 4;
             this.buttonStepsdropdown.Text = "Set";
             this.buttonStepsdropdown.UseVisualStyleBackColor = true;
             this.buttonStepsdropdown.Click += new System.EventHandler(this.set_steps_from_dropdown);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 52);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(21, 17);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "or";
-            // 
-            // textboxStepsinput
-            // 
-            this.textboxStepsinput.Location = new System.Drawing.Point(29, 50);
-            this.textboxStepsinput.Name = "textboxStepsinput";
-            this.textboxStepsinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxStepsinput.TabIndex = 1;
-            // 
             // comboboxSteps
             // 
             this.comboboxSteps.FormattingEnabled = true;
-            this.comboboxSteps.Location = new System.Drawing.Point(29, 18);
+            this.comboboxSteps.Location = new System.Drawing.Point(34, 92);
             this.comboboxSteps.Name = "comboboxSteps";
-            this.comboboxSteps.Size = new System.Drawing.Size(121, 24);
-            this.comboboxSteps.TabIndex = 0;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.buttonNtextbox);
-            this.groupBox5.Controls.Add(this.buttonNdropdown);
-            this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Controls.Add(this.textboxNinput);
-            this.groupBox5.Controls.Add(this.comboboxN);
-            this.groupBox5.Location = new System.Drawing.Point(15, 193);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(259, 80);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "η";
-            // 
-            // buttonNtextbox
-            // 
-            this.buttonNtextbox.Location = new System.Drawing.Point(157, 50);
-            this.buttonNtextbox.Name = "buttonNtextbox";
-            this.buttonNtextbox.Size = new System.Drawing.Size(75, 23);
-            this.buttonNtextbox.TabIndex = 4;
-            this.buttonNtextbox.Text = "Set";
-            this.buttonNtextbox.UseVisualStyleBackColor = true;
-            this.buttonNtextbox.Click += new System.EventHandler(this.set_n_from_textbox);
+            this.comboboxSteps.Size = new System.Drawing.Size(122, 24);
+            this.comboboxSteps.TabIndex = 3;
+            this.comboboxSteps.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxSteps_KeyPress);
             // 
             // buttonNdropdown
             // 
-            this.buttonNdropdown.Location = new System.Drawing.Point(157, 18);
+            this.buttonNdropdown.Location = new System.Drawing.Point(195, 141);
             this.buttonNdropdown.Name = "buttonNdropdown";
             this.buttonNdropdown.Size = new System.Drawing.Size(75, 23);
-            this.buttonNdropdown.TabIndex = 3;
+            this.buttonNdropdown.TabIndex = 6;
             this.buttonNdropdown.Text = "Set";
             this.buttonNdropdown.UseVisualStyleBackColor = true;
             this.buttonNdropdown.Click += new System.EventHandler(this.set_n_from_dropdown);
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 52);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(21, 17);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "or";
-            // 
-            // textboxNinput
-            // 
-            this.textboxNinput.Location = new System.Drawing.Point(29, 50);
-            this.textboxNinput.Name = "textboxNinput";
-            this.textboxNinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxNinput.TabIndex = 1;
-            // 
             // comboboxN
             // 
             this.comboboxN.FormattingEnabled = true;
-            this.comboboxN.Location = new System.Drawing.Point(29, 18);
+            this.comboboxN.Location = new System.Drawing.Point(34, 140);
             this.comboboxN.Name = "comboboxN";
-            this.comboboxN.Size = new System.Drawing.Size(121, 24);
-            this.comboboxN.TabIndex = 0;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.buttonYtextbox);
-            this.groupBox6.Controls.Add(this.buttonYdropdown);
-            this.groupBox6.Controls.Add(this.label14);
-            this.groupBox6.Controls.Add(this.textboxYinput);
-            this.groupBox6.Controls.Add(this.comboboxY);
-            this.groupBox6.Location = new System.Drawing.Point(15, 279);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(259, 80);
-            this.groupBox6.TabIndex = 9;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "γ";
-            // 
-            // buttonYtextbox
-            // 
-            this.buttonYtextbox.Location = new System.Drawing.Point(157, 49);
-            this.buttonYtextbox.Name = "buttonYtextbox";
-            this.buttonYtextbox.Size = new System.Drawing.Size(75, 24);
-            this.buttonYtextbox.TabIndex = 4;
-            this.buttonYtextbox.Text = "Set";
-            this.buttonYtextbox.UseVisualStyleBackColor = true;
-            this.buttonYtextbox.Click += new System.EventHandler(this.set_y_from_textbox);
+            this.comboboxN.Size = new System.Drawing.Size(122, 24);
+            this.comboboxN.TabIndex = 5;
+            this.comboboxN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxN_KeyPress);
             // 
             // buttonYdropdown
             // 
-            this.buttonYdropdown.Location = new System.Drawing.Point(157, 18);
+            this.buttonYdropdown.Location = new System.Drawing.Point(196, 188);
             this.buttonYdropdown.Name = "buttonYdropdown";
             this.buttonYdropdown.Size = new System.Drawing.Size(75, 23);
-            this.buttonYdropdown.TabIndex = 3;
+            this.buttonYdropdown.TabIndex = 8;
             this.buttonYdropdown.Text = "Set";
             this.buttonYdropdown.UseVisualStyleBackColor = true;
             this.buttonYdropdown.Click += new System.EventHandler(this.set_y_from_dropdown);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 52);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(21, 17);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "or";
-            // 
-            // textboxYinput
-            // 
-            this.textboxYinput.Location = new System.Drawing.Point(29, 50);
-            this.textboxYinput.Name = "textboxYinput";
-            this.textboxYinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxYinput.TabIndex = 1;
-            // 
             // comboboxY
             // 
             this.comboboxY.FormattingEnabled = true;
-            this.comboboxY.Location = new System.Drawing.Point(29, 18);
+            this.comboboxY.Location = new System.Drawing.Point(35, 187);
             this.comboboxY.Name = "comboboxY";
-            this.comboboxY.Size = new System.Drawing.Size(121, 24);
-            this.comboboxY.TabIndex = 0;
+            this.comboboxY.Size = new System.Drawing.Size(122, 24);
+            this.comboboxY.TabIndex = 7;
+            this.comboboxY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxY_KeyPress);
             // 
             // groupboxConfiguration
             // 
+            this.groupboxConfiguration.Controls.Add(this.groupBox1);
             this.groupboxConfiguration.Controls.Add(this.button10);
-            this.groupboxConfiguration.Controls.Add(this.groupBox11);
-            this.groupboxConfiguration.Controls.Add(this.groupBox10);
-            this.groupboxConfiguration.Controls.Add(this.groupBox9);
-            this.groupboxConfiguration.Controls.Add(this.groupBox7);
-            this.groupboxConfiguration.Controls.Add(this.groupBox2);
-            this.groupboxConfiguration.Controls.Add(this.groupBox6);
             this.groupboxConfiguration.Controls.Add(this.buttonStartAlgorithm);
-            this.groupboxConfiguration.Controls.Add(this.groupBox5);
-            this.groupboxConfiguration.Controls.Add(this.groupBox3);
+            this.groupboxConfiguration.Controls.Add(this.label7);
+            this.groupboxConfiguration.Controls.Add(this.label31);
+            this.groupboxConfiguration.Controls.Add(this.comboboxEpisode);
+            this.groupboxConfiguration.Controls.Add(this.label14);
+            this.groupboxConfiguration.Controls.Add(this.button2);
+            this.groupboxConfiguration.Controls.Add(this.buttonEpisodesdropdown);
+            this.groupboxConfiguration.Controls.Add(this.label13);
+            this.groupboxConfiguration.Controls.Add(this.label12);
+            this.groupboxConfiguration.Controls.Add(this.comboboxE);
+            this.groupboxConfiguration.Controls.Add(this.comboboxSteps);
+            this.groupboxConfiguration.Controls.Add(this.buttonStepsdropdown);
+            this.groupboxConfiguration.Controls.Add(this.buttonYdropdown);
+            this.groupboxConfiguration.Controls.Add(this.comboboxN);
+            this.groupboxConfiguration.Controls.Add(this.buttonNdropdown);
+            this.groupboxConfiguration.Controls.Add(this.comboboxY);
             this.groupboxConfiguration.Location = new System.Drawing.Point(1112, 12);
             this.groupboxConfiguration.Name = "groupboxConfiguration";
-            this.groupboxConfiguration.Size = new System.Drawing.Size(289, 755);
+            this.groupboxConfiguration.Size = new System.Drawing.Size(289, 592);
             this.groupboxConfiguration.TabIndex = 11;
             this.groupboxConfiguration.TabStop = false;
             this.groupboxConfiguration.Text = "Configuration";
             // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.button7);
-            this.groupBox11.Controls.Add(this.button8);
-            this.groupBox11.Controls.Add(this.label34);
-            this.groupBox11.Controls.Add(this.textboxBeerconfig);
-            this.groupBox11.Controls.Add(this.comboboxBeer);
-            this.groupBox11.Location = new System.Drawing.Point(17, 632);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(259, 80);
-            this.groupBox11.TabIndex = 11;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Beer reward";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(157, 49);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 24);
-            this.button7.TabIndex = 4;
-            this.button7.Text = "Set";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(157, 18);
+            this.button8.Location = new System.Drawing.Point(179, 38);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 24);
-            this.button8.TabIndex = 3;
+            this.button8.TabIndex = 12;
             this.button8.Text = "Set";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(7, 52);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(21, 17);
-            this.label34.TabIndex = 2;
-            this.label34.Text = "or";
-            // 
-            // textboxBeerconfig
-            // 
-            this.textboxBeerconfig.Location = new System.Drawing.Point(29, 50);
-            this.textboxBeerconfig.Name = "textboxBeerconfig";
-            this.textboxBeerconfig.Size = new System.Drawing.Size(121, 22);
-            this.textboxBeerconfig.TabIndex = 1;
-            // 
             // comboboxBeer
             // 
             this.comboboxBeer.FormattingEnabled = true;
-            this.comboboxBeer.Location = new System.Drawing.Point(29, 18);
+            this.comboboxBeer.Location = new System.Drawing.Point(19, 38);
             this.comboboxBeer.Name = "comboboxBeer";
             this.comboboxBeer.Size = new System.Drawing.Size(121, 24);
-            this.comboboxBeer.TabIndex = 0;
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.button5);
-            this.groupBox10.Controls.Add(this.button6);
-            this.groupBox10.Controls.Add(this.label33);
-            this.groupBox10.Controls.Add(this.textboxEmptySquareconfig);
-            this.groupBox10.Controls.Add(this.comboboxEmptysquare);
-            this.groupBox10.Location = new System.Drawing.Point(17, 537);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(259, 80);
-            this.groupBox10.TabIndex = 10;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Empty square punishment";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(157, 49);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 24);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Set";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.comboboxBeer.TabIndex = 11;
+            this.comboboxBeer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxBeer_KeyPress);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(157, 18);
+            this.button6.Location = new System.Drawing.Point(179, 90);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 3;
+            this.button6.TabIndex = 14;
             this.button6.Text = "Set";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(7, 52);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(21, 17);
-            this.label33.TabIndex = 2;
-            this.label33.Text = "or";
-            // 
-            // textboxEmptySquareconfig
-            // 
-            this.textboxEmptySquareconfig.Location = new System.Drawing.Point(29, 50);
-            this.textboxEmptySquareconfig.Name = "textboxEmptySquareconfig";
-            this.textboxEmptySquareconfig.Size = new System.Drawing.Size(121, 22);
-            this.textboxEmptySquareconfig.TabIndex = 1;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // comboboxEmptysquare
             // 
             this.comboboxEmptysquare.FormattingEnabled = true;
-            this.comboboxEmptysquare.Location = new System.Drawing.Point(29, 18);
+            this.comboboxEmptysquare.Location = new System.Drawing.Point(19, 90);
             this.comboboxEmptysquare.Name = "comboboxEmptysquare";
             this.comboboxEmptysquare.Size = new System.Drawing.Size(121, 24);
-            this.comboboxEmptysquare.TabIndex = 0;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.button3);
-            this.groupBox9.Controls.Add(this.button4);
-            this.groupBox9.Controls.Add(this.label32);
-            this.groupBox9.Controls.Add(this.textboxWallpunish);
-            this.groupBox9.Controls.Add(this.comboboxWallpunishment);
-            this.groupBox9.Location = new System.Drawing.Point(15, 451);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(259, 80);
-            this.groupBox9.TabIndex = 10;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Wall punishment";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(157, 49);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 24);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Set";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.comboboxEmptysquare.TabIndex = 13;
+            this.comboboxEmptysquare.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxEmptysquare_KeyPress);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(157, 18);
+            this.button4.Location = new System.Drawing.Point(179, 143);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
+            this.button4.TabIndex = 16;
             this.button4.Text = "Set";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(7, 52);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(21, 17);
-            this.label32.TabIndex = 2;
-            this.label32.Text = "or";
-            // 
-            // textboxWallpunish
-            // 
-            this.textboxWallpunish.Location = new System.Drawing.Point(29, 50);
-            this.textboxWallpunish.Name = "textboxWallpunish";
-            this.textboxWallpunish.Size = new System.Drawing.Size(121, 22);
-            this.textboxWallpunish.TabIndex = 1;
-            // 
             // comboboxWallpunishment
             // 
             this.comboboxWallpunishment.FormattingEnabled = true;
-            this.comboboxWallpunishment.Location = new System.Drawing.Point(29, 18);
+            this.comboboxWallpunishment.Location = new System.Drawing.Point(19, 143);
             this.comboboxWallpunishment.Name = "comboboxWallpunishment";
             this.comboboxWallpunishment.Size = new System.Drawing.Size(121, 24);
-            this.comboboxWallpunishment.TabIndex = 0;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.button1);
-            this.groupBox7.Controls.Add(this.button2);
-            this.groupBox7.Controls.Add(this.label31);
-            this.groupBox7.Controls.Add(this.textboxE);
-            this.groupBox7.Controls.Add(this.comboboxE);
-            this.groupBox7.Location = new System.Drawing.Point(15, 365);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(259, 80);
-            this.groupBox7.TabIndex = 10;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Ɛ";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(157, 49);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Set";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboboxWallpunishment.TabIndex = 15;
+            this.comboboxWallpunishment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxWallpunishment_KeyPress);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(157, 18);
+            this.button2.Location = new System.Drawing.Point(196, 237);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
+            this.button2.TabIndex = 10;
             this.button2.Text = "Set";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(7, 52);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(21, 17);
-            this.label31.TabIndex = 2;
-            this.label31.Text = "or";
-            // 
-            // textboxE
-            // 
-            this.textboxE.Location = new System.Drawing.Point(29, 50);
-            this.textboxE.Name = "textboxE";
-            this.textboxE.Size = new System.Drawing.Size(121, 22);
-            this.textboxE.TabIndex = 1;
-            // 
             // comboboxE
             // 
             this.comboboxE.FormattingEnabled = true;
-            this.comboboxE.Location = new System.Drawing.Point(29, 18);
+            this.comboboxE.Location = new System.Drawing.Point(35, 236);
             this.comboboxE.Name = "comboboxE";
-            this.comboboxE.Size = new System.Drawing.Size(121, 24);
-            this.comboboxE.TabIndex = 0;
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.buttonAdvancestepstextbox);
-            this.groupBox8.Controls.Add(this.comboboxAdvancesteps);
-            this.groupBox8.Controls.Add(this.buttonAdvancestepsdropdown);
-            this.groupBox8.Controls.Add(this.textboxAdvancestepsinput);
-            this.groupBox8.Controls.Add(this.label15);
-            this.groupBox8.Location = new System.Drawing.Point(6, 25);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(268, 80);
-            this.groupBox8.TabIndex = 9;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Advance steps";
-            // 
-            // buttonAdvancestepstextbox
-            // 
-            this.buttonAdvancestepstextbox.Location = new System.Drawing.Point(166, 51);
-            this.buttonAdvancestepstextbox.Name = "buttonAdvancestepstextbox";
-            this.buttonAdvancestepstextbox.Size = new System.Drawing.Size(75, 26);
-            this.buttonAdvancestepstextbox.TabIndex = 9;
-            this.buttonAdvancestepstextbox.Text = "Step";
-            this.buttonAdvancestepstextbox.UseVisualStyleBackColor = true;
-            this.buttonAdvancestepstextbox.Click += new System.EventHandler(this.buttonAdvancestepstextbox_Click);
+            this.comboboxE.Size = new System.Drawing.Size(122, 24);
+            this.comboboxE.TabIndex = 9;
+            this.comboboxE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxE_KeyPress);
             // 
             // comboboxAdvancesteps
             // 
@@ -1100,59 +737,20 @@ namespace ReinforcementLearning
             "10",
             "25",
             "100"});
-            this.comboboxAdvancesteps.Location = new System.Drawing.Point(38, 21);
+            this.comboboxAdvancesteps.Location = new System.Drawing.Point(32, 35);
             this.comboboxAdvancesteps.Name = "comboboxAdvancesteps";
             this.comboboxAdvancesteps.Size = new System.Drawing.Size(121, 24);
-            this.comboboxAdvancesteps.TabIndex = 5;
+            this.comboboxAdvancesteps.TabIndex = 19;
             // 
             // buttonAdvancestepsdropdown
             // 
-            this.buttonAdvancestepsdropdown.Location = new System.Drawing.Point(166, 20);
+            this.buttonAdvancestepsdropdown.Location = new System.Drawing.Point(193, 33);
             this.buttonAdvancestepsdropdown.Name = "buttonAdvancestepsdropdown";
             this.buttonAdvancestepsdropdown.Size = new System.Drawing.Size(75, 27);
-            this.buttonAdvancestepsdropdown.TabIndex = 8;
+            this.buttonAdvancestepsdropdown.TabIndex = 20;
             this.buttonAdvancestepsdropdown.Text = "Step";
             this.buttonAdvancestepsdropdown.UseVisualStyleBackColor = true;
             this.buttonAdvancestepsdropdown.Click += new System.EventHandler(this.buttonAdvancestepsdropdown_Click);
-            // 
-            // textboxAdvancestepsinput
-            // 
-            this.textboxAdvancestepsinput.Location = new System.Drawing.Point(38, 53);
-            this.textboxAdvancestepsinput.Name = "textboxAdvancestepsinput";
-            this.textboxAdvancestepsinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxAdvancestepsinput.TabIndex = 6;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(16, 55);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(21, 17);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "or";
-            // 
-            // groupboxAdvanceepisodes
-            // 
-            this.groupboxAdvanceepisodes.Controls.Add(this.buttonAdvanceepisodestextbox);
-            this.groupboxAdvanceepisodes.Controls.Add(this.comboboxAdvanceepisodes);
-            this.groupboxAdvanceepisodes.Controls.Add(this.label16);
-            this.groupboxAdvanceepisodes.Controls.Add(this.buttonAdvanceepisodesdropdown);
-            this.groupboxAdvanceepisodes.Controls.Add(this.textboxAdvanceepisodesinput);
-            this.groupboxAdvanceepisodes.Location = new System.Drawing.Point(6, 119);
-            this.groupboxAdvanceepisodes.Name = "groupboxAdvanceepisodes";
-            this.groupboxAdvanceepisodes.Size = new System.Drawing.Size(268, 80);
-            this.groupboxAdvanceepisodes.TabIndex = 10;
-            this.groupboxAdvanceepisodes.TabStop = false;
-            this.groupboxAdvanceepisodes.Text = "Advance episodes";
-            // 
-            // buttonAdvanceepisodestextbox
-            // 
-            this.buttonAdvanceepisodestextbox.Location = new System.Drawing.Point(166, 51);
-            this.buttonAdvanceepisodestextbox.Name = "buttonAdvanceepisodestextbox";
-            this.buttonAdvanceepisodestextbox.Size = new System.Drawing.Size(75, 24);
-            this.buttonAdvanceepisodestextbox.TabIndex = 14;
-            this.buttonAdvanceepisodestextbox.Text = "Step";
-            this.buttonAdvanceepisodestextbox.UseVisualStyleBackColor = true;
             // 
             // comboboxAdvanceepisodes
             // 
@@ -1164,44 +762,33 @@ namespace ReinforcementLearning
             "10",
             "25",
             "100"});
-            this.comboboxAdvanceepisodes.Location = new System.Drawing.Point(38, 21);
+            this.comboboxAdvanceepisodes.Location = new System.Drawing.Point(32, 85);
             this.comboboxAdvanceepisodes.Name = "comboboxAdvanceepisodes";
             this.comboboxAdvanceepisodes.Size = new System.Drawing.Size(121, 24);
-            this.comboboxAdvanceepisodes.TabIndex = 10;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 55);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(21, 17);
-            this.label16.TabIndex = 12;
-            this.label16.Text = "or";
+            this.comboboxAdvanceepisodes.TabIndex = 21;
             // 
             // buttonAdvanceepisodesdropdown
             // 
-            this.buttonAdvanceepisodesdropdown.Location = new System.Drawing.Point(166, 21);
+            this.buttonAdvanceepisodesdropdown.Location = new System.Drawing.Point(194, 84);
             this.buttonAdvanceepisodesdropdown.Name = "buttonAdvanceepisodesdropdown";
             this.buttonAdvanceepisodesdropdown.Size = new System.Drawing.Size(75, 24);
-            this.buttonAdvanceepisodesdropdown.TabIndex = 13;
+            this.buttonAdvanceepisodesdropdown.TabIndex = 22;
             this.buttonAdvanceepisodesdropdown.Text = "Step";
             this.buttonAdvanceepisodesdropdown.UseVisualStyleBackColor = true;
             // 
-            // textboxAdvanceepisodesinput
-            // 
-            this.textboxAdvanceepisodesinput.Location = new System.Drawing.Point(38, 53);
-            this.textboxAdvanceepisodesinput.Name = "textboxAdvanceepisodesinput";
-            this.textboxAdvanceepisodesinput.Size = new System.Drawing.Size(121, 22);
-            this.textboxAdvanceepisodesinput.TabIndex = 11;
-            // 
             // groupboxAlgorithmprogress
             // 
-            this.groupboxAlgorithmprogress.Controls.Add(this.groupBox8);
-            this.groupboxAlgorithmprogress.Controls.Add(this.groupboxAdvanceepisodes);
+            this.groupboxAlgorithmprogress.Controls.Add(this.label16);
+            this.groupboxAlgorithmprogress.Controls.Add(this.label15);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvanceepisodes);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvancesteps);
+            this.groupboxAlgorithmprogress.Controls.Add(this.buttonAdvanceepisodesdropdown);
+            this.groupboxAlgorithmprogress.Controls.Add(this.buttonAdvancestepsdropdown);
+            this.groupboxAlgorithmprogress.Controls.Add(this.buttonRestart);
             this.groupboxAlgorithmprogress.Enabled = false;
-            this.groupboxAlgorithmprogress.Location = new System.Drawing.Point(1114, 773);
+            this.groupboxAlgorithmprogress.Location = new System.Drawing.Point(1114, 605);
             this.groupboxAlgorithmprogress.Name = "groupboxAlgorithmprogress";
-            this.groupboxAlgorithmprogress.Size = new System.Drawing.Size(289, 207);
+            this.groupboxAlgorithmprogress.Size = new System.Drawing.Size(289, 152);
             this.groupboxAlgorithmprogress.TabIndex = 12;
             this.groupboxAlgorithmprogress.TabStop = false;
             this.groupboxAlgorithmprogress.Text = "Algorithm progress";
@@ -1211,18 +798,18 @@ namespace ReinforcementLearning
             this.groupboxSessionprogress.Controls.Add(this.groupboxCans);
             this.groupboxSessionprogress.Controls.Add(this.groupboxRewarddata);
             this.groupboxSessionprogress.Controls.Add(this.label23);
-            this.groupboxSessionprogress.Controls.Add(this.textBox2);
+            this.groupboxSessionprogress.Controls.Add(this.textboxNprogress);
             this.groupboxSessionprogress.Controls.Add(this.label19);
             this.groupboxSessionprogress.Controls.Add(this.label22);
             this.groupboxSessionprogress.Controls.Add(this.textboxYprogress);
-            this.groupboxSessionprogress.Controls.Add(this.textboxNprogress);
+            this.groupboxSessionprogress.Controls.Add(this.textboxEprogress);
             this.groupboxSessionprogress.Controls.Add(this.label18);
             this.groupboxSessionprogress.Controls.Add(this.textboxEpisodesprogress);
             this.groupboxSessionprogress.Controls.Add(this.textboxStepsprogress);
             this.groupboxSessionprogress.Controls.Add(this.groupboxCurrentposition);
             this.groupboxSessionprogress.Controls.Add(this.label20);
             this.groupboxSessionprogress.Enabled = false;
-            this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 342);
+            this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 367);
             this.groupboxSessionprogress.Name = "groupboxSessionprogress";
             this.groupboxSessionprogress.Size = new System.Drawing.Size(546, 280);
             this.groupboxSessionprogress.TabIndex = 18;
@@ -1341,14 +928,14 @@ namespace ReinforcementLearning
             this.label23.TabIndex = 20;
             this.label23.Text = "γ";
             // 
-            // textBox2
+            // textboxNprogress
             // 
-            this.textBox2.Location = new System.Drawing.Point(297, 40);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(75, 22);
-            this.textBox2.TabIndex = 21;
+            this.textboxNprogress.Location = new System.Drawing.Point(297, 40);
+            this.textboxNprogress.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxNprogress.Name = "textboxNprogress";
+            this.textboxNprogress.ReadOnly = true;
+            this.textboxNprogress.Size = new System.Drawing.Size(75, 22);
+            this.textboxNprogress.TabIndex = 21;
             // 
             // label19
             // 
@@ -1379,14 +966,14 @@ namespace ReinforcementLearning
             this.textboxYprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxYprogress.TabIndex = 13;
             // 
-            // textboxNprogress
+            // textboxEprogress
             // 
-            this.textboxNprogress.Location = new System.Drawing.Point(209, 40);
-            this.textboxNprogress.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxNprogress.Name = "textboxNprogress";
-            this.textboxNprogress.ReadOnly = true;
-            this.textboxNprogress.Size = new System.Drawing.Size(79, 22);
-            this.textboxNprogress.TabIndex = 17;
+            this.textboxEprogress.Location = new System.Drawing.Point(209, 40);
+            this.textboxEprogress.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxEprogress.Name = "textboxEprogress";
+            this.textboxEprogress.ReadOnly = true;
+            this.textboxEprogress.Size = new System.Drawing.Size(79, 22);
+            this.textboxEprogress.TabIndex = 17;
             // 
             // label18
             // 
@@ -1537,7 +1124,7 @@ namespace ReinforcementLearning
             this.groupboxQmatrix.Controls.Add(this.groupBox4);
             this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixview);
             this.groupboxQmatrix.Enabled = false;
-            this.groupboxQmatrix.Location = new System.Drawing.Point(1408, 140);
+            this.groupboxQmatrix.Location = new System.Drawing.Point(1408, 165);
             this.groupboxQmatrix.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxQmatrix.Name = "groupboxQmatrix";
             this.groupboxQmatrix.Padding = new System.Windows.Forms.Padding(4);
@@ -1708,9 +1295,9 @@ namespace ReinforcementLearning
             // comboBox6
             // 
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(21, 23);
+            this.comboBox6.Location = new System.Drawing.Point(35, 23);
             this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(241, 24);
+            this.comboBox6.Size = new System.Drawing.Size(235, 24);
             this.comboBox6.TabIndex = 22;
             this.comboBox6.Text = "View prior episodes...";
             // 
@@ -1718,9 +1305,9 @@ namespace ReinforcementLearning
             // 
             this.groupboxHistory.Controls.Add(this.comboBox7);
             this.groupboxHistory.Controls.Add(this.comboBox6);
-            this.groupboxHistory.Location = new System.Drawing.Point(1408, 943);
+            this.groupboxHistory.Location = new System.Drawing.Point(1114, 791);
             this.groupboxHistory.Name = "groupboxHistory";
-            this.groupboxHistory.Size = new System.Drawing.Size(546, 59);
+            this.groupboxHistory.Size = new System.Drawing.Size(291, 97);
             this.groupboxHistory.TabIndex = 22;
             this.groupboxHistory.TabStop = false;
             this.groupboxHistory.Text = "History";
@@ -1729,28 +1316,28 @@ namespace ReinforcementLearning
             // 
             this.comboBox7.Enabled = false;
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(268, 23);
+            this.comboBox7.Location = new System.Drawing.Point(34, 53);
             this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(263, 24);
+            this.comboBox7.Size = new System.Drawing.Size(237, 24);
             this.comboBox7.TabIndex = 23;
-            this.comboBox7.Text = "View steps this episode...";
+            this.comboBox7.Text = "View prior steps...";
             // 
             // groupboxStatusmessage
             // 
             this.groupboxStatusmessage.Controls.Add(this.textboxStatus);
-            this.groupboxStatusmessage.Location = new System.Drawing.Point(1407, 628);
+            this.groupboxStatusmessage.Location = new System.Drawing.Point(1407, 654);
             this.groupboxStatusmessage.Name = "groupboxStatusmessage";
-            this.groupboxStatusmessage.Size = new System.Drawing.Size(546, 314);
+            this.groupboxStatusmessage.Size = new System.Drawing.Size(546, 374);
             this.groupboxStatusmessage.TabIndex = 23;
             this.groupboxStatusmessage.TabStop = false;
             this.groupboxStatusmessage.Text = "Status message";
             // 
             // textboxStatus
             // 
-            this.textboxStatus.Location = new System.Drawing.Point(21, 21);
+            this.textboxStatus.Location = new System.Drawing.Point(23, 28);
             this.textboxStatus.Name = "textboxStatus";
             this.textboxStatus.ReadOnly = true;
-            this.textboxStatus.Size = new System.Drawing.Size(511, 287);
+            this.textboxStatus.Size = new System.Drawing.Size(511, 317);
             this.textboxStatus.TabIndex = 0;
             this.textboxStatus.Text = "";
             // 
@@ -1967,14 +1554,191 @@ namespace ReinforcementLearning
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(153, 719);
+            this.button10.Location = new System.Drawing.Point(35, 550);
             this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(125, 28);
+            this.button10.Size = new System.Drawing.Size(241, 28);
             this.button10.TabIndex = 12;
             this.button10.Text = "Reset config";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // groupboxRewards
+            // 
+            this.groupboxRewards.Controls.Add(this.textboxInitialBeerreward);
+            this.groupboxRewards.Controls.Add(this.label44);
+            this.groupboxRewards.Controls.Add(this.textboxInitialEmptysquare);
+            this.groupboxRewards.Controls.Add(this.textboxRewardssuccessmove);
+            this.groupboxRewards.Controls.Add(this.label30);
+            this.groupboxRewards.Controls.Add(this.label28);
+            this.groupboxRewards.Controls.Add(this.textboxInitialWallpunishment);
+            this.groupboxRewards.Controls.Add(this.label29);
+            this.groupboxRewards.Location = new System.Drawing.Point(286, 20);
+            this.groupboxRewards.Name = "groupboxRewards";
+            this.groupboxRewards.Size = new System.Drawing.Size(252, 119);
+            this.groupboxRewards.TabIndex = 59;
+            this.groupboxRewards.TabStop = false;
+            this.groupboxRewards.Text = "Rewards";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(11, 24);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(114, 17);
+            this.label44.TabIndex = 26;
+            this.label44.Text = "Successful move";
+            // 
+            // textboxRewardssuccessmove
+            // 
+            this.textboxRewardssuccessmove.Location = new System.Drawing.Point(14, 43);
+            this.textboxRewardssuccessmove.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxRewardssuccessmove.Name = "textboxRewardssuccessmove";
+            this.textboxRewardssuccessmove.ReadOnly = true;
+            this.textboxRewardssuccessmove.Size = new System.Drawing.Size(109, 22);
+            this.textboxRewardssuccessmove.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(31, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(221, 17);
+            this.label7.TabIndex = 59;
+            this.label7.Text = "How many episodes will there be?";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(31, 69);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(198, 17);
+            this.label12.TabIndex = 60;
+            this.label12.Text = "How many steps per episode?";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(31, 120);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(16, 17);
+            this.label13.TabIndex = 61;
+            this.label13.Text = "η";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(32, 167);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(15, 17);
+            this.label14.TabIndex = 62;
+            this.label14.Text = "γ";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(32, 219);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(17, 17);
+            this.label31.TabIndex = 63;
+            this.label31.Text = "Ɛ";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(16, 124);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(100, 17);
+            this.label32.TabIndex = 64;
+            this.label32.Text = "Ran into a wall";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(16, 71);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(163, 17);
+            this.label34.TabIndex = 66;
+            this.label34.Text = "Incorrectly grabbed beer";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(16, 18);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(99, 17);
+            this.label33.TabIndex = 65;
+            this.label33.Text = "Collected beer";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label45);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.comboboxMovedwithoutwall);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.label32);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.comboboxEmptysquare);
+            this.groupBox1.Controls.Add(this.label34);
+            this.groupBox1.Controls.Add(this.button8);
+            this.groupBox1.Controls.Add(this.comboboxBeer);
+            this.groupBox1.Controls.Add(this.comboboxWallpunishment);
+            this.groupBox1.Location = new System.Drawing.Point(16, 276);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(260, 232);
+            this.groupBox1.TabIndex = 67;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rewards";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(16, 177);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(179, 17);
+            this.label45.TabIndex = 69;
+            this.label45.Text = "Moved without hitting a wall";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(179, 195);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Set";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboboxMovedwithoutwall
+            // 
+            this.comboboxMovedwithoutwall.FormattingEnabled = true;
+            this.comboboxMovedwithoutwall.Location = new System.Drawing.Point(19, 195);
+            this.comboboxMovedwithoutwall.Name = "comboboxMovedwithoutwall";
+            this.comboboxMovedwithoutwall.Size = new System.Drawing.Size(121, 24);
+            this.comboboxMovedwithoutwall.TabIndex = 17;
+            this.comboboxMovedwithoutwall.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxMovedwithoutwall_KeyPress);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(32, 18);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(101, 17);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Advance steps";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(32, 67);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(124, 17);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Advance episodes";
             // 
             // Form1
             // 
@@ -2004,7 +1768,6 @@ namespace ReinforcementLearning
             this.Controls.Add(this.groupboxStatusmessage);
             this.Controls.Add(this.groupboxHistory);
             this.Controls.Add(this.groupboxQmatrix);
-            this.Controls.Add(this.buttonRestart);
             this.Controls.Add(this.groupboxSessionprogress);
             this.Controls.Add(this.groupboxAlgorithmprogress);
             this.Controls.Add(this.groupboxConfiguration);
@@ -2016,30 +1779,12 @@ namespace ReinforcementLearning
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupboxCurrentposition.ResumeLayout(false);
             this.groupboxCurrentposition.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupboxInitialsettings.ResumeLayout(false);
             this.groupboxInitialsettings.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupboxConfiguration.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupboxAdvanceepisodes.ResumeLayout(false);
-            this.groupboxAdvanceepisodes.PerformLayout();
+            this.groupboxConfiguration.PerformLayout();
             this.groupboxAlgorithmprogress.ResumeLayout(false);
+            this.groupboxAlgorithmprogress.PerformLayout();
             this.groupboxSessionprogress.ResumeLayout(false);
             this.groupboxSessionprogress.PerformLayout();
             this.groupboxCans.ResumeLayout(false);
@@ -2074,6 +1819,10 @@ namespace ReinforcementLearning
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupboxRewards.ResumeLayout(false);
+            this.groupboxRewards.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2095,11 +1844,7 @@ namespace ReinforcementLearning
         private TextBox textboxLeft;
         private Label label1;
         private Button buttonStartAlgorithm;
-        private GroupBox groupBox2;
-        private Button buttonEpisodestextbox;
         private Button buttonEpisodesdropdown;
-        private Label label7;
-        private TextBox textboxEpisodesinput;
         private ComboBox comboboxEpisode;
         private GroupBox groupboxInitialsettings;
         private TextBox textboxInitialY;
@@ -2110,41 +1855,21 @@ namespace ReinforcementLearning
         private TextBox textboxInitialNumberofepisodes;
         private TextBox textboxInitialNumberofsteps;
         private Label label9;
-        private GroupBox groupBox3;
-        private Button buttonStepstextbox;
         private Button buttonStepsdropdown;
-        private Label label12;
-        private TextBox textboxStepsinput;
         private ComboBox comboboxSteps;
-        private GroupBox groupBox5;
-        private Button buttonNtextbox;
         private Button buttonNdropdown;
-        private Label label13;
-        private TextBox textboxNinput;
         private ComboBox comboboxN;
-        private GroupBox groupBox6;
-        private Button buttonYtextbox;
         private Button buttonYdropdown;
-        private Label label14;
-        private TextBox textboxYinput;
         private ComboBox comboboxY;
         private GroupBox groupboxConfiguration;
-        private GroupBox groupBox8;
-        private Button buttonAdvancestepstextbox;
         private ComboBox comboboxAdvancesteps;
         private Button buttonAdvancestepsdropdown;
-        private TextBox textboxAdvancestepsinput;
-        private Label label15;
-        private GroupBox groupboxAdvanceepisodes;
-        private Button buttonAdvanceepisodestextbox;
         private ComboBox comboboxAdvanceepisodes;
-        private Label label16;
         private Button buttonAdvanceepisodesdropdown;
-        private TextBox textboxAdvanceepisodesinput;
         private GroupBox groupboxAlgorithmprogress;
         private GroupBox groupboxSessionprogress;
         private TextBox textboxYprogress;
-        private TextBox textboxNprogress;
+        private TextBox textboxEprogress;
         private Label label18;
         private TextBox textboxEpisodesprogress;
         private TextBox textboxStepsprogress;
@@ -2152,7 +1877,7 @@ namespace ReinforcementLearning
         private TextBox textboxInitialNinitial;
         private Label label21;
         private Label label23;
-        private TextBox textBox2;
+        private TextBox textboxNprogress;
         private Label label19;
         private Label label22;
         private ComboBox comboBox1;
@@ -2173,29 +1898,13 @@ namespace ReinforcementLearning
         private TextBox textboxInitialEmptysquare;
         private TextBox textboxInitialWallpunishment;
         private Label label28;
-        private GroupBox groupBox11;
-        private Button button7;
         private Button button8;
-        private Label label34;
-        private TextBox textboxBeerconfig;
         private ComboBox comboboxBeer;
-        private GroupBox groupBox10;
-        private Button button5;
         private Button button6;
-        private Label label33;
-        private TextBox textboxEmptySquareconfig;
         private ComboBox comboboxEmptysquare;
-        private GroupBox groupBox9;
-        private Button button3;
         private Button button4;
-        private Label label32;
-        private TextBox textboxWallpunish;
         private ComboBox comboboxWallpunishment;
-        private GroupBox groupBox7;
-        private Button button1;
         private Button button2;
-        private Label label31;
-        private TextBox textboxE;
         private ComboBox comboboxE;
         private ComboBox comboBox6;
         private GroupBox groupboxHistory;
@@ -2246,6 +1955,23 @@ namespace ReinforcementLearning
         private ComboBox comboboxRight;
         private ComboBox comboboxLeft;
         private Button button10;
+        private GroupBox groupboxRewards;
+        private Label label44;
+        private TextBox textboxRewardssuccessmove;
+        private Label label32;
+        private Label label7;
+        private Label label31;
+        private Label label14;
+        private Label label13;
+        private Label label12;
+        private Label label34;
+        private Label label33;
+        private GroupBox groupBox1;
+        private Label label45;
+        private Button button1;
+        private ComboBox comboboxMovedwithoutwall;
+        private Label label16;
+        private Label label15;
     }
 }
 

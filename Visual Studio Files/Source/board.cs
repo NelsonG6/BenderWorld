@@ -8,11 +8,9 @@ namespace ReinforcementLearning
         public List<List<BoardSquare>> board_data; //These contain pictureboxes, passed from form1
         public int board_size;
 
-        //keeps track of where bender is
-        public int bender_x;
-        public int bender_y;
-
         public int beer_can_count;
+
+        public Unit bender;
 
         public Board()
         {
@@ -32,17 +30,18 @@ namespace ReinforcementLearning
 
             //Add walls
             //left wall
-            for (int i = 0; i < 10; i++) { board_data[0][i].walls.Add(new int[2] { -1, 0 }); }
+            for (int i = 0; i < 10; i++) { board_data[0][i].walls[MoveList.left()] = true; }
             //right wall
-            for (int i = 0; i < 10; i++) { board_data[9][i].walls.Add(new int[2] { 1, 0 }); }
+            for (int i = 0; i < 10; i++) { board_data[9][i].walls[MoveList.right()] = true; }
             //bottom wall
-            for (int i = 0; i < 10; i++) { board_data[i][0].walls.Add(new int[2] { 0, -1 }); }
+            for (int i = 0; i < 10; i++) { board_data[i][0].walls[MoveList.down()] = true; }
             //above wall
-            for (int i = 0; i < 10; i++) { board_data[i][9].walls.Add(new int[2] { 0, 1 }); }
+            for (int i = 0; i < 10; i++) { board_data[i][9].walls[MoveList.up()] = true; }
 
             //Bender location will be set in shuffle
-            bender_x = 0;
-            bender_y = 0;
+
+
+            bender = new Unit();
 
             shuffle_cans_and_bender(); //A fresh board not copied will need randomly generated data, except at program launch. We'll clear it in that case.
         }
@@ -89,43 +88,48 @@ namespace ReinforcementLearning
         public void shuffle_bender()
         {
             //If Bender is already somewhere on the board, make sure we remove him from that location.
-            if (board_data[bender_x][bender_y].bender_present) board_data[bender_x][bender_y].bender_present = false;
+            if (board_data[bender.bender_x][bender.bender_y].bender_present) board_data[bender.bender_x][bender.bender_y].bender_present = false;
 
             //Get bender's new location.
-            bender_x = MyRandom.Next(0, 10); //0-9 inclusive
-            bender_y = MyRandom.Next(0, 10);
-            board_data[bender_x][bender_y].bender_present = true; //Set bender
+            bender.bender_x = MyRandom.Next(0, 10); //0-9 inclusive
+            bender.bender_y = MyRandom.Next(0, 10);
+            board_data[bender.bender_x][bender.bender_y].bender_present = true; //Set bender
 
             //Commenting this because I want to display pictureboxes from the textboxhandler, from a call from algorithmmanager
             //update_pictureboxes();
         }
 
-        //Used when the robot takes an action
-        //We get a string from this, which will be translated into a reward at the q-matrix.
-        public string detect_percept(int x_move, int y_move)
+        //Used when the robot moves *only*, otherwise, the perception will be checked from the state of the unit.
+        //Generates percepts, and not MoveResults.
+        public Percept percieve(Move move_to_check)
         {
-            if(board_data[bender_x][bender_y].check_wall(x_move, y_move))
+            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+
+            if (move_to_check != MoveList.grab() && bender_location.check_if_walls_prevent_move(move_to_check))
             {
-                return "Wall";
+                return PerceptList.wall(); //Wall percieved 
             }
             else
             {
-                if (board_data[bender_x + x_move][bender_y + y_move].beer_can_present)
-                    return "Beer Can";
+                int percieve_x = bender.bender_x + move_to_check.grid_adjustment[0];
+                int percieve_y = bender.bender_y + move_to_check.grid_adjustment[1];
+
+                BoardSquare percieve_location = board_data[percieve_x][percieve_y];
+                if (percieve_location.beer_can_present)
+                    return PerceptList.can();
                 else
-                    return "Empty";
+                    return PerceptList.empty();
             }
-            //Shouldn't reach this
         }
 
         //This is how we store each state that bender can percieve.
         public string get_encoding_of_percepts()
         {
-            string precept_string = detect_percept(-1, 0);
-            precept_string += ", " + detect_percept(0, -1);
-            precept_string += ", " + detect_percept(1, 0);
-            precept_string += ", " + detect_percept(0, 1);
-            precept_string += ", " + detect_percept(0, 0);
+            string precept_string = percieve(MoveList.left()).get_string_data();
+            precept_string += ", " + percieve(MoveList.down()).get_string_data();
+            precept_string += ", " + percieve(MoveList.right()).get_string_data();
+            precept_string += ", " + percieve(MoveList.up()).get_string_data();
+            precept_string += ", " + percieve(MoveList.grab()).get_string_data();
             return precept_string;
         }
 
@@ -157,7 +161,69 @@ namespace ReinforcementLearning
 
         public bool is_bender_on_can()
         {
-            return board_data[bender_x][bender_y].beer_can_present;
+            return board_data[bender.bender_x][bender.bender_y].beer_can_present;
+        }
+
+        //This function will give bender perception data from the board
+        public void bender_percieves()
+        {
+
+        }
+
+        public MoveResult apply_move(Move move_to_apply)
+        {
+            //Get the move result based on the current condition
+            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+            if(bender_location.check_if_walls_prevent_move(move_to_apply))
+                return MoveResultList.move_hit_wall(); //Walls prevent move
+
+            if(move_to_apply == MoveList.grab())
+            {
+                if (bender_location.beer_can_present)
+                {
+                    collect_can();
+                    return MoveResultList.can_collected();
+                }
+                    
+                else
+                    return MoveResultList.can_missing();
+            }
+            //Didn't try to grab a can, and didn't hit a wall. We moved successfully.
+
+            move_bender(move_to_apply);
+            return MoveResultList.move_successful();
+        }
+
+        public void move_bender(Move to_move)
+        {
+            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+            bender_location.bender_present = false;
+
+            bender.bender_x += to_move.grid_adjustment[0];
+            bender.bender_y += to_move.grid_adjustment[1];
+            bender_location = board_data[bender.bender_x][bender.bender_y];
+            bender_location.bender_present = true;
+        }
+
+        public void collect_can()
+        {
+            BoardSquare bender_location = board_data[bender.bender_x][bender.bender_y];
+            
+            bender_location.beer_can_present = false;
+        }
+
+        public int get_cans_remaining()
+        {
+            int total = 0;
+            foreach (var i in board_data)
+            {
+                foreach(var j in i)
+                {
+                    if (j.beer_can_present)
+                        ++total;
+                }
+            }
+            return total;
         }
     }    
 }

@@ -29,22 +29,25 @@ namespace ReinforcementLearning
                 pictureData.Image = null;
 
             //Set background
-            pictureData.BackgroundImage = backgrounds[square_state];
+            pictureData.BackgroundImage = Backgrounds.dictionary[visited_state];
         }
 
-        public static void set_backgrounds()
-        {
-            backgrounds = new Dictionary<string, System.Drawing.Bitmap>();
-            backgrounds.Add("Last", Properties.Resources.background_last_move);
-            backgrounds.Add("Explored", Properties.Resources.background_explored);
-            backgrounds.Add("Unexplored", Properties.Resources.background_unexplored);
-        }
 
         public void copy_attributes(BoardSquare copy_from)
         {
             beer_can_present = copy_from.beer_can_present;
             bender_present = copy_from.beer_can_present;
-            walls = copy_from.walls.Select(item => (int[])item.Clone()).ToList();
+            walls = new Dictionary<Move, bool>();
+
+            foreach (var i in copy_from.walls.Keys)
+            {
+                walls.Add(i, copy_from.walls[i]);
+            }
+        }
+
+        public static void set_backgrounds()
+        {
+
         }
     }
 }

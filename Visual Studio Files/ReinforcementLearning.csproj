@@ -53,8 +53,11 @@
     </Compile>
     <Compile Include="Source\AlgorithmManager.cs" />
     <Compile Include="Source\AlgorithmState.cs" />
+    <Compile Include="Source\Backgrounds.cs" />
     <Compile Include="Source\board.cs" />
     <Compile Include="Source\BoardSquare.cs" />
+    <Compile Include="Source\BoardVisitedState.cs" />
+    <Compile Include="Source\BoardVisitedStateList.cs" />
     <Compile Include="Source\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,10 +66,22 @@
     </Compile>
     <Compile Include="Properties\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Move.cs" />
+    <Compile Include="Source\MoveList.cs" />
+    <Compile Include="Source\MoveResult.cs" />
+    <Compile Include="Source\MoveResultList.cs" />
     <Compile Include="Source\MyRandom.cs" />
+    <Compile Include="Source\Percept.cs" />
+    <Compile Include="Source\PerceptList.cs" />
     <Compile Include="Source\PictureSquare.cs" />
     <Compile Include="Source\Qmatrix.cs" />
     <Compile Include="Source\FormsHandler.cs" />
+    <Compile Include="Source\MoveSet.cs" />
+    <Compile Include="Source\PerceptionState.cs" />
+    <Compile Include="Source\PerceptionStateList.cs" />
+    <Compile Include="Source\Unit.cs" />
+    <Compile Include="Source\Wall.cs" />
+    <Compile Include="Source\WallsList.cs" />
     <EmbeddedResource Include="Source\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

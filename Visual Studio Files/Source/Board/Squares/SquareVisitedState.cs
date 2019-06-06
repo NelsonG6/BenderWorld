@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ReinforcementLearning
 {
-    class BoardVisitedState
+    class SquareVisitedState
     {
         private readonly string state_data;
 
-        public BoardVisitedState(string to_set)
+        public SquareVisitedState(string to_set)
         {
             state_data = to_set;
         }

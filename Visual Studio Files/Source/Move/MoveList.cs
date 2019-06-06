@@ -20,31 +20,31 @@ namespace ReinforcementLearning
             left_move.grid_adjustment[0] = -1;
             left_move.grid_adjustment[1] = 0;
             left_move.grab = false;
-            left_move.name_of_move = "L";
+            left_move.short_name = "L";
 
             right_move = new Move();
             right_move.grid_adjustment[0] = 1;
             right_move.grid_adjustment[1] = 0;
             right_move.grab = false;
-            right_move.name_of_move = "R";
+            right_move.short_name = "R";
 
             up_move = new Move();
             up_move.grid_adjustment[0] = 0;
             up_move.grid_adjustment[1] = 1;
             up_move.grab = false;
-            up_move.name_of_move = "Up";
+            up_move.short_name = "Up";
 
             down_move = new Move();
             down_move.grid_adjustment[0] = 0;
             down_move.grid_adjustment[1] = -1;
             down_move.grab = false;
-            down_move.name_of_move = "D";
+            down_move.short_name = "D";
 
             grab_move = new Move();
             grab_move.grid_adjustment[0] = 0;
             grab_move.grid_adjustment[1] = 0;
             grab_move.grab = true;
-            grab_move.name_of_move = "Gr";
+            grab_move.short_name = "Gr";
 
             list = new List<Move>();
 

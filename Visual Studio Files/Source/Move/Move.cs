@@ -18,21 +18,23 @@ namespace ReinforcementLearning
         //public string name_of_move; //The description of the move, which is used to translate this move into actions when the result isn't movement-based.'
         //Grab is a non-movement based move, in this case.
 
-        public string name_of_move;
+        public string short_name; //Shorthand name of move
+        public string long_name; //Used for the status box display
 
         //might not need this constructor
         public Move()
         {
             grid_adjustment = new int[2] { 0, 0 };
-            name_of_move = "Initialized and not set";
+            short_name = "Initialized and not set";
+            long_name = "Initialized and not set";
         }
 
-        public Move(int set_x, int set_y, string string_to_set)
+        public Move(int set_x, int set_y, string short_name_set)
         {
             grid_adjustment[0] = set_x;
             grid_adjustment[1] = set_y;
 
-            name_of_move = string_to_set;
+            short_name = short_name_set;
         }
 
         public Move(Move set_from)
@@ -40,7 +42,7 @@ namespace ReinforcementLearning
             grid_adjustment[0] = set_from.grid_adjustment[0];
             grid_adjustment[1] = set_from.grid_adjustment[1];
 
-            name_of_move = set_from.name_of_move;
+            short_name = set_from.short_name;
         }
     }
 }

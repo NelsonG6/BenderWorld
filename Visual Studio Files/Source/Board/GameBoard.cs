@@ -3,7 +3,7 @@
 namespace ReinforcementLearning
 {
     //Manages a few different classes
-    class GameBoard : BoardBase 
+    class GameBoard : BaseBoard 
     {
         public int beer_can_count;
         public Unit bender;
@@ -34,8 +34,6 @@ namespace ReinforcementLearning
 
             beer_can_count = set_from.beer_can_count;
 
-            board_data = new List<List<SquareBase>>();
-
             //Initialize 10x10 grid
             for (int i = 0; i < 10; i++)
             {
@@ -63,8 +61,6 @@ namespace ReinforcementLearning
                 }
             }
 
-
-
             shuffle_bender(); //Place bender randomly somewhere
         }
 
@@ -89,7 +85,7 @@ namespace ReinforcementLearning
         //Generates percepts, and not MoveResults.
         public Percept percieve(Move move_to_check)
         {
-            SquareBase bender_location = board_data[bender.bender_x][bender.bender_y];
+            BaseSquare bender_location = board_data[bender.bender_x][bender.bender_y];
 
             if (move_to_check != MoveList.grab() && ((BoardSquare)bender_location).check_if_walls_prevent_move(move_to_check))
             {
@@ -100,7 +96,7 @@ namespace ReinforcementLearning
                 int percieve_x = bender.bender_x + move_to_check.grid_adjustment[0];
                 int percieve_y = bender.bender_y + move_to_check.grid_adjustment[1];
 
-                SquareBase percieve_location = board_data[percieve_x][percieve_y];
+                BaseSquare percieve_location = board_data[percieve_x][percieve_y];
                 if (percieve_location.beer_can_present)
                     return PerceptList.can();
                 else
@@ -193,7 +189,7 @@ namespace ReinforcementLearning
 
         public void collect_can()
         {
-            SquareBase bender_location = board_data[bender.bender_x][bender.bender_y];
+            BaseSquare bender_location = board_data[bender.bender_x][bender.bender_y];
             
             bender_location.beer_can_present = false;
         }
@@ -228,7 +224,17 @@ namespace ReinforcementLearning
 
         public void add_walls()
         {
-            //Add walls
+            //Set all walls to empty first
+
+            foreach(var i in board_data)
+            {
+                foreach(var j in i)
+                {
+                    ((BoardSquare)j).walls = WallsList.empty_wall();
+                }
+            }
+            
+            //Add walls, which will replace some of the empty walls.
             //left wall
             for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[0][i]).walls = WallsList.left_wall(); }
             //right wall

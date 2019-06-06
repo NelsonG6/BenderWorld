@@ -53,14 +53,14 @@
     </Compile>
     <Compile Include="Source\AlgorithmManager.cs" />
     <Compile Include="Source\AlgorithmState.cs" />
-    <Compile Include="Source\Forms\Backgrounds.cs" />
-    <Compile Include="Source\Board\DisplayBoard.cs" />
+    <Compile Include="Source\Board\Squares\Backgrounds.cs" />
+    <Compile Include="Source\Board\PictureBoard.cs" />
     <Compile Include="Source\Board\GameBoard.cs" />
-    <Compile Include="Source\Board\BoardBase.cs" />
+    <Compile Include="Source\Board\BaseBoard.cs" />
     <Compile Include="Source\Board\Squares\BoardSquare.cs" />
-    <Compile Include="Source\Board\Squares\SquareBase.cs" />
-    <Compile Include="Source\Board\BoardVisitedState.cs" />
-    <Compile Include="Source\Board\BoardVisitedStateList.cs" />
+    <Compile Include="Source\Board\Squares\BaseSquare.cs" />
+    <Compile Include="Source\Board\Squares\SquareVisitedState.cs" />
+    <Compile Include="Source\Board\Squares\SquareVisitedStateList.cs" />
     <Compile Include="Source\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

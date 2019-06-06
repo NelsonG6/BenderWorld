@@ -10,11 +10,19 @@ namespace ReinforcementLearning
 
         public string name;
 
+
+
+        public Wall()
+        {
+            restricted_moves = new HashSet<Move>(); //Leave the hashset empty
+            name = "Empty walls";
+        }
+
         public Wall(Move move_to_set)
         {
             restricted_moves = new HashSet<Move>();
             restricted_moves.Add(move_to_set);
-            name = "One sided wall: " + move_to_set.name_of_move;
+            name = "One sided wall: " + move_to_set.short_name;
         }
 
         public Wall(Move move_a, Move move_b)
@@ -22,7 +30,7 @@ namespace ReinforcementLearning
             restricted_moves = new HashSet<Move>();
             restricted_moves.Add(move_a);
             restricted_moves.Add(move_b);
-            name = "Two sided wall: " + move_a.name_of_move + "+" + move_b.name_of_move;
+            name = "Two sided wall: " + move_a.short_name + "+" + move_b.short_name;
         }
     }
 }

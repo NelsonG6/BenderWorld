@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ReinforcementLearning
 {
-    class PictureSquare : SquareBase
+    class PictureSquare : BaseSquare
     {
         public PictureBox pictureData;
 
@@ -27,11 +27,11 @@ namespace ReinforcementLearning
                 pictureData.Image = null;
 
             //Set background
-            pictureData.BackgroundImage = Backgrounds.dictionary[visited_state];
+            pictureData.BackgroundImage = Backgrounds.dictionary[visited_state]; //Visisted state belongs to the base class, and is unexplored by default
         }
 
 
-        public void copy_attributes(SquareBase copy_from)
+        public void copy_attributes(BaseSquare copy_from)
         {
             beer_can_present = copy_from.beer_can_present;
             bender_present = copy_from.beer_can_present;

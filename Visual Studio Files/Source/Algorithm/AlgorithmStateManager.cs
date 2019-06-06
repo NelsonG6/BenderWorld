@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace ReinforcementLearning
 {
-    static class AlgorithmManager
+    static class AlgorithmStateManager
     {
-        static public AlgorithmState state_to_view; //This will store the currently displayed configuration of cans and bender, and q matrix.
         static public AlgorithmState current_state; //This is a pointer to the most recently generated state
 
         static public List<List<AlgorithmState>> state_history; //This is the history of the entire run, and all the configurations and q-matrix instances.
                                                                 //The head of this list is the current progress point of our algorithm.
-
-        //dont think i need this, i can just reference the qmatrix in the algorithm state
-        /*
-        static public Qmatrix qmatrix; //This is the running q matrix.
-                                        //We'll be making copies of this for our stored algorithm state history.
-            */                                           
 
         static public float n_initial; //eta
         static public float y_initial; //discount
@@ -32,10 +25,9 @@ namespace ReinforcementLearning
 
         static public bool algorithm_started;        
 
-        static AlgorithmManager()
+        static AlgorithmStateManager()
         {
             current_state = new AlgorithmState(); //Get defaults
-            state_to_view = current_state;
             state_history = new List<List<AlgorithmState>>(); //initialize history
             reinforcement_factors = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
 
@@ -60,7 +52,8 @@ namespace ReinforcementLearning
             reinforcement_factors.Add(MoveResultList.can_missing(), -1);
             reinforcement_factors.Add(MoveResultList.move_successful(), 0);
 
-            create_empty_board(); //This will gives us a board set to empty square.
+            current_state.board_data.shuffle_bender();
+            current_state.board_data.clear();
         }
 
         public static void take_step(int steps_to_take) //Go to the most current state, and step forward once. 
@@ -77,7 +70,7 @@ namespace ReinforcementLearning
                     current_state.update_fields(); //Read the data for the first time, since the algorithm just started
                     //This will normally be updated already at the end of the last run
 
-
+                    ++(current_state.episode_count);
                     current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board
 
                     //Bender percieves
@@ -88,23 +81,24 @@ namespace ReinforcementLearning
 
                     state_history.Add(new List<AlgorithmState>()); //episode index 0
                     state_history[0].Add(current_state);
-                    
-                    
 
-                    
+                    current_state.e_current = e_initial;
+                    current_state.y_current = y_initial;
+                    current_state.n_current = n_initial;
                 }                
                 else
                 {
                     if(current_state.step_count >= step_limit)
                     {   //First step
-                        current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board
+                        current_state = new AlgorithmState(current_state); //Clone the old state, so we dont modify what we stored in the list.
+                        current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board. //History was already added.
                         current_state.start_new_episode(); //restart our totals
-                        
+                        ++(current_state.episode_count);
+                        current_state.step_count = 0;
 
-                        state_history.Add(new List<AlgorithmState>()); //episode count index increment
-                        //Add the 0 step to the history, as it is a new, shuffle state.
-                        state_history[current_state.episode_count].Add(current_state);
-                        
+                        List<AlgorithmState> to_add = new List<AlgorithmState>(); //add this to the state history as position 0
+                        to_add.Add(current_state);
+                        state_history.Add(to_add);
                     }
 
                     current_state = new AlgorithmState(current_state); //Copy the old state. We're going to change this one into the new state.
@@ -113,27 +107,27 @@ namespace ReinforcementLearning
                     state_for_qmatrix = current_state.board_data.bender.get_perception_state(); //This is used to update the matrix after our move
                     Move step_to_take = current_state.live_qmatrix.generate_step(); //Tentative; we'll attempt this later. just a random move for now.
                     MoveResult move_result = current_state.board_data.apply_move(step_to_take); //The move should be performed now, if possible.
-                    update_value = reinforcement_factors[move_result];
+                    update_value = reinforcement_factors[move_result]; //Get the reward for this action
 
                     current_state.episode_rewards += (int)update_value; //Update the rewards total
+                    ++(current_state.step_count);
 
                     current_state.live_qmatrix.update_state(state_for_qmatrix, step_to_take, update_value); //give the value to the q matrix to digest
                     state_history[current_state.episode_count].Add(current_state);
 
-                    if (state_to_view.step_count >= step_limit)
+                    if (current_state.step_count >= step_limit)
                     {   //We've taken the max amount of steps. 
                         
                     }
 
-                    if (state_to_view.episode_count >= episode_limit)
+                    if (current_state.episode_count >= episode_limit)
                     {
                         //algorithm is done running trials
 
                     }
-
-
                 }
-                FormsHandler.display_manager_state();
+                
+                FormsHandler.display_state(current_state);
             }
         }
 
@@ -162,9 +156,8 @@ namespace ReinforcementLearning
             current_state.board_data.add_unit(temp_bender); //Add bender at the position he was in before we cleared the board
 
             algorithm_started = false; //Algorithm no longer running
-            state_to_view = current_state; //Set the state to display to match our current state.
 
-            FormsHandler.display_manager_state(); //use formshandler to display this state
+            FormsHandler.display_state(current_state); //use formshandler to display this state
         }
 
         static public string get_qmatrix_view(Move move_to_get)

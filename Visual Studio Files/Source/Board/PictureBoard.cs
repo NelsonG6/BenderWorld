@@ -8,10 +8,12 @@ namespace ReinforcementLearning
 {
     //This class is used by the FormsHandler, and there should only ever be one instance.
     //It stores PictureSquares, instead of BoardSquares
-    class DisplayBoard : BoardBase
+    class PictureBoard : BaseBoard
     {
-        public DisplayBoard() : base()
+        public PictureBoard() : base()
         {
+            PictureSquare.set_backgrounds(); //This initializes a dictionary of "boardVisistedState" - background image pairs.
+
             //Initialize 10x10 grid
             for (int i = 0; i < 10; i++)
             {
@@ -22,7 +24,7 @@ namespace ReinforcementLearning
             }
         }
 
-        public void clone_position(BoardBase set_from)
+        public void clone_position(BaseBoard set_from)
         {
             for (int i = 0; i < board_size; i++)
             {
@@ -37,7 +39,5 @@ namespace ReinforcementLearning
         {
             return (PictureSquare)board_data[x][y];
         }
-
-        
     }
 }

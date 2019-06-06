@@ -32,8 +32,8 @@ namespace ReinforcementLearning
             int x_offset = 50;
             int y_offset = 55;
 
-            PictureBox building; //Temporary picturebox
-            PictureSquare board_to_build; //This is object inherits from boardSquare, but has a picture element.
+            PictureBox picturebox_in_progress; //Temporary picturebox
+            PictureSquare square_to_build; //This is object inherits from boardSquare, but has a picture element.
 
             //Create pictureboxes and pass them to our board
             for (int i = 0; i < 10; i++)
@@ -41,17 +41,16 @@ namespace ReinforcementLearning
                 for (int j = 0; j < 10; j++)
                 {
                     //Fill in the column with rows
-                    building = new PictureBox();
-                    board_to_build = new PictureSquare();
-                    building.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
-                    building.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length));
-                    building.Size = new Size(edge_length, edge_length);
-                    building.SizeMode = PictureBoxSizeMode.StretchImage;
-                    building.BackgroundImageLayout = ImageLayout.Stretch;
-                    this.Controls.Add(building);
-                    board_to_build.pictureData = building;
-                    FormsHandler.add(i, 9-j, board_to_build); //9-j to handle the board layout, for some reason!
-                    
+                    picturebox_in_progress = new PictureBox();
+                    square_to_build = new PictureSquare();
+                    picturebox_in_progress.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
+                    picturebox_in_progress.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length));
+                    picturebox_in_progress.Size = new Size(edge_length, edge_length);
+                    picturebox_in_progress.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picturebox_in_progress.BackgroundImageLayout = ImageLayout.Stretch;
+                    this.Controls.Add(picturebox_in_progress);
+                    square_to_build.pictureData = picturebox_in_progress;
+                    FormsHandler.add(i, 9-j, square_to_build); //9-j to handle the board layout, for some reason!
                 }
             }
 
@@ -59,6 +58,7 @@ namespace ReinforcementLearning
             //This triggers the constructor for algorithm manager, as well
 
             textboxStatus.Text = "Program launched.";
+            FormsHandler.display_state(AlgorithmStateManager.current_state); //First time we display the board.
         }
 
         private void change_enabled_setting()
@@ -81,20 +81,20 @@ namespace ReinforcementLearning
         private void start_algorithm(object sender, EventArgs e)
         {
             change_enabled_setting(); //Toggle controls
-            AlgorithmManager.take_step(1); //This will start the algorithm
+            AlgorithmStateManager.take_step(1); //This will start the algorithm
         }
 
         private void reset_algorithm(object sender, EventArgs e)
         {
             change_enabled_setting();
-            AlgorithmManager.create_empty_board();
+            AlgorithmStateManager.create_empty_board();
         }
 
 
 
         private void buttonAdvancestepsdropdown_Click(object sender, EventArgs e)
         {
-            AlgorithmManager.take_step(Int32.Parse(comboboxAdvancesteps.SelectedItem.ToString()));
+            AlgorithmStateManager.take_step(Int32.Parse(comboboxAdvancesteps.SelectedItem.ToString()));
         }
 
         private void buttonAdvancestepstextbox_Click(object sender, EventArgs e)
@@ -103,7 +103,7 @@ namespace ReinforcementLearning
             if (!success)
                 comboboxAdvancesteps.Text = "Invalid.";
             else
-                AlgorithmManager.take_step(result);
+                AlgorithmStateManager.take_step(result);
         }
 
         private void next_episode(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace ReinforcementLearning
                 comboboxEpisode.Text = "Invalid.";
             else
             {
-                AlgorithmManager.episode_limit = result;
+                AlgorithmStateManager.episode_limit = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -130,7 +130,7 @@ namespace ReinforcementLearning
                 comboboxSteps.Text = "Invalid.";
             else
             {
-                AlgorithmManager.step_limit = result;
+                AlgorithmStateManager.step_limit = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -143,7 +143,7 @@ namespace ReinforcementLearning
                 comboboxN.Text = "Invalid.";
             else
             {
-                AlgorithmManager.n_initial = result;
+                AlgorithmStateManager.n_initial = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -155,7 +155,7 @@ namespace ReinforcementLearning
                 comboboxY.Text = "Invalid.";
             else
             {
-                AlgorithmManager.y_initial = result;
+                AlgorithmStateManager.y_initial = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -172,7 +172,7 @@ namespace ReinforcementLearning
                 comboboxE.Text = "Invalid.";
             else
             {
-                AlgorithmManager.e_initial = result;
+                AlgorithmStateManager.e_initial = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -184,7 +184,7 @@ namespace ReinforcementLearning
                 comboboxWallpunishment.Text = "Invalid.";
             else
             {
-                AlgorithmManager.reinforcement_factors[MoveResultList.move_hit_wall()] = result;
+                AlgorithmStateManager.reinforcement_factors[MoveResultList.move_hit_wall()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -196,7 +196,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                AlgorithmManager.reinforcement_factors[MoveResultList.can_missing()] = result;
+                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -208,14 +208,14 @@ namespace ReinforcementLearning
                 comboboxBeer.Text = "Invalid.";
             else
             {
-                AlgorithmManager.reinforcement_factors[MoveResultList.can_collected()] = result;
+                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_collected()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            AlgorithmManager.set_default_configuration();
+            AlgorithmStateManager.set_default_configuration();
             FormsHandler.display_initial_settings();
         }
 
@@ -226,7 +226,7 @@ namespace ReinforcementLearning
                 comboboxMovedwithoutwall.Text = "Invalid.";
             else
             {
-                AlgorithmManager.reinforcement_factors[MoveResultList.move_successful()] = result;
+                AlgorithmStateManager.reinforcement_factors[MoveResultList.move_successful()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -294,7 +294,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                AlgorithmManager.reinforcement_factors[MoveResultList.can_missing()] = result;
+                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()] = result;
                 FormsHandler.display_initial_settings();
             }
         }

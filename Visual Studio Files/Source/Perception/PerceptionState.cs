@@ -40,7 +40,7 @@ namespace ReinforcementLearning
             string building = "";
             foreach (var i in perceptions)
             {
-                building += ("[" + i.Key.name_of_move) + ": " + i.Value.get_string_data() + "]";
+                building += ("[" + i.Key.short_name) + ": " + i.Value.get_string_data() + "]";
             }
             return building;
         }

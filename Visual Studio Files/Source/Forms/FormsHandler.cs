@@ -61,13 +61,11 @@ namespace ReinforcementLearning
         //This will be set from the outside, and we will display whatever is in here.
         //static public AlgorithmState current_state;
 
-        static public DisplayBoard current_board; //Stored seperately from the algorithm state because this board will store PictureSquares
+        static public PictureBoard picture_board; //Stored seperately from the algorithm state because this board will store PictureSquares
 
         static FormsHandler()
         {
-            current_board = new DisplayBoard();
-
-            PictureSquare.set_backgrounds(); //This initializes a dictionary of "boardVisistedState" - background image pairs.
+            picture_board = new PictureBoard();
 
             //Pass textboxes to the board, so it can manage them.
 
@@ -137,15 +135,15 @@ namespace ReinforcementLearning
         static public void display_initial_settings()
         {
             //initial settings
-            number_of_episodes.Text = AlgorithmManager.episode_limit.ToString();
-            number_of_steps.Text = AlgorithmManager.step_limit.ToString();
-            n_initial.Text = AlgorithmManager.n_initial.ToString();
-            y_initial.Text = AlgorithmManager.y_initial.ToString();
-            e_initial.Text = AlgorithmManager.e_initial.ToString();
-            empty_square_punishment_textbox.Text = AlgorithmManager.reinforcement_factors[MoveResultList.can_missing()].ToString();
-            wall_punishment_textbox.Text = AlgorithmManager.reinforcement_factors[MoveResultList.move_hit_wall()].ToString();
-            beer_reward_textbox.Text = AlgorithmManager.reinforcement_factors[MoveResultList.can_collected()].ToString();
-            successful_move_textbox.Text = AlgorithmManager.reinforcement_factors[MoveResultList.move_successful()].ToString();
+            number_of_episodes.Text = AlgorithmStateManager.episode_limit.ToString(); //Constructor launcher for algorithmstate 6-5
+            number_of_steps.Text = AlgorithmStateManager.step_limit.ToString();
+            n_initial.Text = AlgorithmStateManager.n_initial.ToString();
+            y_initial.Text = AlgorithmStateManager.y_initial.ToString();
+            e_initial.Text = AlgorithmStateManager.e_initial.ToString();
+            empty_square_punishment_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()].ToString();
+            wall_punishment_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.move_hit_wall()].ToString();
+            beer_reward_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.can_collected()].ToString();
+            successful_move_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.move_successful()].ToString();
         }
 
         //Used after "algorithm reset" button is pressed. Not used during algorithm run.
@@ -164,57 +162,59 @@ namespace ReinforcementLearning
         //Handles updating all the fields that change every time we look at new data
         //This method handles any time we are updating what is displayed for any reason once the algorithm is active
         //We expect the algorithm state to be set from the outside before we enter this.
-        static public void display_manager_state()
+        //This function does not handle changing q values as a result of history viewing.
+        static public void display_state(AlgorithmState state_to_display)
         {
-            current_board.clone_position(AlgorithmManager.state_to_view.board_data); //This copies the state's board over to our PictureSquare board.
+            picture_board.clone_position(state_to_display.board_data); //This copies the state's board over to our PictureSquare board.
 
-            string bender_position = AlgorithmManager.state_to_view.board_data.bender.bender_x.ToString();
-            bender_position += ", " + AlgorithmManager.state_to_view.board_data.bender.bender_y.ToString();
-            status_box.Text = "Bender's position is (" + bender_position + ").";
+            //Status box update
+            string bender_position_string = state_to_display.board_data.bender.bender_x.ToString();
+            bender_position_string += ", " + state_to_display.board_data.bender.bender_y.ToString();
+            status_box.Text = "Bender's position is (" + bender_position_string + ").";
 
-
-            
-            if (AlgorithmManager.algorithm_started) //Only display this if we've started
+            //Textboxes update
+            if (AlgorithmStateManager.algorithm_started) //Only display this if we've started
             {   //Current position state textboxes             
                 //I think i want to get these directly from the q matrix
                 //to do that, i need the perceptions bender is in, and then i can request the moveset, which has my values.
-                PerceptionState benders_perception = AlgorithmManager.current_state.board_data.bender.get_perception_state();
-                display_qmatrix_values(benders_perception);
+                PerceptionState benders_perception = state_to_display.board_data.bender.get_perception_state();
+                display_qmatrix_values(state_to_display, benders_perception);
 
-                //matrix stuff
-                qmatrix_left.Text = AlgorithmManager.get_qmatrix_view(MoveList.left());
-                qmatrix_right.Text = AlgorithmManager.get_qmatrix_view(MoveList.right());
-                qmatrix_up.Text = AlgorithmManager.get_qmatrix_view(MoveList.up());
-                qmatrix_down.Text = AlgorithmManager.get_qmatrix_view(MoveList.down());
-                qmatrix_current_square.Text = AlgorithmManager.get_qmatrix_view(MoveList.grab());
+                //qmatrix values? percepts?
+                qmatrix_left.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.left());
+                qmatrix_right.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.right());
+                qmatrix_up.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.up());
+                qmatrix_down.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.down());
+                qmatrix_current_square.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.grab());
 
                 qmatrix_state.Items.Clear();
-                foreach (var i in AlgorithmManager.current_state.live_qmatrix.get_list_of_qmatrix_states())
+                foreach (var i in state_to_display.live_qmatrix.get_list_of_qmatrix_states())
                 {
                     qmatrix_state.Items.Add(i);
                 }
 
                 //Session progress
-                step_number.Text = AlgorithmManager.current_state.step_count.ToString();
-                episode_number.Text = AlgorithmManager.current_state.episode_count.ToString();
-                e_session.Text = AlgorithmManager.current_state.e_current.ToString();
-                n_session.Text = AlgorithmManager.current_state.n_current.ToString();
-                y_session.Text = AlgorithmManager.current_state.y_current.ToString();
+                step_number.Text = state_to_display.step_count.ToString();
+                episode_number.Text = state_to_display.episode_count.ToString();
+                e_session.Text = state_to_display.e_current.ToString();
+                n_session.Text = state_to_display.n_current.ToString();
+                y_session.Text = state_to_display.y_current.ToString();
 
-                beer_remaining.Text = AlgorithmManager.current_state.board_data.get_cans_remaining().ToString();
-                beer_collected.Text = AlgorithmManager.current_state.cans_collected.ToString();
-                reward_episode.Text = AlgorithmManager.current_state.episode_rewards.ToString();
-                reward_total.Text = AlgorithmManager.current_state.total_rewards.ToString();
+                beer_remaining.Text = state_to_display.board_data.get_cans_remaining().ToString();
+                beer_collected.Text = state_to_display.cans_collected.ToString();
+                reward_episode.Text = state_to_display.episode_rewards.ToString();
+                reward_total.Text = state_to_display.total_rewards.ToString();
 
-                current_position_left.Text = AlgorithmManager.current_state.get_bender_percept(MoveList.left()).get_string_data();
-                current_position_right.Text = AlgorithmManager.current_state.get_bender_percept(MoveList.right()).get_string_data();
-                current_position_down.Text = AlgorithmManager.current_state.get_bender_percept(MoveList.down()).get_string_data();
-                current_position_up.Text = AlgorithmManager.current_state.get_bender_percept(MoveList.up()).get_string_data();
-                current_position_square.Text = AlgorithmManager.current_state.get_bender_percept(MoveList.grab()).get_string_data();
+                current_position_left.Text = state_to_display.get_bender_percept(MoveList.left()).get_string_data();
+                current_position_right.Text = state_to_display.get_bender_percept(MoveList.right()).get_string_data();
+                current_position_down.Text = state_to_display.get_bender_percept(MoveList.down()).get_string_data();
+                current_position_up.Text = state_to_display.get_bender_percept(MoveList.up()).get_string_data();
+                current_position_square.Text = state_to_display.get_bender_percept(MoveList.grab()).get_string_data();
             }
-            
-            foreach(var i in current_board.board_data)
-            {   //Handle drawing the board
+
+            //Handle drawing the board
+            foreach (var i in picture_board.board_data)
+            {
                 foreach (var j in i)
                 {
                     ((PictureSquare)j).setPicture();
@@ -223,9 +223,9 @@ namespace ReinforcementLearning
         }
 
         //Triggers the constructor. Adds a PictureBox to a PictureSquare.
-        static public void add(int i, int j, PictureSquare board_to_set)
+        static public void add(int i, int j, PictureSquare square_to_set)
         {
-            current_board.board_data[i][j] = board_to_set;
+            picture_board.board_data[i][j] = square_to_set;
         }
 
         //used for viewing q matrix configurations
@@ -244,10 +244,12 @@ namespace ReinforcementLearning
         }
 
         //This is used to display rows of the qmatrix and the q-values for each move
-        //Pass this a perceptionstate built from the dropdown box(s)
-        static private void display_qmatrix_values(PerceptionState benders_perception)
+        //Pass this a perceptionstate
+        //This is called to view matrix values from current or history
+        //This method is private, so it is only called from within forms handler.
+        static private void display_qmatrix_values(AlgorithmState current_state, PerceptionState benders_perception)
         {
-            MoveSet values_to_display = AlgorithmManager.current_state.live_qmatrix.matrix_data[benders_perception];
+            MoveSet values_to_display = current_state.live_qmatrix.matrix_data[benders_perception];
 
             current_position_left.Text = values_to_display.move_list[MoveList.left()].ToString();
             current_position_down.Text = values_to_display.move_list[MoveList.left()].ToString();
@@ -255,6 +257,5 @@ namespace ReinforcementLearning
             current_position_up.Text = values_to_display.move_list[MoveList.left()].ToString();
             current_position_square.Text = values_to_display.move_list[MoveList.left()].ToString();
         }
-
     }
 }

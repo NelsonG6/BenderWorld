@@ -13,7 +13,7 @@ namespace ReinforcementLearning
         private static System.Drawing.Bitmap explored_bitmap;
         private static System.Drawing.Bitmap unexplored_bitmap;
 
-        static public Dictionary<BoardVisitedState, System.Drawing.Bitmap> dictionary;
+        static public Dictionary<SquareVisitedState, System.Drawing.Bitmap> dictionary;
 
         static Backgrounds()
         {
@@ -21,10 +21,10 @@ namespace ReinforcementLearning
             explored_bitmap = Properties.Resources.background_explored;
             unexplored_bitmap = Properties.Resources.background_unexplored;
 
-            dictionary = new Dictionary<BoardVisitedState, System.Drawing.Bitmap>();
-            dictionary.Add(BoardVisitedStateList.last(), last_move_bitmap);
-            dictionary.Add(BoardVisitedStateList.explored(), explored_bitmap);
-            dictionary.Add(BoardVisitedStateList.unexplored(), unexplored_bitmap);
+            dictionary = new Dictionary<SquareVisitedState, System.Drawing.Bitmap>();
+            dictionary.Add(SquareVisitedStateList.last(), last_move_bitmap);
+            dictionary.Add(SquareVisitedStateList.explored(), explored_bitmap);
+            dictionary.Add(SquareVisitedStateList.unexplored(), unexplored_bitmap);
         }
             
         public static System.Drawing.Bitmap last_move()

@@ -1,7 +1,7 @@
 ﻿namespace ReinforcementLearning
 {
     //This version of SquareBase will have walls
-    class BoardSquare : SquareBase
+    class BoardSquare : BaseSquare
     {
         //This stores the wall data for the square
         //It will determine if there is one wall, two walls, or no walls. Only a single wall object is needed.

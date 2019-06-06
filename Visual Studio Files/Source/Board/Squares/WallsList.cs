@@ -10,6 +10,7 @@
         private static readonly Wall top_right_wall_data;
         private static readonly Wall bottom_left_wall_data;
         private static readonly Wall bottom_right_wall_data; //bottom right corner
+        private static readonly Wall empty_wall_data;
 
         static WallsList()
         {
@@ -22,7 +23,7 @@
             top_right_wall_data = new Wall(MoveList.right(), MoveList.up());
             bottom_left_wall_data = new Wall(MoveList.left(), MoveList.down());
             bottom_right_wall_data = new Wall(MoveList.right(), MoveList.down());
-
+            empty_wall_data = new Wall();
         }
 
         public static Wall top_wall()
@@ -56,6 +57,10 @@
         public static Wall bottom_right_wall()
         {
             return bottom_right_wall_data;
+        }
+        public static Wall empty_wall()
+        {
+            return empty_wall_data;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ReinforcementLearning
     //This class handles the types of results we get after applying a move to the board.
     class MoveResult
     {
-        string result_data;
+        public string result_data;
 
         public MoveResult(string to_set)
         {

@@ -10,54 +10,58 @@ namespace ReinforcementLearning
     //All states that exist in the q-matrix will be a reference to this list
     static class PerceptionStateList
     {
-        static public HashSet<PerceptionState> list_of_states; //hashset for unique elements
+        //A perception state is essentially a dictionary of moves mapped to percept
+        //So we can map dictionaries to perception states, which makes it easier to retrieve from the comboboxes later
+
+        //This takes in new perception states, and returns one from the static list, to help with equality and tracking.
+        static public Dictionary<PerceptionState, PerceptionState> list_of_states;
 
         static PerceptionStateList()
         {
-            list_of_states = new HashSet<PerceptionState>();
-
             //Create all 243 possible configurations
-            PerceptionState temp_1;
-            PerceptionState temp_2;
-            PerceptionState temp_3;
-            PerceptionState temp_4;
-            PerceptionState temp_5;
 
-            int count = PerceptList.get_list().Count();
+            list_of_states = new Dictionary<PerceptionState, PerceptionState>();
 
-            //Should give me 243 unique states, check in debug
-            for (int i = 0; i < count; i++)
+            PerceptionState to_build;
+
+            foreach (var i in PerceptList.get_list())
             {
-                temp_1 = new PerceptionState();
-                temp_1.perceptions[MoveList.left()] = PerceptList.get_list()[i];
-                for (int j = 0; j < count; j++)
+                foreach (var j in PerceptList.get_list())
                 {
-                    temp_2 = new PerceptionState(temp_1); //Make a new copy, but keep our progress
-                    temp_2.perceptions[MoveList.right()] = PerceptList.get_list()[j];
-                    for (int k = 0; k < count; k++)
+                    foreach(var k in PerceptList.get_list())
                     {
-                        temp_3 = new PerceptionState(temp_2); //Make a new copy, but keep our progress
-                        temp_3.perceptions[MoveList.up()] = PerceptList.get_list()[k];
-                        for (int l = 0; l < count; l++)
-                        {
-                            temp_4 = new PerceptionState(temp_3); //Make a new copy, but keep our progress
-                            temp_4.perceptions[MoveList.down()] = PerceptList.get_list()[l];
-                            for (int m = 0; m < count; m++)
+                        foreach(var l in PerceptList.get_list())
+                        {                            
+                            foreach(var m in PerceptList.get_list())
                             {
-                                temp_5 = new PerceptionState(temp_4); //Make a new copy, but keep our progress
-                                temp_5.perceptions[MoveList.grab()] = PerceptList.get_list()[m];
-                                list_of_states.Add(temp_5);
+                                to_build = new PerceptionState();
+                                to_build.perception_data[MoveList.left()] = i;
+                                to_build.perception_data[MoveList.right()] = j;
+                                to_build.perception_data[MoveList.down()] = k;
+                                to_build.perception_data[MoveList.up()] = l;
+                                to_build.perception_data[MoveList.grab()] = m;
+                                to_build.set_id(list_of_states.Count);
+                                to_build.set_name();
+
+                                list_of_states.Add(to_build, to_build);
+                                //list_of_states[to_build] = to_build;
+                                //Add the perception state to our dictionary at a location reachable if we can build a similar dictionary.
                             }
                         }
-
                     }
                 }
             }
         }
 
-        public static HashSet<PerceptionState> get_list()
+        static public PerceptionState GetPerceptionFromList(PerceptionState to_find)
+        {
+            return list_of_states[to_find];
+        }
+
+        public static Dictionary<PerceptionState, PerceptionState> get_list()
         {
             return list_of_states;
         }
+
     }
 }

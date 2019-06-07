@@ -23,7 +23,9 @@ namespace ReinforcementLearning
         //Punishments will be an associated string that returns an integer value.
         static public Dictionary<MoveResult, float> reinforcement_factors;
 
-        static public bool algorithm_started;        
+        static public bool algorithm_started;
+        static public bool algorithm_ended;
+        static public bool program_launch_message_posted;
 
         static AlgorithmStateManager()
         {
@@ -34,8 +36,11 @@ namespace ReinforcementLearning
             set_default_configuration();
         }
 
+        //This should be called at the program launch, and when the reset config button is pressed
         public static void set_default_configuration()
         {
+
+            //Consider moving this to algorithm state constructor
             n_initial = .2F;
             y_initial = .9F;
             e_initial = .1F;
@@ -43,97 +48,88 @@ namespace ReinforcementLearning
             episode_limit = 5000;
             step_limit = 200;
 
-            reinforcement_factors.Clear();
+            algorithm_ended = false;
+            algorithm_started = false;
 
             //Build our reinforcement factors dictionary
-            
+            reinforcement_factors.Clear();
             reinforcement_factors.Add(MoveResultList.move_hit_wall(), -5);
             reinforcement_factors.Add(MoveResultList.can_collected(), 10);
             reinforcement_factors.Add(MoveResultList.can_missing(), -1);
             reinforcement_factors.Add(MoveResultList.move_successful(), 0);
 
-            current_state.board_data.shuffle_bender();
-            current_state.board_data.clear();
+            algorithm_started = false;
         }
 
         public static void take_step(int steps_to_take) //Go to the most current state, and step forward once. 
         {   //If the algorithm hasn't started, this will just start the algorithm and leave us at step 0.
 
-            float update_value = 0; //Our reinforcement value based on the action we take.
-            PerceptionState state_for_qmatrix; //This will store the perception that our unit has, so we can index the correct row of the q-matrix.
-
-            while (steps_to_take-- > 0)
+            while (steps_to_take-- > 0 && !algorithm_ended)
             {
-                if(!algorithm_started) //First step, so just display step 0.
+                if (!algorithm_started) //First step, so just display step 0.
                 {
                     algorithm_started = true;
-                    current_state.update_fields(); //Read the data for the first time, since the algorithm just started
                     //This will normally be updated already at the end of the last run
-
-                    ++(current_state.episode_count);
-                    current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board
-
-                    //Bender percieves
-                    current_state.board_data.bender_percieves();
-
-                    //Add benders percept to the matrix
-                    current_state.live_qmatrix.matrix_data.Add(current_state.board_data.bender.get_perception_state(), new MoveSet());
-
-                    state_history.Add(new List<AlgorithmState>()); //episode index 0
-                    state_history[0].Add(current_state);
 
                     current_state.e_current = e_initial;
                     current_state.y_current = y_initial;
                     current_state.n_current = n_initial;
-                }                
+
+                    current_state.step_limit = step_limit;
+                    current_state.episode_limit = episode_limit;
+
+                    start_new_episode(); //go through the new episode functions
+                }
+                else if (current_state.step_count >= step_limit) //If the last step hit the max steps count, the step we do next 
+                {
+                    int episodes = state_history.Count - 1;
+                    int steps = state_history[episodes].Count - 1;
+                    AlgorithmState copy_from = state_history[episodes][steps]; //Don't just blindly take current_state; find the most recent step.
+
+                    current_state = new AlgorithmState(copy_from); //Copy the old state. We're going to change this one into the new state.
+                    start_new_episode(); //First step of a new episode
+                                         //This is not the start of the algorithm
+                }
+
                 else
                 {
-                    if(current_state.step_count >= step_limit)
-                    {   //First step
-                        current_state = new AlgorithmState(current_state); //Clone the old state, so we dont modify what we stored in the list.
-                        current_state.board_data.shuffle_cans_and_bender(); //Shuffle the the current board. //History was already added.
-                        current_state.start_new_episode(); //restart our totals
-                        ++(current_state.episode_count);
-                        current_state.step_count = 0;
-
-                        List<AlgorithmState> to_add = new List<AlgorithmState>(); //add this to the state history as position 0
-                        to_add.Add(current_state);
-                        state_history.Add(to_add);
-                    }
-
-                    current_state = new AlgorithmState(current_state); //Copy the old state. We're going to change this one into the new state.
-                    
-                    //Get step from qmatrix. Being randomly generated for now.
-                    state_for_qmatrix = current_state.board_data.bender.get_perception_state(); //This is used to update the matrix after our move
-                    Move step_to_take = current_state.live_qmatrix.generate_step(); //Tentative; we'll attempt this later. just a random move for now.
-                    MoveResult move_result = current_state.board_data.apply_move(step_to_take); //The move should be performed now, if possible.
-                    update_value = reinforcement_factors[move_result]; //Get the reward for this action
-
-                    current_state.episode_rewards += (int)update_value; //Update the rewards total
-                    ++(current_state.step_count);
-
-                    current_state.live_qmatrix.update_state(state_for_qmatrix, step_to_take, update_value); //give the value to the q matrix to digest
-                    state_history[current_state.episode_count].Add(current_state);
-
-                    if (current_state.step_count >= step_limit)
-                    {   //We've taken the max amount of steps. 
-                        
-                    }
+                    int episodes = state_history.Count - 1;
+                    int steps = state_history[episodes].Count - 1;
+                    AlgorithmState copy_from = state_history[episodes][steps]; //Don't just blindly take current_state; find the most recent step.
+                    current_state = new AlgorithmState(copy_from); //Copy the old state. We're going to change this one into the new state.
+                    //This marks the entry point of the regular algorithm loop
+                    current_state.generate_step(); //increments step counter, and builds the status message starting message
 
                     if (current_state.episode_count >= episode_limit)
-                    {
-                        //algorithm is done running trials
+                        if (current_state.step_count >= step_limit)
+                            algorithm_ended = true; //We've exceeded the episode limit and step limit.
 
-                    }
+                    state_history.Last().Add(current_state); //Add the state to the history list, after everything possible has been done to it.    
                 }
-                
-                FormsHandler.display_state(current_state);
             }
         }
 
+        //This is called when we have confirmed that we are starting a new episode from the first program run,
+        //or when we are restarting after reaching a step limit max
+        static private void start_new_episode()
+        {
+            current_state.start_new_episode(); //restart our totals
+            List<AlgorithmState> to_add = new List<AlgorithmState>(); //add this to the state history as position 0
+            to_add.Add(current_state); //Add the state to the new history list
+            state_history.Add(to_add); //Add this history list to the list at large
+        }
+
+
+        static public string get_qmatrix_view(Move move_to_get)
+        {
+            MoveSet to_get = current_state.live_qmatrix.matrix_data[current_state.board_data.bender.get_perception_state()];
+            return to_get.move_list[move_to_get].ToString();   
+        }
+
         public static void create_empty_board()
-        {   //Used with the reset button, and on program launch
-            //Not used when the algorithm is running
+        {   //Used ONLY with the reset button
+
+            algorithm_started = false; //Algorithm no longer running
 
             Unit temp_bender;
 
@@ -154,16 +150,6 @@ namespace ReinforcementLearning
             current_state.board_data.clear(); //Erase the cans, since we emptied the board. This is mostly for visual effect, to convey the algoirthm has stopped.
             current_state.board_data.remove_unit(current_state.board_data.bender); //Remove the automatic bender that was placed
             current_state.board_data.add_unit(temp_bender); //Add bender at the position he was in before we cleared the board
-
-            algorithm_started = false; //Algorithm no longer running
-
-            FormsHandler.display_state(current_state); //use formshandler to display this state
-        }
-
-        static public string get_qmatrix_view(Move move_to_get)
-        {
-            MoveSet to_get = current_state.live_qmatrix.matrix_data[current_state.board_data.bender.get_perception_state()];
-            return to_get.move_list[move_to_get].ToString();   
         }
     }
 }

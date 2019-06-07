@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ReinforcementLearning
 {
@@ -15,10 +16,13 @@ namespace ReinforcementLearning
 
         //The q-matrix does not store any details about what state the board is in, so it must have a state passed to it.
 
+        public bool did_we_update;
+
         public Qmatrix()
         {
             //This is our q-matrix
             matrix_data = new Dictionary<PerceptionState, MoveSet>();
+            did_we_update = false;
         }
 
         public Qmatrix(Qmatrix copy_from)
@@ -31,14 +35,20 @@ namespace ReinforcementLearning
                 //Should be a deep copy
                 matrix_data.Add(i, new MoveSet(copy_from.matrix_data[i]));
             }
+            did_we_update = copy_from.did_we_update;
         }
 
-        //When this is called, the q matrix will update with whatever
+        //When this is called, the q matrix will update
         public void update_state(PerceptionState percieved_state, Move base_move, float amount_to_update)
         {
+            did_we_update = false;
             //check if this state already exists, and add it to our list of states we've encountered, if not.
             if (!matrix_data.ContainsKey(percieved_state))
+            {
+                did_we_update = true;
                 matrix_data.Add(percieved_state, new MoveSet());
+            }
+                
             matrix_data[percieved_state].move_list[base_move] += amount_to_update;
         }
 
@@ -57,12 +67,11 @@ namespace ReinforcementLearning
         public List <string> get_list_of_qmatrix_states()
         {
             List<string> building = new List<string>();
-            foreach (var i in matrix_data.Keys)
+            foreach (var i in matrix_data.Keys.OrderBy(o => o.ID))
             {
-                building.Add(i.get_string());
+                building.Add(i.ToString());
             }
             return building;
         }
-
     }
 }

@@ -8,41 +8,108 @@ namespace ReinforcementLearning
 {
     //a state is a pairing of all possible moves (5) and their percepts
     //This is a state in the sense of, what state is bender in when he perceives his environment
-    class PerceptionState
+    class PerceptionState : IEquatable<PerceptionState>
     {
-        public Dictionary<Move, Percept> perceptions;
+        public SortedDictionary<Move, Percept> perception_data;
+
+        public string name_without_id;
+
+        public string name_with_id;
+
+        public int ID;
 
         public PerceptionState()
         {
-            perceptions = new Dictionary<Move, Percept>();
+            perception_data = new SortedDictionary<Move, Percept>();
             foreach(var i in MoveList.get_moves())
             {
-                perceptions.Add(i, PerceptList.initialized());
+                perception_data.Add(i, PerceptList.initialized());
             }
+
+            set_name();
+        }
+
+        public bool Equals(PerceptionState to_check)
+        {
+            foreach(var i in perception_data.Keys)
+            {
+                if (perception_data[i] != to_check.perception_data[i])
+                    return false;
+            }
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return name_without_id.GetHashCode();
+        }
+
+        public bool does_dictionary_match(Dictionary<Move, Percept> to_check)
+        {
+            foreach(var i in to_check)
+            {
+                if (i.Value != perception_data[i.Key])
+                    return false;
+            }
+            return true;
         }
 
         public Percept get_percept(Move perception_cause)
         {
-            return perceptions[perception_cause];
+            return perception_data[perception_cause];
         }
 
         public PerceptionState(PerceptionState copy_from)
         {
-            perceptions = new Dictionary<Move, Percept>();
-            foreach (var i in copy_from.perceptions)
+            perception_data = new SortedDictionary<Move, Percept>();
+            foreach (var i in copy_from.perception_data)
             {
-                perceptions.Add(i.Key, i.Value);
+                perception_data.Add(i.Key, i.Value);
             }
         }
 
-        public string get_string()
+        public void set_name()
         {
-            string building = "";
-            foreach (var i in perceptions)
+            string part_one = "[ID: " + ID.ToString() + "]";
+
+            string part_two = "";
+
+            foreach (var i in perception_data.Keys.OrderBy(o => o.order))
             {
-                building += ("[" + i.Key.short_name) + ": " + i.Value.get_string_data() + "]";
+                part_two += "[" + i.short_name + ": " + perception_data[i].ToString() + "]";
             }
-            return building;
+
+            name_with_id = part_one + part_two;
+            name_without_id = part_two;
+
+        }
+
+        public void set_id(int to_set)
+        {
+            ID = to_set;
+        }
+
+        public override string ToString()
+        {
+            return name_with_id;
+        }
+
+        public int compare(PerceptionState compare_to)
+        {
+            int compare_total = 0;
+            foreach (var i in MoveList.list)
+            {
+                if (perception_data[i] == compare_to.perception_data[i])
+                    compare_total++;
+            }
+            return compare_total;
+        }
+
+        public bool contains(Move move, Percept percept)
+        {
+            if (perception_data[move] == percept)
+                return true;
+            return false;
         }
     }
 }

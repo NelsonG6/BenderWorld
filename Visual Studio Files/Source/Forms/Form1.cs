@@ -15,11 +15,13 @@ namespace ReinforcementLearning
             comboboxAdvancesteps.SelectedIndex = 0;
             comboboxAdvanceepisodes.SelectedIndex = 0;
 
-            comboboxLeft.SelectedIndex = 0;
-            comboboxRight.SelectedIndex = 0;
-            comboboxDown.SelectedIndex = 0;
-            comboboxUp.SelectedIndex = 0;
-            comboboxCurrentsquare.SelectedIndex = 0;
+            comboboxLeft.SelectedIndex = -1;
+            comboboxRight.SelectedIndex = -1;
+            comboboxDown.SelectedIndex = -1;
+            comboboxUp.SelectedIndex = -1;
+            comboboxCurrentsquare.SelectedIndex = -1;
+
+            label7.Parent = groupboxConfiguration;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,7 +60,7 @@ namespace ReinforcementLearning
             //This triggers the constructor for algorithm manager, as well
 
             textboxStatus.Text = "Program launched.";
-            FormsHandler.display_state(AlgorithmStateManager.current_state); //First time we display the board.
+            FormsHandler.display_state(); //First time we display the board.
         }
 
         private void change_enabled_setting()
@@ -82,19 +84,21 @@ namespace ReinforcementLearning
         {
             change_enabled_setting(); //Toggle controls
             AlgorithmStateManager.take_step(1); //This will start the algorithm
+            FormsHandler.display_state();
         }
 
         private void reset_algorithm(object sender, EventArgs e)
-        {
-            change_enabled_setting();
-            AlgorithmStateManager.create_empty_board();
+        {            
+            AlgorithmStateManager.create_empty_board(); //Special function that creates a new board but keeps bender's position
+            FormsHandler.clear_after_board_reset();
+            FormsHandler.display_state();
+            change_enabled_setting(); //Togle controls
         }
-
-
 
         private void buttonAdvancestepsdropdown_Click(object sender, EventArgs e)
         {
-            AlgorithmStateManager.take_step(Int32.Parse(comboboxAdvancesteps.SelectedItem.ToString()));
+            AlgorithmStateManager.take_step(Int32.Parse(comboboxAdvancesteps.Text));
+            FormsHandler.display_state();
         }
 
         private void buttonAdvancestepstextbox_Click(object sender, EventArgs e)
@@ -319,6 +323,29 @@ namespace ReinforcementLearning
         {
             if (comboboxEpisode.Text == "Invalid.")
                 comboboxEpisode.Text = "";
+        }
+
+        private void buttonAdvanceepisodesdropdown_Click(object sender, EventArgs e)
+        {
+            FormsHandler.display_state();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void qmatrix_small_dropdown_changed(object sender, EventArgs e)
+        {
+            if (!FormsHandler.lock_index_change_events && ((ComboBox)sender).SelectedIndex > -1)
+                if (((ComboBox)sender).SelectedText != "None.") 
+                FormsHandler.small_dropdown_changed((ComboBox)sender);
+        }
+
+        private void comboboxQmatrixselect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!FormsHandler.lock_index_change_events && ((ComboBox)sender).SelectedIndex > -1)
+                FormsHandler.large_dropdown_changed();
         }
     }
 }

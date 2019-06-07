@@ -117,15 +117,15 @@ namespace ReinforcementLearning
             this.textboxRewardepisode = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.textboxNprogress = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textboxYprogress = new System.Windows.Forms.TextBox();
-            this.textboxEprogress = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textboxEpisodesprogress = new System.Windows.Forms.TextBox();
+            this.textboxNprogress = new System.Windows.Forms.TextBox();
             this.textboxStepsprogress = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.textboxEprogress = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textboxYprogress = new System.Windows.Forms.TextBox();
             this.comboboxQmatrixselect = new System.Windows.Forms.ComboBox();
             this.textboxQmatrixcurrent = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -138,8 +138,9 @@ namespace ReinforcementLearning
             this.label27 = new System.Windows.Forms.Label();
             this.textboxQmatrixleft = new System.Windows.Forms.TextBox();
             this.groupboxQmatrix = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textboxQmatrixentries = new System.Windows.Forms.TextBox();
             this.groupboxQmatrixselect = new System.Windows.Forms.GroupBox();
-            this.button9 = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.comboboxCurrentsquare = new System.Windows.Forms.ComboBox();
@@ -242,7 +243,7 @@ namespace ReinforcementLearning
             this.groupboxCurrentposition.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxCurrentposition.Name = "groupboxCurrentposition";
             this.groupboxCurrentposition.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxCurrentposition.Size = new System.Drawing.Size(515, 82);
+            this.groupboxCurrentposition.Size = new System.Drawing.Size(445, 85);
             this.groupboxCurrentposition.TabIndex = 6;
             this.groupboxCurrentposition.TabStop = false;
             this.groupboxCurrentposition.Text = "Current percepts";
@@ -253,7 +254,7 @@ namespace ReinforcementLearning
             this.textboxCurrentsquare.Margin = new System.Windows.Forms.Padding(4);
             this.textboxCurrentsquare.Name = "textboxCurrentsquare";
             this.textboxCurrentsquare.ReadOnly = true;
-            this.textboxCurrentsquare.Size = new System.Drawing.Size(80, 22);
+            this.textboxCurrentsquare.Size = new System.Drawing.Size(75, 22);
             this.textboxCurrentsquare.TabIndex = 9;
             // 
             // label5
@@ -262,9 +263,9 @@ namespace ReinforcementLearning
             this.label5.Location = new System.Drawing.Point(361, 24);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 17);
+            this.label5.Size = new System.Drawing.Size(55, 17);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Current square";
+            this.label5.Text = "Current";
             // 
             // textboxUp
             // 
@@ -387,7 +388,7 @@ namespace ReinforcementLearning
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofepisodes);
             this.groupboxInitialsettings.Location = new System.Drawing.Point(1407, 13);
             this.groupboxInitialsettings.Name = "groupboxInitialsettings";
-            this.groupboxInitialsettings.Size = new System.Drawing.Size(546, 145);
+            this.groupboxInitialsettings.Size = new System.Drawing.Size(569, 145);
             this.groupboxInitialsettings.TabIndex = 10;
             this.groupboxInitialsettings.TabStop = false;
             this.groupboxInitialsettings.Text = "Initial Settings";
@@ -460,7 +461,7 @@ namespace ReinforcementLearning
             this.groupboxRewards.Controls.Add(this.label29);
             this.groupboxRewards.Location = new System.Drawing.Point(286, 20);
             this.groupboxRewards.Name = "groupboxRewards";
-            this.groupboxRewards.Size = new System.Drawing.Size(252, 119);
+            this.groupboxRewards.Size = new System.Drawing.Size(276, 119);
             this.groupboxRewards.TabIndex = 59;
             this.groupboxRewards.TabStop = false;
             this.groupboxRewards.Text = "Rewards";
@@ -471,7 +472,7 @@ namespace ReinforcementLearning
             this.textboxInitialBeerreward.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialBeerreward.Name = "textboxInitialBeerreward";
             this.textboxInitialBeerreward.ReadOnly = true;
-            this.textboxInitialBeerreward.Size = new System.Drawing.Size(108, 22);
+            this.textboxInitialBeerreward.Size = new System.Drawing.Size(110, 22);
             this.textboxInitialBeerreward.TabIndex = 25;
             // 
             // label44
@@ -486,11 +487,11 @@ namespace ReinforcementLearning
             // 
             // textboxInitialEmptysquare
             // 
-            this.textboxInitialEmptysquare.Location = new System.Drawing.Point(132, 84);
+            this.textboxInitialEmptysquare.Location = new System.Drawing.Point(148, 84);
             this.textboxInitialEmptysquare.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialEmptysquare.Name = "textboxInitialEmptysquare";
             this.textboxInitialEmptysquare.ReadOnly = true;
-            this.textboxInitialEmptysquare.Size = new System.Drawing.Size(113, 22);
+            this.textboxInitialEmptysquare.Size = new System.Drawing.Size(111, 22);
             this.textboxInitialEmptysquare.TabIndex = 23;
             // 
             // textboxRewardssuccessmove
@@ -499,7 +500,7 @@ namespace ReinforcementLearning
             this.textboxRewardssuccessmove.Margin = new System.Windows.Forms.Padding(4);
             this.textboxRewardssuccessmove.Name = "textboxRewardssuccessmove";
             this.textboxRewardssuccessmove.ReadOnly = true;
-            this.textboxRewardssuccessmove.Size = new System.Drawing.Size(109, 22);
+            this.textboxRewardssuccessmove.Size = new System.Drawing.Size(111, 22);
             this.textboxRewardssuccessmove.TabIndex = 27;
             // 
             // label30
@@ -515,7 +516,7 @@ namespace ReinforcementLearning
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(133, 24);
+            this.label28.Location = new System.Drawing.Point(149, 25);
             this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(71, 17);
@@ -524,17 +525,17 @@ namespace ReinforcementLearning
             // 
             // textboxInitialWallpunishment
             // 
-            this.textboxInitialWallpunishment.Location = new System.Drawing.Point(132, 43);
+            this.textboxInitialWallpunishment.Location = new System.Drawing.Point(148, 43);
             this.textboxInitialWallpunishment.Margin = new System.Windows.Forms.Padding(4);
             this.textboxInitialWallpunishment.Name = "textboxInitialWallpunishment";
             this.textboxInitialWallpunishment.ReadOnly = true;
-            this.textboxInitialWallpunishment.Size = new System.Drawing.Size(113, 22);
+            this.textboxInitialWallpunishment.Size = new System.Drawing.Size(111, 22);
             this.textboxInitialWallpunishment.TabIndex = 21;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(129, 68);
+            this.label29.Location = new System.Drawing.Point(145, 69);
             this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(80, 17);
@@ -639,6 +640,7 @@ namespace ReinforcementLearning
             // 
             // groupboxConfiguration
             // 
+            this.groupboxConfiguration.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.groupboxConfiguration.Controls.Add(this.groupBox1);
             this.groupboxConfiguration.Controls.Add(this.button10);
             this.groupboxConfiguration.Controls.Add(this.buttonStartAlgorithm);
@@ -920,6 +922,7 @@ namespace ReinforcementLearning
             this.buttonAdvanceepisodesdropdown.TabIndex = 22;
             this.buttonAdvanceepisodesdropdown.Text = "Step";
             this.buttonAdvanceepisodesdropdown.UseVisualStyleBackColor = true;
+            this.buttonAdvanceepisodesdropdown.Click += new System.EventHandler(this.buttonAdvanceepisodesdropdown_Click);
             // 
             // groupboxAlgorithmprogress
             // 
@@ -976,7 +979,7 @@ namespace ReinforcementLearning
             this.groupboxSessionprogress.Enabled = false;
             this.groupboxSessionprogress.Location = new System.Drawing.Point(1409, 367);
             this.groupboxSessionprogress.Name = "groupboxSessionprogress";
-            this.groupboxSessionprogress.Size = new System.Drawing.Size(546, 237);
+            this.groupboxSessionprogress.Size = new System.Drawing.Size(569, 237);
             this.groupboxSessionprogress.TabIndex = 18;
             this.groupboxSessionprogress.TabStop = false;
             this.groupboxSessionprogress.Text = "Session progress";
@@ -1040,7 +1043,7 @@ namespace ReinforcementLearning
             this.groupboxRewarddata.Controls.Add(this.label39);
             this.groupboxRewarddata.Location = new System.Drawing.Point(282, 66);
             this.groupboxRewarddata.Name = "groupboxRewarddata";
-            this.groupboxRewarddata.Size = new System.Drawing.Size(250, 76);
+            this.groupboxRewarddata.Size = new System.Drawing.Size(184, 76);
             this.groupboxRewarddata.TabIndex = 60;
             this.groupboxRewarddata.TabStop = false;
             this.groupboxRewarddata.Text = "Reward data";
@@ -1061,7 +1064,7 @@ namespace ReinforcementLearning
             this.textboxRewardtotal.Margin = new System.Windows.Forms.Padding(4);
             this.textboxRewardtotal.Name = "textboxRewardtotal";
             this.textboxRewardtotal.ReadOnly = true;
-            this.textboxRewardtotal.Size = new System.Drawing.Size(79, 22);
+            this.textboxRewardtotal.Size = new System.Drawing.Size(75, 22);
             this.textboxRewardtotal.TabIndex = 28;
             // 
             // textboxRewardepisode
@@ -1093,6 +1096,25 @@ namespace ReinforcementLearning
             this.label23.TabIndex = 20;
             this.label23.Text = "γ";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(387, 18);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(71, 17);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Episode #";
+            // 
+            // textboxEpisodesprogress
+            // 
+            this.textboxEpisodesprogress.Location = new System.Drawing.Point(383, 37);
+            this.textboxEpisodesprogress.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxEpisodesprogress.Name = "textboxEpisodesprogress";
+            this.textboxEpisodesprogress.ReadOnly = true;
+            this.textboxEpisodesprogress.Size = new System.Drawing.Size(75, 22);
+            this.textboxEpisodesprogress.TabIndex = 13;
+            // 
             // textboxNprogress
             // 
             this.textboxNprogress.Location = new System.Drawing.Point(121, 37);
@@ -1101,6 +1123,15 @@ namespace ReinforcementLearning
             this.textboxNprogress.ReadOnly = true;
             this.textboxNprogress.Size = new System.Drawing.Size(75, 22);
             this.textboxNprogress.TabIndex = 21;
+            // 
+            // textboxStepsprogress
+            // 
+            this.textboxStepsprogress.Location = new System.Drawing.Point(298, 37);
+            this.textboxStepsprogress.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxStepsprogress.Name = "textboxStepsprogress";
+            this.textboxStepsprogress.ReadOnly = true;
+            this.textboxStepsprogress.Size = new System.Drawing.Size(79, 22);
+            this.textboxStepsprogress.TabIndex = 15;
             // 
             // label19
             // 
@@ -1111,6 +1142,25 @@ namespace ReinforcementLearning
             this.label19.Size = new System.Drawing.Size(17, 17);
             this.label19.TabIndex = 20;
             this.label19.Text = "Ɛ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(296, 18);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(49, 17);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "Step #";
+            // 
+            // textboxEprogress
+            // 
+            this.textboxEprogress.Location = new System.Drawing.Point(33, 37);
+            this.textboxEprogress.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxEprogress.Name = "textboxEprogress";
+            this.textboxEprogress.ReadOnly = true;
+            this.textboxEprogress.Size = new System.Drawing.Size(79, 22);
+            this.textboxEprogress.TabIndex = 17;
             // 
             // label22
             // 
@@ -1131,53 +1181,6 @@ namespace ReinforcementLearning
             this.textboxYprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxYprogress.TabIndex = 13;
             // 
-            // textboxEprogress
-            // 
-            this.textboxEprogress.Location = new System.Drawing.Point(33, 37);
-            this.textboxEprogress.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxEprogress.Name = "textboxEprogress";
-            this.textboxEprogress.ReadOnly = true;
-            this.textboxEprogress.Size = new System.Drawing.Size(79, 22);
-            this.textboxEprogress.TabIndex = 17;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(381, 17);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(71, 17);
-            this.label18.TabIndex = 12;
-            this.label18.Text = "Episode #";
-            // 
-            // textboxEpisodesprogress
-            // 
-            this.textboxEpisodesprogress.Location = new System.Drawing.Point(380, 37);
-            this.textboxEpisodesprogress.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxEpisodesprogress.Name = "textboxEpisodesprogress";
-            this.textboxEpisodesprogress.ReadOnly = true;
-            this.textboxEpisodesprogress.Size = new System.Drawing.Size(79, 22);
-            this.textboxEpisodesprogress.TabIndex = 13;
-            // 
-            // textboxStepsprogress
-            // 
-            this.textboxStepsprogress.Location = new System.Drawing.Point(292, 37);
-            this.textboxStepsprogress.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxStepsprogress.Name = "textboxStepsprogress";
-            this.textboxStepsprogress.ReadOnly = true;
-            this.textboxStepsprogress.Size = new System.Drawing.Size(79, 22);
-            this.textboxStepsprogress.TabIndex = 15;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(290, 17);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(49, 17);
-            this.label20.TabIndex = 14;
-            this.label20.Text = "Step #";
-            // 
             // comboboxQmatrixselect
             // 
             this.comboboxQmatrixselect.FormattingEnabled = true;
@@ -1185,9 +1188,10 @@ namespace ReinforcementLearning
             "No board states have been added yet."});
             this.comboboxQmatrixselect.Location = new System.Drawing.Point(27, 21);
             this.comboboxQmatrixselect.Name = "comboboxQmatrixselect";
-            this.comboboxQmatrixselect.Size = new System.Drawing.Size(497, 24);
+            this.comboboxQmatrixselect.Size = new System.Drawing.Size(518, 24);
             this.comboboxQmatrixselect.TabIndex = 0;
             this.comboboxQmatrixselect.Text = "Select a board state...";
+            this.comboboxQmatrixselect.SelectedIndexChanged += new System.EventHandler(this.comboboxQmatrixselect_SelectedIndexChanged);
             // 
             // textboxQmatrixcurrent
             // 
@@ -1195,7 +1199,7 @@ namespace ReinforcementLearning
             this.textboxQmatrixcurrent.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixcurrent.Name = "textboxQmatrixcurrent";
             this.textboxQmatrixcurrent.ReadOnly = true;
-            this.textboxQmatrixcurrent.Size = new System.Drawing.Size(80, 22);
+            this.textboxQmatrixcurrent.Size = new System.Drawing.Size(75, 22);
             this.textboxQmatrixcurrent.TabIndex = 21;
             // 
             // label17
@@ -1204,9 +1208,9 @@ namespace ReinforcementLearning
             this.label17.Location = new System.Drawing.Point(370, 21);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(103, 17);
+            this.label17.Size = new System.Drawing.Size(55, 17);
             this.label17.TabIndex = 20;
-            this.label17.Text = "Current square";
+            this.label17.Text = "Current";
             // 
             // textboxQmatrixup
             // 
@@ -1286,6 +1290,8 @@ namespace ReinforcementLearning
             // 
             // groupboxQmatrix
             // 
+            this.groupboxQmatrix.Controls.Add(this.label6);
+            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixentries);
             this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixselect);
             this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixview);
             this.groupboxQmatrix.Enabled = false;
@@ -1293,14 +1299,33 @@ namespace ReinforcementLearning
             this.groupboxQmatrix.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxQmatrix.Name = "groupboxQmatrix";
             this.groupboxQmatrix.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxQmatrix.Size = new System.Drawing.Size(545, 204);
+            this.groupboxQmatrix.Size = new System.Drawing.Size(568, 204);
             this.groupboxQmatrix.TabIndex = 12;
             this.groupboxQmatrix.TabStop = false;
             this.groupboxQmatrix.Text = "Q-Matrix";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(470, 146);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(97, 17);
+            this.label6.TabIndex = 62;
+            this.label6.Text = "Stored entries";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // textboxQmatrixentries
+            // 
+            this.textboxQmatrixentries.Location = new System.Drawing.Point(473, 163);
+            this.textboxQmatrixentries.Margin = new System.Windows.Forms.Padding(4);
+            this.textboxQmatrixentries.Name = "textboxQmatrixentries";
+            this.textboxQmatrixentries.ReadOnly = true;
+            this.textboxQmatrixentries.Size = new System.Drawing.Size(79, 22);
+            this.textboxQmatrixentries.TabIndex = 61;
+            // 
             // groupboxQmatrixselect
             // 
-            this.groupboxQmatrixselect.Controls.Add(this.button9);
             this.groupboxQmatrixselect.Controls.Add(this.label35);
             this.groupboxQmatrixselect.Controls.Add(this.label40);
             this.groupboxQmatrixselect.Controls.Add(this.comboboxCurrentsquare);
@@ -1314,19 +1339,10 @@ namespace ReinforcementLearning
             this.groupboxQmatrixselect.Controls.Add(this.comboboxQmatrixselect);
             this.groupboxQmatrixselect.Location = new System.Drawing.Point(7, 18);
             this.groupboxQmatrixselect.Name = "groupboxQmatrixselect";
-            this.groupboxQmatrixselect.Size = new System.Drawing.Size(530, 110);
+            this.groupboxQmatrixselect.Size = new System.Drawing.Size(554, 110);
             this.groupboxQmatrixselect.TabIndex = 59;
             this.groupboxQmatrixselect.TabStop = false;
             this.groupboxQmatrixselect.Text = "Select";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(464, 70);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(60, 24);
-            this.button9.TabIndex = 59;
-            this.button9.Text = "View";
-            this.button9.UseVisualStyleBackColor = true;
             // 
             // label35
             // 
@@ -1351,14 +1367,11 @@ namespace ReinforcementLearning
             // comboboxCurrentsquare
             // 
             this.comboboxCurrentsquare.FormattingEnabled = true;
-            this.comboboxCurrentsquare.Items.AddRange(new object[] {
-            "Empty",
-            "Can",
-            "Wall"});
             this.comboboxCurrentsquare.Location = new System.Drawing.Point(376, 69);
             this.comboboxCurrentsquare.Name = "comboboxCurrentsquare";
-            this.comboboxCurrentsquare.Size = new System.Drawing.Size(79, 24);
+            this.comboboxCurrentsquare.Size = new System.Drawing.Size(75, 24);
             this.comboboxCurrentsquare.TabIndex = 5;
+            this.comboboxCurrentsquare.SelectedIndexChanged += new System.EventHandler(this.qmatrix_small_dropdown_changed);
             // 
             // label41
             // 
@@ -1373,14 +1386,11 @@ namespace ReinforcementLearning
             // comboboxUp
             // 
             this.comboboxUp.FormattingEnabled = true;
-            this.comboboxUp.Items.AddRange(new object[] {
-            "Empty",
-            "Can",
-            "Wall"});
             this.comboboxUp.Location = new System.Drawing.Point(291, 69);
             this.comboboxUp.Name = "comboboxUp";
             this.comboboxUp.Size = new System.Drawing.Size(79, 24);
             this.comboboxUp.TabIndex = 4;
+            this.comboboxUp.SelectedIndexChanged += new System.EventHandler(this.qmatrix_small_dropdown_changed);
             // 
             // label42
             // 
@@ -1395,14 +1405,11 @@ namespace ReinforcementLearning
             // comboboxDown
             // 
             this.comboboxDown.FormattingEnabled = true;
-            this.comboboxDown.Items.AddRange(new object[] {
-            "Empty",
-            "Can",
-            "Wall"});
             this.comboboxDown.Location = new System.Drawing.Point(203, 69);
             this.comboboxDown.Name = "comboboxDown";
             this.comboboxDown.Size = new System.Drawing.Size(79, 24);
             this.comboboxDown.TabIndex = 3;
+            this.comboboxDown.SelectedIndexChanged += new System.EventHandler(this.qmatrix_small_dropdown_changed);
             // 
             // label43
             // 
@@ -1417,26 +1424,20 @@ namespace ReinforcementLearning
             // comboboxRight
             // 
             this.comboboxRight.FormattingEnabled = true;
-            this.comboboxRight.Items.AddRange(new object[] {
-            "Empty",
-            "Can",
-            "Wall"});
             this.comboboxRight.Location = new System.Drawing.Point(115, 70);
             this.comboboxRight.Name = "comboboxRight";
             this.comboboxRight.Size = new System.Drawing.Size(79, 24);
             this.comboboxRight.TabIndex = 2;
+            this.comboboxRight.SelectedIndexChanged += new System.EventHandler(this.qmatrix_small_dropdown_changed);
             // 
             // comboboxLeft
             // 
             this.comboboxLeft.FormattingEnabled = true;
-            this.comboboxLeft.Items.AddRange(new object[] {
-            "Empty",
-            "Can",
-            "Wall"});
             this.comboboxLeft.Location = new System.Drawing.Point(27, 70);
             this.comboboxLeft.Name = "comboboxLeft";
             this.comboboxLeft.Size = new System.Drawing.Size(79, 24);
             this.comboboxLeft.TabIndex = 1;
+            this.comboboxLeft.SelectedIndexChanged += new System.EventHandler(this.qmatrix_small_dropdown_changed);
             // 
             // groupboxQmatrixview
             // 
@@ -1452,7 +1453,7 @@ namespace ReinforcementLearning
             this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixdown);
             this.groupboxQmatrixview.Location = new System.Drawing.Point(7, 125);
             this.groupboxQmatrixview.Name = "groupboxQmatrixview";
-            this.groupboxQmatrixview.Size = new System.Drawing.Size(530, 71);
+            this.groupboxQmatrixview.Size = new System.Drawing.Size(460, 71);
             this.groupboxQmatrixview.TabIndex = 59;
             this.groupboxQmatrixview.TabStop = false;
             this.groupboxQmatrixview.Text = "Q-matrix values";
@@ -1492,17 +1493,17 @@ namespace ReinforcementLearning
             this.groupboxStatusmessage.Controls.Add(this.textboxStatus);
             this.groupboxStatusmessage.Location = new System.Drawing.Point(1409, 605);
             this.groupboxStatusmessage.Name = "groupboxStatusmessage";
-            this.groupboxStatusmessage.Size = new System.Drawing.Size(546, 374);
+            this.groupboxStatusmessage.Size = new System.Drawing.Size(569, 374);
             this.groupboxStatusmessage.TabIndex = 23;
             this.groupboxStatusmessage.TabStop = false;
             this.groupboxStatusmessage.Text = "Status message";
             // 
             // textboxStatus
             // 
-            this.textboxStatus.Location = new System.Drawing.Point(23, 28);
+            this.textboxStatus.Location = new System.Drawing.Point(33, 24);
             this.textboxStatus.Name = "textboxStatus";
             this.textboxStatus.ReadOnly = true;
-            this.textboxStatus.Size = new System.Drawing.Size(511, 317);
+            this.textboxStatus.Size = new System.Drawing.Size(530, 317);
             this.textboxStatus.TabIndex = 0;
             this.textboxStatus.Text = "";
             // 
@@ -1721,7 +1722,7 @@ namespace ReinforcementLearning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1986, 1055);
+            this.ClientSize = new System.Drawing.Size(2040, 1055);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox13);
@@ -1775,6 +1776,7 @@ namespace ReinforcementLearning
             this.groupboxRewarddata.ResumeLayout(false);
             this.groupboxRewarddata.PerformLayout();
             this.groupboxQmatrix.ResumeLayout(false);
+            this.groupboxQmatrix.PerformLayout();
             this.groupboxQmatrixselect.ResumeLayout(false);
             this.groupboxQmatrixselect.PerformLayout();
             this.groupboxQmatrixview.ResumeLayout(false);
@@ -1920,7 +1922,6 @@ namespace ReinforcementLearning
         private Label label39;
         private GroupBox groupboxQmatrixview;
         private GroupBox groupboxQmatrixselect;
-        private Button button9;
         private Label label35;
         private Label label40;
         private ComboBox comboboxCurrentsquare;
@@ -1949,6 +1950,8 @@ namespace ReinforcementLearning
         private ComboBox comboboxMovedwithoutwall;
         private Label label16;
         private Label label15;
+        private Label label6;
+        private TextBox textboxQmatrixentries;
     }
 }
 

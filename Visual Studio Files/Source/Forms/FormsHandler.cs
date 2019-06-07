@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ReinforcementLearning
@@ -18,18 +20,12 @@ namespace ReinforcementLearning
         static public TextBox successful_move_textbox;
 
         //Q-matrix view
-        static public ComboBox qmatrix_state;
-        static public ComboBox qmatrix_left_combobox;
-        static public ComboBox qmatrix_right_combobox;
-        static public ComboBox qmatrix_up_combobox;
-        static public ComboBox qmatrix_down_combobox;
-        static public ComboBox qmatrix_current_combobox;
+        static public ComboBox qmatrix_state_combobox_large; //The larger dropdown
+        static public TextBox qmatrix_stored_entires;
+        
 
-        static public TextBox qmatrix_left;
-        static public TextBox qmatrix_right;
-        static public TextBox qmatrix_down;
-        static public TextBox qmatrix_up;
-        static public TextBox qmatrix_current_square;
+
+
 
         //Session progress
         static public TextBox step_number;
@@ -43,14 +39,29 @@ namespace ReinforcementLearning
         static public TextBox reward_episode;
         static public TextBox reward_total;
 
-        //Current position
-        static public TextBox current_position_left;
-        static public TextBox current_position_down;
-        static public TextBox current_position_right;
-        static public TextBox current_position_up;
-        static public TextBox current_position_square;
 
         static public RichTextBox status_box;
+
+        static Control form1_control;
+        static Control groupbox_initial_settings;
+        static Control groupbox_rewards;
+        static Control groupbox_qmatrix;
+        static Control groupbox_matrix_select;
+        static Control groupbox_qmatrix_values;
+        static Control groupbox_session_progress;
+        static Control groupbox_can_data;
+        static Control groupbox_reward_data;
+        static Control groupbox_current_position;
+
+        static public bool lock_index_change_events;
+
+        static public List<TextBox> list_session_progress;
+
+        //store a textbox that displays the percepts of the current position for each move
+        static public Dictionary<Move, TextBox> list_current_position_textboxes;
+        //Store a textbox that displays a q-matrix value for each move
+        static public Dictionary<Move, TextBox> List_qmatrix_value_textboxes;
+        static public Dictionary<Move, ComboBox> list_qmatrix_comboboxes; //Store a q-matrix combobox for each move
 
         //Current position
 
@@ -66,19 +77,20 @@ namespace ReinforcementLearning
         static FormsHandler()
         {
             picture_board = new PictureBoard();
+            lock_index_change_events = false; 
 
             //Pass textboxes to the board, so it can manage them.
-
-            Control form1_control = Application.OpenForms["Form1"];
-            Control groupbox_initial_settings = form1_control.Controls["groupboxInitialsettings"];
-            Control groupbox_rewards = groupbox_initial_settings.Controls["groupboxRewards"];
-            Control groupbox_qmatrix = form1_control.Controls["groupboxQmatrix"];
-            Control groupbox_matrix_select = groupbox_qmatrix.Controls["groupboxQmatrixselect"];
-            Control groupbox_qmatrix_view = form1_control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"];
-            Control groupbox_session_progress = form1_control.Controls["groupboxSessionprogress"];
-            Control groupbox_can_data = groupbox_session_progress.Controls["groupboxCans"];
-            Control groupbox_reward_data = groupbox_session_progress.Controls["groupboxRewarddata"];
-            Control groupbox_current_position = groupbox_session_progress.Controls["groupboxCurrentposition"];
+            
+            form1_control = Application.OpenForms["Form1"];
+            groupbox_initial_settings = form1_control.Controls["groupboxInitialsettings"];
+            groupbox_rewards = groupbox_initial_settings.Controls["groupboxRewards"];
+            groupbox_qmatrix = form1_control.Controls["groupboxQmatrix"];
+            groupbox_matrix_select = groupbox_qmatrix.Controls["groupboxQmatrixselect"];
+            groupbox_qmatrix_values = form1_control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"];
+            groupbox_session_progress = form1_control.Controls["groupboxSessionprogress"];
+            groupbox_can_data = groupbox_session_progress.Controls["groupboxCans"];
+            groupbox_reward_data = groupbox_session_progress.Controls["groupboxRewarddata"];
+            groupbox_current_position = groupbox_session_progress.Controls["groupboxCurrentposition"];
 
             //Initial settings
             number_of_episodes = groupbox_initial_settings.Controls["textboxInitialNumberofepisodes"] as TextBox;
@@ -93,18 +105,24 @@ namespace ReinforcementLearning
             successful_move_textbox = groupbox_rewards.Controls["textboxRewardssuccessmove"] as TextBox;
 
             //Q-Matrix view
-            qmatrix_state = groupbox_matrix_select.Controls["comboboxQmatrixselect"] as ComboBox;
-            qmatrix_left_combobox = groupbox_matrix_select.Controls["comboboxLeft"] as ComboBox;
-            qmatrix_right_combobox = groupbox_matrix_select.Controls["comboboxRight"] as ComboBox;
-            qmatrix_up_combobox = groupbox_matrix_select.Controls["comboboxUp"] as ComboBox;
-            qmatrix_down_combobox = groupbox_matrix_select.Controls["comboboxDown"] as ComboBox;
-            qmatrix_current_combobox = groupbox_matrix_select.Controls["comboboxCurrentsquare"] as ComboBox;
+            qmatrix_state_combobox_large = groupbox_matrix_select.Controls["comboboxQmatrixselect"] as ComboBox;
+            qmatrix_stored_entires = groupbox_qmatrix.Controls["textboxQmatrixentries"] as TextBox;
 
-            qmatrix_left = groupbox_qmatrix_view.Controls["textboxQmatrixleft"] as TextBox;
-            qmatrix_right = groupbox_qmatrix_view.Controls["textboxQmatrixright"] as TextBox;
-            qmatrix_down = groupbox_qmatrix_view.Controls["textboxQmatrixdown"] as TextBox;
-            qmatrix_up = groupbox_qmatrix_view.Controls["textboxQmatrixup"] as TextBox;
-            qmatrix_current_square = groupbox_qmatrix_view.Controls["textboxQmatrixcurrent"] as TextBox;
+            list_qmatrix_comboboxes = new Dictionary<Move, ComboBox>();
+            list_qmatrix_comboboxes[MoveList.left()] = groupbox_matrix_select.Controls["comboboxLeft"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.right()] = groupbox_matrix_select.Controls["comboboxRight"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.up()] = groupbox_matrix_select.Controls["comboboxUp"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.down()] = groupbox_matrix_select.Controls["comboboxDown"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.grab()] = groupbox_matrix_select.Controls["comboboxCurrentsquare"] as ComboBox;
+
+            List_qmatrix_value_textboxes = new Dictionary<Move, TextBox>();
+            List_qmatrix_value_textboxes[MoveList.left()] = groupbox_qmatrix_values.Controls["textboxQmatrixleft"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.right()] = groupbox_qmatrix_values.Controls["textboxQmatrixright"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.down()] = groupbox_qmatrix_values.Controls["textboxQmatrixdown"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.up()] = groupbox_qmatrix_values.Controls["textboxQmatrixup"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.grab()] = groupbox_qmatrix_values.Controls["textboxQmatrixcurrent"] as TextBox;
+            
+
 
             //Session progress
             step_number = groupbox_session_progress.Controls["textboxStepsprogress"] as TextBox;
@@ -120,11 +138,34 @@ namespace ReinforcementLearning
             reward_total = groupbox_reward_data.Controls["textboxRewardtotal"] as TextBox;
 
             //Current position
-            current_position_left = groupbox_current_position.Controls["textboxLeft"] as TextBox;
-            current_position_right = groupbox_current_position.Controls["textboxRight"] as TextBox; 
-            current_position_up = groupbox_current_position.Controls["textboxUp"] as TextBox;
-            current_position_down = groupbox_current_position.Controls["textboxDown"] as TextBox;
-            current_position_square = groupbox_current_position.Controls["textboxCurrentsquare"] as TextBox;
+            list_current_position_textboxes = new Dictionary<Move, TextBox>();
+            list_current_position_textboxes[MoveList.left()] = groupbox_current_position.Controls["textboxLeft"] as TextBox;
+            list_current_position_textboxes[MoveList.right()] = groupbox_current_position.Controls["textboxRight"] as TextBox;
+            list_current_position_textboxes[MoveList.up()] = groupbox_current_position.Controls["textboxUp"] as TextBox;
+            list_current_position_textboxes[MoveList.down()] = groupbox_current_position.Controls["textboxDown"] as TextBox;
+            list_current_position_textboxes[MoveList.grab()] = groupbox_current_position.Controls["textboxCurrentsquare"] as TextBox;
+
+            //Add all these textboxes to a list
+            list_session_progress = new List<TextBox>();
+            foreach(var i in list_current_position_textboxes)
+            {
+                list_session_progress.Add(i.Value);
+            }
+            foreach(var i in List_qmatrix_value_textboxes)
+            {
+                list_session_progress.Add(i.Value);
+            }
+
+            list_session_progress.Add(step_number);
+            list_session_progress.Add(episode_number);
+            list_session_progress.Add(e_session);
+            list_session_progress.Add(n_session);
+            list_session_progress.Add(y_session);
+            list_session_progress.Add(beer_remaining);
+            list_session_progress.Add(beer_collected);
+            list_session_progress.Add(reward_episode);
+            list_session_progress.Add(reward_total);
+            list_session_progress.Add(qmatrix_stored_entires);
 
             //Status message
             status_box = Application.OpenForms["Form1"].Controls["groupboxStatusmessage"].Controls["textboxStatus"] as RichTextBox;
@@ -147,15 +188,29 @@ namespace ReinforcementLearning
         }
 
         //Used after "algorithm reset" button is pressed. Not used during algorithm run.
+        
         static public void clear_after_board_reset()
         {
-            //Clear the current position textboxes
-            current_position_down.Clear();
-            current_position_left.Clear();
-            current_position_right.Clear();
-            current_position_up.Clear();
-            current_position_square.Clear();
-            status_box.Text = "Board cleared.";
+            //This needs to handle the data that is not viewed when the algorithm isn't running
+            lock_index_change_events = true;
+
+            //Clear qmatrix value textboxes
+            foreach(var i in List_qmatrix_value_textboxes)
+            {
+                i.Value.Clear();
+            }
+
+            foreach(var i in list_session_progress)
+            {
+                i.Clear();
+            }
+
+            qmatrix_state_combobox_large.Text = "";
+
+            foreach (var i in list_qmatrix_comboboxes.Values) { i.Items.Clear(); i.Text = ""; }
+            foreach (var i in List_qmatrix_value_textboxes.Values) { i.Clear(); }
+
+            lock_index_change_events = false;
         }
 
         //This is ran every time we step through the algorithm.
@@ -163,53 +218,42 @@ namespace ReinforcementLearning
         //This method handles any time we are updating what is displayed for any reason once the algorithm is active
         //We expect the algorithm state to be set from the outside before we enter this.
         //This function does not handle changing q values as a result of history viewing.
-        static public void display_state(AlgorithmState state_to_display)
+        static public void display_state()
         {
-            picture_board.clone_position(state_to_display.board_data); //This copies the state's board over to our PictureSquare board.
-
-            //Status box update
-            string bender_position_string = state_to_display.board_data.bender.bender_x.ToString();
-            bender_position_string += ", " + state_to_display.board_data.bender.bender_y.ToString();
-            status_box.Text = "Bender's position is (" + bender_position_string + ").";
+            picture_board.clone_position(AlgorithmStateManager.current_state.board_data); //This copies the state's board over to our PictureSquare board.
 
             //Textboxes update
             if (AlgorithmStateManager.algorithm_started) //Only display this if we've started
-            {   //Current position state textboxes             
-                //I think i want to get these directly from the q matrix
-                //to do that, i need the perceptions bender is in, and then i can request the moveset, which has my values.
-                PerceptionState benders_perception = state_to_display.board_data.bender.get_perception_state();
-                display_qmatrix_values(state_to_display, benders_perception);
-
-                //qmatrix values? percepts?
-                qmatrix_left.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.left());
-                qmatrix_right.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.right());
-                qmatrix_up.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.up());
-                qmatrix_down.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.down());
-                qmatrix_current_square.Text = AlgorithmStateManager.get_qmatrix_view(MoveList.grab());
-
-                qmatrix_state.Items.Clear();
-                foreach (var i in state_to_display.live_qmatrix.get_list_of_qmatrix_states())
-                {
-                    qmatrix_state.Items.Add(i);
-                }
+            {
+                //This will configure the q-matrix dropdowns properly, and handle if there is no qmatrix as well.
+                //This doesn't affect the stored entries textbox
+                handle_qmatrix_forms(AlgorithmStateManager.current_state, AlgorithmStateManager.current_state.bender_perception_starting);
 
                 //Session progress
-                step_number.Text = state_to_display.step_count.ToString();
-                episode_number.Text = state_to_display.episode_count.ToString();
-                e_session.Text = state_to_display.e_current.ToString();
-                n_session.Text = state_to_display.n_current.ToString();
-                y_session.Text = state_to_display.y_current.ToString();
+                step_number.Text = AlgorithmStateManager.current_state.step_count.ToString();
+                episode_number.Text = AlgorithmStateManager.current_state.episode_count.ToString();
+                e_session.Text = AlgorithmStateManager.current_state.e_current.ToString();
+                n_session.Text = AlgorithmStateManager.current_state.n_current.ToString();
+                y_session.Text = AlgorithmStateManager.current_state.y_current.ToString();
 
-                beer_remaining.Text = state_to_display.board_data.get_cans_remaining().ToString();
-                beer_collected.Text = state_to_display.cans_collected.ToString();
-                reward_episode.Text = state_to_display.episode_rewards.ToString();
-                reward_total.Text = state_to_display.total_rewards.ToString();
+                //If this moveset doesn't exist, we should get an error.
+                //This function should only be called at the algorithm start, or from a dropdown that has a valid q-matrix combination.
+                //These textboxes handle percepts
 
-                current_position_left.Text = state_to_display.get_bender_percept(MoveList.left()).get_string_data();
-                current_position_right.Text = state_to_display.get_bender_percept(MoveList.right()).get_string_data();
-                current_position_down.Text = state_to_display.get_bender_percept(MoveList.down()).get_string_data();
-                current_position_up.Text = state_to_display.get_bender_percept(MoveList.up()).get_string_data();
-                current_position_square.Text = state_to_display.get_bender_percept(MoveList.grab()).get_string_data();
+                PerceptionState to_view = AlgorithmStateManager.current_state.bender_perception_ending;
+
+                foreach (var i in MoveList.list)
+                {
+                    list_current_position_textboxes[i].Text = to_view.perception_data[i].ToString();
+
+                }
+
+                beer_remaining.Text = AlgorithmStateManager.current_state.board_data.get_cans_remaining().ToString();
+                beer_collected.Text = AlgorithmStateManager.current_state.cans_collected.ToString();
+                reward_episode.Text = AlgorithmStateManager.current_state.episode_rewards.ToString();
+                reward_total.Text = AlgorithmStateManager.current_state.total_rewards.ToString();
+
+
             }
 
             //Handle drawing the board
@@ -220,6 +264,11 @@ namespace ReinforcementLearning
                     ((PictureSquare)j).setPicture();
                 }
             }
+
+
+
+
+            status_box.Text = AlgorithmStateManager.current_state.status_message.complete_message;
         }
 
         //Triggers the constructor. Adds a PictureBox to a PictureSquare.
@@ -228,34 +277,161 @@ namespace ReinforcementLearning
             picture_board.board_data[i][j] = square_to_set;
         }
 
-        //used for viewing q matrix configurations
-        static public void update_qmatrix_view(bool set_flag)
+        //This is used to display rows of the qmatrix and the q-values for each move
+        //This is called from FormsHandler.DisplayState, as well as directly from the dropdowns when their contents are changed.
+        //When this is called from displaystate, the perception to view may not be valid.
+        //When this is called from the dropdown, the perception should exist in the qmatrix.
+        static private void handle_qmatrix_forms(AlgorithmState state_to_display, PerceptionState perception_to_view)
         {
-            //set_flag true means this was called from the view button, and we do not have to change the comboboxes
-            //set_flag false means this was called from the combobox change event, and we will change the comboboxes.
-            if(set_flag)
-            {   //dont change comboboxes
+            qmatrix_stored_entires.Text = AlgorithmStateManager.current_state.live_qmatrix.matrix_data.Count.ToString();
+            
+            //May not have qmatrix data at the step being displayed.
+            if (state_to_display.live_qmatrix.matrix_data.Count == 0)
+            {   //There are no q-matrix entries.
+                //reset qmatrix combo boxes
+                foreach (var i in list_qmatrix_comboboxes.Values)
+                {
+                    i.Items.Clear();
+                    i.Items.Add("None");
+                }
 
+                qmatrix_state_combobox_large.Items.Clear();
+                qmatrix_state_combobox_large.Items.Add("A q-matrix entry has not yet been made.");
+
+                
+                //reset qmatrix textboxes
+                foreach (var i in List_qmatrix_value_textboxes.Values) { i.Clear(); }
             }
             else
-            {   //change comboboxes
+            {
+                //Build q-matrix dropdowns.
+                //use a hashset to avoid adding duplicates
+                //For each move, we want a hashet of percepts, in other words all the percepts that this move sees in the q matrix entries that exist.
+                Dictionary<Move, HashSet<Percept>> dropdown_text_items =  new Dictionary<Move, HashSet<Percept>>();
 
+                //Initialize hashsets before looping over perceptionstates
+                foreach (var i in MoveList.list)
+                {
+                    dropdown_text_items.Add(i, new HashSet<Percept>());
+                }
+
+                //Copy the items over to the combobox. Loop over perception states.
+                foreach (var i in state_to_display.live_qmatrix.matrix_data.Keys)
+                {
+                    foreach (var j in MoveList.list)
+                    {
+                        //For each qmatrix entry, copy each percept over to dropdowns dictionary for the appropriate move.
+                        dropdown_text_items[j].Add(i.perception_data[j]);
+                    }
+                }
+                
+                //Update the comboboxes with the percepts that are available in the qmatrix.
+                List<string> string_list = new List<string>(); //Used for sorting...?
+
+                //Cycle through the moves to select each dropdown
+                foreach (var i in MoveList.list)
+                {
+                    list_qmatrix_comboboxes[i].Items.Clear();
+                    //Cycle through the percepts we gathered for this move's dropdown
+                    foreach (var j in dropdown_text_items[i].OrderBy(o => o.percept_data))
+                    {
+                        list_qmatrix_comboboxes[i].Items.Add(j); //I think i can just give my objects a tostring method
+                    }
+                    
+                }
+
+                //Refresh the overall-state dropdown
+                qmatrix_state_combobox_large.Items.Clear();
+                foreach (var i in state_to_display.live_qmatrix.matrix_data.Keys.OrderBy(o => o.ID))
+                {
+                    qmatrix_state_combobox_large.Items.Add(i);
+                }
+
+                //Here, we assume that we are viewing the location bender was previously in.
+                view_qmatrix_configuration(state_to_display.bender_perception_starting);
+
+                
             }
         }
 
-        //This is used to display rows of the qmatrix and the q-values for each move
-        //Pass this a perceptionstate
-        //This is called to view matrix values from current or history
-        //This method is private, so it is only called from within forms handler.
-        static private void display_qmatrix_values(AlgorithmState current_state, PerceptionState benders_perception)
-        {
-            MoveSet values_to_display = current_state.live_qmatrix.matrix_data[benders_perception];
 
-            current_position_left.Text = values_to_display.move_list[MoveList.left()].ToString();
-            current_position_down.Text = values_to_display.move_list[MoveList.left()].ToString();
-            current_position_right.Text = values_to_display.move_list[MoveList.left()].ToString();
-            current_position_up.Text = values_to_display.move_list[MoveList.left()].ToString();
-            current_position_square.Text = values_to_display.move_list[MoveList.left()].ToString();
+        //This is called when the dropdown menu boxes change, as well as from display_state().
+        //This will update the comboboxes, state dropdown, and the q-matrix value textboxes.
+        static public void view_qmatrix_configuration(PerceptionState state_to_view)
+        {
+            //We're only handed states that exist in the q-matrix already
+
+            //Handle the small dropdowns
+            //Set the dropdown to be selected to the correct percept
+            //These will trigger the selected_index_changed events
+            //So I'll managed this with a lock
+            lock_index_change_events = true;
+            foreach(var i in MoveList.list)
+            {
+                list_qmatrix_comboboxes[i].SelectedIndex = list_qmatrix_comboboxes[i].Items.IndexOf(state_to_view.perception_data[i]);
+            }
+
+            //Handle the large dropdown
+            qmatrix_state_combobox_large.SelectedIndex = qmatrix_state_combobox_large.Items.IndexOf(state_to_view);
+
+            //Handle the values stored in the textboxes
+            foreach (var i in MoveList.list)
+            {
+                List_qmatrix_value_textboxes[i].Text = AlgorithmStateManager.current_state.live_qmatrix.matrix_data[state_to_view].move_list[i].ToString();
+            }
+
+            lock_index_change_events = false;
+        }
+
+        static public void large_dropdown_changed()
+        {
+            view_qmatrix_configuration((PerceptionState)qmatrix_state_combobox_large.SelectedItem);
+        }
+
+        static public void small_dropdown_changed(ComboBox changed_dropdown)
+        {
+            PerceptionState to_set = new PerceptionState();
+            Move percept_move = null;
+
+            foreach(var i in MoveList.list)
+            {
+                if (changed_dropdown == list_qmatrix_comboboxes[i])
+                    percept_move = i;
+            }
+
+            //get the percept of the dropdown
+            Percept keep_for_best_fit = (Percept)changed_dropdown.SelectedItem;
+            
+            //Build a perception state that matches the dropdowns
+            foreach(var i in MoveList.list)
+            {
+                to_set.perception_data[i] = (Percept)list_qmatrix_comboboxes[i].SelectedItem;
+            }
+
+            to_set.set_name();
+            to_set = PerceptionStateList.list_of_states[to_set]; //Convert to static instance
+
+            //This state may not exist in our q-matrix states, because we only changed one of the dropdowns.
+            //The best solution i think is to make the other dropdowns find the most accurate state.
+            //Compare all the states in the q-matrix, and display any that is tied for best matched.
+            //Also, the matching state must have the same item as the dropdown we just changed.
+
+            int compare_value = 0;
+            int temp = 0;
+            PerceptionState best_perceptionstate = null;
+            foreach(PerceptionState i in qmatrix_state_combobox_large.Items)
+            {
+                temp = to_set.compare(i);
+                if (temp > compare_value && i.contains(percept_move, keep_for_best_fit))
+                {
+                    best_perceptionstate = i;
+                    compare_value = temp;
+                }
+            }
+
+            view_qmatrix_configuration(best_perceptionstate);
+
         }
     }
 }
+

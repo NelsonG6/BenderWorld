@@ -51,8 +51,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\AlgorithmManager.cs" />
-    <Compile Include="Source\AlgorithmState.cs" />
+    <Compile Include="Source\Algorithm\AlgorithmStateManager.cs" />
+    <Compile Include="Source\Algorithm\AlgorithmState.cs" />
     <Compile Include="Source\Board\Squares\Backgrounds.cs" />
     <Compile Include="Source\Board\PictureBoard.cs" />
     <Compile Include="Source\Board\GameBoard.cs" />
@@ -77,12 +77,13 @@
     <Compile Include="Source\Perception\Percept.cs" />
     <Compile Include="Source\Perception\PerceptList.cs" />
     <Compile Include="Source\Board\Squares\PictureSquare.cs" />
-    <Compile Include="Source\Qmatrix.cs" />
+    <Compile Include="Source\Algorithm\Qmatrix.cs" />
     <Compile Include="Source\Forms\FormsHandler.cs" />
     <Compile Include="Source\Move\MoveSet.cs" />
     <Compile Include="Source\Perception\PerceptionState.cs" />
     <Compile Include="Source\Perception\PerceptionStateList.cs" />
-    <Compile Include="Source\Unit.cs" />
+    <Compile Include="Source\Forms\StatusMessage.cs" />
+    <Compile Include="Source\Board\Unit.cs" />
     <Compile Include="Source\Board\Squares\Wall.cs" />
     <Compile Include="Source\Board\Squares\WallsList.cs" />
     <EmbeddedResource Include="Source\Forms\Form1.resx">

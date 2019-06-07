@@ -10,7 +10,7 @@ namespace ReinforcementLearning
     class Unit
     {
         string unit_name;
-        PerceptionState perception_data; //Store the percepts for this unit
+        public PerceptionState perception_data; //Store the percepts for this unit
 
         public int bender_x;
         public int bender_y;
@@ -29,7 +29,7 @@ namespace ReinforcementLearning
             bender_x = set_from.bender_x;
             bender_y = set_from.bender_y;
             unit_name = set_from.unit_name;
-            perception_data = new PerceptionState(set_from.perception_data);
+            perception_data = set_from.perception_data;
         }
 
         public PerceptionState get_perception_state()

@@ -77,8 +77,21 @@ namespace ReinforcementLearning
             bender.bender_y = MyRandom.Next(0, 10);
             board_data[bender.bender_x][bender.bender_y].bender_present = true; //Set bender
 
-            //Commenting this because I want to display pictureboxes from the textboxhandler, from a call from algorithmmanager
-            //update_pictureboxes();
+            board_data[bender.bender_x][bender.bender_y].visited_state = SquareVisitedStateList.last();
+        }
+
+        //This function will give bender perception data from the board
+        public void bender_percieves()
+        {
+            PerceptionState find_perception = new PerceptionState();
+            foreach (var i in MoveList.list)
+            {
+                find_perception.perception_data[i] = percieve(i);
+            }
+            //Translated: for each move, percieve with this move, and update the perception for this move.
+
+            find_perception.set_name();
+            bender.perception_data = PerceptionStateList.GetPerceptionFromList(find_perception);
         }
 
         //Used when the robot moves *only*, otherwise, the perception will be checked from the state of the unit.
@@ -103,18 +116,6 @@ namespace ReinforcementLearning
                     return PerceptList.empty();
             }
         }
-
-        //This is how we store each state that bender can percieve.
-        public string get_encoding_of_percepts()
-        {
-            string precept_string = percieve(MoveList.left()).get_string_data();
-            precept_string += ", " + percieve(MoveList.down()).get_string_data();
-            precept_string += ", " + percieve(MoveList.right()).get_string_data();
-            precept_string += ", " + percieve(MoveList.up()).get_string_data();
-            precept_string += ", " + percieve(MoveList.grab()).get_string_data();
-            return precept_string;
-        }
-
 
         //This is called when the algorithm has been reset
         public void clear()
@@ -145,15 +146,7 @@ namespace ReinforcementLearning
             return board_data[bender.bender_x][bender.bender_y].beer_can_present;
         }
 
-        //This function will give bender perception data from the board
-        public void bender_percieves()
-        {
-            foreach(var i in MoveList.list)
-            {
-                bender.get_perception_state().perceptions[i] = percieve(i);
-            }
-            //Translated: for each move, percieve with this move, and update the perception for this move.
-        }
+
 
         public MoveResult apply_move(Move move_to_apply)
         {
@@ -185,6 +178,8 @@ namespace ReinforcementLearning
             bender.bender_x += to_move.grid_adjustment[0];
             bender.bender_y += to_move.grid_adjustment[1];
             bender_location().bender_present = true;
+
+            bender_percieves();
         }
 
         public void collect_can()
@@ -192,6 +187,8 @@ namespace ReinforcementLearning
             BaseSquare bender_location = board_data[bender.bender_x][bender.bender_y];
             
             bender_location.beer_can_present = false;
+
+            bender_percieves();
         }
 
         public int get_cans_remaining()
@@ -236,13 +233,13 @@ namespace ReinforcementLearning
             
             //Add walls, which will replace some of the empty walls.
             //left wall
-            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[0][i]).walls = WallsList.left_wall(); }
+            for (int i = 1; i <= 8; i++) { ((BoardSquare)board_data[0][i]).walls = WallsList.left_wall(); }
             //right wall
-            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[9][i]).walls = WallsList.right_wall(); }
+            for (int i = 1; i <= 8; i++) { ((BoardSquare)board_data[9][i]).walls = WallsList.right_wall(); }
             //bottom wall
-            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[i][0]).walls = WallsList.bottom_wall(); }
+            for (int i = 1; i <= 8; i++) { ((BoardSquare)board_data[i][0]).walls = WallsList.bottom_wall(); }
             //above wall
-            for (int i = 1; i < 8; i++) { ((BoardSquare)board_data[i][9]).walls = WallsList.top_wall(); }
+            for (int i = 1; i <= 8; i++) { ((BoardSquare)board_data[i][9]).walls = WallsList.top_wall(); }
 
             ((BoardSquare)board_data[0][0]).walls = WallsList.bottom_left_wall();
             ((BoardSquare)board_data[9][9]).walls = WallsList.top_right_wall();

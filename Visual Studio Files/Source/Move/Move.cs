@@ -10,7 +10,7 @@ namespace ReinforcementLearning
     //4 movements with grab false
     //one no-movement with grab true
 
-    class Move
+    class Move : IComparable<Move>
     {   //This class defines the moves bender can make.
         public int[] grid_adjustment; //The motion bender makes from this movement
 
@@ -21,6 +21,8 @@ namespace ReinforcementLearning
         public string short_name; //Shorthand name of move
         public string long_name; //Used for the status box display
 
+        public int order; //This is the order we display the boxes in, and the order we encode the state as
+
         //might not need this constructor
         public Move()
         {
@@ -29,20 +31,17 @@ namespace ReinforcementLearning
             long_name = "Initialized and not set";
         }
 
-        public Move(int set_x, int set_y, string short_name_set)
-        {
-            grid_adjustment[0] = set_x;
-            grid_adjustment[1] = set_y;
-
-            short_name = short_name_set;
-        }
-
         public Move(Move set_from)
         {
             grid_adjustment[0] = set_from.grid_adjustment[0];
             grid_adjustment[1] = set_from.grid_adjustment[1];
 
             short_name = set_from.short_name;
+        }
+
+        public int CompareTo(Move compare_from)
+        {
+            return this.long_name.CompareTo(compare_from.long_name);
         }
     }
 }

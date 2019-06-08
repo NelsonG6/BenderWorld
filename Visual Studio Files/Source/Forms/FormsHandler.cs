@@ -194,6 +194,8 @@ namespace ReinforcementLearning
 
             }
 
+            picture_board.clone_position(AlgorithmStateManager.current_state.board_data);
+
             //Handle drawing the board
             foreach (var i in picture_board.board_data)
             {
@@ -328,46 +330,51 @@ namespace ReinforcementLearning
 
         static public void small_dropdown_changed(ComboBox changed_dropdown)
         {
-            PerceptionState to_set = new PerceptionState();
-            Move percept_move = null;
-
-            foreach(var i in MoveList.list)
+            if(changed_dropdown.SelectedText != "None.")
             {
-                if (changed_dropdown == list_qmatrix_comboboxes[i])
-                    percept_move = i;
-            }
 
-            //get the percept of the dropdown
-            Percept keep_for_best_fit = (Percept)changed_dropdown.SelectedItem;
-            
-            //Build a perception state that matches the dropdowns
-            foreach(var i in MoveList.list)
-            {
-                to_set.perception_data[i] = (Percept)list_qmatrix_comboboxes[i].SelectedItem;
-            }
+                PerceptionState to_set = new PerceptionState();
+                Move percept_move = null;
 
-            to_set.set_name();
-            to_set = PerceptionStateList.list_of_states[to_set]; //Convert to static instance
-
-            //This state may not exist in our q-matrix states, because we only changed one of the dropdowns.
-            //The best solution i think is to make the other dropdowns find the most accurate state.
-            //Compare all the states in the q-matrix, and display any that is tied for best matched.
-            //Also, the matching state must have the same item as the dropdown we just changed.
-
-            int compare_value = 0;
-            int temp = 0;
-            PerceptionState best_perceptionstate = null;
-            foreach(PerceptionState i in qmatrix_state_combobox_large.Items)
-            {
-                temp = to_set.compare(i);
-                if (temp > compare_value && i.contains(percept_move, keep_for_best_fit))
+                foreach (var i in MoveList.list)
                 {
-                    best_perceptionstate = i;
-                    compare_value = temp;
+                    if (changed_dropdown == list_qmatrix_comboboxes[i])
+                        percept_move = i;
                 }
+
+                //get the percept of the dropdown
+                Percept keep_for_best_fit = (Percept)changed_dropdown.SelectedItem;
+
+                //Build a perception state that matches the dropdowns
+                foreach (var i in MoveList.list)
+                {
+                    to_set.perception_data[i] = (Percept)list_qmatrix_comboboxes[i].SelectedItem;
+                }
+
+                to_set.set_name();
+                to_set = PerceptionStateList.list_of_states[to_set]; //Convert to static instance
+
+                //This state may not exist in our q-matrix states, because we only changed one of the dropdowns.
+                //The best solution i think is to make the other dropdowns find the most accurate state.
+                //Compare all the states in the q-matrix, and display any that is tied for best matched.
+                //Also, the matching state must have the same item as the dropdown we just changed.
+
+                int compare_value = 0;
+                int temp = 0;
+                PerceptionState best_perceptionstate = null;
+                foreach (PerceptionState i in qmatrix_state_combobox_large.Items)
+                {
+                    temp = to_set.compare(i);
+                    if (temp > compare_value && i.contains(percept_move, keep_for_best_fit))
+                    {
+                        best_perceptionstate = i;
+                        compare_value = temp;
+                    }
+                }
+
+                view_qmatrix_configuration(best_perceptionstate);
             }
 
-            view_qmatrix_configuration(best_perceptionstate);
 
         }
 

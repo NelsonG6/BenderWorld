@@ -80,7 +80,7 @@ namespace ReinforcementLearning
         private void reset_algorithm(object sender, EventArgs e)
         {            
             AlgorithmStateManager.create_empty_board(); //Special function that creates a new board but keeps bender's position
-            FormsHandler.clear_after_board_reset();
+            FormsHandler.clear_after_board_reset(); //get rid of the cans generated after creating an empty board
             FormsHandler.display_state();
             change_enabled_setting(); //Togle controls
         }
@@ -90,7 +90,7 @@ namespace ReinforcementLearning
         {
             FormsHandler.halted = false;
             int steps_to_take = Int32.Parse(comboboxAdvancesteps.Text);
-            steps_to_take += Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmStateManager.current_state.episode_limit;
+            steps_to_take += Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmStateManager.current_state.step_limit;
 
             int initial_delay = Int32.Parse(comboboxDelayms.Text);
             int delay = initial_delay;
@@ -406,7 +406,7 @@ namespace ReinforcementLearning
         {
             bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
             if (!success || result < 0)
-                comboboxDelayms.Text = "25";
+                comboboxDelayms.Text = "0";
             else
                 comboboxDelayms.Text = result.ToString();
         }

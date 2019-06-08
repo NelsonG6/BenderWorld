@@ -91,10 +91,10 @@ namespace ReinforcementLearning
             Unit temp_bender;
 
             //Copy bender so we can keep his position
-            if (current_state.board_data.bender == null)
+            if (get_latest().board_data.bender == null)
             {
-                current_state.board_data.bender = new Unit();
-                temp_bender = current_state.board_data.bender;
+                get_latest().board_data.bender = new Unit();
+                temp_bender = get_latest().board_data.bender;
             }
             else
                 temp_bender = new Unit(current_state.board_data.bender);
@@ -104,9 +104,13 @@ namespace ReinforcementLearning
             //current_state.start_new_episode(); //Reset everything in our state except the initial values, and keep benders position as well
 
             current_state = new AlgorithmState(); //Freshly constructed. No progress kept.
+
+
             current_state.board_data.clear(); //Erase the cans, since we emptied the board. This is mostly for visual effect, to convey the algoirthm has stopped.
             current_state.board_data.remove_unit(current_state.board_data.bender); //Remove the automatic bender that was placed
             current_state.board_data.add_unit(temp_bender); //Add bender at the position he was in before we cleared the board
+
+            state_history = new List<AlgorithmEpisode>();
         }
     }
 }

@@ -63,16 +63,6 @@ namespace ReinforcementLearning.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _0 {
-            get {
-                object obj = ResourceManager.GetObject("_0", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _1 {
             get {
                 object obj = ResourceManager.GetObject("_1", resourceCulture);
@@ -83,9 +73,29 @@ namespace ReinforcementLearning.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _10 {
+            get {
+                object obj = ResourceManager.GetObject("_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _2 {
             get {
                 object obj = ResourceManager.GetObject("_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _220px_Bender_Rodriguez {
+            get {
+                object obj = ResourceManager.GetObject("_220px_Bender_Rodriguez", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +226,36 @@ namespace ReinforcementLearning.Properties {
         internal static System.Drawing.Bitmap bender_and_beer {
             get {
                 object obj = ResourceManager.GetObject("bender_and_beer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fry_squinting {
+            get {
+                object obj = ResourceManager.GetObject("fry_squinting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fry_squinting_small {
+            get {
+                object obj = ResourceManager.GetObject("fry_squinting_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap futurama_ship {
+            get {
+                object obj = ResourceManager.GetObject("futurama_ship", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

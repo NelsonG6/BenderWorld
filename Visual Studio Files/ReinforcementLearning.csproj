@@ -51,6 +51,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Algorithm\AlgorithmEpisode.cs" />
     <Compile Include="Source\Algorithm\AlgorithmStateManager.cs" />
     <Compile Include="Source\Algorithm\AlgorithmState.cs" />
     <Compile Include="Source\Board\Squares\Backgrounds.cs" />
@@ -94,6 +95,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\AlgorithmState.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -120,7 +122,8 @@
     <Content Include="Properties\Images\background explored.png" />
     <Content Include="Properties\Images\background last move.png" />
     <Content Include="Properties\Images\background unexplored.png" />
-    <Content Include="Properties\Images\numbers\0.png" />
+    <Content Include="Properties\Images\fry squinting small.png" />
+    <Content Include="Properties\Images\fry squinting.png" />
     <Content Include="Properties\Images\numbers\1.png" />
     <Content Include="Properties\Images\numbers\2.png" />
     <Content Include="Properties\Images\numbers\3.png" />
@@ -130,6 +133,12 @@
     <Content Include="Properties\Images\numbers\7.png" />
     <Content Include="Properties\Images\numbers\8.png" />
     <Content Include="Properties\Images\numbers\9.png" />
+    <None Include="Properties\Images\futurama ship.png" />
+    <None Include="Properties\Images\220px-Bender_Rodriguez.png" />
+    <None Include="Properties\Images\numbers\10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,10 +23,6 @@ namespace ReinforcementLearning
         static public ComboBox qmatrix_state_combobox_large; //The larger dropdown
         static public TextBox qmatrix_stored_entires;
         
-
-
-
-
         //Session progress
         static public TextBox step_number;
         static public TextBox episode_number;
@@ -39,21 +35,35 @@ namespace ReinforcementLearning
         static public TextBox reward_episode;
         static public TextBox reward_total;
 
-
         static public RichTextBox status_box;
 
+        //List of groupbox controls
         static Control form1_control;
-        static Control groupbox_initial_settings;
-        static Control groupbox_rewards;
-        static Control groupbox_qmatrix;
-        static Control groupbox_matrix_select;
-        static Control groupbox_qmatrix_values;
-        static Control groupbox_session_progress;
-        static Control groupbox_can_data;
-        static Control groupbox_reward_data;
-        static Control groupbox_current_position;
+        static GroupBox groupbox_initial_settings;
+        static GroupBox groupbox_rewards;
+        static GroupBox groupbox_qmatrix;
+        static GroupBox groupbox_matrix_select;
+        static GroupBox groupbox_qmatrix_values;
+        static GroupBox groupbox_session_progress;
+        static GroupBox groupbox_can_data;
+        static GroupBox groupbox_reward_data;
+        static GroupBox groupbox_current_position;
+        static GroupBox groupbox_control_progress;
+        static GroupBox groupbox_history;
+
+
+        //Control progress
+        static ComboBox control_progress_steps;
+        static ComboBox control_progress_episodes;
+        static ComboBox control_progress_delay;
+
+        //History
+        static ComboBox combobox_history_episodes;
+        static ComboBox combobox_history_steps;
 
         static public bool lock_index_change_events;
+        static public bool is_drop_down_open;
+        static public bool halted;
 
         static public List<TextBox> list_session_progress;
 
@@ -77,114 +87,39 @@ namespace ReinforcementLearning
         static FormsHandler()
         {
             picture_board = new PictureBoard();
-            lock_index_change_events = false; 
 
+            lock_index_change_events = false;
+            is_drop_down_open = false;
+            halted = false;
             //Pass textboxes to the board, so it can manage them.
-            
-            form1_control = Application.OpenForms["Form1"];
-            groupbox_initial_settings = form1_control.Controls["groupboxInitialsettings"];
-            groupbox_rewards = groupbox_initial_settings.Controls["groupboxRewards"];
-            groupbox_qmatrix = form1_control.Controls["groupboxQmatrix"];
-            groupbox_matrix_select = groupbox_qmatrix.Controls["groupboxQmatrixselect"];
-            groupbox_qmatrix_values = form1_control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"];
-            groupbox_session_progress = form1_control.Controls["groupboxSessionprogress"];
-            groupbox_can_data = groupbox_session_progress.Controls["groupboxCans"];
-            groupbox_reward_data = groupbox_session_progress.Controls["groupboxRewarddata"];
-            groupbox_current_position = groupbox_session_progress.Controls["groupboxCurrentposition"];
 
-            //Initial settings
-            number_of_episodes = groupbox_initial_settings.Controls["textboxInitialNumberofepisodes"] as TextBox;
-            number_of_steps = groupbox_initial_settings.Controls["textboxInitialNumberofsteps"] as TextBox;
-            n_initial = groupbox_initial_settings.Controls["textboxInitialNinitial"] as TextBox; 
-            y_initial = groupbox_initial_settings.Controls["textboxInitialY"] as TextBox; 
-            e_initial = groupbox_initial_settings.Controls["textboxInitialEpsilon"] as TextBox;
-            //Rewards
-            wall_punishment_textbox = groupbox_rewards.Controls["textboxInitialWallpunishment"] as TextBox;
-            empty_square_punishment_textbox = groupbox_rewards.Controls["textboxInitialEmptysquare"] as TextBox;
-            beer_reward_textbox = groupbox_rewards.Controls["textboxInitialBeerreward"] as TextBox;
-            successful_move_textbox = groupbox_rewards.Controls["textboxRewardssuccessmove"] as TextBox;
+            link_handler_to_form();
 
-            //Q-Matrix view
-            qmatrix_state_combobox_large = groupbox_matrix_select.Controls["comboboxQmatrixselect"] as ComboBox;
-            qmatrix_stored_entires = groupbox_qmatrix.Controls["textboxQmatrixentries"] as TextBox;
+            //Initialize dropdown boxes
+            control_progress_steps.SelectedIndex = 0;
+            control_progress_episodes.Text = "0"; ;
+            control_progress_delay.Text = "25";
 
-            list_qmatrix_comboboxes = new Dictionary<Move, ComboBox>();
-            list_qmatrix_comboboxes[MoveList.left()] = groupbox_matrix_select.Controls["comboboxLeft"] as ComboBox;
-            list_qmatrix_comboboxes[MoveList.right()] = groupbox_matrix_select.Controls["comboboxRight"] as ComboBox;
-            list_qmatrix_comboboxes[MoveList.up()] = groupbox_matrix_select.Controls["comboboxUp"] as ComboBox;
-            list_qmatrix_comboboxes[MoveList.down()] = groupbox_matrix_select.Controls["comboboxDown"] as ComboBox;
-            list_qmatrix_comboboxes[MoveList.grab()] = groupbox_matrix_select.Controls["comboboxCurrentsquare"] as ComboBox;
-
-            List_qmatrix_value_textboxes = new Dictionary<Move, TextBox>();
-            List_qmatrix_value_textboxes[MoveList.left()] = groupbox_qmatrix_values.Controls["textboxQmatrixleft"] as TextBox;
-            List_qmatrix_value_textboxes[MoveList.right()] = groupbox_qmatrix_values.Controls["textboxQmatrixright"] as TextBox;
-            List_qmatrix_value_textboxes[MoveList.down()] = groupbox_qmatrix_values.Controls["textboxQmatrixdown"] as TextBox;
-            List_qmatrix_value_textboxes[MoveList.up()] = groupbox_qmatrix_values.Controls["textboxQmatrixup"] as TextBox;
-            List_qmatrix_value_textboxes[MoveList.grab()] = groupbox_qmatrix_values.Controls["textboxQmatrixcurrent"] as TextBox;
-            
-
-
-            //Session progress
-            step_number = groupbox_session_progress.Controls["textboxStepsprogress"] as TextBox;
-            episode_number = groupbox_session_progress.Controls["textboxEpisodesprogress"] as TextBox;
-            e_session = groupbox_session_progress.Controls["textboxEprogress"] as TextBox;
-            n_session = groupbox_session_progress.Controls["textboxNprogress"] as TextBox;
-            y_session = groupbox_session_progress.Controls["textboxYprogress"] as TextBox;
-
-            //Can data and reward data
-            beer_remaining = groupbox_can_data.Controls["textboxCansremaining"] as TextBox;
-            beer_collected= groupbox_can_data.Controls["textboxCanscollected"] as TextBox;
-            reward_episode = groupbox_reward_data.Controls["textboxRewardepisode"] as TextBox;
-            reward_total = groupbox_reward_data.Controls["textboxRewardtotal"] as TextBox;
-
-            //Current position
-            list_current_position_textboxes = new Dictionary<Move, TextBox>();
-            list_current_position_textboxes[MoveList.left()] = groupbox_current_position.Controls["textboxLeft"] as TextBox;
-            list_current_position_textboxes[MoveList.right()] = groupbox_current_position.Controls["textboxRight"] as TextBox;
-            list_current_position_textboxes[MoveList.up()] = groupbox_current_position.Controls["textboxUp"] as TextBox;
-            list_current_position_textboxes[MoveList.down()] = groupbox_current_position.Controls["textboxDown"] as TextBox;
-            list_current_position_textboxes[MoveList.grab()] = groupbox_current_position.Controls["textboxCurrentsquare"] as TextBox;
-
-            //Add all these textboxes to a list
-            list_session_progress = new List<TextBox>();
-            foreach(var i in list_current_position_textboxes)
+            foreach(var i in list_qmatrix_comboboxes)
             {
-                list_session_progress.Add(i.Value);
+                i.Value.SelectedIndex = -1;
             }
-            foreach(var i in List_qmatrix_value_textboxes)
-            {
-                list_session_progress.Add(i.Value);
-            }
-
-            list_session_progress.Add(step_number);
-            list_session_progress.Add(episode_number);
-            list_session_progress.Add(e_session);
-            list_session_progress.Add(n_session);
-            list_session_progress.Add(y_session);
-            list_session_progress.Add(beer_remaining);
-            list_session_progress.Add(beer_collected);
-            list_session_progress.Add(reward_episode);
-            list_session_progress.Add(reward_total);
-            list_session_progress.Add(qmatrix_stored_entires);
-
-            //Status message
-            status_box = Application.OpenForms["Form1"].Controls["groupboxStatusmessage"].Controls["textboxStatus"] as RichTextBox;
-
+            
             display_initial_settings();
         }
 
         static public void display_initial_settings()
         {
             //initial settings
-            number_of_episodes.Text = AlgorithmStateManager.episode_limit.ToString(); //Constructor launcher for algorithmstate 6-5
-            number_of_steps.Text = AlgorithmStateManager.step_limit.ToString();
-            n_initial.Text = AlgorithmStateManager.n_initial.ToString();
-            y_initial.Text = AlgorithmStateManager.y_initial.ToString();
-            e_initial.Text = AlgorithmStateManager.e_initial.ToString();
-            empty_square_punishment_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()].ToString();
-            wall_punishment_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.move_hit_wall()].ToString();
-            beer_reward_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.can_collected()].ToString();
-            successful_move_textbox.Text = AlgorithmStateManager.reinforcement_factors[MoveResultList.move_successful()].ToString();
+            number_of_episodes.Text = AlgorithmStateManager.current_state.episode_limit.ToString(); //Constructor launcher for algorithmstate 6-5
+            number_of_steps.Text = AlgorithmStateManager.current_state.step_limit.ToString();
+            n_initial.Text = AlgorithmStateManager.current_state.n_current.ToString();
+            y_initial.Text = AlgorithmStateManager.current_state.y_current.ToString();
+            e_initial.Text = AlgorithmStateManager.current_state.e_current.ToString();
+            empty_square_punishment_textbox.Text = AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.can_missing()].ToString();
+            wall_punishment_textbox.Text = AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.move_hit_wall()].ToString();
+            beer_reward_textbox.Text = AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.can_collected()].ToString();
+            successful_move_textbox.Text = AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.move_successful()].ToString();
         }
 
         //Used after "algorithm reset" button is pressed. Not used during algorithm run.
@@ -217,7 +152,7 @@ namespace ReinforcementLearning
         //Handles updating all the fields that change every time we look at new data
         //This method handles any time we are updating what is displayed for any reason once the algorithm is active
         //We expect the algorithm state to be set from the outside before we enter this.
-        //This function does not handle changing q values as a result of history viewing.
+        //This will also handle updating the history dropdowns
         static public void display_state()
         {
             picture_board.clone_position(AlgorithmStateManager.current_state.board_data); //This copies the state's board over to our PictureSquare board.
@@ -253,6 +188,9 @@ namespace ReinforcementLearning
                 reward_episode.Text = AlgorithmStateManager.current_state.episode_rewards.ToString();
                 reward_total.Text = AlgorithmStateManager.current_state.total_rewards.ToString();
 
+                //Update the history episode dropdown
+                if (combobox_history_episodes.Items.Count < AlgorithmStateManager.state_history.Count)
+                    combobox_history_episodes.Items.Add(AlgorithmStateManager.state_history.Last());
 
             }
 
@@ -430,6 +368,110 @@ namespace ReinforcementLearning
             }
 
             view_qmatrix_configuration(best_perceptionstate);
+
+        }
+
+        static public void link_handler_to_form()
+        {
+            form1_control = Application.OpenForms["Form1"];
+            groupbox_initial_settings = form1_control.Controls["groupboxInitialsettings"] as GroupBox;
+            groupbox_rewards = groupbox_initial_settings.Controls["groupboxRewards"] as GroupBox; ;
+            groupbox_qmatrix = form1_control.Controls["groupboxQmatrix"] as GroupBox; ;
+            groupbox_matrix_select = groupbox_qmatrix.Controls["groupboxQmatrixselect"] as GroupBox; ;
+            groupbox_qmatrix_values = form1_control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"] as GroupBox; ;
+            groupbox_session_progress = form1_control.Controls["groupboxSessionprogress"] as GroupBox; ;
+            groupbox_can_data = groupbox_session_progress.Controls["groupboxCans"] as GroupBox; ;
+            groupbox_reward_data = groupbox_session_progress.Controls["groupboxRewarddata"] as GroupBox; ;
+            groupbox_current_position = groupbox_session_progress.Controls["groupboxCurrentposition"] as GroupBox; ;
+
+            //Initial settings
+            number_of_episodes = groupbox_initial_settings.Controls["textboxInitialNumberofepisodes"] as TextBox;
+            number_of_steps = groupbox_initial_settings.Controls["textboxInitialNumberofsteps"] as TextBox;
+            n_initial = groupbox_initial_settings.Controls["textboxInitialNinitial"] as TextBox;
+            y_initial = groupbox_initial_settings.Controls["textboxInitialY"] as TextBox;
+            e_initial = groupbox_initial_settings.Controls["textboxInitialEpsilon"] as TextBox;
+            //Rewards
+            wall_punishment_textbox = groupbox_rewards.Controls["textboxInitialWallpunishment"] as TextBox;
+            empty_square_punishment_textbox = groupbox_rewards.Controls["textboxInitialEmptysquare"] as TextBox;
+            beer_reward_textbox = groupbox_rewards.Controls["textboxInitialBeerreward"] as TextBox;
+            successful_move_textbox = groupbox_rewards.Controls["textboxRewardssuccessmove"] as TextBox;
+
+            //Q-Matrix view
+            qmatrix_state_combobox_large = groupbox_matrix_select.Controls["comboboxQmatrixselect"] as ComboBox;
+            qmatrix_stored_entires = groupbox_qmatrix.Controls["textboxQmatrixentries"] as TextBox;
+
+            list_qmatrix_comboboxes = new Dictionary<Move, ComboBox>();
+            list_qmatrix_comboboxes[MoveList.left()] = groupbox_matrix_select.Controls["comboboxLeft"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.right()] = groupbox_matrix_select.Controls["comboboxRight"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.up()] = groupbox_matrix_select.Controls["comboboxUp"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.down()] = groupbox_matrix_select.Controls["comboboxDown"] as ComboBox;
+            list_qmatrix_comboboxes[MoveList.grab()] = groupbox_matrix_select.Controls["comboboxCurrentsquare"] as ComboBox;
+
+            List_qmatrix_value_textboxes = new Dictionary<Move, TextBox>();
+            List_qmatrix_value_textboxes[MoveList.left()] = groupbox_qmatrix_values.Controls["textboxQmatrixleft"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.right()] = groupbox_qmatrix_values.Controls["textboxQmatrixright"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.down()] = groupbox_qmatrix_values.Controls["textboxQmatrixdown"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.up()] = groupbox_qmatrix_values.Controls["textboxQmatrixup"] as TextBox;
+            List_qmatrix_value_textboxes[MoveList.grab()] = groupbox_qmatrix_values.Controls["textboxQmatrixcurrent"] as TextBox;
+
+
+
+            //Session progress
+            step_number = groupbox_session_progress.Controls["textboxStepsprogress"] as TextBox;
+            episode_number = groupbox_session_progress.Controls["textboxEpisodesprogress"] as TextBox;
+            e_session = groupbox_session_progress.Controls["textboxEprogress"] as TextBox;
+            n_session = groupbox_session_progress.Controls["textboxNprogress"] as TextBox;
+            y_session = groupbox_session_progress.Controls["textboxYprogress"] as TextBox;
+
+            //Can data and reward data
+            beer_remaining = groupbox_can_data.Controls["textboxCansremaining"] as TextBox;
+            beer_collected = groupbox_can_data.Controls["textboxCanscollected"] as TextBox;
+            reward_episode = groupbox_reward_data.Controls["textboxRewardepisode"] as TextBox;
+            reward_total = groupbox_reward_data.Controls["textboxRewardtotal"] as TextBox;
+
+            //Current position
+            list_current_position_textboxes = new Dictionary<Move, TextBox>();
+            list_current_position_textboxes[MoveList.left()] = groupbox_current_position.Controls["textboxLeft"] as TextBox;
+            list_current_position_textboxes[MoveList.right()] = groupbox_current_position.Controls["textboxRight"] as TextBox;
+            list_current_position_textboxes[MoveList.up()] = groupbox_current_position.Controls["textboxUp"] as TextBox;
+            list_current_position_textboxes[MoveList.down()] = groupbox_current_position.Controls["textboxDown"] as TextBox;
+            list_current_position_textboxes[MoveList.grab()] = groupbox_current_position.Controls["textboxCurrentsquare"] as TextBox;
+
+            //Add all these textboxes to a list
+            list_session_progress = new List<TextBox>();
+            foreach (var i in list_current_position_textboxes)
+            {
+                list_session_progress.Add(i.Value);
+            }
+            foreach (var i in List_qmatrix_value_textboxes)
+            {
+                list_session_progress.Add(i.Value);
+            }
+
+            list_session_progress.Add(step_number);
+            list_session_progress.Add(episode_number);
+            list_session_progress.Add(e_session);
+            list_session_progress.Add(n_session);
+            list_session_progress.Add(y_session);
+            list_session_progress.Add(beer_remaining);
+            list_session_progress.Add(beer_collected);
+            list_session_progress.Add(reward_episode);
+            list_session_progress.Add(reward_total);
+            list_session_progress.Add(qmatrix_stored_entires);
+
+            //Control progess
+            groupbox_control_progress = form1_control.Controls["groupboxAlgorithmprogress"] as GroupBox;
+            control_progress_steps = groupbox_control_progress.Controls["comboboxAdvancesteps"] as ComboBox;
+            control_progress_episodes = groupbox_control_progress.Controls["comboboxAdvanceepisodes"] as ComboBox;
+            control_progress_delay = groupbox_control_progress.Controls["comboboxDelayms"] as ComboBox;
+
+
+            //Status message
+            status_box = form1_control.Controls["groupboxStatusmessage"].Controls["textboxStatus"] as RichTextBox;
+
+            //History
+            groupbox_history = form1_control.Controls["groupboxHistory"] as GroupBox;
+            combobox_history_episodes = groupbox_history.Controls["comboboxHistoryepisode"] as ComboBox;
 
         }
     }

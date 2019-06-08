@@ -10,55 +10,49 @@ namespace ReinforcementLearning
     {
         static public AlgorithmState current_state; //This is a pointer to the most recently generated state
 
-        static public List<List<AlgorithmState>> state_history; //This is the history of the entire run, and all the configurations and q-matrix instances.
+        static public List<AlgorithmEpisode> state_history; //This is the history of the entire run, and all the configurations and q-matrix instances.
                                                                 //The head of this list is the current progress point of our algorithm.
-
-        static public float n_initial; //eta
-        static public float y_initial; //discount
-        static public float e_initial; //epsilon
-
-        static public int episode_limit; //When to stop
-        static public int step_limit;
-
-        //Punishments will be an associated string that returns an integer value.
-        static public Dictionary<MoveResult, float> reinforcement_factors;
 
         static public bool algorithm_started;
         static public bool algorithm_ended;
-        static public bool program_launch_message_posted;
 
         static AlgorithmStateManager()
         {
-            current_state = new AlgorithmState(); //Get defaults
-            state_history = new List<List<AlgorithmState>>(); //initialize history
-            reinforcement_factors = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
-
             set_default_configuration();
         }
 
         //This should be called at the program launch, and when the reset config button is pressed
         public static void set_default_configuration()
         {
-
-            //Consider moving this to algorithm state constructor
-            n_initial = .2F;
-            y_initial = .9F;
-            e_initial = .1F;
-
-            episode_limit = 5000;
-            step_limit = 200;
+            current_state = new AlgorithmState(); //Get defaults
+            state_history = new List<AlgorithmEpisode>(); //initialize history
 
             algorithm_ended = false;
             algorithm_started = false;
+            //Consider moving this to algorithm state constructor
+        }
 
-            //Build our reinforcement factors dictionary
-            reinforcement_factors.Clear();
-            reinforcement_factors.Add(MoveResultList.move_hit_wall(), -5);
-            reinforcement_factors.Add(MoveResultList.can_collected(), 10);
-            reinforcement_factors.Add(MoveResultList.can_missing(), -1);
-            reinforcement_factors.Add(MoveResultList.move_successful(), 0);
+        public static AlgorithmState get_latest()
+        {
+            int episode_index = state_history.Count - 1;
+            if(episode_index == -1)
+            {
+                return null; //No episodes created
+            }
+            else
+            {
+                int step_index = state_history[episode_index].Count() - 1;
+                if (step_index == -1)
+                    return null; //Step index shouldn't be 0, because we shouldn't call this at a time when we created a new episode but didn't put a state there.
+                else
+                    return state_history[episode_index][step_index];
+            }
+        }
 
-            algorithm_started = false;
+        public static void start_algorithm()
+        {
+            algorithm_started = true;
+            current_state.board_data.shuffle_cans_and_bender();
         }
 
         public static void take_step(int steps_to_take) //Go to the most current state, and step forward once. 
@@ -66,59 +60,22 @@ namespace ReinforcementLearning
 
             while (steps_to_take-- > 0 && !algorithm_ended)
             {
-                if (!algorithm_started) //First step, so just display step 0.
-                {
-                    algorithm_started = true;
-                    //This will normally be updated already at the end of the last run
+                if (state_history.Count > 0)
+                    current_state = new AlgorithmState(get_latest()); //Only copy the last state if we have a history
+                                                                      //If the count wasn't 0, then we are starting the algorithm, and the state was built from the interface. No need to copy.
+                if (state_history.Count < current_state.episode_count) //When we copied the state above, it determined if this still will belong to a new episode.
+                
+                    //Since the episode count is higher than the index of the episodes in our state_history, we know we need to add a new index for a new episode.
+                    state_history.Add(new AlgorithmEpisode(AlgorithmStateManager.current_state.episode_count));
+                    //Don't advance a step when we do this.
+                
+                else    //Should have a newly generated algorithm state now
+                        //This marks the entry point of the regular algorithm loop
+                    current_state.generate_step(); //The state determines a move to make, and attempts it, and records the results.
 
-                    current_state.e_current = e_initial;
-                    current_state.y_current = y_initial;
-                    current_state.n_current = n_initial;
-
-                    current_state.step_limit = step_limit;
-                    current_state.episode_limit = episode_limit;
-
-                    start_new_episode(); //go through the new episode functions
-                }
-                else if (current_state.step_count >= step_limit) //If the last step hit the max steps count, the step we do next 
-                {
-                    int episodes = state_history.Count - 1;
-                    int steps = state_history[episodes].Count - 1;
-                    AlgorithmState copy_from = state_history[episodes][steps]; //Don't just blindly take current_state; find the most recent step.
-
-                    current_state = new AlgorithmState(copy_from); //Copy the old state. We're going to change this one into the new state.
-                    start_new_episode(); //First step of a new episode
-                                         //This is not the start of the algorithm
-                }
-
-                else
-                {
-                    int episodes = state_history.Count - 1;
-                    int steps = state_history[episodes].Count - 1;
-                    AlgorithmState copy_from = state_history[episodes][steps]; //Don't just blindly take current_state; find the most recent step.
-                    current_state = new AlgorithmState(copy_from); //Copy the old state. We're going to change this one into the new state.
-                    //This marks the entry point of the regular algorithm loop
-                    current_state.generate_step(); //increments step counter, and builds the status message starting message
-
-                    if (current_state.episode_count >= episode_limit)
-                        if (current_state.step_count >= step_limit)
-                            algorithm_ended = true; //We've exceeded the episode limit and step limit.
-
-                    state_history.Last().Add(current_state); //Add the state to the history list, after everything possible has been done to it.    
-                }
+                state_history.Last().Add(current_state); //Add the state to the history list, after everything possible has been done to it.    
             }
         }
-
-        //This is called when we have confirmed that we are starting a new episode from the first program run,
-        //or when we are restarting after reaching a step limit max
-        static private void start_new_episode()
-        {
-            current_state.start_new_episode(); //restart our totals
-            List<AlgorithmState> to_add = new List<AlgorithmState>(); //add this to the state history as position 0
-            to_add.Add(current_state); //Add the state to the new history list
-            state_history.Add(to_add); //Add this history list to the list at large
-        }
-
 
         static public string get_qmatrix_view(Move move_to_get)
         {

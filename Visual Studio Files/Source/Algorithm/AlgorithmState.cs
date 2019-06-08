@@ -1,4 +1,6 @@
-﻿namespace ReinforcementLearning
+﻿using System.Collections.Generic;
+
+namespace ReinforcementLearning
 {
     class AlgorithmState
     {
@@ -40,6 +42,10 @@
         //Empty algorithm state
         //Dont think i need this
 
+
+        //Punishments will be an associated string that returns an integer value.
+        public Dictionary<MoveResult, float> reinforcement_factors;
+
         //Default config algorithm state
         //This is called when the program is launched.
         public AlgorithmState()
@@ -61,7 +67,29 @@
             status_message = new StatusMessage(this);
 
             bender_perception_starting = null;
-            bender_perception_ending = null;
+            
+
+            //Set initial data
+            e_current = .1F;
+            y_current = .9F;
+            n_current = .2F;
+
+            reinforcement_factors = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
+            reinforcement_factors.Clear();
+            reinforcement_factors.Add(MoveResultList.move_hit_wall(), -5);
+            reinforcement_factors.Add(MoveResultList.can_collected(), 10);
+            reinforcement_factors.Add(MoveResultList.can_missing(), -1);
+            reinforcement_factors.Add(MoveResultList.move_successful(), 0);
+
+            //Default limit
+            episode_limit = 5000;
+            step_limit = 200;
+
+            episode_count = 1;
+
+            board_data.bender_percieves();
+            bender_perception_ending = board_data.bender.get_perception_state();
+
         }
 
         //Copied from another algorithm state
@@ -85,17 +113,21 @@
             move_this_step = null;
             result_this_step = null;
             obtained_reward = 0;
-            step_count = set_from.step_count;
-            episode_count = set_from.episode_count;
 
+            //Detect if we reached the limit for this episode
+            if (step_count == step_limit)
+                start_new_episode();
+            else
+            {
+                step_count = set_from.step_count + 1;
+                episode_count = set_from.episode_count;
+            }
+            
             live_qmatrix = new Qmatrix(set_from.live_qmatrix); //Copy the q matrix
 
             board_data = new GameBoard(set_from.board_data); //Copy the board
 
-
-
-            //Set up squares
-            board_data.board_data[set_from.location_initial[0]][set_from.location_initial[1]].visited_state = SquareVisitedStateList.explored();
+            reinforcement_factors = set_from.reinforcement_factors;
 
             //The initial location will be the resulting location of the last step
             location_initial = new int[2] { set_from.location_result[0], set_from.location_result[1] };
@@ -113,6 +145,7 @@
 
         //Used to erase session-based progress.
         //This is also called each new episode once we reach the max steps
+        //Not called when the program launches?
         public void start_new_episode()
         {
             ++episode_count;
@@ -138,13 +171,11 @@
         //Or starting the algorithm, and making the first history entry at step 0.
         //Here, a step only happens when we have been asked by the manager to *actually* take a step.
         public void generate_step()
-        {
-            ++step_count; //Increase the step count.
-            
+        {   
             //Get step from qmatrix. Being randomly generated for now.
             move_this_step = live_qmatrix.generate_step(); //Tentative; we'll attempt this later. just a random move for now.
             result_this_step = board_data.apply_move(move_this_step); //The move should be performed now, if possible.
-            obtained_reward = AlgorithmStateManager.reinforcement_factors[result_this_step]; //Get the reward for this action
+            obtained_reward = AlgorithmStateManager.current_state.reinforcement_factors[result_this_step]; //Get the reward for this action
 
             episode_rewards += obtained_reward; //Update the rewards total
 
@@ -156,7 +187,15 @@
             location_result = new int[2] { board_data.bender.bender_x, board_data.bender.bender_y };
             bender_perception_ending = board_data.bender.get_perception_state();
 
+            if (step_count == step_limit && episode_count > episode_limit)
+                AlgorithmStateManager.algorithm_ended = true;
+
             status_message = new StatusMessage(this);
+        }
+
+        override public string ToString()
+        {
+            return "[Step " + step_count + "]";
         }
     } 
 }

@@ -31,10 +31,11 @@ namespace ReinforcementLearning
         }
 
 
-        public void copy_attributes(BaseSquare copy_from)
+        new public void copy_status(BaseSquare copy_from)
         {
             beer_can_present = copy_from.beer_can_present;
-            bender_present = copy_from.beer_can_present;
+            bender_present = copy_from.bender_present;
+            visited_state = copy_from.visited_state;
         }
 
         public static void set_backgrounds()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ReinforcementLearning
@@ -10,18 +11,6 @@ namespace ReinforcementLearning
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized; //Start with the window maximized
-
-            //Initialize dropdown boxes
-            comboboxAdvancesteps.SelectedIndex = 0;
-            comboboxAdvanceepisodes.SelectedIndex = 0;
-
-            comboboxLeft.SelectedIndex = -1;
-            comboboxRight.SelectedIndex = -1;
-            comboboxDown.SelectedIndex = -1;
-            comboboxUp.SelectedIndex = -1;
-            comboboxCurrentsquare.SelectedIndex = -1;
-
-            label7.Parent = groupboxConfiguration;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -83,6 +72,7 @@ namespace ReinforcementLearning
         private void start_algorithm(object sender, EventArgs e)
         {
             change_enabled_setting(); //Toggle controls
+            AlgorithmStateManager.start_algorithm();
             AlgorithmStateManager.take_step(1); //This will start the algorithm
             FormsHandler.display_state();
         }
@@ -95,24 +85,46 @@ namespace ReinforcementLearning
             change_enabled_setting(); //Togle controls
         }
 
-        private void buttonAdvancestepsdropdown_Click(object sender, EventArgs e)
+        //Advance algorithm button
+        async private void buttonAdvancestepsdropdown_Click(object sender, EventArgs e)
         {
-            AlgorithmStateManager.take_step(Int32.Parse(comboboxAdvancesteps.Text));
-            FormsHandler.display_state();
-        }
+            FormsHandler.halted = false;
+            int steps_to_take = Int32.Parse(comboboxAdvancesteps.Text);
+            steps_to_take += Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmStateManager.current_state.episode_limit;
 
-        private void buttonAdvancestepstextbox_Click(object sender, EventArgs e)
-        {
-            bool success = Int32.TryParse(comboboxAdvancesteps.Text, out int result);
-            if (!success)
-                comboboxAdvancesteps.Text = "Invalid.";
+            int initial_delay = Int32.Parse(comboboxDelayms.Text);
+            int delay = initial_delay;
+
+            if(delay > 25 || steps_to_take > 4)
+            {
+                textboxProgresssteps.Text = steps_to_take.ToString();
+                groupboxCountdown.Enabled = true;
+                groupboxAlgorithmprogress.Enabled = false;
+                groupboxHistory.Enabled = false;
+                while (steps_to_take-- > 0 && !FormsHandler.halted)
+                {
+                    
+                    AlgorithmStateManager.take_step(1);
+                    FormsHandler.display_state();
+                    textboxProgresssteps.Text = steps_to_take.ToString();
+                    do
+                    {
+                        await Task.Delay(1);
+                        textboxCountdown.Text = delay.ToString();
+                    } while (--delay > 0 && !FormsHandler.halted);
+                    delay = initial_delay;
+                }
+                groupboxAlgorithmprogress.Enabled = true;
+                groupboxCountdown.Enabled = false;
+                groupboxHistory.Enabled = true;
+            }
+
             else
-                AlgorithmStateManager.take_step(result);
-        }
-
-        private void next_episode(object sender, EventArgs e)
-        {
-
+            {
+                AlgorithmStateManager.take_step(steps_to_take);
+                FormsHandler.display_state();
+            }
+            
         }
 
         private void set_episode_from_dropdown(object sender, EventArgs e)
@@ -122,7 +134,7 @@ namespace ReinforcementLearning
                 comboboxEpisode.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.episode_limit = result;
+                AlgorithmStateManager.current_state.episode_limit = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -134,7 +146,7 @@ namespace ReinforcementLearning
                 comboboxSteps.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.step_limit = result;
+                AlgorithmStateManager.current_state.step_limit = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -147,7 +159,7 @@ namespace ReinforcementLearning
                 comboboxN.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.n_initial = result;
+                AlgorithmStateManager.current_state.n_current = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -159,7 +171,7 @@ namespace ReinforcementLearning
                 comboboxY.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.y_initial = result;
+                AlgorithmStateManager.current_state.y_current = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -176,7 +188,7 @@ namespace ReinforcementLearning
                 comboboxE.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.e_initial = result;
+                AlgorithmStateManager.current_state.e_current = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -188,7 +200,7 @@ namespace ReinforcementLearning
                 comboboxWallpunishment.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.reinforcement_factors[MoveResultList.move_hit_wall()] = result;
+                AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.move_hit_wall()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -200,7 +212,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()] = result;
+                AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.can_missing()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -212,7 +224,7 @@ namespace ReinforcementLearning
                 comboboxBeer.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_collected()] = result;
+                AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.can_collected()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -230,7 +242,7 @@ namespace ReinforcementLearning
                 comboboxMovedwithoutwall.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.reinforcement_factors[MoveResultList.move_successful()] = result;
+                AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.move_successful()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -298,7 +310,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                AlgorithmStateManager.reinforcement_factors[MoveResultList.can_missing()] = result;
+                AlgorithmStateManager.current_state.reinforcement_factors[MoveResultList.can_missing()] = result;
                 FormsHandler.display_initial_settings();
             }
         }
@@ -330,10 +342,7 @@ namespace ReinforcementLearning
             FormsHandler.display_state();
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void qmatrix_small_dropdown_changed(object sender, EventArgs e)
         {
@@ -346,6 +355,99 @@ namespace ReinforcementLearning
         {
             if (!FormsHandler.lock_index_change_events && ((ComboBox)sender).SelectedIndex > -1)
                 FormsHandler.large_dropdown_changed();
+        }
+
+        private void combobox_clicked_clear_text(object sender, EventArgs e)
+        {
+            if(!FormsHandler.is_drop_down_open)
+                ((ComboBox)sender).Text = "";
+        }
+
+        private void dropdown_opened(object sender, EventArgs e)
+        {
+            FormsHandler.is_drop_down_open = true;
+        }
+
+        private void dropdown_closed(object sender, EventArgs e)
+        {
+            FormsHandler.is_drop_down_open = false;
+        }
+
+        private void comboboxAdvancesteps_Leave(object sender, EventArgs e)
+        {
+            bool success = Int32.TryParse(comboboxAdvancesteps.Text, out int result);
+            if (!success || result < 1)
+            {
+                if (Int32.Parse(comboboxAdvanceepisodes.Text) > 0)
+                    comboboxAdvancesteps.Text = "0";
+                else
+                    comboboxAdvancesteps.Text = "1";
+            }
+            else            
+                comboboxAdvancesteps.Text = result.ToString();
+
+                
+        }
+
+        private void comboboxAdvanceepisodes_Leave(object sender, EventArgs e)
+        {
+            bool success = Int32.TryParse(comboboxAdvanceepisodes.Text, out int result);
+            if (!success || result < 0)
+            {
+                comboboxAdvanceepisodes.Text = "0";
+                if (Int32.Parse(comboboxAdvancesteps.Text) == 0)
+                    comboboxAdvancesteps.Text = "1";
+
+
+            }
+        }
+
+        private void comboboxDelayms_Leave(object sender, EventArgs e)
+        {
+            bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
+            if (!success || result < 0)
+                comboboxDelayms.Text = "25";
+            else
+                comboboxDelayms.Text = result.ToString();
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            FormsHandler.halted = true;
+            groupboxAlgorithmprogress.Enabled = true;
+            groupboxCountdown.Enabled = false;
+        }
+
+        private void history_index_changed(object sender, EventArgs e)
+        {
+            if (comboboxHistoryepisode.SelectedIndex != -1)
+            {
+                comboboxHistorystep.Enabled = true;
+                comboboxHistorystep.Items.Clear();
+                int index = comboboxHistoryepisode.SelectedIndex;
+                comboboxHistorystep.Items.AddRange(AlgorithmStateManager.state_history[index].ToArray());
+            }
+            else
+            {
+                comboboxHistorystep.Items.Clear();
+                comboboxHistorystep.Text = "";
+                comboboxHistorystep.Enabled = false;
+            }
+        }
+
+        private void dropdownclosed_historysteps(object sender, EventArgs e)
+        {
+            FormsHandler.is_drop_down_open = false;
+        }
+
+        private void comboboxHistorystep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboboxAdvancesteps.SelectedIndex != -1)
+            {
+                //view history
+                AlgorithmStateManager.current_state = (AlgorithmState)comboboxHistorystep.SelectedItem;
+                FormsHandler.display_state();
+            }
         }
     }
 }

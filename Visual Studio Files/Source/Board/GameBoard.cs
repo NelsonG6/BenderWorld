@@ -24,7 +24,7 @@ namespace ReinforcementLearning
             //Bender location will be set in shuffle
             bender = new Unit();
             board_size = 10;
-            shuffle_cans_and_bender(); //A fresh board not copied will need randomly generated data, except at program launch. We'll clear it in that case.
+            shuffle_bender(); //A fresh board not copied will need randomly generated data, except at program launch. We'll clear it in that case.
         }
 
         //Copy constructor
@@ -40,6 +40,8 @@ namespace ReinforcementLearning
                 for (int j = 0; j < 10; j++)
                 {
                     board_data[i].Add(new BoardSquare((BoardSquare)set_from.board_data[i][j]));
+                    if (board_data[i][j].visited_state == SquareVisitedStateList.last() && !board_data[i][j].bender_present)
+                        board_data[i][j].visited_state = SquareVisitedStateList.explored();
                 }
             }
 
@@ -48,6 +50,7 @@ namespace ReinforcementLearning
             bender = new Unit(set_from.bender);
         }
 
+        //Only called when we start a new episode
         public void shuffle_cans_and_bender()
         {
             beer_can_count = 0;
@@ -62,6 +65,7 @@ namespace ReinforcementLearning
             }
 
             shuffle_bender(); //Place bender randomly somewhere
+            board_data[bender.bender_x][bender.bender_y].visited_state = SquareVisitedStateList.last();
         }
 
 
@@ -76,8 +80,6 @@ namespace ReinforcementLearning
             bender.bender_x = MyRandom.Next(0, 10); //0-9 inclusive
             bender.bender_y = MyRandom.Next(0, 10);
             board_data[bender.bender_x][bender.bender_y].bender_present = true; //Set bender
-
-            board_data[bender.bender_x][bender.bender_y].visited_state = SquareVisitedStateList.last();
         }
 
         //This function will give bender perception data from the board
@@ -150,12 +152,16 @@ namespace ReinforcementLearning
 
         public MoveResult apply_move(Move move_to_apply)
         {
+            bender_location().visited_state = SquareVisitedStateList.last();
+
             //Get the move result based on the current condition
-            if(bender_location().check_if_walls_prevent_move(move_to_apply))
+            if (bender_location().check_if_walls_prevent_move(move_to_apply))
                 return MoveResultList.move_hit_wall(); //Walls prevent move
 
             if(move_to_apply == MoveList.grab())
             {
+                
+
                 if (bender_location().beer_can_present)
                 {
                     collect_can();
@@ -178,7 +184,7 @@ namespace ReinforcementLearning
             bender.bender_x += to_move.grid_adjustment[0];
             bender.bender_y += to_move.grid_adjustment[1];
             bender_location().bender_present = true;
-
+            bender_location().visited_state = SquareVisitedStateList.last();
             bender_percieves();
         }
 

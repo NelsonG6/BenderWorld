@@ -5,13 +5,20 @@
     {
         public string complete_message;
 
+        public static bool program_launch_message;
+
+        static StatusMessage()
+        {
+            program_launch_message = false;
+        }
+
         public StatusMessage(AlgorithmState set_from)
         {
-            if (!AlgorithmStateManager.program_launch_message_posted)
+            if (!program_launch_message)
             {
-                AlgorithmStateManager.program_launch_message_posted = true;
+                program_launch_message = true;
                 complete_message = "The program has been launched.\nBender's starting position is (";
-                complete_message += set_from.board_data.bender.bender_x.ToString() + ", " + set_from.board_data.bender.bender_y.ToString() + ").";
+                complete_message += (set_from.board_data.bender.bender_x + 1).ToString() + ", " + (set_from.board_data.bender.bender_y + 1).ToString() + ").";
             }
             else if(!AlgorithmStateManager.algorithm_started)
             {
@@ -23,7 +30,8 @@
             {
                 complete_message = "A new episode has been created.\n";
                 complete_message += "Starting turn [Episode: " + set_from.episode_count.ToString() + ", Step: " + set_from.step_count + "]";
-                complete_message += " at position (" + set_from.board_data.bender.bender_x.ToString() + ", " + set_from.board_data.bender.bender_y.ToString() + ").";
+                complete_message += " at position (" + (set_from.board_data.bender.bender_x + 1).ToString();
+                complete_message += ", " + (set_from.board_data.bender.bender_y + 1).ToString() + ").";
                 complete_message += System.Environment.NewLine + "Bender's initial perception is:";
                 complete_message += System.Environment.NewLine + set_from.bender_perception_starting.ToString() + ".";
             }
@@ -32,7 +40,7 @@
                 
                 //"Episode #, Step # beginning."
                 string starting_data = "Starting turn [Episode: " + set_from.episode_count.ToString() + ", Step: " + set_from.step_count.ToString() + "]";
-                starting_data += " at position (" + set_from.location_initial[0].ToString() + ", " + set_from.location_initial[1].ToString() + ").";
+                starting_data += " at position (" + (set_from.location_initial[0] + 1).ToString() + ", " + (set_from.location_initial[1] + 1).ToString() + ").";
 
                 string initial_percept_data = "Bender's initial perception is: " + System.Environment.NewLine;
                 initial_percept_data += set_from.bender_perception_starting.ToString();
@@ -56,7 +64,8 @@
                 //Add bender perception data in his new location here
 
                 //"Bender's position is:
-                string new_position_data = "The resulting position was (" + set_from.location_result[0] + ", " + set_from.location_result[1] + ").";
+                string new_position_data = "The resulting position was (" + (set_from.location_result[0] + 1).ToString();
+                new_position_data += ", " + ((set_from.location_result[1]) + 1).ToString() + ").";
 
                 //New percept
                 string new_percept_data = "The percept at the new location is: " + System.Environment.NewLine + set_from.bender_perception_ending.ToString() + ".";

@@ -5,7 +5,7 @@
     {
         //This stores the wall data for the square
         //It will determine if there is one wall, two walls, or no walls. Only a single wall object is needed.
-        public Wall walls;
+        public BoardSquareWalls walls;
 
         public BoardSquare() : base()
         {

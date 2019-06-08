@@ -3,41 +3,42 @@
     //A container class for the status message data posted every move
     class StatusMessage
     {
-        public string complete_message;
-
         public static bool program_launch_message;
+
+
 
         static StatusMessage()
         {
             program_launch_message = false;
         }
 
-        public StatusMessage(AlgorithmState set_from)
+        public static string GetMessageFromState(AlgorithmState set_from)
         {
+            string complete_message;
+            complete_message = "";
             if (!program_launch_message)
             {
                 program_launch_message = true;
                 complete_message = "The program has been launched.\nBender's starting position is (";
-                complete_message += (set_from.board_data.bender.bender_x + 1).ToString() + ", " + (set_from.board_data.bender.bender_y + 1).ToString() + ").";
+                complete_message += (set_from.board_data.bender.x_coordinate + 1).ToString() + ", " + (set_from.board_data.bender.y_coordinate + 1).ToString() + ").";
             }
-            else if(!AlgorithmStateManager.algorithm_started)
-            {
+            else if (!AlgorithmState.algorithm_started)
+
                 complete_message = "The board was reset. Progress has been erased.";
-            }
 
             //Starting data
             else if (set_from.step_count == 0)
             {
                 complete_message = "A new episode has been created.\n";
                 complete_message += "Starting turn [Episode: " + set_from.episode_count.ToString() + ", Step: " + set_from.step_count + "]";
-                complete_message += " at position (" + (set_from.board_data.bender.bender_x + 1).ToString();
-                complete_message += ", " + (set_from.board_data.bender.bender_y + 1).ToString() + ").";
+                complete_message += " at position (" + (set_from.board_data.bender.x_coordinate + 1).ToString();
+                complete_message += ", " + (set_from.board_data.bender.y_coordinate + 1).ToString() + ").";
                 complete_message += System.Environment.NewLine + "Bender's initial perception is:";
-                complete_message += System.Environment.NewLine + set_from.bender_perception_starting.ToString() + ".";
+                complete_message += System.Environment.NewLine + set_from.bender_perception_ending.ToString() + ".";
             }
             else
-            {                
-                
+            {
+
                 //"Episode #, Step # beginning."
                 string starting_data = "Starting turn [Episode: " + set_from.episode_count.ToString() + ", Step: " + set_from.step_count.ToString() + "]";
                 starting_data += " at position (" + (set_from.location_initial[0] + 1).ToString() + ", " + (set_from.location_initial[1] + 1).ToString() + ").";
@@ -47,7 +48,7 @@
 
                 string move_being_applied_data;
 
-                if (set_from.move_this_step == MoveList.grab())
+                if (set_from.move_this_step == Move.grab())
                     move_being_applied_data = "A [Grab] was attempted.";
                 else
                     move_being_applied_data = "A [" + set_from.move_this_step.long_name + "] was attempted.";
@@ -72,7 +73,7 @@
 
                 //"The calculation used on the q matrix was:"
                 string qmatrix_adjustment_data = "No qmatrix entry was made.";
-                    if(set_from.live_qmatrix.did_we_update)
+                if (set_from.live_qmatrix.did_we_update)
                     qmatrix_adjustment_data = "A q-matrix entry was made for this perception.";
 
                 //ending data
@@ -89,7 +90,10 @@
                 complete_message += newline + new_percept_data;
                 complete_message += newline + qmatrix_adjustment_data;
                 complete_message += newline + ending_data;
+
             }
+            return complete_message;
         }
+
     }
 }

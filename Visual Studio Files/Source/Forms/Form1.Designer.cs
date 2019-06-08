@@ -121,6 +121,7 @@ namespace ReinforcementLearning
             this.label12 = new System.Windows.Forms.Label();
             this.comboboxSteps = new System.Windows.Forms.ComboBox();
             this.comboboxY = new System.Windows.Forms.ComboBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
@@ -172,7 +173,6 @@ namespace ReinforcementLearning
             this.textboxEprogress = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.textboxYprogress = new System.Windows.Forms.TextBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
@@ -187,6 +187,7 @@ namespace ReinforcementLearning
             this.groupboxCountdown.SuspendLayout();
             this.groupboxConfiguration.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
@@ -209,7 +210,6 @@ namespace ReinforcementLearning
             this.groupboxCans.SuspendLayout();
             this.groupboxRewarddata.SuspendLayout();
             this.groupboxCurrentposition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
@@ -218,6 +218,7 @@ namespace ReinforcementLearning
             // 
             // groupboxInitialsettings
             // 
+            this.groupboxInitialsettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.groupboxInitialsettings.Controls.Add(this.label9);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialNumberofsteps);
             this.groupboxInitialsettings.Controls.Add(this.textboxInitialNinitial);
@@ -1147,7 +1148,7 @@ namespace ReinforcementLearning
             this.comboboxEpisode.TabIndex = 1;
             this.comboboxEpisode.DropDown += new System.EventHandler(this.dropdown_opened);
             this.comboboxEpisode.SelectedIndexChanged += new System.EventHandler(this.set_episode_from_dropdown);
-            this.comboboxEpisode.DropDownClosed += new System.EventHandler(this.dropdown_closed);
+            this.comboboxEpisode.DropDownClosed += new System.EventHandler(this.dropdown_closed_numberepisodes);
             this.comboboxEpisode.Click += new System.EventHandler(this.combobox_clicked_clear_text);
             this.comboboxEpisode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxEpisode_KeyPress);
             // 
@@ -1235,6 +1236,17 @@ namespace ReinforcementLearning
             this.comboboxY.DropDownClosed += new System.EventHandler(this.dropdown_closed);
             this.comboboxY.Click += new System.EventHandler(this.combobox_clicked_clear_text);
             this.comboboxY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxY_KeyPress);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.BackgroundImage = global::ReinforcementLearning.Properties.Resources.fry_squinting_small;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox4.Location = new System.Drawing.Point(195, 13);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(40, 52);
+            this.pictureBox4.TabIndex = 61;
+            this.pictureBox4.TabStop = false;
             // 
             // pictureBox7
             // 
@@ -1765,17 +1777,6 @@ namespace ReinforcementLearning
             this.textboxYprogress.Size = new System.Drawing.Size(79, 22);
             this.textboxYprogress.TabIndex = 13;
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.BackgroundImage = global::ReinforcementLearning.Properties.Resources.fry_squinting_small;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(195, 13);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(40, 52);
-            this.pictureBox4.TabIndex = 61;
-            this.pictureBox4.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
@@ -1876,6 +1877,7 @@ namespace ReinforcementLearning
             this.groupboxConfiguration.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
@@ -1902,7 +1904,6 @@ namespace ReinforcementLearning
             this.groupboxRewarddata.PerformLayout();
             this.groupboxCurrentposition.ResumeLayout(false);
             this.groupboxCurrentposition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();

@@ -18,12 +18,63 @@ namespace ReinforcementLearning
 
         public int ID;
 
+        //Dumb, but it lets you access the static and persistent perception state
+        //By passing in one that you built with equal properties.
+        static public Dictionary<PerceptionState, PerceptionState> list_of_states;
+
+        static PerceptionState()
+        {
+            //Create all 243 possible configurations
+
+            list_of_states = new Dictionary<PerceptionState, PerceptionState>();
+
+            PerceptionState to_build;
+
+            foreach (var i in Percept.get_list())
+            {
+                foreach (var j in Percept.get_list())
+                {
+                    foreach (var k in Percept.get_list())
+                    {
+                        foreach (var l in Percept.get_list())
+                        {
+                            foreach (var m in Percept.get_list())
+                            {
+                                to_build = new PerceptionState();
+                                to_build.perception_data[Move.left()] = i;
+                                to_build.perception_data[Move.right()] = j;
+                                to_build.perception_data[Move.down()] = k;
+                                to_build.perception_data[Move.up()] = l;
+                                to_build.perception_data[Move.grab()] = m;
+                                to_build.set_id(list_of_states.Count);
+                                to_build.set_name();
+
+                                list_of_states.Add(to_build, to_build);
+                                //list_of_states[to_build] = to_build;
+                                //Add the perception state to our dictionary at a location reachable if we can build a similar dictionary.
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        static public PerceptionState GetPerceptionFromList(PerceptionState to_find)
+        {
+            return list_of_states[to_find];
+        }
+
+        public static Dictionary<PerceptionState, PerceptionState> get_list()
+        {
+            return list_of_states;
+        }
+
         public PerceptionState()
         {
             perception_data = new SortedDictionary<Move, Percept>();
-            foreach(var i in MoveList.get_moves())
+            foreach(var i in Move.get_moves())
             {
-                perception_data.Add(i, PerceptList.initialized());
+                perception_data.Add(i, Percept.initialized());
             }
 
             set_name();
@@ -97,7 +148,7 @@ namespace ReinforcementLearning
         public int compare(PerceptionState compare_to)
         {
             int compare_total = 0;
-            foreach (var i in MoveList.list)
+            foreach (var i in Move.list)
             {
                 if (perception_data[i] == compare_to.perception_data[i])
                     compare_total++;

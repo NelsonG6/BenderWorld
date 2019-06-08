@@ -19,7 +19,7 @@ namespace ReinforcementLearning
             move_list = new Dictionary<Move, float>();
 
             //Build a dictionary with 5 moves, by default
-            foreach(var i in MoveList.get_moves())
+            foreach(var i in Move.get_moves())
             {
                 move_list.Add(i, 0f);
             }
@@ -40,7 +40,7 @@ namespace ReinforcementLearning
             move_list = new Dictionary<Move, float>();
 
             move_list = new Dictionary<Move, float>();
-            foreach (var i in MoveList.get_moves())
+            foreach (var i in Move.get_moves())
             {
                 move_list.Add(i, 0f);
                 if (set_from == i)

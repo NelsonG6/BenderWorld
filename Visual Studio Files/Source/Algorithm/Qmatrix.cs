@@ -22,7 +22,7 @@ namespace ReinforcementLearning
         {
             //This is our q-matrix
             matrix_data = new Dictionary<PerceptionState, MoveSet>();
-            did_we_update = false;
+            did_we_update = false;          
         }
 
         public Qmatrix(Qmatrix copy_from)
@@ -52,16 +52,35 @@ namespace ReinforcementLearning
             matrix_data[percieved_state].move_list[base_move] += amount_to_update;
         }
 
-        public Move generate_step()
+        public Move generate_step(PerceptionState perceieved_state)
         {
-            //Always generate the step using the state at algorithmManager.current_state
+            if(matrix_data.Keys.Contains(perceieved_state))
+            {
+                //Always generate the step using the state at algorithmManager.current_state            
+                Dictionary<Move, float> best_percepts = new Dictionary<Move, float>();
 
-            
-            
-            
+                //Loop through the move-float pair, and do a random selection of any move that is tied for best action.
+                foreach (var i in matrix_data[perceieved_state].move_list)
+                {
+                    if (best_percepts.Count == 0)
+                        best_percepts.Add(i.Key, i.Value);
+                    else
+                    {
+                        if (best_percepts.Values.First() < i.Value)
+                        {
+                            best_percepts = new Dictionary<Move, float>();
+                            best_percepts.Add(i.Key, i.Value);
+                        }
+                    }
+                }
 
-            //Temporary while working out the UI. This will not be a simple random equation.
-            return MoveList.get_moves()[MyRandom.Next(0, 5)];
+                //Temporary while working out the UI. This will not be a simple random equation.
+                Move[] moves = best_percepts.Keys.ToArray();
+                return moves[MyRandom.Next(0, moves.Count())];
+            }
+
+            //No q-matrix entry, so just do a random move. 
+            return Move.list[MyRandom.Next(0, Move.list.Count)];
         }
 
         public List <string> get_list_of_qmatrix_states()

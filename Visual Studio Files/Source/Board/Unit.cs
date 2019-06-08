@@ -12,24 +12,61 @@ namespace ReinforcementLearning
         string unit_name;
         public PerceptionState perception_data; //Store the percepts for this unit
 
-        public int bender_x;
-        public int bender_y;
+        public int x_coordinate;
+        public int y_coordinate;
+
+        public BoardSquare current_location;
+        public BoardSquare previous_location;
+
+        public System.Drawing.Bitmap unit_image;
+
+        //Stores our pre-defined unit types
+
+            static public Unit bender_data;
+            static public Unit url_data;
+
+            static Unit()
+            {
+                bender_data = new Unit();
+                bender_data.unit_name = "Bender";
+                bender_data.x_coordinate = 0;
+
+
+                url_data = new Unit();
+            }
+
+            static public Unit bender()
+            {
+                return bender_data;
+            }
+
+            static public Unit url()
+            {
+                return url_data;
+            }
+        
 
         public Unit()
         {
             perception_data = new PerceptionState();
-            unit_name = "Bender";
+            unit_name = null;
 
-            bender_x = 0;
-            bender_y = 0;
+            x_coordinate = 0;
+            y_coordinate = 0;
+
+            current_location = null;
+            previous_location = null;
         }
 
         public Unit(Unit set_from)
         {
-            bender_x = set_from.bender_x;
-            bender_y = set_from.bender_y;
+            x_coordinate = set_from.x_coordinate;
+            y_coordinate = set_from.y_coordinate;
             unit_name = set_from.unit_name;
             perception_data = set_from.perception_data;
+            current_location = set_from.current_location;
+            previous_location = set_from.previous_location;
+            unit_image = set_from.unit_image;
         }
 
         public PerceptionState get_perception_state()

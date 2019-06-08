@@ -1,9 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ReinforcementLearning
 {
     class AlgorithmState
     {
+        //Static members
+        static public AlgorithmState current_state; //This is a pointer to the most recently generated state
+
+        static public List<AlgorithmEpisode> state_history; //This is the history of the entire run, and all the configurations and q-matrix instances.
+                                                            //The head of this list is the current progress point of our algorithm.
+
+        static public bool algorithm_started;
+        static public bool algorithm_ended;
+
+        //Non-static members
         public int episode_count; //current progess
         public int step_count;
 
@@ -21,8 +32,6 @@ namespace ReinforcementLearning
         public float episode_rewards; //Session - Reward data
         public float total_rewards;
 
-        public StatusMessage status_message; //the status message to be displayed.
-
         public Qmatrix live_qmatrix; //Moves will be generated from here.
 
         public int[] location_initial;
@@ -36,60 +45,114 @@ namespace ReinforcementLearning
         public PerceptionState bender_perception_starting;
         public PerceptionState bender_perception_ending;
 
-        //We dont need this for this program
-        //public List<Unit> unit_list; 
+        //Static functions
+        static AlgorithmState()
+        {
+            set_default_configuration();
+        }
 
-        //Empty algorithm state
-        //Dont think i need this
+        //This should be called at the program launch, and when the reset config button is pressed
+        public static void set_default_configuration()
+        {
+            current_state = new AlgorithmState(); //Get defaults
+            state_history = new List<AlgorithmEpisode>(); //initialize history
 
+            algorithm_ended = false;
+            algorithm_started = false;
+            //Consider moving this to algorithm state constructor
+        }
 
-        //Punishments will be an associated string that returns an integer value.
-        public Dictionary<MoveResult, float> reinforcement_factors;
+        public static AlgorithmState get_latest()
+        {
+            int episode_index = state_history.Count - 1;
+            if (episode_index == -1)
+            {
+                return null; //No episodes created
+            }
+            else
+            {
+                int step_index = state_history[episode_index].Count() - 1;
+                if (step_index == -1)
+                    return null; //Step index shouldn't be 0, because we shouldn't call this at a time when we created a new episode but didn't put a state there.
+                else
+                    return state_history[episode_index][step_index];
+            }
+        }
 
+        public static void start_algorithm()
+        {
+            algorithm_started = true;
+            current_state.board_data.shuffle_cans_and_bender();
+        }
+
+        public static void take_step(int steps_to_take) //Go to the most current state, and step forward once. 
+        {   //If the algorithm hasn't started, this will just start the algorithm and leave us at step 0.
+            while (steps_to_take-- > 0 && !algorithm_ended)
+            {
+                if (state_history.Count == 0)
+                {
+                    current_state.start_new_episode();
+                    state_history.Add(new AlgorithmEpisode(current_state.episode_count));
+                }
+                else
+                {
+                    current_state = new AlgorithmState(get_latest()); //Only copy the last state if we have a history
+                                                                      //If the count wasn't 0, then we are starting the algorithm, and the state was built from the interface. No need to copy.
+                    if (state_history.Count() < current_state.episode_count) //When we copied the state above, it determined if this still will belong to a new episode.
+                    //Since the episode count is higher than the index of the episod
+                        state_history.Add(new AlgorithmEpisode(current_state.episode_count));
+                    
+                    else
+                        current_state.generate_step();
+
+                }
+                state_history.Last().Add(current_state); //Add the state to the history list, after everything possible has been done to it.    
+            }
+        }
+
+        static public string get_qmatrix_view(Move move_to_get)
+        {
+            MoveSet to_get = current_state.live_qmatrix.matrix_data[current_state.board_data.bender.get_perception_state()];
+            return to_get.move_list[move_to_get].ToString();
+        }
+
+        public static void erase_board_for_reset()
+        {   //Used ONLY with the reset button, keeps a few old things, like bender's position and settings
+            algorithm_started = false; //Algorithm no longer running
+            current_state.initialize_values();
+            state_history = new List<AlgorithmEpisode>();
+        }
+
+        //Non-static functions
         //Default config algorithm state
         //This is called when the program is launched.
         public AlgorithmState()
         {
-            board_data = new GameBoard(); //Produces a shuffled bender and can-filled board  
-            board_data.clear(); //Clear the board for our initial launch
+            board_data = new GameBoard(); //Produces a shuffled bender and can-filled board 
 
-            live_qmatrix = new Qmatrix();
-
-            location_initial = new int[2] { board_data.bender.bender_x, board_data.bender.bender_y };
-            location_result = new int[2] { 0, 0 };
-
-            //A new episode will produce shuffled cans, but we'll clear it for the loading screen.
-            
-            move_this_step = null;
-            result_this_step = null;
-            obtained_reward = 0;
-
-            status_message = new StatusMessage(this);
-
-            bender_perception_starting = null;
-            
+            initialize_values(); //Gives us some empty defaults
 
             //Set initial data
             e_current = .1F;
             y_current = .9F;
             n_current = .2F;
 
-            reinforcement_factors = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
-            reinforcement_factors.Clear();
-            reinforcement_factors.Add(MoveResultList.move_hit_wall(), -5);
-            reinforcement_factors.Add(MoveResultList.can_collected(), 10);
-            reinforcement_factors.Add(MoveResultList.can_missing(), -1);
-            reinforcement_factors.Add(MoveResultList.move_successful(), 0);
-
             //Default limit
             episode_limit = 5000;
             step_limit = 200;
 
-            episode_count = 1;
+        }
 
-            board_data.bender_percieves();
-            bender_perception_ending = board_data.bender.get_perception_state();
+        //Called from create_empty_board (after reset), and the constructor
+        //Just a useful container for resetting some values when we want to start over, but making a new state would have us lose bender's position.
+        private void initialize_values()
+        {
+            board_data.clear(); //Clear the board for our initial launch(this doesn't remove bender, just cans)
+            episode_count = 0;
+            live_qmatrix = new Qmatrix();
 
+            location_initial = new int[2] { board_data.bender.x_coordinate, board_data.bender.y_coordinate };
+            location_result = new int[2] { 0, 0 };
         }
 
         //Copied from another algorithm state
@@ -109,33 +172,23 @@ namespace ReinforcementLearning
             episode_rewards = set_from.episode_rewards; //Reward data
             total_rewards = set_from.total_rewards;
 
-            status_message = null; //No status message while we're building/stepping the next state
-            move_this_step = null;
-            result_this_step = null;
-            obtained_reward = 0;
+            board_data = new GameBoard(set_from.board_data); //Copy the board
+
+            episode_count = set_from.episode_count;
+            step_count = set_from.step_count;
+            
+            live_qmatrix = new Qmatrix(set_from.live_qmatrix); //Copy the q matrix
+
+            //The initial location will be the resulting location of the last step
+            location_initial = new int[2] { set_from.location_result[0], set_from.location_result[1] };
+
+            bender_perception_starting = set_from.bender_perception_ending;
 
             //Detect if we reached the limit for this episode
             if (step_count == step_limit)
                 start_new_episode();
             else
-            {
-                step_count = set_from.step_count + 1;
-                episode_count = set_from.episode_count;
-            }
-            
-            live_qmatrix = new Qmatrix(set_from.live_qmatrix); //Copy the q matrix
-
-            board_data = new GameBoard(set_from.board_data); //Copy the board
-
-            reinforcement_factors = set_from.reinforcement_factors;
-
-            //The initial location will be the resulting location of the last step
-            location_initial = new int[2] { set_from.location_result[0], set_from.location_result[1] };
-            location_result = null;
-
-            bender_perception_starting = set_from.bender_perception_ending;
-            bender_perception_ending = null;
-
+                ++step_count;
         }
 
         public Percept get_bender_percept(Move direction_to_check)
@@ -145,7 +198,7 @@ namespace ReinforcementLearning
 
         //Used to erase session-based progress.
         //This is also called each new episode once we reach the max steps
-        //Not called when the program launches?
+        //Not called when the program launches
         public void start_new_episode()
         {
             ++episode_count;
@@ -157,14 +210,10 @@ namespace ReinforcementLearning
 
             board_data.bender_percieves();
 
-            location_result = new int[2] { board_data.bender.bender_x, board_data.bender.bender_y };
+            location_result = new int[2] { board_data.bender.x_coordinate, board_data.bender.y_coordinate };
 
             bender_perception_starting = board_data.bender.get_perception_state();
             bender_perception_ending = board_data.bender.get_perception_state();
-
-
-
-            status_message = new StatusMessage(this);
         }
 
         //At the algorithm manager, generate step is ambiguous with actually stepping through the algorithm,
@@ -173,29 +222,28 @@ namespace ReinforcementLearning
         public void generate_step()
         {   
             //Get step from qmatrix. Being randomly generated for now.
-            move_this_step = live_qmatrix.generate_step(); //Tentative; we'll attempt this later. just a random move for now.
+            move_this_step = live_qmatrix.generate_step(board_data.bender.get_perception_state()); //Tentative; we'll attempt this later. just a random move for now.
             result_this_step = board_data.apply_move(move_this_step); //The move should be performed now, if possible.
-            obtained_reward = AlgorithmStateManager.current_state.reinforcement_factors[result_this_step]; //Get the reward for this action
+            obtained_reward = ReinforcementFactors.list[result_this_step]; //Get the reward for this action
 
             episode_rewards += obtained_reward; //Update the rewards total
 
-            if (result_this_step == MoveResultList.can_collected())
+            if (result_this_step == MoveResult.can_collected())
                 ++cans_collected;
 
-            live_qmatrix.update_state(bender_perception_starting, move_this_step, obtained_reward); //give the value to the q matrix to digest
+            if (obtained_reward > 0)
+                live_qmatrix.update_state(bender_perception_starting, move_this_step, obtained_reward); //give the value to the q matrix to digest
 
-            location_result = new int[2] { board_data.bender.bender_x, board_data.bender.bender_y };
+            location_result = new int[2] { board_data.bender.x_coordinate, board_data.bender.y_coordinate };
             bender_perception_ending = board_data.bender.get_perception_state();
 
             if (step_count == step_limit && episode_count > episode_limit)
-                AlgorithmStateManager.algorithm_ended = true;
-
-            status_message = new StatusMessage(this);
+                algorithm_ended = true;
         }
 
         override public string ToString()
         {
-            return "[Step " + step_count + "]";
+            return "[Episode: " + episode_count.ToString() + "][Step: " + step_count + "]";
         }
     } 
 }

@@ -22,9 +22,9 @@ namespace ReinforcementLearning
             unexplored_bitmap = Properties.Resources.background_unexplored;
 
             dictionary = new Dictionary<SquareVisitedState, System.Drawing.Bitmap>();
-            dictionary.Add(SquareVisitedStateList.last(), last_move_bitmap);
-            dictionary.Add(SquareVisitedStateList.explored(), explored_bitmap);
-            dictionary.Add(SquareVisitedStateList.unexplored(), unexplored_bitmap);
+            dictionary.Add(SquareVisitedState.last(), last_move_bitmap);
+            dictionary.Add(SquareVisitedState.explored(), explored_bitmap);
+            dictionary.Add(SquareVisitedState.unexplored(), unexplored_bitmap);
         }
             
         public static System.Drawing.Bitmap last_move()

@@ -52,8 +52,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Source\Algorithm\AlgorithmEpisode.cs" />
-    <Compile Include="Source\Algorithm\AlgorithmStateManager.cs" />
     <Compile Include="Source\Algorithm\AlgorithmState.cs" />
+    <Compile Include="Source\Algorithm\ReinforcementFactors.cs" />
     <Compile Include="Source\Board\Squares\Backgrounds.cs" />
     <Compile Include="Source\Board\PictureBoard.cs" />
     <Compile Include="Source\Board\GameBoard.cs" />
@@ -61,7 +61,6 @@
     <Compile Include="Source\Board\Squares\BoardSquare.cs" />
     <Compile Include="Source\Board\Squares\BaseSquare.cs" />
     <Compile Include="Source\Board\Squares\SquareVisitedState.cs" />
-    <Compile Include="Source\Board\Squares\SquareVisitedStateList.cs" />
     <Compile Include="Source\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,22 +70,17 @@
     <Compile Include="Properties\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Move\Move.cs" />
-    <Compile Include="Source\Move\MoveList.cs" />
     <Compile Include="Source\Move\MoveResult.cs" />
-    <Compile Include="Source\Move\MoveResultList.cs" />
     <Compile Include="Source\MyRandom.cs" />
     <Compile Include="Source\Perception\Percept.cs" />
-    <Compile Include="Source\Perception\PerceptList.cs" />
     <Compile Include="Source\Board\Squares\PictureSquare.cs" />
     <Compile Include="Source\Algorithm\Qmatrix.cs" />
     <Compile Include="Source\Forms\FormsHandler.cs" />
     <Compile Include="Source\Move\MoveSet.cs" />
     <Compile Include="Source\Perception\PerceptionState.cs" />
-    <Compile Include="Source\Perception\PerceptionStateList.cs" />
     <Compile Include="Source\Forms\StatusMessage.cs" />
     <Compile Include="Source\Board\Unit.cs" />
-    <Compile Include="Source\Board\Squares\Wall.cs" />
-    <Compile Include="Source\Board\Squares\WallsList.cs" />
+    <Compile Include="Source\Board\Squares\BoardSquareWalls.cs" />
     <EmbeddedResource Include="Source\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

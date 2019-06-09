@@ -8,11 +8,11 @@ namespace ReinforcementLearning
 {
     static class ReinforcementFactors
     {
-        public static Dictionary<MoveResult, float> list;
+        public static Dictionary<MoveResult, double> list;
 
         static ReinforcementFactors()
         {
-            list = new Dictionary<MoveResult, float>(); //initialize reinforcement factor list
+            list = new Dictionary<MoveResult, double>(); //initialize reinforcement factor list
             list.Clear();
             list.Add(MoveResult.move_hit_wall(), -5);
             list.Add(MoveResult.can_collected(), 10);

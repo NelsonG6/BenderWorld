@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ReinforcementLearning
@@ -16,8 +17,7 @@ namespace ReinforcementLearning
         static public bool algorithm_started; //Used for the status message
         static public bool algorithm_ended;
 
-        public static int step_limit;
-        public static int episode_limit;
+
 
         //Non-static members
         public GameBoard board_data; //Stores the state of the cans and walls (bender is stored with other coordinates)
@@ -27,11 +27,10 @@ namespace ReinforcementLearning
         public PerceptionState bender_perception_starting;
         public PerceptionState bender_perception_ending;
 
-        public int episode_count; //current progess
-        public int step_count;
 
-        public float episode_rewards; //Session - Reward data
-        public float total_rewards;
+
+        public double episode_rewards; //Session - Reward data
+        public double total_rewards;
 
         public int[] location_initial; //Just used for the status message
         public int[] location_result;
@@ -39,17 +38,11 @@ namespace ReinforcementLearning
         public Move move_this_step; //The move we took this step, stored for the status message
         public MoveResult result_this_step; //Moveresult stored for status
 
-        public float obtained_reward; //The raw reward for the action we took
+
+
+        public double obtained_reward; //The raw reward for the action we took
 
         public int cans_collected;
-
-        //Static functions
-        static AlgorithmState()
-        {
-            SetDefaultConfiguration();
-            step_limit = 200;
-            episode_limit = 5000;
-        }
 
         //This should be called at the program launch, and when the reset config button is pressed
         public static void SetDefaultConfiguration()
@@ -57,8 +50,10 @@ namespace ReinforcementLearning
             state_history = new List<AlgorithmEpisode>(); //initialize history
             state_history.Add(new AlgorithmEpisode(1)); //Create the first episode. The current state is retieved from the most recent point. 
 
+
+
             algorithm_ended = false;
-            algorithm_started = false;
+            algorithm_started = false;           
         }
 
         public static AlgorithmState GetCurrentState()
@@ -87,20 +82,17 @@ namespace ReinforcementLearning
         }
 
         //Manages the state history, and making sure the correct state is being created/stored
-        public static void PrepareStep(int steps_to_take) //Go to the most current state, and step forward once. 
+        public static void PrepareStep() //Go to the most current state, and step forward once. 
         {   //If the algorithm hasn't started, this will just start the algorithm and leave us at step 0.
-            while (steps_to_take-- > 0 && !algorithm_ended)
-            {
-                //use start new episode if this is the first step
-                //step and add, or dont step and dont add
-                AlgorithmState step_with = new AlgorithmState(GetCurrentState());
 
-                if (step_with.step_count > step_limit)
-                    state_history.Add(new AlgorithmEpisode(state_history.Count + 1)); //Add the first empty episode
-                else
-                    step_with.TakeStep();
-                state_history.Last().Add(step_with); //Add the state to the history list, after everything possible has been done to it.    
-            }
+            //use start new episode if this is the first step
+            //step and add, or dont step and dont add
+            AlgorithmState step_with = new AlgorithmState(GetCurrentState());
+
+            if (step_with.GetStepNumber() == Qmatrix.step_limit)
+                state_history.Add(new AlgorithmEpisode(state_history.Count + 1)); //Add the first empty episode
+            step_with.TakeStep();
+            state_history.Last().Add(step_with); //Add the state to the history list, after everything possible has been done to it.    
         }
 
         //Gets the qmatrix view for the give move at bender's current position
@@ -116,9 +108,7 @@ namespace ReinforcementLearning
             InitializeValues();
             state_history = new List<AlgorithmEpisode>();
             state_history.Add(new AlgorithmEpisode(1));
-
-            step_limit = 200;
-            episode_limit = 5000;
+            FormsHandler.ResetConfiguration();
         }
 
         //Non-static functions
@@ -139,10 +129,7 @@ namespace ReinforcementLearning
         private void InitializeValues()
         {
             board_data.ClearCans(); //Clear the board for our initial launch(this doesn't remove bender, just cans)
-            episode_count = 0;
             live_qmatrix = new Qmatrix();
-
-
 
             location_initial = new int[2] { 0, 0 };
             location_result = new int[2] { 0, 0 };
@@ -160,23 +147,20 @@ namespace ReinforcementLearning
 
             board_data = new GameBoard(set_from.board_data); //Copy the board
 
-            episode_count = set_from.episode_count;
-            
-            
+            //Increase steps in here
             live_qmatrix = new Qmatrix(set_from.live_qmatrix); //Copy the q matrix
-
+            
             //The initial location will be the resulting location of the last step
             location_initial = new int[2] { set_from.location_result[0], set_from.location_result[1] };
 
             bender_perception_starting = set_from.bender_perception_ending;
 
             //Detect if we reached the limit for this episode
-            step_count = set_from.step_count;
 
-            if (step_count == step_limit)
+            if (live_qmatrix.step_number == Qmatrix.step_limit)
                 StartNewEpisode();
             else
-                ++step_count;
+                live_qmatrix.step_number++;
         }
 
         public Percept GetBenderPercept(Move direction_to_check)
@@ -189,8 +173,8 @@ namespace ReinforcementLearning
         //Not called when the program launches
         public void StartNewEpisode()
         {
-            ++episode_count;
-            step_count = 0;
+
+
             cans_collected = 0;
             episode_rewards = 0; //Session - Reward data
 
@@ -202,6 +186,8 @@ namespace ReinforcementLearning
 
             bender_perception_starting = board_data.bender.get_perception_state();
             bender_perception_ending = board_data.bender.get_perception_state();
+
+            live_qmatrix.ProcessNewEpisode();
         }
 
         //At the algorithm manager, generate step is ambiguous with actually stepping through the algorithm,
@@ -210,7 +196,7 @@ namespace ReinforcementLearning
         public void TakeStep()
         {   
             //Get step from qmatrix. Being randomly generated for now.
-            move_this_step = live_qmatrix.generate_step(board_data.bender.get_perception_state()); //Tentative; we'll attempt this later. just a random move for now.
+            move_this_step = live_qmatrix.GenerateStep(bender_perception_starting); //Tentative; we'll attempt this later. just a random move for now.
             result_this_step = board_data.ApplyMove(move_this_step); //The move should be performed now, if possible.
             obtained_reward = ReinforcementFactors.list[result_this_step]; //Get the reward for this action
 
@@ -219,19 +205,19 @@ namespace ReinforcementLearning
             if (result_this_step == MoveResult.can_collected())
                 ++cans_collected;
 
-            if (obtained_reward != 0)
-                live_qmatrix.update_state(bender_perception_starting, move_this_step, obtained_reward); //give the value to the q matrix to digest
-
             location_result = new int[2] { board_data.bender.x_coordinate, board_data.bender.y_coordinate };
             bender_perception_ending = board_data.bender.get_perception_state();
 
-            if (step_count == step_limit && episode_count > episode_limit)
+            live_qmatrix.UpdateState(bender_perception_starting, bender_perception_ending, move_this_step, obtained_reward); 
+            //give the value to the q matrix to digest
+
+            if (GetStepNumber() == Qmatrix.step_limit && GetEpisodeNumber() > Qmatrix.episode_limit)
                 algorithm_ended = true;
         }
 
         override public string ToString()
         {
-            return "[Episode: " + episode_count.ToString() + "][Step: " + step_count + "]";
+            return "[Episode: " + GetEpisodeNumber().ToString() + "][Step: " + GetStepNumber() + "]";
         }
 
         public static Qmatrix GetCurrentQmatrix()
@@ -250,5 +236,25 @@ namespace ReinforcementLearning
             state_history.Last().Add(to_add);
         }
         
+        public int GetEpisodeLimit()
+        {
+            return Qmatrix.episode_limit;
+        }
+
+        public int GetStepLimit()
+        {
+            return Qmatrix.step_limit;
+        }
+
+        public int GetEpisodeNumber()
+        {
+            return live_qmatrix.episode_number;
+        }
+
+        public int GetStepNumber()
+        {
+            return live_qmatrix.step_number;
+        }
+
     } 
 }

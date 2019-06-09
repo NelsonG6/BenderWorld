@@ -15,13 +15,12 @@ namespace ReinforcementLearning
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Second entry point of the program.
-            //When the form loads, we'll create some pictureboxes, that will function as the robot world grid.
+            AlgorithmState.SetDefaultConfiguration();
 
-            //Used for creating pictureboxes and their point values
-            int edge_length = 75;
-            int x_offset = 50;
-            int y_offset = 55;
+
+            //Second entry point of the program.
+            //When the form loads, we'll create some pictureboxes, that will function as the robot world grid.            
+
 
             PictureBox picturebox_in_progress; //Temporary picturebox
             PictureSquare square_to_build; //This is object inherits from boardSquare, but has a picture element.
@@ -35,11 +34,13 @@ namespace ReinforcementLearning
                     picturebox_in_progress = new PictureBox();
                     square_to_build = new PictureSquare();
                     picturebox_in_progress.Name = i.ToString() + "-" + j.ToString(); //Each name is the coordinate
-                    picturebox_in_progress.Location = new Point(x_offset + (i * edge_length), y_offset + (j * edge_length));
-                    picturebox_in_progress.Size = new Size(edge_length, edge_length);
+                    picturebox_in_progress.Location =
+                        new Point(  InitialSettings.x_offset() + (i * InitialSettings.edge_length()),
+                                    InitialSettings.y_offset() + (j * InitialSettings.edge_length()));
+                    picturebox_in_progress.Size = new Size(InitialSettings.edge_length(), InitialSettings.edge_length());
                     picturebox_in_progress.SizeMode = PictureBoxSizeMode.StretchImage;
                     picturebox_in_progress.BackgroundImageLayout = ImageLayout.Stretch;
-                    this.Controls.Add(picturebox_in_progress);
+                    Controls.Add(picturebox_in_progress);
                     square_to_build.pictureData = picturebox_in_progress;
                     FormsHandler.Add(i, 9-j, square_to_build); //9-j to handle the board layout, for some reason!
                 }
@@ -49,7 +50,7 @@ namespace ReinforcementLearning
             //This triggers the constructor for algorithm manager, as well
 
             textboxStatus.Text = "Program launched.";
-            //AlgorithmState.GetCurrentBoard().ClearCans();
+            
             FormsHandler.DisplayState(); //First time we display the board.
         }
 
@@ -80,7 +81,7 @@ namespace ReinforcementLearning
 
         private void restart_algorithm_button_click(object sender, EventArgs e)
         {
-            FormsHandler.HandleRestart(AlgorithmState.GetCurrentState());
+            FormsHandler.StopAlgorithm(AlgorithmState.GetCurrentState());
             
             change_enabled_setting(); //Togle controls
         }
@@ -92,12 +93,12 @@ namespace ReinforcementLearning
             int steps_to_take = Int32.Parse(comboboxAdvancesteps.Text);
             int episodes = Int32.Parse(comboboxAdvanceepisodes.Text);
             if (episodes > 0)
-                steps_to_take += (Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmState.step_limit) + 1; //+1 to get the new episode generated
+                steps_to_take += (Int32.Parse(comboboxAdvanceepisodes.Text) * FormsHandler.loaded_state.GetStepLimit()) + 1; //+1 to get the new episode generated
 
             int initial_delay = Int32.Parse(comboboxDelayms.Text);
             int delay = initial_delay;
 
-            if(delay > 25 || steps_to_take > 4)
+            if(steps_to_take > 1)
             {
                 textboxProgresssteps.Text = steps_to_take.ToString();
                 groupboxCountdown.Enabled = true;
@@ -105,8 +106,7 @@ namespace ReinforcementLearning
                 groupboxHistory.Enabled = false;
                 while (steps_to_take-- > 0 && !FormsHandler.halted)
                 {
-                    
-                    AlgorithmState.PrepareStep(1);
+                    AlgorithmState.PrepareStep();
                     FormsHandler.LoadAndDisplayState(AlgorithmState.GetCurrentState());
                     textboxProgresssteps.Text = steps_to_take.ToString();
                     do
@@ -123,7 +123,7 @@ namespace ReinforcementLearning
 
             else
             {
-                AlgorithmState.PrepareStep(steps_to_take);
+                AlgorithmState.PrepareStep();
                 FormsHandler.LoadAndDisplayState(AlgorithmState.GetCurrentState());
             }
             
@@ -136,7 +136,7 @@ namespace ReinforcementLearning
                 comboboxEpisode.Text = "Invalid.";
             else
             {
-                AlgorithmState.episode_limit = result;
+                Qmatrix.episode_limit = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -148,7 +148,7 @@ namespace ReinforcementLearning
                 comboboxSteps.Text = "Invalid.";
             else
             {
-                AlgorithmState.step_limit = result;
+                Qmatrix.step_limit = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -156,7 +156,7 @@ namespace ReinforcementLearning
         private void set_n_from_dropdown(object sender, EventArgs e)
         {
 
-            bool success = float.TryParse(comboboxN.Text, out float result);
+            bool success = double.TryParse(comboboxN.Text, out double result);
             if (!success)
                 comboboxN.Text = "Invalid.";
             else
@@ -168,7 +168,7 @@ namespace ReinforcementLearning
 
         private void set_y_from_dropdown(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxY.Text, out float result);
+            bool success = double.TryParse(comboboxY.Text, out double result);
             if (!success)
                 comboboxY.Text = "Invalid.";
             else
@@ -185,7 +185,7 @@ namespace ReinforcementLearning
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxE.Text, out float result);
+            bool success = double.TryParse(comboboxE.Text, out double result);
             if (!success)
                 comboboxE.Text = "Invalid.";
             else
@@ -197,7 +197,7 @@ namespace ReinforcementLearning
 
         private void button4_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxWallpunishment.Text, out float result);
+            bool success = double.TryParse(comboboxWallpunishment.Text, out double result);
             if (!success)
                 comboboxWallpunishment.Text = "Invalid.";
             else
@@ -209,7 +209,7 @@ namespace ReinforcementLearning
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxEmptysquare.Text, out float result);
+            bool success = double.TryParse(comboboxEmptysquare.Text, out double result);
             if (!success)
                 comboboxEmptysquare.Text = "Invalid.";
             else
@@ -221,7 +221,7 @@ namespace ReinforcementLearning
 
         private void button8_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxBeer.Text, out float result);
+            bool success = double.TryParse(comboboxBeer.Text, out double result);
             if (!success)
                 comboboxBeer.Text = "Invalid.";
             else
@@ -233,13 +233,12 @@ namespace ReinforcementLearning
 
         private void reset_config_button_click(object sender, EventArgs e)
         {
-            AlgorithmState.SetDefaultConfiguration();
-            FormsHandler.DisplayInitialSettings();
+            FormsHandler.ResetConfiguration();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxMovedwithoutwall.Text, out float result);
+            bool success = double.TryParse(comboboxMovedwithoutwall.Text, out double result);
             if (!success)
                 comboboxMovedwithoutwall.Text = "Invalid.";
             else
@@ -307,7 +306,7 @@ namespace ReinforcementLearning
 
         private void button6_Click(object sender, EventArgs e)
         {
-            bool success = float.TryParse(comboboxEmptysquare.Text, out float result);
+            bool success = double.TryParse(comboboxEmptysquare.Text, out double result);
             if (!success)
                 comboboxEmptysquare.Text = "Invalid.";
             else
@@ -401,7 +400,7 @@ namespace ReinforcementLearning
         {
             bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
             if (!success || result < 0)
-                comboboxDelayms.Text = "5";
+                comboboxDelayms.Text = InitialSettings.ms_delay().ToString();
             else
                 comboboxDelayms.Text = result.ToString();
         }
@@ -479,8 +478,8 @@ namespace ReinforcementLearning
             if (e.KeyChar == 13)
             {
                 bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
-                if (!success || result < 5)
-                    comboboxDelayms.Text = "5";
+                if (!success || result < InitialSettings.ms_delay())
+                    comboboxDelayms.Text = InitialSettings.ms_delay().ToString();
                 else
                     comboboxDelayms.Text = result.ToString();
 

@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Source\Algorithm\AlgorithmEpisode.cs" />
     <Compile Include="Source\Algorithm\AlgorithmState.cs" />
+    <Compile Include="Source\InitialSettings.cs" />
     <Compile Include="Source\Algorithm\ReinforcementFactors.cs" />
     <Compile Include="Source\Board\Squares\Backgrounds.cs" />
     <Compile Include="Source\Board\PictureBoard.cs" />

@@ -134,9 +134,9 @@ namespace ReinforcementLearning
         }
 
         //This is called when the algorithm has been reset
-        public void clear()
+        public void ClearCans()
         {
-            //Clear all the pictures
+            //Clear all cans
             foreach (var i in board_data)
             {
                 foreach (var j in i)
@@ -149,7 +149,7 @@ namespace ReinforcementLearning
             }
         }
 
-        public void clone_position(GameBoard clone_from)
+        public void ClonePosition(GameBoard clone_from)
         {
             for(int i = 0; i < board_size; i++)
             {
@@ -160,14 +160,14 @@ namespace ReinforcementLearning
             }
         }
 
-        public bool is_bender_on_can()
+        public bool IsBenderOnCan()
         {
             return board_data[bender.x_coordinate][bender.y_coordinate].beer_can_present;
         }
 
 
 
-        public MoveResult apply_move(Move move_to_apply)
+        public MoveResult ApplyMove(Move move_to_apply)
         {
             get_square_unit_is_on(bender).visited_state = SquareVisitedState.last();
 
@@ -190,11 +190,11 @@ namespace ReinforcementLearning
             }
             //Didn't try to grab a can, and didn't hit a wall. We moved successfully.
 
-            move_bender(move_to_apply);
+            MoveBender(move_to_apply);
             return MoveResult.move_successful();
         }
 
-        public void move_bender(Move to_move)
+        public void MoveBender(Move to_move)
         {
             get_square_unit_is_on(bender).bender_present = false;
 

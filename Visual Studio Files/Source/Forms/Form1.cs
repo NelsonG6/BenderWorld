@@ -41,7 +41,7 @@ namespace ReinforcementLearning
                     picturebox_in_progress.BackgroundImageLayout = ImageLayout.Stretch;
                     this.Controls.Add(picturebox_in_progress);
                     square_to_build.pictureData = picturebox_in_progress;
-                    FormsHandler.add(i, 9-j, square_to_build); //9-j to handle the board layout, for some reason!
+                    FormsHandler.Add(i, 9-j, square_to_build); //9-j to handle the board layout, for some reason!
                 }
             }
 
@@ -49,7 +49,8 @@ namespace ReinforcementLearning
             //This triggers the constructor for algorithm manager, as well
 
             textboxStatus.Text = "Program launched.";
-            FormsHandler.display_state(); //First time we display the board.
+            //AlgorithmState.GetCurrentBoard().ClearCans();
+            FormsHandler.DisplayState(); //First time we display the board.
         }
 
         private void change_enabled_setting()
@@ -72,15 +73,15 @@ namespace ReinforcementLearning
         private void start_algorithm(object sender, EventArgs e)
         {
             change_enabled_setting(); //Toggle controls
-            AlgorithmState.start_algorithm();
-            AlgorithmState.take_step(1); //This will start the algorithm
-            FormsHandler.display_state();
+            AlgorithmState.StartAlgorithm();
+
+            FormsHandler.LoadAndDisplayState(AlgorithmState.GetCurrentState());
         }
 
-        private void reset_algorithm(object sender, EventArgs e)
-        {            
-            AlgorithmState.erase_board_for_reset(); //Special function that creates a new board but keeps bender's position
-            FormsHandler.clear_after_board_reset(); //Clear comboboxes and other forms
+        private void restart_algorithm_button_click(object sender, EventArgs e)
+        {
+            FormsHandler.HandleRestart(AlgorithmState.GetCurrentState());
+            
             change_enabled_setting(); //Togle controls
         }
 
@@ -91,7 +92,7 @@ namespace ReinforcementLearning
             int steps_to_take = Int32.Parse(comboboxAdvancesteps.Text);
             int episodes = Int32.Parse(comboboxAdvanceepisodes.Text);
             if (episodes > 0)
-                steps_to_take += (Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmState.current_state.step_limit) + 1; //+1 to get the new episode generated
+                steps_to_take += (Int32.Parse(comboboxAdvanceepisodes.Text) * AlgorithmState.step_limit) + 1; //+1 to get the new episode generated
 
             int initial_delay = Int32.Parse(comboboxDelayms.Text);
             int delay = initial_delay;
@@ -105,8 +106,8 @@ namespace ReinforcementLearning
                 while (steps_to_take-- > 0 && !FormsHandler.halted)
                 {
                     
-                    AlgorithmState.take_step(1);
-                    FormsHandler.display_state();
+                    AlgorithmState.PrepareStep(1);
+                    FormsHandler.LoadAndDisplayState(AlgorithmState.GetCurrentState());
                     textboxProgresssteps.Text = steps_to_take.ToString();
                     do
                     {
@@ -122,8 +123,8 @@ namespace ReinforcementLearning
 
             else
             {
-                AlgorithmState.take_step(steps_to_take);
-                FormsHandler.display_state();
+                AlgorithmState.PrepareStep(steps_to_take);
+                FormsHandler.LoadAndDisplayState(AlgorithmState.GetCurrentState());
             }
             
         }
@@ -135,8 +136,8 @@ namespace ReinforcementLearning
                 comboboxEpisode.Text = "Invalid.";
             else
             {
-                AlgorithmState.current_state.episode_limit = result;
-                FormsHandler.display_initial_settings();
+                AlgorithmState.episode_limit = result;
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -147,8 +148,8 @@ namespace ReinforcementLearning
                 comboboxSteps.Text = "Invalid.";
             else
             {
-                AlgorithmState.current_state.step_limit = result;
-                FormsHandler.display_initial_settings();
+                AlgorithmState.step_limit = result;
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -160,8 +161,8 @@ namespace ReinforcementLearning
                 comboboxN.Text = "Invalid.";
             else
             {
-                AlgorithmState.current_state.n_current = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.loaded_state.live_qmatrix.n_current = result;
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -172,8 +173,8 @@ namespace ReinforcementLearning
                 comboboxY.Text = "Invalid.";
             else
             {
-                AlgorithmState.current_state.y_current = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.loaded_state.live_qmatrix.y_current = result;
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -189,8 +190,8 @@ namespace ReinforcementLearning
                 comboboxE.Text = "Invalid.";
             else
             {
-                AlgorithmState.current_state.e_current = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.loaded_state.live_qmatrix.e_current = result;
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -202,7 +203,7 @@ namespace ReinforcementLearning
             else
             {
                 ReinforcementFactors.list[MoveResult.move_hit_wall()] = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -214,7 +215,7 @@ namespace ReinforcementLearning
             else
             {
                 ReinforcementFactors.list[MoveResult.can_missing()] = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -226,14 +227,14 @@ namespace ReinforcementLearning
             else
             {
                 ReinforcementFactors.list[MoveResult.can_collected()] = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void reset_config_button_click(object sender, EventArgs e)
         {
-            AlgorithmState.set_default_configuration();
-            FormsHandler.display_initial_settings();
+            AlgorithmState.SetDefaultConfiguration();
+            FormsHandler.DisplayInitialSettings();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -244,7 +245,7 @@ namespace ReinforcementLearning
             else
             {
                 ReinforcementFactors.list[MoveResult.move_successful()] = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -312,7 +313,7 @@ namespace ReinforcementLearning
             else
             {
                 ReinforcementFactors.list[MoveResult.can_missing()] = result;
-                FormsHandler.display_initial_settings();
+                FormsHandler.DisplayInitialSettings();
             }
         }
 
@@ -337,13 +338,6 @@ namespace ReinforcementLearning
             if (comboboxEpisode.Text == "Invalid.")
                 comboboxEpisode.Text = "";
         }
-
-        private void buttonAdvanceepisodesdropdown_Click(object sender, EventArgs e)
-        {
-            FormsHandler.display_state();
-        }
-
-
 
         private void qmatrix_small_dropdown_changed(object sender, EventArgs e)
         {
@@ -407,7 +401,7 @@ namespace ReinforcementLearning
         {
             bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
             if (!success || result < 0)
-                comboboxDelayms.Text = "0";
+                comboboxDelayms.Text = "5";
             else
                 comboboxDelayms.Text = result.ToString();
         }
@@ -421,18 +415,17 @@ namespace ReinforcementLearning
 
         private void history_index_changed(object sender, EventArgs e)
         {
-            if (comboboxHistoryepisode.SelectedIndex != -1)
-            {
-                comboboxHistorystep.Enabled = true;
-                comboboxHistorystep.Items.Clear();
-                int index = comboboxHistoryepisode.SelectedIndex;
-                comboboxHistorystep.Items.AddRange(AlgorithmState.state_history[index].ToArray());
-            }
-            else
+            ComboBox sender_box = (ComboBox)sender;
+            if (sender_box.SelectedIndex > -1)
             {
                 comboboxHistorystep.Items.Clear();
-                comboboxHistorystep.Text = "";
-                comboboxHistorystep.Enabled = false;
+
+                AlgorithmEpisode to_display = (AlgorithmEpisode)sender_box.SelectedItem;
+                comboboxHistorystep.Items.AddRange(to_display.state_history_data.ToArray());
+                comboboxHistorystep.SelectedIndex = 0;
+
+                AlgorithmState state_to_display = (AlgorithmState)comboboxHistorystep.Items[0];
+                FormsHandler.LoadAndDisplayState(state_to_display);
             }
         }
 
@@ -443,18 +436,55 @@ namespace ReinforcementLearning
 
         private void comboboxHistorystep_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboboxAdvancesteps.SelectedIndex != -1)
-            {
-                //view history
-                AlgorithmState.current_state = (AlgorithmState)comboboxHistorystep.SelectedItem;
-                FormsHandler.display_state();
-            }
+            AlgorithmState state_to_dislay = (AlgorithmState)((ComboBox)sender).SelectedItem;
+            FormsHandler.LoadAndDisplayState(state_to_dislay);
         }
 
         private void dropdown_closed_numberepisodes(object sender, EventArgs e)
         {
             
             set_episode_from_dropdown(sender, e);
+        }
+
+        private void comboboxHistoryepisode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                bool success = Int32.TryParse(comboboxHistoryepisode.Text, out int result);
+                if (!success || result < 1 || result > comboboxHistoryepisode.Items.Count)
+                    comboboxHistoryepisode.Text = "Invalid.";
+                else
+                    comboboxHistoryepisode.SelectedIndex = result - 1;
+            }
+        }
+
+        private void comboboxHistorystep_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                bool success = Int32.TryParse(comboboxHistorystep.Text, out int result);
+                if (!success || result < 1 || result > comboboxHistorystep.Items.Count)
+                    comboboxHistorystep.Text = "Invalid.";
+                else
+                {
+                    comboboxHistorystep.SelectedIndex = result;
+                    FormsHandler.LoadAndDisplayState((AlgorithmState)comboboxHistorystep.SelectedItem);
+                }
+                    
+            }
+        }
+
+        private void comboboxDelayms_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                bool success = Int32.TryParse(comboboxDelayms.Text, out int result);
+                if (!success || result < 5)
+                    comboboxDelayms.Text = "5";
+                else
+                    comboboxDelayms.Text = result.ToString();
+
+            }
         }
     }
 }

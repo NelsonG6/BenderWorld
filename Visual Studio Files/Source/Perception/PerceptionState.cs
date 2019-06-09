@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReinforcementLearning
 {
@@ -13,7 +11,6 @@ namespace ReinforcementLearning
         public SortedDictionary<Move, Percept> perception_data;
 
         public string name_without_id;
-
         public string name_with_id;
 
         public int ID;

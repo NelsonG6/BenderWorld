@@ -135,5 +135,10 @@ namespace ReinforcementLearning
         {
             return this.long_name.CompareTo(compare_from.long_name);
         }
+
+        override public string ToString()
+        {
+            return long_name;
+        }
     }
 }

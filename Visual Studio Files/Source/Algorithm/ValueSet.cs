@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ReinforcementLearning
 {
     //This class is useful for simplifying the q-matrix
     //This class will manage the list of 5 q moves that are associated with each state in the q-matrix.
-    //Each Row of the q matrix has one of these items, so there will be 243 total.
-    class MoveSet
+    //A valueset is a row of the q matrix.
+    class ValueSet
     {
         //5 moves with q-matrix float values associated for each one
         public Dictionary<Move, float> move_list;
 
-        public MoveSet()
+        public ValueSet()
         {
             move_list = new Dictionary<Move, float>();
 
@@ -25,7 +21,7 @@ namespace ReinforcementLearning
             }
         }
 
-        public MoveSet(MoveSet set_from)
+        public ValueSet(ValueSet set_from)
         {
             move_list = new Dictionary<Move, float>();
             foreach (var i in set_from.move_list)
@@ -34,19 +30,5 @@ namespace ReinforcementLearning
             }
         }
 
-        /*
-        public MoveSet(Move set_from, float value_to_adjust)
-        {
-            move_list = new Dictionary<Move, float>();
-
-            move_list = new Dictionary<Move, float>();
-            foreach (var i in Move.get_moves())
-            {
-                move_list.Add(i, 0f);
-                if (set_from == i)
-                    move_list[i] = +value_to_adjust;
-            }
-        }
-        */
     }
 }

@@ -63,7 +63,6 @@ namespace ReinforcementLearning
 
         static public bool lock_index_change_events;
 
-
         //static public bool is_drop_down_open; //why do i need this?
 
 
@@ -86,11 +85,15 @@ namespace ReinforcementLearning
         //This will be set from the outside, and we will display whatever is in here.
         //static public AlgorithmState current_state;
 
+        static public AlgorithmState loaded_state; //The forms handler essentially always stores one state to be displayed at a time.
+
         static public PictureBoard picture_board; //Stored seperately from the algorithm state because this board will store PictureSquares
 
         static FormsHandler()
         {
             picture_board = new PictureBoard();
+
+            loaded_state = new AlgorithmState(); //We handle our own algorithm state.
 
             lock_index_change_events = false;
             halted = false;
@@ -101,24 +104,32 @@ namespace ReinforcementLearning
             //Initialize dropdown boxes
             control_progress_steps.SelectedIndex = 0;
             control_progress_episodes.Text = "0"; ;
-            control_progress_delay.Text = "25";
+            control_progress_delay.Text = "5";
 
             foreach(var i in list_qmatrix_comboboxes)
             {
                 i.Value.SelectedIndex = -1;
             }
             
-            display_initial_settings();
+            DisplayInitialSettings();
         }
 
-        static public void display_initial_settings()
+        public static void HandleRestart(AlgorithmState to_handle)
+        {
+            loaded_state = to_handle;
+            to_handle.EraseBoardForReset(); //Special function that creates a new board but keeps bender's position   
+            //clear the board and keep bender 
+            ClearFormsAfterRestart(); //Clear comboboxes and other forms
+        }
+
+        static public void DisplayInitialSettings()
         {
             //initial settings
-            number_of_episodes.Text = AlgorithmState.current_state.episode_limit.ToString(); //Constructor launcher for algorithmstate 6-5
-            number_of_steps.Text = AlgorithmState.current_state.step_limit.ToString();
-            n_initial.Text = AlgorithmState.current_state.n_current.ToString();
-            y_initial.Text = AlgorithmState.current_state.y_current.ToString();
-            e_initial.Text = AlgorithmState.current_state.e_current.ToString();
+            number_of_episodes.Text = AlgorithmState.episode_limit.ToString(); //Constructor launcher for algorithmstate 6-5
+            number_of_steps.Text = AlgorithmState.step_limit.ToString();
+            n_initial.Text = loaded_state.live_qmatrix.n_current.ToString();
+            y_initial.Text = loaded_state.live_qmatrix.y_current.ToString();
+            e_initial.Text = loaded_state.live_qmatrix.e_current.ToString();
             empty_square_punishment_textbox.Text = ReinforcementFactors.list[MoveResult.can_missing()].ToString();
             wall_punishment_textbox.Text = ReinforcementFactors.list[MoveResult.move_hit_wall()].ToString();
             beer_reward_textbox.Text = ReinforcementFactors.list[MoveResult.can_collected()].ToString();
@@ -126,7 +137,7 @@ namespace ReinforcementLearning
         }
 
         //Used after "algorithm reset" button is pressed. Not used during algorithm run.
-        static public void clear_after_board_reset()
+        static public void ClearFormsAfterRestart()
         {
             //This needs to handle the data that is not viewed when the algorithm isn't running
             lock_index_change_events = true;
@@ -137,49 +148,58 @@ namespace ReinforcementLearning
                 i.Value.Clear();
             }
 
+            //Session progess textboxes
             foreach(var i in list_session_progress)
             {
                 i.Clear();
             }
 
-            qmatrix_state_combobox_large.Text = "";
+            qmatrix_state_combobox_large.Text = "Select a board state...";
 
             foreach (var i in list_qmatrix_comboboxes.Values) { i.Items.Clear(); i.Text = ""; }
             foreach (var i in List_qmatrix_value_textboxes.Values) { i.Clear(); }
 
             lock_index_change_events = false;
 
-            FormsHandler.display_state();
+            combobox_history_steps.Items.Clear();
+            combobox_history_steps.Text = "View prior steps...";
+
+            combobox_history_episodes.Items.Clear();
+            combobox_history_episodes.Text = "View prior episodes...";
+
+            DisplayState();
         }
+
+        
 
         //This is ran every time we step through the algorithm.
         //Handles updating all the fields that change every time we look at new data
         //This method handles any time we are updating what is displayed for any reason once the algorithm is active
         //We expect the algorithm state to be set from the outside before we enter this.
         //This will also handle updating the history dropdowns
-        static public void display_state()
+        static public void DisplayState()
         {
-            picture_board.clone_position(AlgorithmState.current_state.board_data); //This copies the state's board over to our PictureSquare board.
+            picture_board.clone_position(loaded_state.board_data); //This copies the state's board over to our PictureSquare board.
 
             //Textboxes update
             if (AlgorithmState.algorithm_started) //Only display this if we've started
             {
                 //This will configure the q-matrix dropdowns properly, and handle if there is no qmatrix as well.
                 //This doesn't affect the stored entries textbox
-                handle_qmatrix_forms(AlgorithmState.current_state, AlgorithmState.current_state.bender_perception_starting);
+                HandleQmatrixForms(loaded_state, loaded_state.bender_perception_starting);
 
                 //Session progress
-                step_number.Text = AlgorithmState.current_state.step_count.ToString();
-                episode_number.Text = AlgorithmState.current_state.episode_count.ToString();
-                e_session.Text = AlgorithmState.current_state.e_current.ToString();
-                n_session.Text = AlgorithmState.current_state.n_current.ToString();
-                y_session.Text = AlgorithmState.current_state.y_current.ToString();
+                step_number.Text = loaded_state.step_count.ToString();
+                episode_number.Text = loaded_state.episode_count.ToString();
+                e_session.Text = loaded_state.live_qmatrix.e_current.ToString();
+                n_session.Text = loaded_state.live_qmatrix.n_current.ToString();
+                y_session.Text = loaded_state.live_qmatrix.y_current.ToString();
 
                 //If this moveset doesn't exist, we should get an error.
                 //This function should only be called at the algorithm start, or from a dropdown that has a valid q-matrix combination.
                 //These textboxes handle percepts
 
-                PerceptionState to_view = AlgorithmState.current_state.board_data.get_bender_perception();
+                PerceptionState to_view = loaded_state.board_data.get_bender_perception();
 
                 foreach (var i in Move.list)
                 {
@@ -187,10 +207,10 @@ namespace ReinforcementLearning
 
                 }
 
-                beer_remaining.Text = AlgorithmState.current_state.board_data.get_cans_remaining().ToString();
-                beer_collected.Text = AlgorithmState.current_state.cans_collected.ToString();
-                reward_episode.Text = AlgorithmState.current_state.episode_rewards.ToString();
-                reward_total.Text = AlgorithmState.current_state.total_rewards.ToString();
+                beer_remaining.Text = loaded_state.board_data.get_cans_remaining().ToString();
+                beer_collected.Text = loaded_state.cans_collected.ToString();
+                reward_episode.Text = loaded_state.episode_rewards.ToString();
+                reward_total.Text = loaded_state.total_rewards.ToString();
 
                 //Update the history episode dropdown
                 if (combobox_history_episodes.Items.Count < AlgorithmState.state_history.Count)
@@ -198,16 +218,16 @@ namespace ReinforcementLearning
 
                 combobox_history_episodes.SelectedIndex = combobox_history_episodes.Items.Count - 1;
 
-                combobox_history_steps.Items.Clear();
-                combobox_history_steps.Text = "Episodes will appear here.";
-                if(AlgorithmState.current_state.step_count > 0)
+                if (!combobox_history_steps.Items.Contains(loaded_state) || loaded_state.step_count == 0)
                 {
-                    int index = AlgorithmState.state_history.Count - 1;
-                    combobox_history_steps.Items.AddRange(AlgorithmState.state_history[index].ToArray());
-                }                               
+                    combobox_history_steps.Items.Clear();
+                    combobox_history_steps.Items.AddRange(AlgorithmState.state_history.Last().ToArray());
+                    combobox_history_steps.Text = loaded_state.ToString();
+                }
+
             }
 
-            picture_board.clone_position(AlgorithmState.current_state.board_data);
+            picture_board.clone_position(loaded_state.board_data);
 
             //Handle drawing the board
             foreach (var i in picture_board.board_data)
@@ -218,13 +238,13 @@ namespace ReinforcementLearning
                 }
             }
 
-            status_box.Text = StatusMessage.GetMessageFromState(AlgorithmState.current_state);
+            status_box.Text = StatusMessage.GetMessageFromState(loaded_state);
 
             
         }
 
         //Triggers the constructor. Adds a PictureBox to a PictureSquare.
-        static public void add(int i, int j, PictureSquare square_to_set)
+        static public void Add(int i, int j, PictureSquare square_to_set)
         {
             picture_board.board_data[i][j] = square_to_set;
         }
@@ -233,12 +253,12 @@ namespace ReinforcementLearning
         //This is called from FormsHandler.DisplayState, as well as directly from the dropdowns when their contents are changed.
         //When this is called from displaystate, the perception to view may not be valid.
         //When this is called from the dropdown, the perception should exist in the qmatrix.
-        static private void handle_qmatrix_forms(AlgorithmState state_to_display, PerceptionState perception_to_view)
+        static private void HandleQmatrixForms(AlgorithmState current_state, PerceptionState perception_to_view)
         {
-            qmatrix_stored_entires.Text = AlgorithmState.current_state.live_qmatrix.matrix_data.Count.ToString();
+            qmatrix_stored_entires.Text = current_state.live_qmatrix.matrix_data.Count.ToString();
             
             //May not have qmatrix data at the step being displayed.
-            if (state_to_display.live_qmatrix.matrix_data.Count == 0)
+            if (current_state.live_qmatrix.matrix_data.Count == 0)
             {   //There are no q-matrix entries.
                 //reset qmatrix combo boxes
                 foreach (var i in list_qmatrix_comboboxes.Values)
@@ -267,8 +287,8 @@ namespace ReinforcementLearning
                     dropdown_text_items.Add(i, new HashSet<Percept>());
                 }
 
-                //Copy the items over to the combobox. Loop over perception states.
-                foreach (var i in state_to_display.live_qmatrix.matrix_data.Keys)
+                //Copy the items over to the small comboboxes.
+                foreach (var i in current_state.live_qmatrix.matrix_data.Keys)
                 {
                     foreach (var j in Move.list)
                     {
@@ -277,10 +297,8 @@ namespace ReinforcementLearning
                     }
                 }
                 
-                //Update the comboboxes with the percepts that are available in the qmatrix.
-                List<string> string_list = new List<string>(); //Used for sorting...?
 
-                //Cycle through the moves to select each dropdown
+                //Cycle through the moves to add to select each small combobox
                 foreach (var i in Move.list)
                 {
                     list_qmatrix_comboboxes[i].Items.Clear();
@@ -289,17 +307,19 @@ namespace ReinforcementLearning
                     {
                         list_qmatrix_comboboxes[i].Items.Add(j); //I think i can just give my objects a tostring method
                     }
-                    
                 }
 
                 //Refresh the overall-state dropdown
                 qmatrix_state_combobox_large.Items.Clear();
-                foreach (var i in state_to_display.live_qmatrix.matrix_data.Keys.OrderBy(o => o.ID))
+                foreach (var i in current_state.live_qmatrix.matrix_data.Keys.OrderBy(o => o.ID))
                 {
                     qmatrix_state_combobox_large.Items.Add(i);
                 }
 
-                view_qmatrix_configuration(state_to_display.live_qmatrix.matrix_data.Keys.First()); //Just grab the first q-matrix item
+                if (current_state.live_qmatrix.matrix_data.Keys.Contains(current_state.bender_perception_starting))
+                    ViewQmatrixConfiguration(loaded_state.bender_perception_starting);
+                else
+                    ViewQmatrixConfiguration(loaded_state.live_qmatrix.matrix_data.Keys.First()); //Just grab the first q-matrix item
 
             }
         }
@@ -307,7 +327,7 @@ namespace ReinforcementLearning
 
         //This is called when the dropdown menu boxes change, as well as from display_state().
         //This will update the comboboxes, state dropdown, and the q-matrix value textboxes.
-        static public void view_qmatrix_configuration(PerceptionState state_to_view)
+        static public void ViewQmatrixConfiguration(PerceptionState state_to_view)
         {
             //We're only handed states that exist in the q-matrix already
 
@@ -328,7 +348,7 @@ namespace ReinforcementLearning
 
             foreach (var i in Move.list)
             {
-                List_qmatrix_value_textboxes[i].Text = AlgorithmState.current_state.live_qmatrix.matrix_data[state_to_view].move_list[i].ToString();
+                List_qmatrix_value_textboxes[i].Text = loaded_state.live_qmatrix.matrix_data[state_to_view].move_list[i].ToString();
             }
 
             lock_index_change_events = false;
@@ -336,7 +356,7 @@ namespace ReinforcementLearning
 
         static public void large_dropdown_changed()
         {
-            view_qmatrix_configuration((PerceptionState)qmatrix_state_combobox_large.SelectedItem);
+            ViewQmatrixConfiguration((PerceptionState)qmatrix_state_combobox_large.SelectedItem);
         }
 
         static public void small_dropdown_changed(ComboBox changed_dropdown)
@@ -383,10 +403,17 @@ namespace ReinforcementLearning
                     }
                 }
 
-                view_qmatrix_configuration(best_perceptionstate);
+                ViewQmatrixConfiguration(best_perceptionstate);
             }
 
 
+        }
+
+        //Displays the most recent state in the algorithm history list
+        static public void LoadAndDisplayState(AlgorithmState to_display)
+        {
+            loaded_state = to_display;
+            DisplayState();
         }
 
         static public void link_handler_to_form()

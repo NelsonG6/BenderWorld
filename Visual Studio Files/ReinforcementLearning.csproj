@@ -76,7 +76,7 @@
     <Compile Include="Source\Board\Squares\PictureSquare.cs" />
     <Compile Include="Source\Algorithm\Qmatrix.cs" />
     <Compile Include="Source\Forms\FormsHandler.cs" />
-    <Compile Include="Source\Move\MoveSet.cs" />
+    <Compile Include="Source\Algorithm\ValueSet.cs" />
     <Compile Include="Source\Perception\PerceptionState.cs" />
     <Compile Include="Source\Forms\StatusMessage.cs" />
     <Compile Include="Source\Board\Unit.cs" />

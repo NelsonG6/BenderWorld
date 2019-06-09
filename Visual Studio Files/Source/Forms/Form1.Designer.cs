@@ -435,7 +435,7 @@ namespace ReinforcementLearning
             this.buttonRestart.TabIndex = 5;
             this.buttonRestart.Text = "Restart algorithm";
             this.buttonRestart.UseVisualStyleBackColor = true;
-            this.buttonRestart.Click += new System.EventHandler(this.reset_algorithm);
+            this.buttonRestart.Click += new System.EventHandler(this.restart_algorithm_button_click);
             // 
             // comboboxQmatrixselect
             // 
@@ -722,9 +722,10 @@ namespace ReinforcementLearning
             this.comboboxHistoryepisode.TabIndex = 22;
             this.comboboxHistoryepisode.Text = "View prior episodes...";
             this.comboboxHistoryepisode.DropDown += new System.EventHandler(this.dropdown_opened);
-            this.comboboxHistoryepisode.SelectedIndexChanged += new System.EventHandler(this.history_index_changed);
+            this.comboboxHistoryepisode.SelectionChangeCommitted += new System.EventHandler(this.history_index_changed);
             this.comboboxHistoryepisode.DropDownClosed += new System.EventHandler(this.dropdown_closed);
             this.comboboxHistoryepisode.Click += new System.EventHandler(this.combobox_clicked_clear_text);
+            this.comboboxHistoryepisode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxHistoryepisode_KeyPress);
             // 
             // groupboxHistory
             // 
@@ -740,7 +741,6 @@ namespace ReinforcementLearning
             // 
             // comboboxHistorystep
             // 
-            this.comboboxHistorystep.Enabled = false;
             this.comboboxHistorystep.FormattingEnabled = true;
             this.comboboxHistorystep.Location = new System.Drawing.Point(35, 53);
             this.comboboxHistorystep.Name = "comboboxHistorystep";
@@ -748,9 +748,10 @@ namespace ReinforcementLearning
             this.comboboxHistorystep.TabIndex = 23;
             this.comboboxHistorystep.Text = "View prior steps...";
             this.comboboxHistorystep.DropDown += new System.EventHandler(this.dropdown_opened);
-            this.comboboxHistorystep.SelectedIndexChanged += new System.EventHandler(this.comboboxHistorystep_SelectedIndexChanged);
+            this.comboboxHistorystep.SelectionChangeCommitted += new System.EventHandler(this.comboboxHistorystep_SelectedIndexChanged);
             this.comboboxHistorystep.DropDownClosed += new System.EventHandler(this.dropdown_closed);
             this.comboboxHistorystep.Click += new System.EventHandler(this.combobox_clicked_clear_text);
+            this.comboboxHistorystep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxHistorystep_KeyPress);
             // 
             // groupboxAlgorithmprogress
             // 
@@ -796,9 +797,11 @@ namespace ReinforcementLearning
             this.comboboxDelayms.Name = "comboboxDelayms";
             this.comboboxDelayms.Size = new System.Drawing.Size(89, 24);
             this.comboboxDelayms.TabIndex = 26;
+            this.comboboxDelayms.Text = "5";
             this.comboboxDelayms.DropDown += new System.EventHandler(this.dropdown_opened);
             this.comboboxDelayms.DropDownClosed += new System.EventHandler(this.dropdown_closed);
             this.comboboxDelayms.Click += new System.EventHandler(this.combobox_clicked_clear_text);
+            this.comboboxDelayms.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboboxDelayms_KeyPress);
             this.comboboxDelayms.Leave += new System.EventHandler(this.comboboxDelayms_Leave);
             // 
             // label16
@@ -1102,7 +1105,7 @@ namespace ReinforcementLearning
             this.button10.TabIndex = 12;
             this.button10.Text = "Reset config";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button10.Click += new System.EventHandler(this.reset_config_button_click);
             // 
             // buttonStartAlgorithm
             // 

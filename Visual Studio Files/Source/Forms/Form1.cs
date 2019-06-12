@@ -202,7 +202,7 @@ namespace ReinforcementLearning
                 comboboxWallpunishment.Text = "Invalid.";
             else
             {
-                ReinforcementFactors.list[MoveResult.move_hit_wall()] = result;
+                MoveResult.list[MoveResult.MoveFailed] = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -214,7 +214,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                ReinforcementFactors.list[MoveResult.can_missing()] = result;
+                MoveResult.list[MoveResult.CanMissing] = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -226,7 +226,7 @@ namespace ReinforcementLearning
                 comboboxBeer.Text = "Invalid.";
             else
             {
-                ReinforcementFactors.list[MoveResult.can_collected()] = result;
+                MoveResult.list[MoveResult.CanCollected] = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -243,7 +243,7 @@ namespace ReinforcementLearning
                 comboboxMovedwithoutwall.Text = "Invalid.";
             else
             {
-                ReinforcementFactors.list[MoveResult.move_successful()] = result;
+                MoveResult.list[MoveResult.move_successful()] = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }
@@ -311,7 +311,7 @@ namespace ReinforcementLearning
                 comboboxEmptysquare.Text = "Invalid.";
             else
             {
-                ReinforcementFactors.list[MoveResult.can_missing()] = result;
+                MoveResult.list[MoveResult.CanMissing] = result;
                 FormsHandler.DisplayInitialSettings();
             }
         }

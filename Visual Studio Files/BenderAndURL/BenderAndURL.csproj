@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2FC3CD09-E4C6-48DE-A9F7-AC3B77E7B455}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BenderAndURL</RootNamespace>
+    <AssemblyName>BenderAndURL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithm\AlgorithmEpisode.cs" />
+    <Compile Include="Algorithm\AlgorithmManager.cs" />
+    <Compile Include="Algorithm\AlgorithmState.cs" />
+    <Compile Include="Algorithm\Qmatrix.cs" />
+    <Compile Include="Algorithm\ValueSet.cs" />
+    <Compile Include="Board\BoardBase.cs" />
+    <Compile Include="Board\BoardDisplay.cs" />
+    <Compile Include="Board\BoardGame.cs" />
+    <Compile Include="Board\Squares\SquareBoardBase.cs" />
+    <Compile Include="Board\Squares\SquareBoardDisplay.cs" />
+    <Compile Include="Board\Squares\SquareBoardGame.cs" />
+    <Compile Include="Board\Squares\SquareVisitedState.cs" />
+    <Compile Include="Board\Squares\Walls.cs" />
+    <Compile Include="Board\Unit\UnitBase.cs" />
+    <Compile Include="Board\Unit\UnitType.cs" />
+    <Compile Include="Forms\Backgrounds.cs" />
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormsHandler.cs" />
+    <Compile Include="Forms\StatusMessage.cs" />
+    <Compile Include="Board\Unit\Move\Move.cs" />
+    <Compile Include="Board\Unit\Move\MoveResult.cs" />
+    <Compile Include="Board\Unit\Perception\Percept.cs" />
+    <Compile Include="Board\Unit\Perception\PerceptionState.cs" />
+    <Compile Include="Properties\InitialSettings.cs" />
+    <Compile Include="Properties\MyRandom.cs" />
+    <Compile Include="Properties\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\BackgroundExplored.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\BackgroundLast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\BackgroundUnexplored.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Beer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Bender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\BenderAndBeer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\BenderWithCigar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\FrySquinting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\FrySquintingSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Ship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\ShipIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\URL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\UrlAndBeer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Images\Numbers\Number10.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

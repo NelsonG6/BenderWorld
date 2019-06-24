@@ -1,4 +1,4 @@
-# RL-Bender
+# Bender World
 ## Explanation of some symbols:
 * γ ("gamma") - This is the discount rate. Each step bender takes in an episode lessens the impact of the reward gained on that step, which encourages Bender to clear the board as fast as possible.
 * Ɛ ("episolon") - This is the likelihood of selecting a non-optimal action. This is the tendency to explore, versus the tendency to exploit any previous training.

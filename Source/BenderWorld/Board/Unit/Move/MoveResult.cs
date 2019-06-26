@@ -13,7 +13,7 @@ namespace BenderWorld
         public static readonly MoveResult TravelFailed;
         public static readonly MoveResult EnemyEncountered;        
 
-        private static MoveResult initialized_result;
+        private static MoveResult initializedResult;
 
         public static Dictionary<MoveResult, double> list;
 
@@ -36,7 +36,7 @@ namespace BenderWorld
             TravelSucceeded = new MoveResult("Move successful");
             TravelFailed = new MoveResult("Move failed");
             EnemyEncountered = new MoveResult("Enemey encountered");
-            initialized_result = new MoveResult("Initialized");
+            initializedResult = new MoveResult("Initialized");
 
             list.Add(CanMissing, InitialSettings.CanMissingReward);
             list.Add(CanCollected, InitialSettings.CanGrabbedReward);

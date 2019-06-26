@@ -66,7 +66,6 @@ namespace BenderWorld
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.textboxQmatrixleft = new System.Windows.Forms.TextBox();
-            this.groupboxQmatrix = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textboxQmatrixentries = new System.Windows.Forms.TextBox();
             this.groupboxQmatrixselect = new System.Windows.Forms.GroupBox();
@@ -94,7 +93,7 @@ namespace BenderWorld
             this.groupboxCountdown = new System.Windows.Forms.GroupBox();
             this.buttonStop = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
-            this.textboxProgresssteps = new System.Windows.Forms.TextBox();
+            this.textboxProgressSteps = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
             this.textboxCountdown = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
@@ -152,13 +151,12 @@ namespace BenderWorld
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab1 = new System.Windows.Forms.TabPage();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tab2 = new System.Windows.Forms.TabPage();
             this.tab3 = new System.Windows.Forms.TabPage();
-            this.groupboxAlgorithmprogress = new System.Windows.Forms.GroupBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -182,8 +180,8 @@ namespace BenderWorld
             this.comboboxEpisode = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.comboboxN = new System.Windows.Forms.ComboBox();
+            this.groupboxAlgorithmprogress = new System.Windows.Forms.GroupBox();
             this.groupboxRewards.SuspendLayout();
-            this.groupboxQmatrix.SuspendLayout();
             this.groupboxQmatrixselect.SuspendLayout();
             this.groupboxQmatrixview.SuspendLayout();
             this.groupboxCountdown.SuspendLayout();
@@ -215,11 +213,11 @@ namespace BenderWorld
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.tab3.SuspendLayout();
-            this.groupboxAlgorithmprogress.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupboxStatusmessage.SuspendLayout();
+            this.groupboxAlgorithmprogress.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
@@ -413,10 +411,10 @@ namespace BenderWorld
             // buttonRestart
             // 
             this.buttonRestart.Enabled = false;
-            this.buttonRestart.Location = new System.Drawing.Point(580, 90);
+            this.buttonRestart.Location = new System.Drawing.Point(267, 93);
             this.buttonRestart.Margin = new System.Windows.Forms.Padding(4);
             this.buttonRestart.Name = "buttonRestart";
-            this.buttonRestart.Size = new System.Drawing.Size(210, 27);
+            this.buttonRestart.Size = new System.Drawing.Size(211, 27);
             this.buttonRestart.TabIndex = 5;
             this.buttonRestart.Text = "Stop algorithm";
             this.buttonRestart.UseVisualStyleBackColor = true;
@@ -529,26 +527,10 @@ namespace BenderWorld
             this.textboxQmatrixleft.Size = new System.Drawing.Size(79, 22);
             this.textboxQmatrixleft.TabIndex = 13;
             // 
-            // groupboxQmatrix
-            // 
-            this.groupboxQmatrix.Controls.Add(this.label6);
-            this.groupboxQmatrix.Controls.Add(this.textboxQmatrixentries);
-            this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixselect);
-            this.groupboxQmatrix.Controls.Add(this.groupboxQmatrixview);
-            this.groupboxQmatrix.Enabled = false;
-            this.groupboxQmatrix.Location = new System.Drawing.Point(9, 7);
-            this.groupboxQmatrix.Margin = new System.Windows.Forms.Padding(4);
-            this.groupboxQmatrix.Name = "groupboxQmatrix";
-            this.groupboxQmatrix.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxQmatrix.Size = new System.Drawing.Size(568, 204);
-            this.groupboxQmatrix.TabIndex = 12;
-            this.groupboxQmatrix.TabStop = false;
-            this.groupboxQmatrix.Text = "Q-Matrix";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(470, 146);
+            this.label6.Location = new System.Drawing.Point(470, 459);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 17);
@@ -557,7 +539,7 @@ namespace BenderWorld
             // 
             // textboxQmatrixentries
             // 
-            this.textboxQmatrixentries.Location = new System.Drawing.Point(473, 163);
+            this.textboxQmatrixentries.Location = new System.Drawing.Point(473, 476);
             this.textboxQmatrixentries.Margin = new System.Windows.Forms.Padding(4);
             this.textboxQmatrixentries.Name = "textboxQmatrixentries";
             this.textboxQmatrixentries.ReadOnly = true;
@@ -577,7 +559,7 @@ namespace BenderWorld
             this.groupboxQmatrixselect.Controls.Add(this.comboboxRight);
             this.groupboxQmatrixselect.Controls.Add(this.comboboxLeft);
             this.groupboxQmatrixselect.Controls.Add(this.comboboxQmatrixselect);
-            this.groupboxQmatrixselect.Location = new System.Drawing.Point(7, 18);
+            this.groupboxQmatrixselect.Location = new System.Drawing.Point(22, 233);
             this.groupboxQmatrixselect.Name = "groupboxQmatrixselect";
             this.groupboxQmatrixselect.Size = new System.Drawing.Size(554, 110);
             this.groupboxQmatrixselect.TabIndex = 59;
@@ -691,7 +673,7 @@ namespace BenderWorld
             this.groupboxQmatrixview.Controls.Add(this.label25);
             this.groupboxQmatrixview.Controls.Add(this.label17);
             this.groupboxQmatrixview.Controls.Add(this.textboxQmatrixdown);
-            this.groupboxQmatrixview.Location = new System.Drawing.Point(7, 125);
+            this.groupboxQmatrixview.Location = new System.Drawing.Point(22, 340);
             this.groupboxQmatrixview.Name = "groupboxQmatrixview";
             this.groupboxQmatrixview.Size = new System.Drawing.Size(460, 71);
             this.groupboxQmatrixview.TabIndex = 59;
@@ -701,7 +683,7 @@ namespace BenderWorld
             // comboboxHistoryepisode
             // 
             this.comboboxHistoryepisode.FormattingEnabled = true;
-            this.comboboxHistoryepisode.Location = new System.Drawing.Point(580, 32);
+            this.comboboxHistoryepisode.Location = new System.Drawing.Point(267, 35);
             this.comboboxHistoryepisode.Name = "comboboxHistoryepisode";
             this.comboboxHistoryepisode.Size = new System.Drawing.Size(211, 24);
             this.comboboxHistoryepisode.TabIndex = 22;
@@ -712,7 +694,7 @@ namespace BenderWorld
             // comboboxHistorystep
             // 
             this.comboboxHistorystep.FormattingEnabled = true;
-            this.comboboxHistorystep.Location = new System.Drawing.Point(580, 62);
+            this.comboboxHistorystep.Location = new System.Drawing.Point(267, 65);
             this.comboboxHistorystep.Name = "comboboxHistorystep";
             this.comboboxHistorystep.Size = new System.Drawing.Size(211, 24);
             this.comboboxHistorystep.TabIndex = 23;
@@ -843,11 +825,11 @@ namespace BenderWorld
             // 
             this.groupboxCountdown.Controls.Add(this.buttonStop);
             this.groupboxCountdown.Controls.Add(this.label48);
-            this.groupboxCountdown.Controls.Add(this.textboxProgresssteps);
+            this.groupboxCountdown.Controls.Add(this.textboxProgressSteps);
             this.groupboxCountdown.Controls.Add(this.label47);
             this.groupboxCountdown.Controls.Add(this.textboxCountdown);
             this.groupboxCountdown.Enabled = false;
-            this.groupboxCountdown.Location = new System.Drawing.Point(273, 21);
+            this.groupboxCountdown.Location = new System.Drawing.Point(599, 21);
             this.groupboxCountdown.Name = "groupboxCountdown";
             this.groupboxCountdown.Size = new System.Drawing.Size(257, 119);
             this.groupboxCountdown.TabIndex = 60;
@@ -876,12 +858,12 @@ namespace BenderWorld
             // 
             // textboxProgresssteps
             // 
-            this.textboxProgresssteps.Location = new System.Drawing.Point(155, 36);
-            this.textboxProgresssteps.Name = "textboxProgresssteps";
-            this.textboxProgresssteps.ReadOnly = true;
-            this.textboxProgresssteps.Size = new System.Drawing.Size(91, 22);
-            this.textboxProgresssteps.TabIndex = 28;
-            this.textboxProgresssteps.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textboxProgressSteps.Location = new System.Drawing.Point(155, 36);
+            this.textboxProgressSteps.Name = "textboxProgresssteps";
+            this.textboxProgressSteps.ReadOnly = true;
+            this.textboxProgressSteps.Size = new System.Drawing.Size(91, 22);
+            this.textboxProgressSteps.TabIndex = 28;
+            this.textboxProgressSteps.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label47
             // 
@@ -1481,9 +1463,49 @@ namespace BenderWorld
             this.tab1.Text = "Configuration";
             this.tab1.UseVisualStyleBackColor = true;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.Enabled = false;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(31, 679);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(374, 24);
+            this.comboBox2.TabIndex = 71;
+            this.comboBox2.Text = "Enter or select a new value";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(28, 628);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(103, 17);
+            this.label22.TabIndex = 70;
+            this.label22.Text = "Select attribute";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "# of episodes",
+            "# of steps per episode",
+            "γ - Discount rate",
+            "Ɛ - Exploration rate",
+            "η - Learning rate",
+            "Reward - Beer collected",
+            "Reward - Incorrect beer grab attempt",
+            "Reward - Wall collision",
+            "Reward - Successful move"});
+            this.comboBox1.Location = new System.Drawing.Point(31, 648);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(374, 24);
+            this.comboBox1.TabIndex = 69;
+            // 
             // tab2
             // 
-            this.tab2.Controls.Add(this.groupboxQmatrix);
+            this.tab2.Controls.Add(this.label6);
+            this.tab2.Controls.Add(this.textboxQmatrixentries);
+            this.tab2.Controls.Add(this.groupboxQmatrixselect);
+            this.tab2.Controls.Add(this.groupboxQmatrixview);
             this.tab2.Location = new System.Drawing.Point(4, 25);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
@@ -1512,29 +1534,6 @@ namespace BenderWorld
             this.tab3.Text = "Session progress";
             this.tab3.UseVisualStyleBackColor = true;
             // 
-            // groupboxAlgorithmprogress
-            // 
-            this.groupboxAlgorithmprogress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxHistorystep);
-            this.groupboxAlgorithmprogress.Controls.Add(this.groupboxCountdown);
-            this.groupboxAlgorithmprogress.Controls.Add(this.checkBox1);
-            this.groupboxAlgorithmprogress.Controls.Add(this.label46);
-            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxDelayms);
-            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxHistoryepisode);
-            this.groupboxAlgorithmprogress.Controls.Add(this.label16);
-            this.groupboxAlgorithmprogress.Controls.Add(this.label15);
-            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvanceepisodes);
-            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvancesteps);
-            this.groupboxAlgorithmprogress.Controls.Add(this.buttonAdvancestepsdropdown);
-            this.groupboxAlgorithmprogress.Controls.Add(this.buttonRestart);
-            this.groupboxAlgorithmprogress.Enabled = false;
-            this.groupboxAlgorithmprogress.Location = new System.Drawing.Point(1112, 808);
-            this.groupboxAlgorithmprogress.Name = "groupboxAlgorithmprogress";
-            this.groupboxAlgorithmprogress.Size = new System.Drawing.Size(862, 174);
-            this.groupboxAlgorithmprogress.TabIndex = 12;
-            this.groupboxAlgorithmprogress.TabStop = false;
-            this.groupboxAlgorithmprogress.Text = "Control Progress";
-            // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
@@ -1543,43 +1542,6 @@ namespace BenderWorld
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "Status message";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "# of episodes",
-            "# of steps per episode",
-            "γ - Discount rate",
-            "Ɛ - Exploration rate",
-            "η - Learning rate",
-            "Reward - Beer collected",
-            "Reward - Incorrect beer grab attempt",
-            "Reward - Wall collision",
-            "Reward - Successful move"});
-            this.comboBox1.Location = new System.Drawing.Point(31, 648);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(374, 24);
-            this.comboBox1.TabIndex = 69;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(28, 628);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(103, 17);
-            this.label22.TabIndex = 70;
-            this.label22.Text = "Select attribute";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(31, 679);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(374, 24);
-            this.comboBox2.TabIndex = 71;
-            this.comboBox2.Text = "Enter or select a new value";
             // 
             // tabPage2
             // 
@@ -1849,6 +1811,29 @@ namespace BenderWorld
             this.comboboxN.Size = new System.Drawing.Size(60, 24);
             this.comboboxN.TabIndex = 70;
             // 
+            // groupboxAlgorithmprogress
+            // 
+            this.groupboxAlgorithmprogress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxHistorystep);
+            this.groupboxAlgorithmprogress.Controls.Add(this.groupboxCountdown);
+            this.groupboxAlgorithmprogress.Controls.Add(this.checkBox1);
+            this.groupboxAlgorithmprogress.Controls.Add(this.label46);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxDelayms);
+            this.groupboxAlgorithmprogress.Controls.Add(this.label16);
+            this.groupboxAlgorithmprogress.Controls.Add(this.label15);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxHistoryepisode);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvanceepisodes);
+            this.groupboxAlgorithmprogress.Controls.Add(this.comboboxAdvancesteps);
+            this.groupboxAlgorithmprogress.Controls.Add(this.buttonAdvancestepsdropdown);
+            this.groupboxAlgorithmprogress.Controls.Add(this.buttonRestart);
+            this.groupboxAlgorithmprogress.Enabled = false;
+            this.groupboxAlgorithmprogress.Location = new System.Drawing.Point(1112, 808);
+            this.groupboxAlgorithmprogress.Name = "groupboxAlgorithmprogress";
+            this.groupboxAlgorithmprogress.Size = new System.Drawing.Size(862, 174);
+            this.groupboxAlgorithmprogress.TabIndex = 12;
+            this.groupboxAlgorithmprogress.TabStop = false;
+            this.groupboxAlgorithmprogress.Text = "Control Progress";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1885,8 +1870,6 @@ namespace BenderWorld
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.groupboxRewards.ResumeLayout(false);
             this.groupboxRewards.PerformLayout();
-            this.groupboxQmatrix.ResumeLayout(false);
-            this.groupboxQmatrix.PerformLayout();
             this.groupboxQmatrixselect.ResumeLayout(false);
             this.groupboxQmatrixselect.PerformLayout();
             this.groupboxQmatrixview.ResumeLayout(false);
@@ -1924,16 +1907,17 @@ namespace BenderWorld
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.tab2.ResumeLayout(false);
+            this.tab2.PerformLayout();
             this.tab3.ResumeLayout(false);
             this.tab3.PerformLayout();
-            this.groupboxAlgorithmprogress.ResumeLayout(false);
-            this.groupboxAlgorithmprogress.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupboxStatusmessage.ResumeLayout(false);
+            this.groupboxAlgorithmprogress.ResumeLayout(false);
+            this.groupboxAlgorithmprogress.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1984,7 +1968,6 @@ namespace BenderWorld
         private Label label26;
         private Label label27;
         private TextBox textboxQmatrixleft;
-        private GroupBox groupboxQmatrix;
         private TextBox textboxInitialBeerreward;
         private Label label30;
         private Label label29;
@@ -2049,7 +2032,7 @@ namespace BenderWorld
         private GroupBox groupboxCountdown;
         private TextBox textboxCountdown;
         private Label label48;
-        private TextBox textboxProgresssteps;
+        private TextBox textboxProgressSteps;
         private Label label47;
         private Button buttonStop;
         private CheckBox checkBox1;

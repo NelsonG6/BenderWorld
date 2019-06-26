@@ -22,7 +22,7 @@ namespace BenderWorld
             //Second entry point of the program.
             //When the form loads, we'll create some pictureboxes, that will function as the robot world grid.            
 
-            FormsHandler.load();
+            FormsHandler.Load();
             PictureBox picturebox_inProgress; //Temporary picturebox
             SquareBoardDisplay squareTo_build; //This is object inherits from boardSquare, but has a picture element.
 
@@ -63,13 +63,13 @@ namespace BenderWorld
 
             //Groupboxes
             //Left side
-            groupboxConfiguration.Enabled = !groupboxConfiguration.Enabled;
+            tabControl1.TabPages[0].Enabled = !tabControl1.TabPages[0].Enabled;
             groupboxAlgorithmprogress.Enabled = !groupboxAlgorithmprogress.Enabled;
 
             //Right side
-            groupboxQmatrix.Enabled = !groupboxQmatrix.Enabled;
-            groupboxSessionprogress.Enabled = !groupboxSessionprogress.Enabled;
-            groupboxHistory.Enabled = !groupboxHistory.Enabled;
+            tabControl1.TabPages[1].Enabled = !tabControl1.TabPages[1].Enabled;
+            tabControl1.TabPages[2].Enabled = !tabControl1.TabPages[2].Enabled;
+            tabControl1.TabPages[3].Enabled = !tabControl1.TabPages[3].Enabled;
         }
 
         private void startAlgorithm(object sender, EventArgs e)
@@ -119,15 +119,14 @@ namespace BenderWorld
 
             else if(stepsToTake > 1)
             {
-                textboxProgresssteps.Text = stepsToTake.ToString();
+                textboxProgressSteps.Text = stepsToTake.ToString();
                 groupboxCountdown.Enabled = true;
                 groupboxAlgorithmprogress.Enabled = false;
-                groupboxHistory.Enabled = false;
                 while (stepsToTake-- > 0 && !FormsHandler.halted)
                 {
                     AlgorithmManager.StepPrepare();
                     FormsHandler.LoadAndDisplayState(AlgorithmManager.GetCurrentState());
-                    textboxProgresssteps.Text = stepsToTake.ToString();
+                    textboxProgressSteps.Text = stepsToTake.ToString();
                     do
                     {
                         await Task.Delay(1);
@@ -137,7 +136,7 @@ namespace BenderWorld
                 }
                 groupboxAlgorithmprogress.Enabled = true;
                 groupboxCountdown.Enabled = false;
-                groupboxHistory.Enabled = true;
+
             }
 
             else
@@ -359,14 +358,14 @@ namespace BenderWorld
 
         private void qmatrix_small_dropdownChanged(object sender, EventArgs e)
         {
-            if (!FormsHandler.lock_indexChange_events && ((ComboBox)sender).SelectedIndex > -1)
+            if (!FormsHandler.lockIndexChangeEvents && ((ComboBox)sender).SelectedIndex > -1)
                 if (((ComboBox)sender).SelectedText != "None.") 
                 FormsHandler.small_dropdownChanged((ComboBox)sender);
         }
 
         private void comboboxQmatrixselect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!FormsHandler.lock_indexChange_events && ((ComboBox)sender).SelectedIndex > -1)
+            if (!FormsHandler.lockIndexChangeEvents && ((ComboBox)sender).SelectedIndex > -1)
                 FormsHandler.large_dropdownChanged();
         }
 

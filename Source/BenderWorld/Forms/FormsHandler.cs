@@ -10,47 +10,47 @@ namespace BenderWorld
         static public bool hasUrlStartedChasing;
         
         //Initial settings
-        static public TextBox number_of_episodes;
-        static public TextBox number_of_steps;
-        static public TextBox n_initial;
-        static public TextBox y_initial;
-        static public TextBox e_initial;
+        static public TextBox NumberOfEpisodes;
+        static public TextBox NumberOfSteps;
+        static public TextBox nInitial;
+        static public TextBox yInitial;
+        static public TextBox eInitial;
         //Rewards
         static public TextBox wallPunishmentTextbox;
-        static public TextBox empty_squarePunishmentTextbox;
-        static public TextBox beer_rewardTextbox;
+        static public TextBox emptySquarePunishmentTextbox;
+        static public TextBox beerRewardTextbox;
         static public TextBox successfulMoveTextbox;
 
         //Q-matrix view
-        static public ComboBox qmatrix_stateComboboxLarge; //The larger dropdown
-        static public TextBox qmatrix_stored_entires;
+        static public ComboBox qmatrixStateComboboxLarge; //The larger dropdown
+        static public TextBox qmatrixStoredEntires;
         
         //Session progress
         static public TextBox stepNumber;
         static public TextBox episodeNumber;
-        static public TextBox e_session;
-        static public TextBox y_session;
+        static public TextBox eSession;
+        static public TextBox ySession;
         //Rewards
         static public TextBox beerCollected;
-        static public TextBox beer_remaining;
-        static public TextBox reward_episode;
+        static public TextBox beerRemaining;
+        static public TextBox rewardEpisode;
         static public TextBox rewardTotal;
 
-        static public RichTextBox status_box;
+        static public RichTextBox statusBox;
 
         //List of groupbox controls
         static Control form1Control;
-        static GroupBox groupbox_initial_settings;
-        static GroupBox groupbox_rewards;
-        static GroupBox groupbox_qmatrix;
-        static GroupBox groupboxMatrix_select;
-        static GroupBox groupbox_qmatrix_values;
-        static GroupBox groupbox_sessionProgress;
-        static GroupBox groupboxCan_data;
-        static GroupBox groupbox_reward_data;
+        static GroupBox groupboxInitialSettings;
+        static GroupBox groupboxRewards;
+        static GroupBox groupboxQmatrix;
+        static GroupBox groupboxMatrixSelect;
+        static GroupBox groupboxQmatrixValues;
+        static GroupBox groupboxSessionProgress;
+        static GroupBox groupboxCanData;
+        static GroupBox groupboxRewardData;
         static GroupBox groupboxCurrentPosition;
         static GroupBox groupboxControlProgress;
-        static GroupBox groupbox_history;
+        static GroupBox groupboxHistory;
 
 
         //Control progress
@@ -59,22 +59,22 @@ namespace BenderWorld
         static ComboBox controlProgress_delay;
 
         //History
-        static ComboBox combobox_history_episodes;
-        static ComboBox combobox_history_steps;
+        static ComboBox comboboxHistoryEpisodes;
+        static ComboBox comboboxHistorySteps;
 
-        static public bool lock_indexChange_events;
+        static public bool lockIndexChangeEvents;
 
         //static public bool is_drop_down_open; //why do i need this?        
 
         static public bool halted;
 
-        static public List<TextBox> list_sessionProgress;
+        static public List<TextBox> listSessionProgress;
 
         //store a textbox that displays the percepts of the current position for each move
         static public Dictionary<Move, TextBox> listCurrentPositionTextboxes;
         //Store a textbox that displays a q-matrix value for each move
-        static public Dictionary<Move, TextBox> List_qmatrix_valueTextboxes;
-        static public Dictionary<Move, ComboBox> list_qmatrixComboboxes; //Store a q-matrix combobox for each move
+        static public Dictionary<Move, TextBox> listQmatrixValueTextboxes;
+        static public Dictionary<Move, ComboBox> listQmatrixComboboxes; //Store a q-matrix combobox for each move
 
         //Current position
 
@@ -87,7 +87,7 @@ namespace BenderWorld
 
         static public AlgorithmState loadedState; //The forms handler essentially always stores one state to be displayed at a time.
 
-        static public BoardDisplay picture_board; //Stored seperately from the algorithm state because this board will store PictureSquares
+        static public BoardDisplay pictureBoard; //Stored seperately from the algorithm state because this board will store PictureSquares
 
         //Main entry point for my source code
         static FormsHandler()
@@ -95,14 +95,14 @@ namespace BenderWorld
 
         }
 
-        static public void load()
+        static public void Load()
         {
-            picture_board = new BoardDisplay();
+            pictureBoard = new BoardDisplay();
             loadedState = new AlgorithmState();
 
             InitialSettings.Initialize();
 
-            lock_indexChange_events = false;
+            lockIndexChangeEvents = false;
             halted = false;
             //Pass textboxes to the board, so it can manage them.
 
@@ -113,7 +113,7 @@ namespace BenderWorld
             controlProgress_episodes.Text = "0"; ;
             controlProgress_delay.Text = InitialSettings.MS_Delay.ToString();
 
-            foreach (var i in list_qmatrixComboboxes)
+            foreach (var i in listQmatrixComboboxes)
             {
                 i.Value.SelectedIndex = -1;
             }
@@ -133,7 +133,7 @@ namespace BenderWorld
         //This will also handle updating the history dropdowns
         static public void DisplayState()
         {
-            picture_board.ClonePosition(loadedState.boardData); //This copies the state's board over to our PictureSquare board.
+            pictureBoard.ClonePosition(loadedState.boardData); //This copies the state's board over to our PictureSquare board.
 
             //Textboxes update
             if (AlgorithmManager.algorithmStarted) //Only display this if we've started
@@ -145,8 +145,8 @@ namespace BenderWorld
                 //Session progress
                 stepNumber.Text = loadedState.GetStepNumber().ToString();
                 episodeNumber.Text = loadedState.GetEpisodeNumber().ToString();
-                e_session.Text = GetString(loadedState.liveQmatrix.e);
-                y_session.Text = loadedState.liveQmatrix.y.ToString();
+                eSession.Text = GetString(loadedState.liveQmatrix.e);
+                ySession.Text = loadedState.liveQmatrix.y.ToString();
 
                 //If this moveset doesn't exist, we should get an error.
                 //This function should only be called at the algorithm start, or from a dropdown that has a valid q-matrix combination.
@@ -159,30 +159,30 @@ namespace BenderWorld
                     listCurrentPositionTextboxes[i].Text = to_view.perceptionData[i].ToString();
                 }
 
-                beer_remaining.Text = loadedState.boardData.GetCansRemaining().ToString();
+                beerRemaining.Text = loadedState.boardData.GetCansRemaining().ToString();
                 beerCollected.Text = loadedState.cansCollected.ToString();
-                reward_episode.Text = loadedState.episodeRewards.ToString();
+                rewardEpisode.Text = loadedState.episodeRewards.ToString();
                 rewardTotal.Text = loadedState.totalRewards.ToString();
 
                 //Update the history episode dropdown
-                if (combobox_history_episodes.Items.Count < AlgorithmManager.stateHistory.Count)
-                    combobox_history_episodes.Items.Add(AlgorithmManager.stateHistory.Last());
+                if (comboboxHistoryEpisodes.Items.Count < AlgorithmManager.stateHistory.Count)
+                    comboboxHistoryEpisodes.Items.Add(AlgorithmManager.stateHistory.Last());
 
-                combobox_history_episodes.SelectedIndex = combobox_history_episodes.Items.Count - 1;
+                comboboxHistoryEpisodes.SelectedIndex = comboboxHistoryEpisodes.Items.Count - 1;
 
-                if (!combobox_history_steps.Items.Contains(loadedState) || loadedState.GetStepNumber() == 0)
+                if (!comboboxHistorySteps.Items.Contains(loadedState) || loadedState.GetStepNumber() == 0)
                 {
-                    combobox_history_steps.Items.Clear();
-                    combobox_history_steps.Items.AddRange(AlgorithmManager.stateHistory.Last().ToArray());
-                    combobox_history_steps.Text = loadedState.ToString();
+                    comboboxHistorySteps.Items.Clear();
+                    comboboxHistorySteps.Items.AddRange(AlgorithmManager.stateHistory.Last().ToArray());
+                    comboboxHistorySteps.Text = loadedState.ToString();
                 }
             }
 
             
-            status_box.Text = loadedState.GetStatus();
+            statusBox.Text = loadedState.GetStatus();
 
             //Handle drawing the board
-            foreach (var i in picture_board.boardData)
+            foreach (var i in pictureBoard.boardData)
             {
                 foreach (var j in i)
                 {
@@ -202,15 +202,15 @@ namespace BenderWorld
         static public void DisplayInitialSettings()
         {
             //initial settings
-            number_of_episodes.Text = loadedState.GetEpisodeLimit().ToString(); //Constructor launcher for algorithmstate 6-5
-            number_of_steps.Text = loadedState.GetStepLimit().ToString();
+            NumberOfEpisodes.Text = loadedState.GetEpisodeLimit().ToString(); //Constructor launcher for algorithmstate 6-5
+            NumberOfSteps.Text = loadedState.GetStepLimit().ToString();
 
-            n_initial.Text = GetString(loadedState.liveQmatrix.n);
-            y_initial.Text = GetString(loadedState.liveQmatrix.y);
-            e_initial.Text = GetString(loadedState.liveQmatrix.e);
-            empty_squarePunishmentTextbox.Text = MoveResult.list[MoveResult.CanMissing].ToString();
+            nInitial.Text = GetString(loadedState.liveQmatrix.n);
+            yInitial.Text = GetString(loadedState.liveQmatrix.y);
+            eInitial.Text = GetString(loadedState.liveQmatrix.e);
+            emptySquarePunishmentTextbox.Text = MoveResult.list[MoveResult.CanMissing].ToString();
             wallPunishmentTextbox.Text = MoveResult.list[MoveResult.TravelFailed].ToString();
-            beer_rewardTextbox.Text = MoveResult.list[MoveResult.CanCollected].ToString();
+            beerRewardTextbox.Text = MoveResult.list[MoveResult.CanCollected].ToString();
             successfulMoveTextbox.Text = MoveResult.list[MoveResult.TravelSucceeded].ToString();
         }
 
@@ -220,24 +220,24 @@ namespace BenderWorld
         //When this is called from the dropdown, the perception should exist in the qmatrix.
         static private void HandleQmatrixForms(AlgorithmState current_state, PerceptionState perceptionTo_view)
         {
-            qmatrix_stored_entires.Text = current_state.liveQmatrix.matrixData.Count.ToString();
+            qmatrixStoredEntires.Text = current_state.liveQmatrix.matrixData.Count.ToString();
 
             //May not have qmatrix data at the step being displayed.
             if (current_state.liveQmatrix.matrixData.Count == 0)
             {   //There are no q-matrix entries.
                 //reset qmatrix combo boxes
-                foreach (var i in list_qmatrixComboboxes.Values)
+                foreach (var i in listQmatrixComboboxes.Values)
                 {
                     i.Items.Clear();
                     i.Items.Add("None");
                 }
 
-                qmatrix_stateComboboxLarge.Items.Clear();
-                qmatrix_stateComboboxLarge.Items.Add("A q-matrix entry has not yet been made.");
+                qmatrixStateComboboxLarge.Items.Clear();
+                qmatrixStateComboboxLarge.Items.Add("A q-matrix entry has not yet been made.");
 
 
                 //reset qmatrix textboxes
-                foreach (var i in List_qmatrix_valueTextboxes.Values) { i.Clear(); }
+                foreach (var i in listQmatrixValueTextboxes.Values) { i.Clear(); }
             }
             else
             {
@@ -266,19 +266,19 @@ namespace BenderWorld
                 //Cycle through the moves to add to select each small combobox
                 foreach (var i in Move.HorizontalMovesAndGrab)
                 {
-                    list_qmatrixComboboxes[i].Items.Clear();
+                    listQmatrixComboboxes[i].Items.Clear();
                     //Cycle through the percepts we gathered for this move's dropdown
                     foreach (var j in dropdownText_items[i].OrderBy(o => o.perceptData))
                     {
-                        list_qmatrixComboboxes[i].Items.Add(j); //I think i can just give my objects a tostring method
+                        listQmatrixComboboxes[i].Items.Add(j); //I think i can just give my objects a tostring method
                     }
                 }
 
                 //Refresh the overall-state dropdown
-                qmatrix_stateComboboxLarge.Items.Clear();
+                qmatrixStateComboboxLarge.Items.Clear();
                 foreach (var i in current_state.liveQmatrix.matrixData.Keys.OrderBy(o => o.ID))
                 {
-                    qmatrix_stateComboboxLarge.Items.Add(i);
+                    qmatrixStateComboboxLarge.Items.Add(i);
                 }
 
                 if (current_state.liveQmatrix.matrixData.Keys.Contains(current_state.GetPerception(UnitType.Bender)))
@@ -299,23 +299,23 @@ namespace BenderWorld
             //Set the dropdown to be selected to the correct percept
             //These will trigger the selected_indexChanged events
             //So I'll managed this with a lock
-            lock_indexChange_events = true;
+            lockIndexChangeEvents = true;
             foreach (var i in Move.HorizontalMovesAndGrab)
             {
-                list_qmatrixComboboxes[i].SelectedIndex = list_qmatrixComboboxes[i].Items.IndexOf(stateTo_view.perceptionData[i]);
+                listQmatrixComboboxes[i].SelectedIndex = listQmatrixComboboxes[i].Items.IndexOf(stateTo_view.perceptionData[i]);
             }
 
             //Handle the large dropdown
-            qmatrix_stateComboboxLarge.SelectedIndex = qmatrix_stateComboboxLarge.Items.IndexOf(stateTo_view);
+            qmatrixStateComboboxLarge.SelectedIndex = qmatrixStateComboboxLarge.Items.IndexOf(stateTo_view);
 
             //Handle the values stored in the textboxes
 
             foreach (var i in Move.HorizontalMovesAndGrab)
             {
-                List_qmatrix_valueTextboxes[i].Text = loadedState.liveQmatrix.matrixData[stateTo_view].moveList[i].ToString();
+                listQmatrixValueTextboxes[i].Text = loadedState.liveQmatrix.matrixData[stateTo_view].moveList[i].ToString();
             }
 
-            lock_indexChange_events = false;
+            lockIndexChangeEvents = false;
         }
 
 
@@ -330,34 +330,34 @@ namespace BenderWorld
 
             loadedState.SetErasedStatus();
 
-            lock_indexChange_events = true;
+            lockIndexChangeEvents = true;
 
             //Clear qmatrix value textboxes
-            foreach(var i in List_qmatrix_valueTextboxes)
+            foreach(var i in listQmatrixValueTextboxes)
             {
                 i.Value.Clear();
             }
 
             //Session progess textboxes
-            foreach(var i in list_sessionProgress)
+            foreach(var i in listSessionProgress)
             {
                 i.Clear();
             }
 
             
 
-            foreach (var i in list_qmatrixComboboxes.Values) { i.Items.Clear(); i.Text = ""; }
-            foreach (var i in List_qmatrix_valueTextboxes.Values) { i.Clear(); }
+            foreach (var i in listQmatrixComboboxes.Values) { i.Items.Clear(); i.Text = ""; }
+            foreach (var i in listQmatrixValueTextboxes.Values) { i.Clear(); }
 
-            lock_indexChange_events = false;
+            lockIndexChangeEvents = false;
 
-            qmatrix_stateComboboxLarge.Text = "Select a board state...";
+            qmatrixStateComboboxLarge.Text = "Select a board state...";
 
-            combobox_history_steps.Items.Clear();
-            combobox_history_steps.Text = "View prior steps...";
+            comboboxHistorySteps.Items.Clear();
+            comboboxHistorySteps.Text = "View prior steps...";
 
-            combobox_history_episodes.Items.Clear();
-            combobox_history_episodes.Text = "View prior episodes...";
+            comboboxHistoryEpisodes.Items.Clear();
+            comboboxHistoryEpisodes.Text = "View prior episodes...";
 
             loadedState.liveQmatrix = new Qmatrix();
 
@@ -369,7 +369,7 @@ namespace BenderWorld
         //Triggers the constructor. Adds a PictureBox to a PictureSquare.
         static public void Add(int i, int j, SquareBoardDisplay squareTo_set)
         {
-            picture_board.boardData[i][j] = squareTo_set;
+            pictureBoard.boardData[i][j] = squareTo_set;
         }
 
         
@@ -378,7 +378,7 @@ namespace BenderWorld
 
         static public void large_dropdownChanged()
         {
-            ViewQmatrixConfiguration((PerceptionState)qmatrix_stateComboboxLarge.SelectedItem);
+            ViewQmatrixConfiguration((PerceptionState)qmatrixStateComboboxLarge.SelectedItem);
         }
 
         static public void small_dropdownChanged(ComboBox changed_dropdown)
@@ -391,7 +391,7 @@ namespace BenderWorld
 
                 foreach (var i in Move.HorizontalMovesAndGrab)
                 {
-                    if (changed_dropdown == list_qmatrixComboboxes[i])
+                    if (changed_dropdown == listQmatrixComboboxes[i])
                         perceptMove = i;
                 }
 
@@ -401,7 +401,7 @@ namespace BenderWorld
                 //Build a perception state that matches the dropdowns
                 foreach (var i in Move.HorizontalMovesAndGrab)
                 {
-                    to_set.perceptionData[i] = (Percept)list_qmatrixComboboxes[i].SelectedItem;
+                    to_set.perceptionData[i] = (Percept)listQmatrixComboboxes[i].SelectedItem;
                 }
 
                 to_set.SetName();
@@ -414,7 +414,7 @@ namespace BenderWorld
                 int compare_value = 0;
                 int temp = 0;
                 PerceptionState bestPerceptionstate = null;
-                foreach (PerceptionState i in qmatrix_stateComboboxLarge.Items)
+                foreach (PerceptionState i in qmatrixStateComboboxLarge.Items)
                 {
                     temp = to_set.Compare(i);
                     if (temp > compare_value && i.Contains(perceptMove, keepFor_bestFit))
@@ -440,59 +440,59 @@ namespace BenderWorld
         static public void link_handlerToForm()
         {
             form1Control = Application.OpenForms["Form1"];
-            groupbox_initial_settings = form1Control.Controls["groupboxInitialsettings"] as GroupBox;
-            groupbox_rewards = groupbox_initial_settings.Controls["groupboxRewards"] as GroupBox; ;
-            groupbox_qmatrix = form1Control.Controls["groupboxQmatrix"] as GroupBox; ;
-            groupboxMatrix_select = groupbox_qmatrix.Controls["groupboxQmatrixselect"] as GroupBox; ;
-            groupbox_qmatrix_values = form1Control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"] as GroupBox; ;
-            groupbox_sessionProgress = form1Control.Controls["groupboxSessionprogress"] as GroupBox; ;
-            groupboxCan_data = groupbox_sessionProgress.Controls["groupboxCans"] as GroupBox; ;
-            groupbox_reward_data = groupbox_sessionProgress.Controls["groupboxRewarddata"] as GroupBox; ;
-            groupboxCurrentPosition = groupbox_sessionProgress.Controls["groupboxCurrentposition"] as GroupBox; ;
+            groupboxInitialSettings = form1Control.Controls["groupboxInitialsettings"] as GroupBox;
+            groupboxRewards = groupboxInitialSettings.Controls["groupboxRewards"] as GroupBox; ;
+            groupboxQmatrix = form1Control.Controls["groupboxQmatrix"] as GroupBox; ;
+            groupboxMatrixSelect = groupboxQmatrix.Controls["groupboxQmatrixselect"] as GroupBox; ;
+            groupboxQmatrixValues = form1Control.Controls["groupboxQmatrix"].Controls["groupboxQmatrixview"] as GroupBox; ;
+            groupboxSessionProgress = form1Control.Controls["groupboxSessionprogress"] as GroupBox; ;
+            groupboxCanData = groupboxSessionProgress.Controls["groupboxCans"] as GroupBox; ;
+            groupboxRewardData = groupboxSessionProgress.Controls["groupboxRewarddata"] as GroupBox; ;
+            groupboxCurrentPosition = groupboxSessionProgress.Controls["groupboxCurrentposition"] as GroupBox; ;
 
             //Initial settings
-            number_of_episodes = groupbox_initial_settings.Controls["textboxInitialNumberofepisodes"] as TextBox;
-            number_of_steps = groupbox_initial_settings.Controls["textboxInitialNumberofsteps"] as TextBox;
-            n_initial = groupbox_initial_settings.Controls["textboxInitialNinitial"] as TextBox;
-            y_initial = groupbox_initial_settings.Controls["textboxInitialY"] as TextBox;
-            e_initial = groupbox_initial_settings.Controls["textboxInitialEpsilon"] as TextBox;
+            NumberOfEpisodes = groupboxInitialSettings.Controls["textboxInitialNumberofepisodes"] as TextBox;
+            NumberOfSteps = groupboxInitialSettings.Controls["textboxInitialNumberofsteps"] as TextBox;
+            nInitial = groupboxInitialSettings.Controls["textboxInitialNinitial"] as TextBox;
+            yInitial = groupboxInitialSettings.Controls["textboxInitialY"] as TextBox;
+            eInitial = groupboxInitialSettings.Controls["textboxInitialEpsilon"] as TextBox;
             //Rewards
-            wallPunishmentTextbox = groupbox_rewards.Controls["textboxInitialWallpunishment"] as TextBox;
-            empty_squarePunishmentTextbox = groupbox_rewards.Controls["textboxInitialEmptysquare"] as TextBox;
-            beer_rewardTextbox = groupbox_rewards.Controls["textboxInitialBeerreward"] as TextBox;
-            successfulMoveTextbox = groupbox_rewards.Controls["textboxRewardssuccessmove"] as TextBox;
+            wallPunishmentTextbox = groupboxRewards.Controls["textboxInitialWallpunishment"] as TextBox;
+            emptySquarePunishmentTextbox = groupboxRewards.Controls["textboxInitialEmptysquare"] as TextBox;
+            beerRewardTextbox = groupboxRewards.Controls["textboxInitialBeerreward"] as TextBox;
+            successfulMoveTextbox = groupboxRewards.Controls["textboxRewardssuccessmove"] as TextBox;
 
             //Q-Matrix view
-            qmatrix_stateComboboxLarge = groupboxMatrix_select.Controls["comboboxQmatrixselect"] as ComboBox;
-            qmatrix_stored_entires = groupbox_qmatrix.Controls["textboxQmatrixentries"] as TextBox;
+            qmatrixStateComboboxLarge = groupboxMatrixSelect.Controls["comboboxQmatrixselect"] as ComboBox;
+            qmatrixStoredEntires = groupboxQmatrix.Controls["textboxQmatrixentries"] as TextBox;
 
-            list_qmatrixComboboxes = new Dictionary<Move, ComboBox>();
-            list_qmatrixComboboxes[Move.Left] = groupboxMatrix_select.Controls["comboboxLeft"] as ComboBox;
-            list_qmatrixComboboxes[Move.Right] = groupboxMatrix_select.Controls["comboboxRight"] as ComboBox;
-            list_qmatrixComboboxes[Move.Up] = groupboxMatrix_select.Controls["comboboxUp"] as ComboBox;
-            list_qmatrixComboboxes[Move.Down] = groupboxMatrix_select.Controls["comboboxDown"] as ComboBox;
-            list_qmatrixComboboxes[Move.Grab] = groupboxMatrix_select.Controls["comboboxCurrentsquare"] as ComboBox;
+            listQmatrixComboboxes = new Dictionary<Move, ComboBox>();
+            listQmatrixComboboxes[Move.Left] = groupboxMatrixSelect.Controls["comboboxLeft"] as ComboBox;
+            listQmatrixComboboxes[Move.Right] = groupboxMatrixSelect.Controls["comboboxRight"] as ComboBox;
+            listQmatrixComboboxes[Move.Up] = groupboxMatrixSelect.Controls["comboboxUp"] as ComboBox;
+            listQmatrixComboboxes[Move.Down] = groupboxMatrixSelect.Controls["comboboxDown"] as ComboBox;
+            listQmatrixComboboxes[Move.Grab] = groupboxMatrixSelect.Controls["comboboxCurrentsquare"] as ComboBox;
 
-            List_qmatrix_valueTextboxes = new Dictionary<Move, TextBox>();
-            List_qmatrix_valueTextboxes[Move.Left] = groupbox_qmatrix_values.Controls["textboxQmatrixleft"] as TextBox;
-            List_qmatrix_valueTextboxes[Move.Right] = groupbox_qmatrix_values.Controls["textboxQmatrixright"] as TextBox;
-            List_qmatrix_valueTextboxes[Move.Down] = groupbox_qmatrix_values.Controls["textboxQmatrixdown"] as TextBox;
-            List_qmatrix_valueTextboxes[Move.Up] = groupbox_qmatrix_values.Controls["textboxQmatrixup"] as TextBox;
-            List_qmatrix_valueTextboxes[Move.Grab] = groupbox_qmatrix_values.Controls["textboxQmatrixcurrent"] as TextBox;
+            listQmatrixValueTextboxes = new Dictionary<Move, TextBox>();
+            listQmatrixValueTextboxes[Move.Left] = groupboxQmatrixValues.Controls["textboxQmatrixleft"] as TextBox;
+            listQmatrixValueTextboxes[Move.Right] = groupboxQmatrixValues.Controls["textboxQmatrixright"] as TextBox;
+            listQmatrixValueTextboxes[Move.Down] = groupboxQmatrixValues.Controls["textboxQmatrixdown"] as TextBox;
+            listQmatrixValueTextboxes[Move.Up] = groupboxQmatrixValues.Controls["textboxQmatrixup"] as TextBox;
+            listQmatrixValueTextboxes[Move.Grab] = groupboxQmatrixValues.Controls["textboxQmatrixcurrent"] as TextBox;
 
 
 
             //Session progress
-            stepNumber = groupbox_sessionProgress.Controls["textboxStepsprogress"] as TextBox;
-            episodeNumber = groupbox_sessionProgress.Controls["textboxEpisodesprogress"] as TextBox;
-            e_session = groupbox_sessionProgress.Controls["textboxEprogress"] as TextBox;
-            y_session = groupbox_sessionProgress.Controls["textboxYprogress"] as TextBox;
+            stepNumber = groupboxSessionProgress.Controls["textboxStepsprogress"] as TextBox;
+            episodeNumber = groupboxSessionProgress.Controls["textboxEpisodesprogress"] as TextBox;
+            eSession = groupboxSessionProgress.Controls["textboxEprogress"] as TextBox;
+            ySession = groupboxSessionProgress.Controls["textboxYprogress"] as TextBox;
 
             //Can data and reward data
-            beer_remaining = groupboxCan_data.Controls["textboxCansremaining"] as TextBox;
-            beerCollected = groupboxCan_data.Controls["textboxCanscollected"] as TextBox;
-            reward_episode = groupbox_reward_data.Controls["textboxRewardepisode"] as TextBox;
-            rewardTotal = groupbox_reward_data.Controls["textboxRewardtotal"] as TextBox;
+            beerRemaining = groupboxCanData.Controls["textboxCansremaining"] as TextBox;
+            beerCollected = groupboxCanData.Controls["textboxCanscollected"] as TextBox;
+            rewardEpisode = groupboxRewardData.Controls["textboxRewardepisode"] as TextBox;
+            rewardTotal = groupboxRewardData.Controls["textboxRewardtotal"] as TextBox;
 
             //Current position
             listCurrentPositionTextboxes = new Dictionary<Move, TextBox>();
@@ -503,25 +503,25 @@ namespace BenderWorld
             listCurrentPositionTextboxes[Move.Grab] = groupboxCurrentPosition.Controls["textboxCurrentsquare"] as TextBox;
 
             //Add all these textboxes to a list
-            list_sessionProgress = new List<TextBox>();
+            listSessionProgress = new List<TextBox>();
             foreach (var i in listCurrentPositionTextboxes)
             {
-                list_sessionProgress.Add(i.Value);
+                listSessionProgress.Add(i.Value);
             }
-            foreach (var i in List_qmatrix_valueTextboxes)
+            foreach (var i in listQmatrixValueTextboxes)
             {
-                list_sessionProgress.Add(i.Value);
+                listSessionProgress.Add(i.Value);
             }
 
-            list_sessionProgress.Add(stepNumber);
-            list_sessionProgress.Add(episodeNumber);
-            list_sessionProgress.Add(e_session);
-            list_sessionProgress.Add(y_session);
-            list_sessionProgress.Add(beer_remaining);
-            list_sessionProgress.Add(beerCollected);
-            list_sessionProgress.Add(reward_episode);
-            list_sessionProgress.Add(rewardTotal);
-            list_sessionProgress.Add(qmatrix_stored_entires);
+            listSessionProgress.Add(stepNumber);
+            listSessionProgress.Add(episodeNumber);
+            listSessionProgress.Add(eSession);
+            listSessionProgress.Add(ySession);
+            listSessionProgress.Add(beerRemaining);
+            listSessionProgress.Add(beerCollected);
+            listSessionProgress.Add(rewardEpisode);
+            listSessionProgress.Add(rewardTotal);
+            listSessionProgress.Add(qmatrixStoredEntires);
 
             //Control progess
             groupboxControlProgress = form1Control.Controls["groupboxAlgorithmprogress"] as GroupBox;
@@ -531,12 +531,12 @@ namespace BenderWorld
 
 
             //Status message
-            status_box = form1Control.Controls["groupboxStatusmessage"].Controls["textboxStatus"] as RichTextBox;
+            statusBox = form1Control.Controls["groupboxStatusmessage"].Controls["textboxStatus"] as RichTextBox;
 
             //History
-            groupbox_history = form1Control.Controls["groupboxHistory"] as GroupBox;
-            combobox_history_episodes = groupbox_history.Controls["comboboxHistoryepisode"] as ComboBox;
-            combobox_history_steps = groupbox_history.Controls["comboboxHistorystep"] as ComboBox;
+            groupboxHistory = form1Control.Controls["groupboxHistory"] as GroupBox;
+            comboboxHistoryEpisodes = groupboxHistory.Controls["comboboxHistoryepisode"] as ComboBox;
+            comboboxHistorySteps = groupboxHistory.Controls["comboboxHistorystep"] as ComboBox;
 
         }
 

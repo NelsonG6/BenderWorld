@@ -100,7 +100,7 @@
 
                 //moveresult
                 if(setFrom.resultThisStep != null)
-                moveResultData = "The result of the move was [" + setFrom.resultThisStep.result_data + "].";
+                moveResultData = "The result of the move was [" + setFrom.resultThisStep.resultData + "].";
 
                 //The reward from this action was: 
                 string math_sign = "+";

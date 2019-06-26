@@ -5,27 +5,22 @@ namespace BenderWorld
     //This class handles the types of results we get after applying a move to the board.
     class MoveResult
     {
-        public string result_data;
-
         public static readonly MoveResult CanMissing;
         public static readonly MoveResult CanCollected;
         public static readonly MoveResult TravelSucceeded;
         public static readonly MoveResult TravelFailed;
-        public static readonly MoveResult EnemyEncountered;        
+        public static readonly MoveResult EnemyEncountered;
 
-        private static MoveResult initializedResult;
+        public string resultData;
 
         public static Dictionary<MoveResult, double> list;
 
         public MoveResult(string to_set)
         {
-            result_data = to_set;
+            resultData = to_set;
         }
 
-        public string ToString()
-        {
-            return result_data;
-        }
+        public new string ToString => resultData;
 
         static MoveResult()
         {
@@ -36,7 +31,6 @@ namespace BenderWorld
             TravelSucceeded = new MoveResult("Move successful");
             TravelFailed = new MoveResult("Move failed");
             EnemyEncountered = new MoveResult("Enemey encountered");
-            initializedResult = new MoveResult("Initialized");
 
             list.Add(CanMissing, InitialSettings.CanMissingReward);
             list.Add(CanCollected, InitialSettings.CanGrabbedReward);

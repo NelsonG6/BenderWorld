@@ -66,11 +66,11 @@
     <Compile Include="Board\Unit\UnitBase.cs" />
     <Compile Include="Board\Unit\UnitType.cs" />
     <Compile Include="Forms\Backgrounds.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\BenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\BenderForm.Designer.cs">
+      <DependentUpon>BenderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormsHandler.cs" />
     <Compile Include="Forms\StatusMessage.cs" />
@@ -82,8 +82,8 @@
     <Compile Include="Properties\Settings.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BenderForm.resx">
+      <DependentUpon>BenderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
